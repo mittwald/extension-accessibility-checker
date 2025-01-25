@@ -1,13 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
+import { ScanProfile } from "@/app/scanProfile/scanProfile.model";
+import { Project } from "@/app/project/project.model";
+import dbConnect from "@/lib/mongodb";
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ projectId: string }> },
 ) {
   const { projectId } = await params;
-  return NextResponse.json({
-    message: `Get all scan profiles for project ${projectId}`,
-  });
+  await dbConnect();
+
+  const project = await Project.findById(projectId);
+  if (!project) {
+    return NextResponse.json({ message: "Project not found" }, { status: 404 });
+  }
+
+  const scanProfiles = await ScanProfile.find({ projectId });
+  return NextResponse.json(scanProfiles);
 }
 
 export async function POST(
@@ -15,7 +24,16 @@ export async function POST(
   { params }: { params: Promise<{ projectId: string }> },
 ) {
   const { projectId } = await params;
-  return NextResponse.json({
-    message: `Create a new scan profile for project ${projectId}`,
+  await dbConnect();
+
+  const project = await Project.findById(projectId);
+  if (!project) {
+    return NextResponse.json({ message: "Project not found" }, { status: 404 });
+  }
+
+  const scanProfile = await ScanProfile.create({
+    ...(await request.json()),
+    projectId,
   });
+  return NextResponse.json(scanProfile.toJSON(), { status: 201 });
 }

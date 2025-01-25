@@ -1,11 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
+import dbConnect from "@/lib/mongodb";
+import { Project } from "@/app/project/project.model";
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ projectId: string }> },
 ) {
   const { projectId } = await params;
-  return NextResponse.json({ message: `Get project ${projectId}` });
+
+  await dbConnect();
+
+  const project = await Project.findById(projectId);
+  if (!project) {
+    return NextResponse.json({ message: "Project not found" }, { status: 404 });
+  }
+  return NextResponse.json(project.toJSON());
 }
 
 export async function PUT(
@@ -13,7 +22,20 @@ export async function PUT(
   { params }: { params: Promise<{ projectId: string }> },
 ) {
   const { projectId } = await params;
-  return NextResponse.json({ message: `Update project ${projectId}` });
+
+  await dbConnect();
+
+  const input = await request.json();
+  const project = await Project.findByIdAndUpdate(
+    projectId,
+    { $set: { ...input, updatedAt: new Date() } },
+    { new: true },
+  );
+  if (!project) {
+    return NextResponse.json({ message: "Project not found" }, { status: 404 });
+  }
+
+  return NextResponse.json(project.toJSON());
 }
 
 export async function DELETE(
@@ -21,5 +43,13 @@ export async function DELETE(
   { params }: { params: Promise<{ projectId: string }> },
 ) {
   const { projectId } = await params;
-  return NextResponse.json({ message: `Delete project ${projectId}` });
+
+  await dbConnect();
+
+  const project = await Project.findByIdAndDelete(projectId);
+  if (!project) {
+    return NextResponse.json({ message: "Project not found" }, { status: 404 });
+  }
+
+  return NextResponse.json(project.toJSON());
 }

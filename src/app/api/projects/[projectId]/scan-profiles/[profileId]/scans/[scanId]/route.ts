@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { Scan } from "@/app/scan/scan.model";
 
 export async function GET(
   request: NextRequest,
@@ -9,9 +10,11 @@ export async function GET(
   },
 ) {
   const { projectId, profileId, scanId } = await params;
-  return NextResponse.json({
-    message: `Get scan ${scanId} for project ${projectId}, profile ${profileId}`,
-  });
+  const scan = await Scan.findById(scanId).populate("profileId", "_id name");
+  if (!scan || !scan.profileId || scan.profileId._id.toString() !== profileId) {
+    return NextResponse.json({ message: "Scan not found" }, { status: 404 });
+  }
+  return NextResponse.json(scan.toJSON());
 }
 
 export async function DELETE(
@@ -23,7 +26,9 @@ export async function DELETE(
   },
 ) {
   const { projectId, profileId, scanId } = await params;
-  return NextResponse.json({
-    message: `Delete scan ${scanId} for project ${projectId}, profile ${profileId}`,
-  });
+  const scan = await Scan.findByIdAndDelete(scanId);
+  if (!scan || !scan.profileId || scan.profileId._id.toString() !== profileId) {
+    return NextResponse.json({ message: "Scan not found" }, { status: 404 });
+  }
+  return NextResponse.json(scan.toJSON());
 }
