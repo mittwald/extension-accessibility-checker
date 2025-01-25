@@ -10,4 +10,9 @@
     <option name="highlightLevel" value="WARNING" />
     <option name="transferred" value="true" />
   </component>
+  <component name="PhpCodeSniffer">
+    <phpcs_settings>
+      <phpcs_by_interpreter asDefaultInterpreter="true" interpreter_id="d4399adc-4461-488c-8dd7-10559162693a" timeout="30000" />
+    </phpcs_settings>
+  </component>
 </project>
