@@ -1,0 +1,11 @@
+services:
+  mongo:
+    image: mongo:5
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data-a11y-checker:/data/db
+
+volumes:
+  mongo-data-a11y-checker:
