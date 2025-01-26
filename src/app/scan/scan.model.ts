@@ -26,6 +26,7 @@ const ScanSchema = new mongoose.Schema<Scan>({
     type: mongoose.Schema.Types.ObjectId,
     ref: "ScanProfile",
     required: true,
+    index: true,
   },
   queuedAt: { type: Date, default: Date.now },
   finishedAt: { type: Date },
