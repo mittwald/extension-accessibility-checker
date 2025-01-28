@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Scan } from "@/app/scan/scan.model";
+import { ScanModel } from "@/app/scan/scan.model";
 import { ScanProfile } from "@/app/scanProfile/scanProfile.model";
 import dbConnect from "@/lib/mongodb";
 
@@ -10,7 +10,7 @@ export async function GET(
   const { projectId, profileId } = await params;
   await dbConnect();
 
-  const scans = await Scan.find({ profileId });
+  const scans = await ScanModel.find({ profileId });
   return NextResponse.json(scans);
 }
 
@@ -31,7 +31,7 @@ export async function POST(
     );
   }
 
-  const scan = await Scan.create({
+  const scan = await ScanModel.create({
     profileId,
     projectId,
     status: "queued",

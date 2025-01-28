@@ -2,11 +2,11 @@ import { ObjectId } from "mongodb";
 import mongoose from "mongoose";
 import { getModel } from "@/lib/mongoose";
 
-interface Issue {
+export interface Issue {
   errorCode: string;
   severity: "error" | "warning" | "notice";
   description: string;
-  line: number;
+  selector: string;
   codeSnippet: string;
 }
 
@@ -46,10 +46,10 @@ const ScanSchema = new mongoose.Schema<Scan>({
         required: true,
       },
       description: { type: String, required: true },
-      line: { type: Number, required: true },
+      selector: { type: String, required: true },
       codeSnippet: { type: String, required: true },
     },
   ],
 });
 
-export const Scan = getModel<Scan>("Scan", ScanSchema);
+export const ScanModel = getModel<Scan>("Scan", ScanSchema);
