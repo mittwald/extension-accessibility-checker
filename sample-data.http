@@ -1,0 +1,62 @@
+### Create project
+POST http://localhost:3000/api/projects HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Mittwald"
+}
+
+> {%
+    client.test("Project created successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+    client.global.set("projectId", response.body._id);
+%}
+
+### Create scan profile
+POST http://localhost:3000/api/projects/{{projectId}}/scan-profiles HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Mittwald Start & Blog",
+  "domain": "www.mittwald.de",
+  "paths": [
+    "/",
+    "/blog",
+    "/blog/autoren/lukas-fritze",
+    "/blog/webentwicklung-design/barrierefreiheitsstaerkungsgesetz-inhalt-verpflichtungen-und-ausnahmen"
+  ],
+  "standard": "WCAG2AA",
+  "includeNotices": false,
+  "includeWarnings": true,
+  "cronSchedule": {
+    "expression": "42 0 * * *"
+  }
+}
+
+> {%
+    client.test("ScanProfile created successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+    client.global.set("scanProfileId", response.body._id);
+%}
+
+### Schedule scan
+POST http://localhost:3000/api/projects/{{projectId}}/scan-profiles/{{scanProfileId}}/scans HTTP/1.1
+Content-Type: application/json
+
+> {%
+    client.test("Scan scheduled successfully", function() {
+        client.assert(response.status === 202, "Response status is not 202");
+    });
+    client.global.set("scanId", response.body._id);
+%}
+
+### Get scan
+GET http://localhost:3000/api/projects/{{projectId}}/scan-profiles/{{scanProfileId}}/scans/{{scanId}} HTTP/1.1
+
+> {%
+    client.test("Scan retrieved successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
