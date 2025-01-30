@@ -1,35 +1,21 @@
 {
   "name": "extension-a11y-checker",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "compile": "tsc",
-    "format": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --write"
+  "author": {
+    "name": "Lukas Fritze",
+    "email": "l.fritze@mittwald.de"
   },
-  "dependencies": {
-    "mongodb": "^6.12.0",
-    "mongoose": "^8.9.5",
-    "next": "15.1.6",
-    "pa11y": "^8.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+  "packageManager": "yarn@4.6.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "format": "yarn workspaces run format",
+    "dev": "yarn workspaces foreach --all --interlaced --parallel run dev",
+    "build": "yarn workspaces run build"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.6",
-    "postcss": "^8",
     "prettier": "^3.4.2",
-    "tailwindcss": "^3.4.1",
-    "tsx": "^4.19.2",
-    "typescript": "^5"
-  },
-  "packageManager": "yarn@4.6.0"
+    "typescript": "^5.7.3"
+  }
 }
