@@ -1,5 +1,5 @@
-import { ScanModel, ScanProfile } from "extension-a11y-checker-storage/src";
-import { Pa11yScanEngine } from "./Pa11yScanEngine";
+import { ScanModel } from "extension-a11y-checker-storage";
+import { Pa11yScanEngine } from "./Pa11yScanEngine.js";
 
 export class ScanExecutor {
   static async executeQueuedScans() {
@@ -8,25 +8,27 @@ export class ScanExecutor {
     const scans = await ScanModel.find({
       status: { $in: ["queued"] },
     });
+    console.log(`Scans found to execute: ${scans.length}`);
     for (const scan of scans) {
       scan.status = "running";
-      scan.save();
+      await scan.save();
 
-      const profile = await ScanProfile.findById(scan.profileId);
+      await scan.populate("profile");
 
-      if (profile === null) {
+      if (!scan.profile) {
         scan.status = "failed";
-        scan.save();
+        await scan.save();
         continue;
       }
 
-      await engine.executeScan(profile, scan);
+      console.log("executing scan: ", scan._id);
+      await engine.executeScan(scan);
 
       console.log("Issues found: ", scan.issues?.length);
 
       scan.status = "completed";
-      scan.finishedAt = new Date();
-      scan.save();
+      scan.completedAt = new Date();
+      await scan.save();
     }
   }
 }

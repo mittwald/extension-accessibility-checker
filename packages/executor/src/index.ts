@@ -1,5 +1,7 @@
-import dbConnect from "extension-a11y-checker-storage/src/lib/mongodb";
-import { ScanExecutor } from "./scan/ScanExecutor";
+import "reflect-metadata";
+
+import { dbConnect } from "extension-a11y-checker-storage";
+import { ScanExecutor } from "./scan/ScanExecutor.js";
 
 (async () => {
   console.info("connection to DB");

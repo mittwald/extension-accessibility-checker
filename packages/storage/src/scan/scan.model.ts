@@ -1,55 +1,61 @@
+import type { Ref } from "@typegoose/typegoose";
+import { prop } from "@typegoose/typegoose";
 import { ObjectId } from "mongodb";
-import mongoose from "mongoose";
-import { getModel } from "../lib/mongoose";
+import { ScanProfile } from "../scanProfile/scanProfile.model.js";
+import { getModel } from "../lib/mongoose.js";
 
-export interface Issue {
-  errorCode: string;
-  severity: "error" | "warning" | "notice";
-  description: string;
-  selector: string;
-  codeSnippet: string;
+export class Issue {
+  @prop({ required: true })
+  public errorCode: string;
+
+  @prop({ required: true, enum: ["error", "warning", "notice"] })
+  public severity!: "error" | "warning" | "notice";
+
+  @prop({ required: true })
+  public description: string;
+
+  @prop({ required: true })
+  public codeSnippet: string;
+
+  @prop({ required: true })
+  public selector: string;
+
+  @prop({ required: true })
+  public runner: string;
+
+  @prop({ required: true, type: () => Object })
+  public runnerExtras!: Record<string, any>;
 }
 
-export interface Scan {
-  _id: ObjectId;
-  profileId: ObjectId;
-  queuedAt: Date;
-  finishedAt?: Date;
-  status: "queued" | "running" | "completed" | "failed";
-  urls: string[];
-  overallRating?: number;
+export class Scan {
+  public _id: ObjectId;
+
+  @prop({
+    required: true,
+    ref: () => ScanProfile,
+  })
+  public profile: Ref<ScanProfile>;
+
+  @prop({ required: true })
+  public urls: string[];
+
+  @prop({ required: true, enum: ["queued", "running", "completed", "failed"] })
+  public status!: "queued" | "running" | "completed" | "failed";
+
+  @prop()
   issues?: Issue[];
+
+  @prop()
+  public error?: string;
+
+  @prop({ default: Date.now })
+  public createdAt!: Date;
+
+  @prop({ default: Date.now })
+  public updatedAt!: Date;
+
+  @prop()
+  public completedAt?: Date;
 }
 
-const ScanSchema = new mongoose.Schema<Scan>({
-  profileId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "ScanProfile",
-    required: true,
-    index: true,
-  },
-  queuedAt: { type: Date, default: Date.now },
-  finishedAt: { type: Date },
-  status: {
-    type: String,
-    enum: ["queued", "running", "completed", "failed"],
-    required: true,
-  },
-  urls: { type: [String], required: true },
-  overallRating: { type: Number },
-  issues: [
-    {
-      errorCode: { type: String, required: true },
-      severity: {
-        type: String,
-        enum: ["error", "warning", "notice"],
-        required: true,
-      },
-      description: { type: String, required: true },
-      selector: { type: String, required: true },
-      codeSnippet: { type: String, required: true },
-    },
-  ],
-});
-
-export const ScanModel = getModel<Scan>("Scan", ScanSchema);
+export const ScanModel = getModel(Scan);

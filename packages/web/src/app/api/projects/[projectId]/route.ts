@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import dbConnect from "extension-a11y-checker-storage/src/lib/mongodb";
-import { Project } from "extension-a11y-checker-storage/src/project/project.model";
+import { ProjectModel, dbConnect } from "extension-a11y-checker-storage";
 
 export async function GET(
   request: NextRequest,
@@ -10,10 +9,11 @@ export async function GET(
 
   await dbConnect();
 
-  const project = await Project.findById(projectId);
+  const project = await ProjectModel.findById(projectId);
   if (!project) {
     return NextResponse.json({ message: "Project not found" }, { status: 404 });
   }
+
   return NextResponse.json(project.toJSON());
 }
 
@@ -26,7 +26,7 @@ export async function PUT(
   await dbConnect();
 
   const input = await request.json();
-  const project = await Project.findByIdAndUpdate(
+  const project = await ProjectModel.findByIdAndUpdate(
     projectId,
     { $set: { ...input, updatedAt: new Date() } },
     { new: true },
@@ -46,7 +46,7 @@ export async function DELETE(
 
   await dbConnect();
 
-  const project = await Project.findByIdAndDelete(projectId);
+  const project = await ProjectModel.findByIdAndDelete(projectId);
   if (!project) {
     return NextResponse.json({ message: "Project not found" }, { status: 404 });
   }

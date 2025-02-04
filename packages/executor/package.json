@@ -6,22 +6,23 @@
     "email": "l.fritze@mittwald.de"
   },
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "yarn compile",
-    "start": "MONGODB_URI=mongodb://localhost:27017/extension-a11y-checker tsx src/index.ts",
+    "start": "yarn compile && MONGODB_URI=mongodb://localhost:27017/extension-a11y-checker node --no-experimental-require-module dist/index.js",
     "compile": "tsc",
     "format": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --write"
   },
   "dependencies": {
     "extension-a11y-checker-storage": "workspace:*",
-    "pa11y": "^8.0.0"
+    "pa11y": "^8.0.0",
+    "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
-    "tsx": "^4.19.2",
     "typescript": "^5"
   },
   "packageManager": "yarn@4.6.0"

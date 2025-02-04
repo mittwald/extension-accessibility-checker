@@ -1,5 +1,6 @@
-import { ScanProfile, Scan } from "extension-a11y-checker-storage/src";
+import { DocumentType } from "@typegoose/typegoose";
+import { Scan } from "extension-a11y-checker-storage";
 
 export interface ScanEngine {
-  executeScan(profile: ScanProfile, scan: Scan): Promise<void>;
+  executeScan(scan: DocumentType<Scan>): Promise<void>;
 }

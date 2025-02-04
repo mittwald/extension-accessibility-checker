@@ -1,4 +1,6 @@
-export * from "./lib/mongodb";
-export * from "./project/project.model";
-export * from "./scan/scan.model";
-export * from "./scanProfile/scanProfile.model";
+import dbConnect from "./lib/mongodb.js";
+
+export { dbConnect };
+export * from "./project/project.model.js";
+export * from "./scan/scan.model.js";
+export * from "./scanProfile/scanProfile.model.js";

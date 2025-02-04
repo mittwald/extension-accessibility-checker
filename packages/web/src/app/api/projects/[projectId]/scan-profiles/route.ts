@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ScanProfile } from "extension-a11y-checker-storage/src/scanProfile/scanProfile.model";
-import { Project } from "extension-a11y-checker-storage/src/project/project.model";
-import dbConnect from "extension-a11y-checker-storage/src/lib/mongodb";
+import {
+  dbConnect,
+  Project,
+  ProjectModel,
+  ScanProfile,
+  ScanProfileModel,
+} from "extension-a11y-checker-storage";
+import { DocumentType } from "@typegoose/typegoose";
+import { ObjectId } from "mongodb";
 
 export async function GET(
   request: NextRequest,
@@ -10,12 +16,13 @@ export async function GET(
   const { projectId } = await params;
   await dbConnect();
 
-  const project = await Project.findById(projectId);
+  const project: DocumentType<Project> | null =
+    await ProjectModel.findById(projectId);
   if (!project) {
     return NextResponse.json({ message: "Project not found" }, { status: 404 });
   }
 
-  const scanProfiles = await ScanProfile.find({ projectId });
+  const scanProfiles = await ScanProfileModel.find({ project: projectId });
   return NextResponse.json(scanProfiles);
 }
 
@@ -26,14 +33,16 @@ export async function POST(
   const { projectId } = await params;
   await dbConnect();
 
-  const project = await Project.findById(projectId);
+  const project = await ProjectModel.findById(projectId).exec();
   if (!project) {
     return NextResponse.json({ message: "Project not found" }, { status: 404 });
   }
 
-  const scanProfile = await ScanProfile.create({
+  const scanProfile = await ScanProfileModel.create({
     ...(await request.json()),
-    projectId,
+    _id: new ObjectId(),
+    project: project._id,
   });
+
   return NextResponse.json(scanProfile.toJSON(), { status: 201 });
 }

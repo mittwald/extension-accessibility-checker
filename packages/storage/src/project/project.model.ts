@@ -1,20 +1,22 @@
-import { ObjectId } from "mongodb";
-import mongoose from "mongoose";
-import { getModel } from "../lib/mongoose";
+import { prop, modelOptions } from "@typegoose/typegoose";
+import { ObjectId } from "mongoose";
+import { getModel } from "../lib/mongoose.js";
 
-export interface Project {
-  _id: ObjectId;
-  name: string;
-  description?: string;
-  createdAt: Date;
-  updatedAt: Date;
+@modelOptions({ schemaOptions: { versionKey: false } })
+export class Project {
+  public _id: ObjectId;
+
+  @prop({ required: true })
+  public name: string;
+
+  @prop()
+  public description?: string;
+
+  @prop({ default: Date.now })
+  public createdAt: Date;
+
+  @prop({ default: Date.now })
+  public updatedAt: Date;
 }
 
-export const ProjectSchema = new mongoose.Schema<Project>({
-  name: { type: String, required: true },
-  description: { type: String },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
-});
-
-export const Project = getModel<Project>("Project", ProjectSchema);
+export const ProjectModel = getModel(Project);

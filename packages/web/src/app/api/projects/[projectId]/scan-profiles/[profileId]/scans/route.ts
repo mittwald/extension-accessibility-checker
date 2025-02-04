@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ScanModel } from "extension-a11y-checker-storage/src/scan/scan.model";
-import { ScanProfile } from "extension-a11y-checker-storage/src/scanProfile/scanProfile.model";
-import dbConnect from "extension-a11y-checker-storage/src/lib/mongodb";
+import {
+  dbConnect,
+  ScanModel,
+  ScanProfileModel,
+} from "extension-a11y-checker-storage";
+import { ObjectId } from "mongodb";
 
 export async function GET(
   request: NextRequest,
@@ -10,7 +13,7 @@ export async function GET(
   const { projectId, profileId } = await params;
   await dbConnect();
 
-  const scans = await ScanModel.find({ profileId });
+  const scans = await ScanModel.find({ profile: profileId });
   return NextResponse.json(scans);
 }
 
@@ -21,9 +24,10 @@ export async function POST(
   const { projectId, profileId } = await params;
   await dbConnect();
 
-  // todo: add the scan to queue
-
-  const profile = await ScanProfile.findOne({ _id: profileId, projectId });
+  const profile = await ScanProfileModel.findOne({
+    _id: profileId,
+    project: projectId,
+  }).populate("project");
   if (!profile) {
     return NextResponse.json(
       { message: "Scan profile not found" },
@@ -32,8 +36,9 @@ export async function POST(
   }
 
   const scan = await ScanModel.create({
-    profileId,
-    projectId,
+    _id: new ObjectId(),
+    profile: profileId,
+    project: projectId,
     status: "queued",
     urls: profile.paths.map((path) => `https://${profile.domain}${path}`),
   });

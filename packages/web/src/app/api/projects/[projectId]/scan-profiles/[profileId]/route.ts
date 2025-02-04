@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import dbConnect from "extension-a11y-checker-storage/src/lib/mongodb";
-import { ScanProfile } from "extension-a11y-checker-storage/src/scanProfile/scanProfile.model";
+import { dbConnect, ScanProfileModel } from "extension-a11y-checker-storage";
 
 export async function GET(
   request: NextRequest,
@@ -10,8 +9,8 @@ export async function GET(
 
   await dbConnect();
 
-  const scanProfile = await ScanProfile.findOne({ projectId, _id: profileId });
-  if (!scanProfile) {
+  const scanProfile = await ScanProfileModel.findById(profileId);
+  if (!scanProfile || scanProfile.project._id.toString() !== projectId) {
     return NextResponse.json(
       { message: "Scan profile not found" },
       { status: 404 },
@@ -27,8 +26,8 @@ export async function PUT(
   const { projectId, profileId } = await params;
   await dbConnect();
 
-  const project = await ScanProfile.findOne({ projectId, _id: profileId });
-  if (!project) {
+  const scanProfile = await ScanProfileModel.findById(profileId);
+  if (!scanProfile || scanProfile.project._id.toString() !== projectId) {
     return NextResponse.json(
       { message: "Scan profile not found" },
       { status: 404 },
@@ -36,7 +35,7 @@ export async function PUT(
   }
 
   const input = await request.json();
-  const updatedScanProfile = await ScanProfile.findByIdAndUpdate(
+  const updatedScanProfile = await ScanProfileModel.findByIdAndUpdate(
     profileId,
     { $set: { ...input, updatedAt: new Date(), projectId } },
     { new: true },
@@ -51,7 +50,7 @@ export async function DELETE(
   const { projectId, profileId } = await params;
   await dbConnect();
 
-  const deletedScanProfile = await ScanProfile.findOneAndDelete({
+  const deletedScanProfile = await ScanProfileModel.findOneAndDelete({
     projectId,
     _id: profileId,
   });

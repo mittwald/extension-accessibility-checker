@@ -4,6 +4,8 @@ declare module "pa11y" {
     timeout?: number;
     wait?: number;
     ignore?: string[];
+    includeNotices?: boolean;
+    includeWarnings?: boolean;
     actions?: string[];
     headers?: Record<string, string>;
     log?: {
