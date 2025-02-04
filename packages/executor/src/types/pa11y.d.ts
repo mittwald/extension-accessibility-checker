@@ -15,6 +15,7 @@ declare module "pa11y" {
       log: (message: string) => void;
     };
     chromeLaunchConfig?: Record<string, any>;
+    runners?: ("htmlcs" | "axe" | string)[];
     // Add other options as needed
   }
 

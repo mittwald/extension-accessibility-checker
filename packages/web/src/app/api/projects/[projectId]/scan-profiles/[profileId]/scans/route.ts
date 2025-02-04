@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
   dbConnect,
+  Page,
   ScanModel,
   ScanProfileModel,
 } from "extension-a11y-checker-storage";
@@ -40,7 +41,9 @@ export async function POST(
     profile: profileId,
     project: projectId,
     status: "queued",
-    urls: profile.paths.map((path) => `https://${profile.domain}${path}`),
+    pages: profile.paths.map(
+      (path) => new Page(`https://${profile.domain}${path}`),
+    ),
   });
 
   return NextResponse.json(scan.toJSON(), { status: 202 });

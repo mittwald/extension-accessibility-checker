@@ -1,4 +1,5 @@
 import type { Ref } from "@typegoose/typegoose";
+import { modelOptions } from "@typegoose/typegoose";
 import { prop } from "@typegoose/typegoose";
 import { ObjectId } from "mongodb";
 import { Project } from "../project/project.model.js";
@@ -9,6 +10,7 @@ class CronSchedule {
   expression!: string;
 }
 
+@modelOptions({ schemaOptions: { versionKey: false } })
 export class ScanProfile {
   @prop()
   public _id!: ObjectId;

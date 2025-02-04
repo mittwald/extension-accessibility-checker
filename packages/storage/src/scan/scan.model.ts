@@ -1,10 +1,15 @@
 import type { Ref } from "@typegoose/typegoose";
+import { modelOptions } from "@typegoose/typegoose";
 import { prop } from "@typegoose/typegoose";
 import { ObjectId } from "mongodb";
 import { ScanProfile } from "../scanProfile/scanProfile.model.js";
 import { getModel } from "../lib/mongoose.js";
 
+@modelOptions({ schemaOptions: { _id: false } })
 export class Issue {
+  @prop({ required: true })
+  public url: string;
+
   @prop({ required: true })
   public errorCode: string;
 
@@ -15,18 +20,39 @@ export class Issue {
   public description: string;
 
   @prop({ required: true })
-  public codeSnippet: string;
+  public context: string;
 
   @prop({ required: true })
   public selector: string;
-
-  @prop({ required: true })
-  public runner: string;
-
-  @prop({ required: true, type: () => Object })
-  public runnerExtras!: Record<string, any>;
 }
 
+@modelOptions({
+  schemaOptions: { _id: false, suppressReservedKeysWarning: true },
+})
+export class Issues {
+  @prop({ required: true })
+  public errors: number = 0;
+  @prop({ required: true })
+  public warnings: number = 0;
+  @prop({ required: true })
+  public notices: number = 0;
+}
+
+@modelOptions({ schemaOptions: { _id: false } })
+export class Page {
+  @prop({ required: true })
+  public url: string;
+  @prop()
+  public title?: string;
+  @prop()
+  public issues?: Issues;
+
+  public constructor(url: string) {
+    this.url = url;
+  }
+}
+
+@modelOptions({ schemaOptions: { versionKey: false } })
 export class Scan {
   public _id: ObjectId;
 
@@ -36,13 +62,13 @@ export class Scan {
   })
   public profile: Ref<ScanProfile>;
 
-  @prop({ required: true })
-  public urls: string[];
+  @prop({ required: true, type: () => [Page] })
+  public pages: Page[];
 
   @prop({ required: true, enum: ["queued", "running", "completed", "failed"] })
   public status!: "queued" | "running" | "completed" | "failed";
 
-  @prop()
+  @prop({ type: () => [Issue] })
   issues?: Issue[];
 
   @prop()
