@@ -36,16 +36,7 @@ export async function POST(
     );
   }
 
-  const scan = await ScanModel.create({
-    _id: new ObjectId(),
-    profile: profileId,
-    project: projectId,
-    status: "queued",
-    scheduledBy: "user",
-    pages: profile.paths.map(
-      (path) => new Page(`https://${profile.domain}${path}`),
-    ),
-  });
+  const scan = await ScanModel.createForProfile(profile, new Date(), "user");
 
   return NextResponse.json(scan.toJSON(), { status: 202 });
 }

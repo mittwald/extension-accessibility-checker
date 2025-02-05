@@ -96,6 +96,23 @@ export class Scan {
     }).exec();
   }
 
+  public static async createForProfile(
+    this: ReturnModelType<typeof Scan>,
+    profile: DocumentType<ScanProfile>,
+    scheduledFor: Date | null = profile.nextExecution(),
+    scheduler: string = "system",
+  ) {
+    return this.create({
+      profile: profile._id,
+      status: "queued",
+      scheduledBy: scheduler,
+      executionScheduledFor: scheduledFor,
+      pages: profile.paths.map(
+        (path) => new Page(`https://${profile.domain}${path}`),
+      ),
+    });
+  }
+
   public async markAsRunning(this: DocumentType<Scan>) {
     this.status = "running";
     await this.save();

@@ -1,10 +1,12 @@
-import type { Ref } from "@typegoose/typegoose";
+import type { DocumentType, Ref } from "@typegoose/typegoose";
 import { modelOptions } from "@typegoose/typegoose";
 import { prop } from "@typegoose/typegoose";
+import cronParser from "cron-parser";
 import { ObjectId } from "mongodb";
 import { Project } from "../project/project.model.js";
 import { getModel } from "../lib/mongoose.js";
 
+@modelOptions({ schemaOptions: { _id: false } })
 class CronSchedule {
   @prop({ required: true })
   expression!: string;
@@ -58,6 +60,17 @@ export class ScanProfile {
 
   @prop({ default: Date.now })
   public updatedAt!: Date;
+
+  public nextExecution(this: DocumentType<ScanProfile>) {
+    if (!this.cronSchedule) {
+      return null;
+    }
+
+    return cronParser
+      .parseExpression(this.cronSchedule.expression)
+      .next()
+      .toDate();
+  }
 }
 
 export const ScanProfileModel = getModel(ScanProfile);

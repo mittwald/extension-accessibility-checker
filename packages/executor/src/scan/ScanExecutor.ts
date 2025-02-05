@@ -1,7 +1,7 @@
 import { Scan, ScanModel } from "extension-a11y-checker-storage";
 import { Pa11yScanEngine } from "./Pa11yScanEngine.js";
 import { ScanEngine } from "./ScanEngine";
-import { DocumentType } from "@typegoose/typegoose";
+import { DocumentType, isDocument } from "@typegoose/typegoose";
 
 export class ScanExecutor {
   protected static engine: ScanEngine = new Pa11yScanEngine();
@@ -11,6 +11,7 @@ export class ScanExecutor {
     console.log(`Scans found to execute: ${scans.length}`);
     for (const scan of scans) {
       await this.executeScan(scan);
+      await this.scheduleNextScan(scan);
     }
   }
 
@@ -18,7 +19,7 @@ export class ScanExecutor {
     await scan.markAsRunning();
 
     await scan.populate("profile");
-    if (!scan.profile) {
+    if (!isDocument(scan.profile)) {
       await scan.markAsFailed("Profile not found");
       return;
     }
@@ -33,5 +34,20 @@ export class ScanExecutor {
       const message = e instanceof Error ? e.message : JSON.stringify(e);
       await scan.markAsFailed(message);
     }
+  }
+
+  private static async scheduleNextScan(scan: DocumentType<Scan>) {
+    if (!isDocument(scan.profile)) {
+      return;
+    }
+    if (scan.scheduledBy !== "system") {
+      return;
+    }
+
+    const nextScan = await ScanModel.createForProfile(scan.profile);
+    console.log(
+      "next execution scheduled for: ",
+      nextScan.executionScheduledFor,
+    );
   }
 }
