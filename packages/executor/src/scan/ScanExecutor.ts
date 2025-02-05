@@ -6,11 +6,8 @@ import { DocumentType } from "@typegoose/typegoose";
 export class ScanExecutor {
   protected static engine: ScanEngine = new Pa11yScanEngine();
 
-  static async executeQueuedScans() {
-    const scans = await ScanModel.find({
-      status: { $in: ["queued"] },
-      executionScheduledFor: { $lte: new Date() },
-    }).exec();
+  static async executePendingScans() {
+    const scans = await ScanModel.findPending();
     console.log(`Scans found to execute: ${scans.length}`);
     for (const scan of scans) {
       await this.executeScan(scan);

@@ -6,7 +6,7 @@ import { ScanExecutor } from "./scan/ScanExecutor.js";
 
 async function executeScans() {
   console.info("››› Starting scans...");
-  await ScanExecutor.executeQueuedScans();
+  await ScanExecutor.executePendingScans();
   console.info("✓✓✓ Scans finished");
 }
 

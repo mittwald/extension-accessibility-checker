@@ -1,4 +1,4 @@
-import type { Ref, DocumentType } from "@typegoose/typegoose";
+import type { Ref, DocumentType, ReturnModelType } from "@typegoose/typegoose";
 import { index, modelOptions, prop } from "@typegoose/typegoose";
 import { ObjectId } from "mongodb";
 import { ScanProfile } from "../scanProfile/scanProfile.model.js";
@@ -88,6 +88,13 @@ export class Scan {
 
   @prop()
   public completedAt?: Date;
+
+  public static async findPending(this: ReturnModelType<typeof Scan>) {
+    return this.find({
+      status: { $in: ["queued"] },
+      executionScheduledFor: { $lte: new Date() },
+    }).exec();
+  }
 
   public async markAsRunning(this: DocumentType<Scan>) {
     this.status = "running";
