@@ -7,6 +7,7 @@ export class ScanExecutor {
 
     const scans = await ScanModel.find({
       status: { $in: ["queued"] },
+      executionScheduledFor: { $lte: new Date() },
     });
     console.log(`Scans found to execute: ${scans.length}`);
     for (const scan of scans) {

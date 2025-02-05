@@ -1,6 +1,5 @@
 import type { Ref } from "@typegoose/typegoose";
-import { modelOptions } from "@typegoose/typegoose";
-import { prop } from "@typegoose/typegoose";
+import { index, modelOptions, prop } from "@typegoose/typegoose";
 import { ObjectId } from "mongodb";
 import { ScanProfile } from "../scanProfile/scanProfile.model.js";
 import { getModel } from "../lib/mongoose.js";
@@ -52,6 +51,7 @@ export class Page {
   }
 }
 
+@index({ status: 1, executionScheduledFor: 1 })
 @modelOptions({ schemaOptions: { versionKey: false } })
 export class Scan {
   public _id: ObjectId;
@@ -79,6 +79,9 @@ export class Scan {
 
   @prop({ default: Date.now })
   public updatedAt!: Date;
+
+  @prop({ default: Date.now })
+  public executionScheduledFor!: Date;
 
   @prop()
   public completedAt?: Date;
