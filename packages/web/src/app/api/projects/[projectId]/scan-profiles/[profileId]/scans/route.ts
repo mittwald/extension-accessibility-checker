@@ -41,6 +41,7 @@ export async function POST(
     profile: profileId,
     project: projectId,
     status: "queued",
+    scheduledBy: "user",
     pages: profile.paths.map(
       (path) => new Page(`https://${profile.domain}${path}`),
     ),

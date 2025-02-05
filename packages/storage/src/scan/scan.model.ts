@@ -74,6 +74,9 @@ export class Scan {
   @prop()
   public error?: string;
 
+  @prop({ required: true })
+  public scheduledBy: "system" | string;
+
   @prop({ default: Date.now })
   public createdAt!: Date;
 
