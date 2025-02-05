@@ -1,35 +1,40 @@
-import { ScanModel } from "extension-a11y-checker-storage";
+import { Scan, ScanModel } from "extension-a11y-checker-storage";
 import { Pa11yScanEngine } from "./Pa11yScanEngine.js";
+import { ScanEngine } from "./ScanEngine";
+import { DocumentType } from "@typegoose/typegoose";
 
 export class ScanExecutor {
-  static async executeQueuedScans() {
-    const engine = new Pa11yScanEngine();
+  protected static engine: ScanEngine = new Pa11yScanEngine();
 
+  static async executeQueuedScans() {
     const scans = await ScanModel.find({
       status: { $in: ["queued"] },
       executionScheduledFor: { $lte: new Date() },
-    });
+    }).exec();
     console.log(`Scans found to execute: ${scans.length}`);
     for (const scan of scans) {
-      scan.status = "running";
-      await scan.save();
+      await this.executeScan(scan);
+    }
+  }
 
-      await scan.populate("profile");
+  private static async executeScan(scan: DocumentType<Scan>) {
+    await scan.markAsRunning();
 
-      if (!scan.profile) {
-        scan.status = "failed";
-        await scan.save();
-        continue;
-      }
+    await scan.populate("profile");
+    if (!scan.profile) {
+      await scan.markAsFailed("Profile not found");
+      return;
+    }
 
-      console.log("executing scan: ", scan._id);
-      await engine.executeScan(scan);
-
+    console.log("executing scan: ", scan._id);
+    try {
+      await this.engine.executeScan(scan);
       console.log("Issues found: ", scan.issues?.length);
-
-      scan.status = "completed";
-      scan.completedAt = new Date();
-      await scan.save();
+      await scan.markAsCompleted();
+    } catch (e) {
+      console.error(e);
+      const message = e instanceof Error ? e.message : JSON.stringify(e);
+      await scan.markAsFailed(message);
     }
   }
 }

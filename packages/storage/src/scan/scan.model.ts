@@ -1,4 +1,4 @@
-import type { Ref } from "@typegoose/typegoose";
+import type { Ref, DocumentType } from "@typegoose/typegoose";
 import { index, modelOptions, prop } from "@typegoose/typegoose";
 import { ObjectId } from "mongodb";
 import { ScanProfile } from "../scanProfile/scanProfile.model.js";
@@ -85,6 +85,23 @@ export class Scan {
 
   @prop()
   public completedAt?: Date;
+
+  public async markAsRunning(this: DocumentType<Scan>) {
+    this.status = "running";
+    await this.save();
+  }
+
+  public async markAsCompleted(this: DocumentType<Scan>) {
+    this.status = "completed";
+    this.completedAt = new Date();
+    await this.save();
+  }
+
+  public async markAsFailed(this: DocumentType<Scan>, error: string) {
+    this.status = "failed";
+    this.error = error;
+    await this.save();
+  }
 }
 
 export const ScanModel = getModel(Scan);
