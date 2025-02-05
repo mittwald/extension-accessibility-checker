@@ -4,23 +4,18 @@ import cron from "node-cron";
 import { dbConnect } from "extension-a11y-checker-storage";
 import { ScanExecutor } from "./scan/ScanExecutor.js";
 
-async function executeScans() {
-  console.info("››› Starting scans...");
-  await ScanExecutor.executePendingScans();
-  console.info("✓✓✓ Scans finished");
-}
-
 async function main() {
   console.info("Connecting to DB...");
   const db = await dbConnect();
 
   console.info("Starting scan scheduler...");
   // todo: make this configurable
-  // every minute
-  const cronExpr = "* * * * *";
+  // every 10 seconds
+  const cronExpr = "*/10 * * * * *";
   cron.schedule(cronExpr, async () => {
-    console.info("Executing scheduled scans...");
-    await executeScans();
+    console.info("››› Starting scans...");
+    await ScanExecutor.executePendingScans();
+    console.info("✓✓✓ Scans finished");
   });
 
   process.on("SIGINT", async () => {
