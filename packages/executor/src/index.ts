@@ -1,17 +1,36 @@
 import "reflect-metadata";
 
+import cron from "node-cron";
 import { dbConnect } from "extension-a11y-checker-storage";
 import { ScanExecutor } from "./scan/ScanExecutor.js";
 
-(async () => {
-  console.info("connection to DB");
+async function executeScans() {
+  console.info("››› Starting scans...");
+  await ScanExecutor.executeQueuedScans();
+  console.info("✓✓✓ Scans finished");
+}
+
+async function main() {
+  console.info("Connecting to DB...");
   const db = await dbConnect();
 
-  console.info("››› starting scans");
-  await ScanExecutor.executeQueuedScans();
-  console.info("✓✓✓ scans finished");
+  console.info("Starting scan scheduler...");
+  // todo: make this configurable
+  // every minute
+  const cronExpr = "* * * * *";
+  cron.schedule(cronExpr, async () => {
+    console.info("Executing scheduled scans...");
+    await executeScans();
+  });
 
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  process.on("SIGINT", async () => {
+    console.info("Shutting down gracefully...");
+    await db.disconnect();
+    process.exit(0);
+  });
+}
 
-  await db.disconnect();
-})();
+main().catch((err) => {
+  console.error("Error initializing:", err);
+  process.exit(1);
+});
