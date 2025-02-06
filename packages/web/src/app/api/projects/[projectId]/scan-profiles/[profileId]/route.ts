@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { dbConnect, ScanProfileModel } from "extension-a11y-checker-storage";
+import {
+  dbConnect,
+  ScanModel,
+  ScanProfileModel,
+} from "extension-a11y-checker-storage";
 
 export async function GET(
   request: NextRequest,
@@ -16,7 +20,12 @@ export async function GET(
       { status: 404 },
     );
   }
-  return NextResponse.json(scanProfile.toJSON());
+  const lastScan = await ScanModel.lastScanOfProfile(profileId);
+
+  return NextResponse.json({
+    ...scanProfile.toJSON(),
+    issueSummary: lastScan?.getIssueSummary(),
+  });
 }
 
 export async function PUT(

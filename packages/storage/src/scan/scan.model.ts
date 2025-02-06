@@ -96,6 +96,15 @@ export class Scan {
     }).exec();
   }
 
+  public static async lastScanOfProfile(
+    this: ReturnModelType<typeof Scan>,
+    profileId: string,
+  ) {
+    return this.findOne({ profile: profileId }, null, {
+      sort: { completedAt: -1 },
+    }).exec();
+  }
+
   public static async createForProfile(
     this: ReturnModelType<typeof Scan>,
     profile: DocumentType<ScanProfile>,
@@ -128,6 +137,19 @@ export class Scan {
     this.status = "failed";
     this.error = error;
     await this.save();
+  }
+
+  public getIssueSummary(this: DocumentType<Scan>) {
+    return this.pages.reduce(
+      (c: Issues, page) => {
+        return {
+          errors: c.errors + (page.issues?.errors || 0),
+          warnings: c.warnings + (page.issues?.warnings || 0),
+          notices: c.notices + (page.issues?.notices || 0),
+        };
+      },
+      { errors: 0, warnings: 0, notices: 0 },
+    );
   }
 }
 
