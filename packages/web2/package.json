@@ -1,5 +1,5 @@
 {
-  "name": "extension-a11y-checker-web",
+  "name": "extension-a11y-checker-web2",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mittwald/flow-react-components": "^0.1.0-alpha.419",
+    "@tabler/icons-react": "^3.29.0",
     "@tanstack/react-router": "^1.99.8",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
