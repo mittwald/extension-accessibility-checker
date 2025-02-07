@@ -4,5 +4,10 @@ import viteReact from "@vitejs/plugin-react";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [TanStackRouterVite({ autoCodeSplitting: true }), viteReact()],
+  plugins: [
+    TanStackRouterVite({ autoCodeSplitting: true }),
+    viteReact({
+      babel: { plugins: [["babel-plugin-react-compiler", {}]] },
+    }),
+  ],
 });

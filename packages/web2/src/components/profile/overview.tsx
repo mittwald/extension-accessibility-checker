@@ -1,15 +1,15 @@
 import { ScanProfile } from "../../api/types.ts";
-import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
-import { LabeledValue } from "@mittwald/flow-react-components/LabeledValue";
-import { Label } from "@mittwald/flow-react-components/Label";
-import { Content } from "@mittwald/flow-react-components/Content";
-import { Heading } from "@mittwald/flow-react-components/Heading";
+import { ColumnLayout } from "@mittwald/flow-react-components";
+import { LabeledValue } from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
+import { Content } from "@mittwald/flow-react-components";
+import { Heading } from "@mittwald/flow-react-components";
 import {
   IconDanger,
   IconInfo,
   IconWarning,
-} from "@mittwald/flow-react-components/Icons";
-import { Section } from "@mittwald/flow-react-components/Section";
+} from "@mittwald/flow-react-components";
+import { Section } from "@mittwald/flow-react-components";
 
 export const Overview = ({ profile }: { profile: ScanProfile }) => {
   return (

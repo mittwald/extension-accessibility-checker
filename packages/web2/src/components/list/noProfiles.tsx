@@ -1,11 +1,11 @@
-import { Icon } from "@mittwald/flow-react-components/Icon";
+import { Icon } from "@mittwald/flow-react-components";
 import { IconAccessible } from "@tabler/icons-react";
-import { Heading } from "@mittwald/flow-react-components/Heading";
-import Text from "@mittwald/flow-react-components/Text";
-import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
-import Link from "@mittwald/flow-react-components/Link";
-import Button from "@mittwald/flow-react-components/Button";
-import { IllustratedMessage } from "@mittwald/flow-react-components/IllustratedMessage";
+import { Heading } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import { ActionGroup } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
+import { IllustratedMessage } from "@mittwald/flow-react-components";
+import { Link } from "@tanstack/react-router";
 
 export const NoProfiles = () => {
   return (
@@ -20,7 +20,12 @@ export const NoProfiles = () => {
         ermitteln.
       </Text>
       <ActionGroup>
-        <Link href="/profiles/67a27257499e57138e2c2d91">Anzeigen</Link>
+        <Link
+          to="/profiles/$profileId/$tabId"
+          params={{ profileId: "67a27257499e57138e2c2d91", tabId: "overview" }}
+        >
+          Anzeigen
+        </Link>
         <Button>Profil anlegen</Button>
       </ActionGroup>
     </IllustratedMessage>
