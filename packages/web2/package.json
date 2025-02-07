@@ -4,10 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev": "nx serve",
+    "build": "tsc -b && nx vite:build",
+    "compile": "yarn build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "nx vite:preview",
+    "start": "yarn preview"
   },
   "dependencies": {
     "@mittwald/flow-react-components": "^0.2.0-alpha.29",

@@ -2,6 +2,7 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.nx" />
       <excludePattern pattern="yarm.lock" />
       <excludePattern pattern="tsconfig.tsbuildinfo" />
     </content>

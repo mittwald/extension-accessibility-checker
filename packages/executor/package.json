@@ -8,9 +8,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "yarn compile",
-    "start": "yarn compile && MONGODB_URI=mongodb://localhost:27017/extension-a11y-checker node --no-experimental-require-module dist/index.js",
-    "compile": "tsc",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'yarn start'",
+    "build": "tsc",
+    "compile": "yarn build",
+    "start": "yarn build && MONGODB_URI=mongodb://localhost:27017/extension-a11y-checker node --no-experimental-require-module dist/index.js",
     "format": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --write"
   },
   "dependencies": {
@@ -25,7 +26,7 @@
     "@types/node": "^20",
     "@types/node-cron": "^3.0.11",
     "eslint": "^9",
-    "eslint-config-next": "15.1.6",
+    "nodemon": "^3.1.9",
     "typescript": "^5"
   },
   "packageManager": "yarn@4.6.0"

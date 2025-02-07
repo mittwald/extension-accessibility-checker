@@ -19,11 +19,10 @@
     }
   },
   "scripts": {
-    "dev": "yarn start",
-    "build": "yarn compile",
-    "start": "yarn compile && MONGODB_URI=mongodb://localhost:27017/extension-a11y-checker node dist/test.js",
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "compile": "yarn build",
     "lint": "exit 1",
-    "compile": "tsc",
     "format": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --write"
   },
   "dependencies": {

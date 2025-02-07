@@ -9,9 +9,9 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "compile": "yarn build",
     "start": "next start",
     "lint": "next lint",
-    "compile": "tsc",
     "format": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --write"
   },
   "dependencies": {
