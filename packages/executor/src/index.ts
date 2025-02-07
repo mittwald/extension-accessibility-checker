@@ -8,15 +8,19 @@ async function main() {
   console.info("Connecting to DB...");
   const db = await dbConnect();
 
+  const execScans = async () => {
+    console.info("››› Starting scans...");
+    await ScanExecutor.executePendingScans();
+    console.info("✓✓✓ Scans finished");
+  };
+
+  await execScans();
+
   console.info("Starting scan scheduler...");
   // todo: make this configurable
   // every 10 seconds
   const cronExpr = "*/10 * * * * *";
-  cron.schedule(cronExpr, async () => {
-    console.info("››› Starting scans...");
-    await ScanExecutor.executePendingScans();
-    console.info("✓✓✓ Scans finished");
-  });
+  cron.schedule(cronExpr, execScans);
 
   process.on("SIGINT", async () => {
     console.info("Shutting down gracefully...");
