@@ -4,19 +4,22 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nx serve",
-    "build": "tsc -b && nx vite:build",
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "vinxi start",
     "compile": "yarn build",
     "lint": "eslint .",
-    "preview": "nx vite:preview",
-    "start": "yarn preview"
+    "preview": "nx vite:preview"
   },
   "dependencies": {
     "@mittwald/flow-react-components": "^0.2.0-alpha.29",
     "@tabler/icons-react": "^3.29.0",
-    "@tanstack/react-router": "^1.99.8",
+    "@tanstack/react-router": "^1.99.13",
+    "@tanstack/start": "^1.99.13",
+    "extension-a11y-checker-storage": "workspace:*",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "vinxi": "^0.5.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
@@ -32,6 +35,7 @@
     "globals": "^15.14.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.22.0",
-    "vite": "^6.1.0"
+    "vite": "^6.1.0",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }

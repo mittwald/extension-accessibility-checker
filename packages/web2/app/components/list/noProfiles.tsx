@@ -21,8 +21,8 @@ export const NoProfiles = () => {
       </Text>
       <ActionGroup>
         <Link
-          to="/profiles/$profileId/$tabId"
-          params={{ profileId: "67a27257499e57138e2c2d91", tabId: "overview" }}
+          to="/profiles/$profileId"
+          params={{ profileId: "67a27257499e57138e2c2d91" }}
         >
           Anzeigen
         </Link>

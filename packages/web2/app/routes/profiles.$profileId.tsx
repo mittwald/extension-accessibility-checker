@@ -7,18 +7,36 @@ import { Heading } from "@mittwald/flow-react-components";
 import { Breadcrumb } from "@mittwald/flow-react-components";
 import { Link } from "@mittwald/flow-react-components";
 import { LayoutCard } from "@mittwald/flow-react-components";
-import { getProfile } from "../api/profile.ts";
+import { createServerFn } from "@tanstack/start";
+import { z } from "zod";
+import {
+  dbConnect,
+  ScanModel,
+  ScanProfileModel,
+} from "extension-a11y-checker-storage";
+import { ScanProfile } from "../api/types.ts";
 
-export const Route = createFileRoute("/profiles/$profileId/$tabId")({
+const getProfile = createServerFn({
+  method: "GET",
+})
+  .validator(z.string())
+  .handler(async ({ data: profileId }) => {
+    await dbConnect();
+    const profile = await ScanProfileModel.findById(profileId).exec();
+    const lastScan = await ScanModel.lastScanOfProfile(profileId);
+
+    return {
+      ...profile?.toJSON(),
+      issueSummary: lastScan?.getIssueSummary(),
+    } as unknown as ScanProfile;
+  });
+
+export const Route = createFileRoute("/profiles/$profileId")({
   component: RouteComponent,
-
-  loader: ({ params: { profileId } }) =>
-    getProfile("67a27257499e57138e2c2d8e", profileId),
+  loader: ({ params: { profileId } }) => getProfile({ data: profileId }),
 });
 
 function RouteComponent() {
-  // const navigate = Route.useNavigate();
-  const { tabId } = Route.useParams();
   const profile = Route.useLoaderData();
 
   return (
@@ -32,22 +50,10 @@ function RouteComponent() {
         {profile.name}
       </Heading>
       <LayoutCard>
-        <Tabs
-          selectedKey={tabId ?? "overview"}
-          onSelectionChange={(key) => {
-            console.log("key selected", key);
-            // return navigate({
-            //   to: "/profiles/$profileId/$tabId",
-            //   params: {
-            //     profileId: profile._id,
-            //     tabId: key,
-            //   },
-            // });
-          }}
-        >
+        <Tabs>
           <Tab id="overview">
             <TabTitle>Übersicht</TabTitle>
-            <Overview profile={profile} />
+            <Overview profile={profile as ScanProfile} />
           </Tab>
           <Tab id="issues">
             <TabTitle>Fehler</TabTitle>
