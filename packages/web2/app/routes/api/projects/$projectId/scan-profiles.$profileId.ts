@@ -42,6 +42,7 @@ export const APIRoute = createAPIFileRoute(
     if (!deletedScanProfile) {
       return json({ message: "Scan profile not found" }, { status: 404 });
     }
+    await ScanModel.deleteMany({ profile: profileId });
     return json(deletedScanProfile.toJSON());
   },
 });

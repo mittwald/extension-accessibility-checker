@@ -6,7 +6,7 @@ export const APIRoute = createAPIFileRoute(
   "/api/projects/$projectId/scan-profiles/$profileId/scans/$scanId",
 )({
   GET: async ({ params }) => {
-    const { projectId, profileId, scanId } = params;
+    const { profileId, scanId } = params;
 
     const scan = await ScanModel.findById(scanId).populate("profile").exec();
     if (!scan || !scan.profile || scan.profile._id.toString() !== profileId) {
@@ -16,7 +16,7 @@ export const APIRoute = createAPIFileRoute(
   },
 
   DELETE: async ({ params }) => {
-    const { projectId, profileId, scanId } = params;
+    const { profileId, scanId } = params;
 
     const scan = await ScanModel.findByIdAndDelete(scanId);
     if (!scan || !scan.profile || scan.profile._id.toString() !== profileId) {
