@@ -3,8 +3,9 @@ import { modelOptions } from "@typegoose/typegoose";
 import { prop } from "@typegoose/typegoose";
 import cronParser from "cron-parser";
 import { ObjectId } from "mongodb";
-import { Project } from "../project/project.model.js";
+import { Project, ProjectModel } from "../project/project.model.js";
 import { getModel } from "../lib/mongoose.js";
+import { ReturnModelType } from "@typegoose/typegoose/lib/types";
 
 @modelOptions({ schemaOptions: { _id: false } })
 class CronSchedule {
@@ -60,6 +61,17 @@ export class ScanProfile {
 
   @prop({ default: Date.now })
   public updatedAt!: Date;
+
+  public static async findForProject(
+    this: ReturnModelType<typeof ScanProfile>,
+    projectId: string,
+  ) {
+    const project = await ProjectModel.findById(projectId);
+    if (!project) {
+      return null;
+    }
+    return ScanProfileModel.find({ project: projectId }).exec();
+  }
 
   public nextExecution(this: DocumentType<ScanProfile>) {
     if (!this.cronSchedule) {

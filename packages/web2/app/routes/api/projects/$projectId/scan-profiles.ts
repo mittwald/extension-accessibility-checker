@@ -8,11 +8,10 @@ export const APIRoute = createAPIFileRoute(
 )({
   GET: async ({ params }) => {
     const { projectId } = params;
-    const project = await ProjectModel.findById(projectId);
-    if (!project) {
+    const scanProfiles = await ScanProfileModel.findForProject(projectId);
+    if (scanProfiles === null) {
       return json({ message: "Project not found" }, { status: 404 });
     }
-    const scanProfiles = await ScanProfileModel.find({ project: projectId });
     return json(scanProfiles);
   },
 
