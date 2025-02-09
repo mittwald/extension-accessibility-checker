@@ -1,5 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Tabs, Tab, TabTitle } from "@mittwald/flow-react-components";
+import {
+  Tabs,
+  Tab,
+  TabTitle,
+  Text,
+  ColumnLayout,
+  Section,
+} from "@mittwald/flow-react-components";
 import { Overview } from "../components/profile/overview.tsx";
 import { Issues } from "../components/profile/issues.tsx";
 import { Settings } from "../components/profile/settings.tsx";
@@ -14,7 +21,7 @@ import {
   ScanModel,
   ScanProfileModel,
 } from "extension-a11y-checker-storage";
-import { ScanProfile } from "../api/types.ts";
+import { Scan, ScanProfile } from "../api/types.ts";
 
 const getProfile = createServerFn({
   method: "GET",
@@ -26,9 +33,12 @@ const getProfile = createServerFn({
     const lastScan = await ScanModel.lastScanOfProfile(profileId);
 
     return {
-      ...profile?.toJSON(),
-      issueSummary: lastScan?.getIssueSummary(),
-    } as unknown as ScanProfile;
+      profile: {
+        ...profile?.toJSON(),
+        issueSummary: lastScan?.getIssueSummary(),
+      } as unknown as ScanProfile,
+      lastScan: lastScan?.toJSON() as unknown as Scan | undefined,
+    };
   });
 
 export const Route = createFileRoute("/profiles/$profileId")({
@@ -37,10 +47,10 @@ export const Route = createFileRoute("/profiles/$profileId")({
 });
 
 function RouteComponent() {
-  const profile = Route.useLoaderData();
+  const { profile, lastScan } = Route.useLoaderData();
 
   return (
-    <>
+    <Section>
       <Breadcrumb color="light">
         <Link href="/">Projekt</Link>
         <Link href="/">A11y Checker</Link>
@@ -53,11 +63,15 @@ function RouteComponent() {
         <Tabs>
           <Tab id="overview">
             <TabTitle>Übersicht</TabTitle>
-            <Overview profile={profile as ScanProfile} />
+            <Overview profile={profile} />
           </Tab>
           <Tab id="issues">
             <TabTitle>Fehler</TabTitle>
-            <Issues />
+            {lastScan ? (
+              <Issues scan={lastScan} />
+            ) : (
+              <Text>Noch nicht ausgeführt.</Text>
+            )}
           </Tab>
           <Tab id="settings">
             <TabTitle>Einstellungen</TabTitle>
@@ -65,6 +79,6 @@ function RouteComponent() {
           </Tab>
         </Tabs>
       </LayoutCard>
-    </>
+    </Section>
   );
 }

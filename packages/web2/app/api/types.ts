@@ -31,6 +31,7 @@ export interface Issue {
   description: string;
   context: string;
   selector: string;
+  url: string;
 }
 
 export interface Issues {
