@@ -1,6 +1,7 @@
 import { UseFormReturn } from "react-hook-form";
 import { useRef, useState } from "react";
 import {
+  Align,
   Button,
   Header,
   Heading,
@@ -76,47 +77,49 @@ export const PathsList = ({ form }: { form: UseFormReturn<FormValues> }) => {
           über mehrere Seiten deiner Website bekommen.
         </Text>
       </Header>
-      <TextField
-        autoFocus={!!form.getValues("domain")}
-        onFocus={() => {
-          if (inputRef.current) {
-            inputRef.current.select();
-          }
-        }}
-        ref={inputRef}
-        validate={(value) => {
-          if (!value.startsWith("/")) {
-            return "Muss mit `/` beginnen.";
-          }
-          if (paths.has(value)) {
-            return "Pfad ist bereits hinzugefügt.";
-          }
-          return true;
-        }}
-        isInvalid={isValidInputValue()}
-        value={pathInputValue}
-        onChange={(value) => setPathInputValue(value)}
-        onPaste={(event) => {
-          event.preventDefault();
-          const data = event.clipboardData.getData("text");
-          const path = prependPathWithSlash(extractPathFromUrl(data));
-          setPathInputValue(path);
-        }}
-        onKeyDown={(event) => {
-          if (event.key === "Enter" || event.key === "NumpadEnter") {
+      <Align>
+        <TextField
+          autoFocus={!!form.getValues("domain")}
+          onFocus={() => {
+            if (inputRef.current) {
+              inputRef.current.select();
+            }
+          }}
+          ref={inputRef}
+          validate={(value) => {
+            if (!value.startsWith("/")) {
+              return "Muss mit `/` beginnen.";
+            }
+            if (paths.has(value)) {
+              return "Pfad ist bereits hinzugefügt.";
+            }
+            return true;
+          }}
+          isInvalid={isValidInputValue()}
+          value={pathInputValue}
+          onChange={(value) => setPathInputValue(value)}
+          onPaste={(event) => {
             event.preventDefault();
-            addPathToFormValues(pathInputValue);
-          }
-        }}
-      >
-        <Label>Pfad</Label>
-      </TextField>
-      <Button
-        color="primary"
-        onPress={() => addPathToFormValues(pathInputValue)}
-      >
-        Hinzufügen
-      </Button>
+            const data = event.clipboardData.getData("text");
+            const path = prependPathWithSlash(extractPathFromUrl(data));
+            setPathInputValue(path);
+          }}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === "NumpadEnter") {
+              event.preventDefault();
+              addPathToFormValues(pathInputValue);
+            }
+          }}
+        >
+          <Label>Pfad</Label>
+        </TextField>
+        <Button
+          color="primary"
+          onPress={() => addPathToFormValues(pathInputValue)}
+        >
+          Hinzufügen
+        </Button>
+      </Align>
       {pathsList}
     </Section>
   );
