@@ -1,6 +1,7 @@
-import { Issue } from "../../../api/types.ts";
 import {
+  AlertBadge,
   Avatar,
+  Badge,
   CodeBlock,
   Content,
   Heading,
@@ -14,6 +15,8 @@ import {
 } from "@mittwald/flow-react-components";
 import wcagLinks from "../../../wcagLinks.json";
 import techniquesLinks from "../../../techniquesLinks.json";
+import { getLinkForTechnique } from "./helpers.ts";
+import { Issue } from "./types.ts";
 
 const IssueAvatar = ({ issue }: { issue: Issue }) => {
   switch (issue.severity) {
@@ -38,41 +41,8 @@ const IssueAvatar = ({ issue }: { issue: Issue }) => {
   }
 };
 
-const getLinkForTechnique = (technique: string) => {
-  switch (technique.charAt(0)) {
-    case "ARIA":
-    case "SCR":
-    case "C":
-    case "F":
-    case "G":
-    case "H":
-      return `https://www.w3.org/WAI/WCAG22/Techniques/html/${technique}`;
-    case "PDF":
-    case "SVR":
-    case "SM":
-    case "T":
-    default:
-      return null;
-  }
-};
-
-const getIssueMeta = (issue: Issue) => {
-  const [wcagLevel, principle, guideline, criterion, techniques, ...rest] =
-    issue.errorCode.split(".");
-  return {
-    wcagLevel,
-    principle: principle.replace("Principle", "").replace("_", "."),
-    guideline: guideline
-      .replace("Guideline", "")
-      .replace("_", ".") as keyof typeof wcagLinks,
-    criterion: criterion.split("_").join(".") as keyof typeof wcagLinks,
-    techniques: techniques.split(",") as (keyof typeof techniquesLinks)[],
-    rest,
-  };
-};
-
 export const IssueListItemView = ({ issue }: { issue: Issue }) => {
-  const issueMeta = getIssueMeta(issue);
+  const issueMeta = issue.meta;
 
   const wcagGuidelineLinkData = wcagLinks[issueMeta.guideline];
   const wcagCriterionLinkData = wcagLinks[issueMeta.criterion];
@@ -85,22 +55,19 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
   return (
     <ListItemView>
       <IssueAvatar issue={issue} />
-      <Heading>{wcagCriterionLinkData?.label ?? issue.errorCode}</Heading>
-      <Text>{issueMeta.wcagLevel}</Text>
+      <Heading>
+        {wcagCriterionLinkData?.label ?? issue.errorCode}
+        <Badge>{issue.count}×</Badge>
+      </Heading>
+      <Text>
+        {issueMeta.wcagLevel} | WCAG Kriterium {issueMeta.criterion}
+      </Text>
       <Content slot="bottom">
         <Section>
           <Text>{issue.description}</Text>
           <Heading level={3}>Links</Heading>
           <Text>
             <ul>
-              {techniqueLinksData.length > 0 &&
-                techniqueLinksData.map(({ url, label, id }) => (
-                  <li key={id}>
-                    <Link href={url}>
-                      Technik {id}: {label}
-                    </Link>
-                  </li>
-                ))}
               {wcagGuidelineLinkData && (
                 <li>
                   <Link href={wcagGuidelineLinkData.understanding}>
@@ -117,11 +84,31 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
                   </Link>
                 </li>
               )}
+              {techniqueLinksData.length > 0 &&
+                techniqueLinksData.map(({ url, label, id }) => (
+                  <li key={id}>
+                    <Link href={url}>
+                      Technik {id}: {label}
+                    </Link>
+                  </li>
+                ))}
             </ul>
           </Text>
           <Heading level={3}>Vorkommen</Heading>
-          {issue.url}
-          <CodeBlock code={issue.selector} copyable />
+          <ul>
+            {issue.selectors.map((o) => (
+              <li key={o.selector} style={{ paddingBottom: "1rem" }}>
+                <CodeBlock code={o.selector} copyable />
+                <Text>
+                  <ul>
+                    {o.urls.map((url) => (
+                      <li key={url}>{url}</li>
+                    ))}
+                  </ul>
+                </Text>
+              </li>
+            ))}
+          </ul>
         </Section>
       </Content>
     </ListItemView>

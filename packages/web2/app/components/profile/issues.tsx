@@ -6,7 +6,8 @@ import {
   Section,
 } from "@mittwald/flow-react-components";
 import { Scan } from "../../api/types.ts";
-import { IssuesList } from "./issues/issueList.tsx";
+import { groupIssuesByGuidelineAndTechnique } from "./issues/helpers.ts";
+import { IssueGroupView } from "./issues/components/issueGroup.tsx";
 
 interface IssuesProps {
   scan: Scan;
@@ -24,6 +25,8 @@ export const Issues = ({ scan }: IssuesProps) => {
     return order[a.severity] - order[b.severity];
   });
 
+  const issueGroups = groupIssuesByGuidelineAndTechnique(preparedIssues ?? []);
+
   return (
     <Section>
       <ColumnLayout>
@@ -33,7 +36,9 @@ export const Issues = ({ scan }: IssuesProps) => {
         </LabeledValue>
       </ColumnLayout>
       <Section>
-        <IssuesList issues={preparedIssues ?? []} />
+        {issueGroups.map((issueGroup) => (
+          <IssueGroupView group={issueGroup} />
+        ))}
       </Section>
     </Section>
   );

@@ -1,15 +1,15 @@
 import { typedList } from "@mittwald/flow-react-components";
-import { Issue } from "../../../api/types.ts";
 import { IssueListItemView } from "./issueListItemView.tsx";
+import { Issue } from "./types.ts";
 
-export const IssuesList = ({ issues }: { issues: Issue[] }) => {
+export const IssuesList = ({ groups }: { groups: Issue[] }) => {
   const IssueList = typedList<Issue>();
 
   return (
-    <IssueList.List batchSize={issues.length} accordion>
-      <IssueList.StaticData data={issues} />
+    <IssueList.List batchSize={groups.length} accordion>
+      <IssueList.StaticData data={groups} />
       <IssueList.Item>
-        {(issue) => <IssueListItemView issue={issue} />}
+        {(group) => <IssueListItemView issue={group} />}
       </IssueList.Item>
     </IssueList.List>
   );
