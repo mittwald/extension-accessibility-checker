@@ -3,8 +3,11 @@ import { useRef, useState } from "react";
 import {
   Align,
   Button,
+  FieldError,
   Header,
   Heading,
+  Icon,
+  InlineCode,
   Label,
   ListItemView,
   Section,
@@ -18,16 +21,32 @@ import { IconRowRemove } from "@tabler/icons-react";
 
 export const PathsList = ({ form }: { form: UseFormReturn<FormValues> }) => {
   const [pathInputValue, setPathInputValue] = useState("/");
+  const [touched, setTouched] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const isValidInputValue = () => {
-    return false;
+    if (!pathInputValue.startsWith("/")) {
+      return (
+        <Text>
+          Muss mit <InlineCode>/</InlineCode> beginnen.
+        </Text>
+      );
+    }
+    if (paths.has(pathInputValue)) {
+      return "Pfad ist bereits hinzugefügt.";
+    }
+    return true;
   };
 
   function addPathToFormValues(value: string) {
+    if (isValidInputValue() !== true) {
+      return;
+    }
+
     const values = form.getValues("paths");
     values.add(value);
     form.setValue("paths", values);
+    setTouched(false);
 
     if (inputRef.current) {
       inputRef.current.select();
@@ -51,17 +70,20 @@ export const PathsList = ({ form }: { form: UseFormReturn<FormValues> }) => {
       <PathList.Item textValue={(p) => p.toString()}>
         {(path) => (
           <ListItemView>
-            <Text>{path}</Text>
-            {path !== "/" && (
-              <Button
-                variant="plain"
-                color="secondary"
-                size="m"
-                onPress={() => removePathFromFormValues(path)}
-              >
+            <Text>
+              <strong>{path}</strong>
+            </Text>
+            <Button
+              variant="plain"
+              color="secondary"
+              size="m"
+              isDisabled={path === "/"}
+              onPress={() => removePathFromFormValues(path)}
+            >
+              <Icon>
                 <IconRowRemove />
-              </Button>
-            )}
+              </Icon>
+            </Button>
           </ListItemView>
         )}
       </PathList.Item>
@@ -79,25 +101,19 @@ export const PathsList = ({ form }: { form: UseFormReturn<FormValues> }) => {
       </Header>
       <Align>
         <TextField
+          ref={inputRef}
           autoFocus={!!form.getValues("domain")}
           onFocus={() => {
             if (inputRef.current) {
               inputRef.current.select();
             }
           }}
-          ref={inputRef}
-          validate={(value) => {
-            if (!value.startsWith("/")) {
-              return "Muss mit `/` beginnen.";
-            }
-            if (paths.has(value)) {
-              return "Pfad ist bereits hinzugefügt.";
-            }
-            return true;
-          }}
-          isInvalid={isValidInputValue()}
+          isInvalid={touched && isValidInputValue() !== true}
           value={pathInputValue}
-          onChange={(value) => setPathInputValue(value)}
+          onChange={(value) => {
+            setPathInputValue(value);
+            setTouched(true);
+          }}
           onPaste={(event) => {
             event.preventDefault();
             const data = event.clipboardData.getData("text");
@@ -112,9 +128,13 @@ export const PathsList = ({ form }: { form: UseFormReturn<FormValues> }) => {
           }}
         >
           <Label>Pfad</Label>
+          {touched && isValidInputValue() !== true && (
+            <FieldError>{isValidInputValue()}</FieldError>
+          )}
         </TextField>
         <Button
           color="primary"
+          isDisabled={isValidInputValue() !== true}
           onPress={() => addPathToFormValues(pathInputValue)}
         >
           Hinzufügen

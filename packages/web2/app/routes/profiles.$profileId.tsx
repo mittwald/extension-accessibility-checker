@@ -4,7 +4,6 @@ import {
   Tab,
   TabTitle,
   Text,
-  ColumnLayout,
   Section,
 } from "@mittwald/flow-react-components";
 import { Overview } from "../components/profile/overview.tsx";
