@@ -63,6 +63,38 @@ export const updateProfilePaths = createServerFn({ method: "POST" })
     return profile.toJSON() as unknown as ScanProfile;
   });
 
+export const updateProfileSettings = createServerFn({ method: "POST" })
+  .validator(
+    z.object({
+      profileId: z.string(),
+      cronExpression: z.string().optional(),
+      includeWarnings: z.boolean(),
+      includeNotices: z.boolean(),
+    }),
+  )
+  .handler(
+    async ({
+      data: { profileId, cronExpression, includeWarnings, includeNotices },
+    }) => {
+      const profile = await ScanProfileModel.findOneAndUpdate(
+        { _id: profileId },
+        {
+          $set: {
+            includeWarnings,
+            includeNotices,
+            cronSchedule: { expression: cronExpression },
+          },
+          $unset: { cronSchedule: cronExpression ? undefined : 1 },
+        },
+        { new: true },
+      );
+      if (!profile) {
+        return new Response("Profile not found", { status: 404 });
+      }
+      return profile.toJSON() as unknown as ScanProfile;
+    },
+  );
+
 export const deleteProfile = createServerFn({ method: "POST" })
   .validator(z.string())
   .handler(async ({ data: profileId }) => {

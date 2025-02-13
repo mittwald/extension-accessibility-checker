@@ -15,7 +15,6 @@
     "format": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --write"
   },
   "dependencies": {
-    "cron-parser": "^4.9.0",
     "extension-a11y-checker-storage": "workspace:*",
     "node-cron": "^3.0.3",
     "pa11y": "^8.0.0",
