@@ -3,8 +3,11 @@ import {
   ActionGroup,
   Button,
   Content,
+  Header,
   Heading,
   Modal,
+  Section,
+  Text,
 } from "@mittwald/flow-react-components";
 import { useForm } from "react-hook-form";
 import { Form } from "@mittwald/flow-react-components/react-hook-form";
@@ -43,7 +46,16 @@ export const CreateModal = () => {
       <Form form={form} onSubmit={onSubmit}>
         <Content>
           <Domain form={form} />
-          <PathsList form={form} />
+          <Section>
+            <Header>
+              <Heading>Unterseiten hinzufügen</Heading>
+              <Text>
+                Füge Unterseiten hinzu. So kannst du mit einem Profil den
+                Überblick über mehrere Seiten deiner Website bekommen.
+              </Text>
+            </Header>
+            <PathsList form={form} autoFocus={!!form.getValues("domain")} />
+          </Section>
         </Content>
         <ActionGroup>
           <Action closeOverlay="Modal">

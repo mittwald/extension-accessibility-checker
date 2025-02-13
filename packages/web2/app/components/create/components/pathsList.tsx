@@ -6,7 +6,6 @@ import {
   FieldError,
   Header,
   Heading,
-  Icon,
   IconClose,
   InlineCode,
   Label,
@@ -18,9 +17,16 @@ import {
 } from "@mittwald/flow-react-components";
 import { FormValues } from "../types.ts";
 import { extractPathFromUrl, prependPathWithSlash } from "../helpers.ts";
-import { IconRowRemove } from "@tabler/icons-react";
 
-export const PathsList = ({ form }: { form: UseFormReturn<FormValues> }) => {
+type PathFormValues = Pick<FormValues, "paths">;
+
+export const PathsList = ({
+  form,
+  autoFocus,
+}: {
+  form: UseFormReturn<PathFormValues>;
+  autoFocus: boolean;
+}) => {
   const [pathInputValue, setPathInputValue] = useState("/");
   const [touched, setTouched] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -90,18 +96,11 @@ export const PathsList = ({ form }: { form: UseFormReturn<FormValues> }) => {
   );
 
   return (
-    <Section>
-      <Header>
-        <Heading>Unterseiten hinzufügen</Heading>
-        <Text>
-          Füge Unterseiten hinzu. So kannst du mit einem Profil den Überblick
-          über mehrere Seiten deiner Website bekommen.
-        </Text>
-      </Header>
+    <>
       <Align>
         <TextField
           ref={inputRef}
-          autoFocus={!!form.getValues("domain")}
+          autoFocus={autoFocus}
           onFocus={() => {
             if (inputRef.current) {
               inputRef.current.select();
@@ -140,6 +139,6 @@ export const PathsList = ({ form }: { form: UseFormReturn<FormValues> }) => {
         </Button>
       </Align>
       {pathsList}
-    </Section>
+    </>
   );
 };

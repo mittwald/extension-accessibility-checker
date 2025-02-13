@@ -1,10 +1,9 @@
-import { Section } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
+import { PathSettings } from "./settings/paths.tsx";
 
 export const Settings = () => {
   return (
-    <Section>
-      <Heading>Einstellungen</Heading>
-    </Section>
+    <>
+      <PathSettings />
+    </>
   );
 };
