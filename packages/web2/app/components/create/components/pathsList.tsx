@@ -7,6 +7,7 @@ import {
   Header,
   Heading,
   Icon,
+  IconClose,
   InlineCode,
   Label,
   ListItemView,
@@ -80,9 +81,7 @@ export const PathsList = ({ form }: { form: UseFormReturn<FormValues> }) => {
               isDisabled={path === "/"}
               onPress={() => removePathFromFormValues(path)}
             >
-              <Icon>
-                <IconRowRemove />
-              </Icon>
+              <IconClose />
             </Button>
           </ListItemView>
         )}

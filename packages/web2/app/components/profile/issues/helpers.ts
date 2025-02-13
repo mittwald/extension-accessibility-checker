@@ -76,6 +76,7 @@ export const groupIssuesByGuidelineAndTechnique = (
     } else {
       aggregatedIssue.selectors.push({
         selector: issue.selector,
+        context: issue.context,
         urls: [issue.url],
       });
     }

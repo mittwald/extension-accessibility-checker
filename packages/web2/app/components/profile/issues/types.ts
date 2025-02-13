@@ -29,5 +29,6 @@ export interface Issue
 
 export interface IssueOccurrence {
   selector: string;
+  context: string;
   urls: string[];
 }
