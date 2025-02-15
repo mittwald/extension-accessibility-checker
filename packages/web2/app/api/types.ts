@@ -20,9 +20,11 @@ export interface ScanProfile {
   includeNotices: boolean;
   includeWarnings: boolean;
   cronSchedule?: CronScheduleJSON;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
   issueSummary?: Issues;
+
+  nextScan?: Scan;
 }
 
 export interface Issue {
@@ -54,8 +56,8 @@ export interface Scan {
   issues?: Issue[];
   error?: string;
   scheduledBy: "system" | string;
-  createdAt: string;
-  updatedAt: string;
-  executionScheduledFor: string;
-  completedAt?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  executionScheduledFor: Date;
+  completedAt?: Date;
 }

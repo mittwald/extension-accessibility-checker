@@ -15,7 +15,7 @@ interface IssuesProps {
 }
 
 export const Issues = ({ scan }: IssuesProps) => {
-  const date = new Date(scan.completedAt ?? scan.executionScheduledFor);
+  const date = scan.completedAt ?? scan.executionScheduledFor;
 
   const preparedIssues = (scan.issues ?? []).sort((a, b) => {
     const order = {
@@ -39,7 +39,7 @@ export const Issues = ({ scan }: IssuesProps) => {
       </ColumnLayout>
       <Section>
         {issueGroups.map((issueGroup) => (
-          <IssueGroupView group={issueGroup} />
+          <IssueGroupView key={issueGroup.groupKey} group={issueGroup} />
         ))}
       </Section>
     </Section>

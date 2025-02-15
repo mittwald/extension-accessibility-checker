@@ -30,7 +30,9 @@ const PendingScan = () => {
 };
 
 export const CurrentScan = () => {
-  const { nextScan } = Route.useLoaderData();
+  const {
+    profile: { nextScan },
+  } = Route.useLoaderData();
 
   if (!nextScan) {
     return <>Nope!</>;

@@ -40,11 +40,16 @@ export class ScanExecutor {
     if (!isDocument(scan.profile)) {
       return;
     }
-    if (scan.scheduledBy !== "system") {
+
+    const executionDate = scan.profile.nextExecution();
+    if (scan.scheduledBy !== "system" || !executionDate) {
       return;
     }
 
-    const nextScan = await ScanModel.createForProfile(scan.profile);
+    const nextScan = await ScanModel.createForProfile(
+      scan.profile,
+      executionDate,
+    );
     console.log(
       "next execution scheduled for: ",
       nextScan.executionScheduledFor,

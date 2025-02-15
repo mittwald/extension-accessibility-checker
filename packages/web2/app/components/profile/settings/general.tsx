@@ -15,16 +15,15 @@ import {
 import { Route } from "../../../routes/profiles.$profileId.tsx";
 import { startScan } from "../../../actions.ts";
 import { EditGeneralsModal } from "../modals/editGenerals.tsx";
-import { isPending, isRunning } from "../helpers.ts";
+import { isRunningOrPending } from "../helpers.ts";
 import { useRouter } from "@tanstack/react-router";
 
 export const GeneralSettings = () => {
-  const { profile, nextScan } = Route.useLoaderData();
+  const { profile } = Route.useLoaderData();
+  const nextScan = profile.nextScan;
   const router = useRouter();
 
-  const nextExecution = nextScan
-    ? new Date(nextScan?.executionScheduledFor)
-    : null;
+  const nextExecution = nextScan?.executionScheduledFor;
 
   return (
     <Section>
@@ -42,7 +41,7 @@ export const GeneralSettings = () => {
             await startScan({ data: profile._id });
             await router.invalidate({ sync: true });
           }}
-          isDisabled={nextScan && (isRunning(nextScan) || isPending(nextScan))}
+          isDisabled={isRunningOrPending(nextScan)}
         >
           Scan starten
         </Button>

@@ -58,7 +58,7 @@ export class Scan {
 
   @prop({
     required: true,
-    ref: () => ScanProfile,
+    ref: () => "ScanProfile",
   })
   public profile: Ref<ScanProfile>;
 
@@ -98,7 +98,7 @@ export class Scan {
 
   public static async nextScanOfProfile(
     this: ReturnModelType<typeof Scan>,
-    profileId: string,
+    profileId: string | ObjectId,
   ) {
     return this.findOne(
       { profile: profileId, status: { $in: ["queued", "running"] } },
@@ -125,7 +125,7 @@ export class Scan {
   public static async createForProfile(
     this: ReturnModelType<typeof Scan>,
     profile: DocumentType<ScanProfile>,
-    scheduledFor: Date | null = profile.nextExecution(),
+    scheduledFor: Date,
     scheduler: string = "system",
   ) {
     return this.create({

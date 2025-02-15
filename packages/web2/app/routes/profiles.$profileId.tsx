@@ -22,7 +22,7 @@ import {
 } from "extension-a11y-checker-storage";
 import { Scan, ScanProfile } from "../api/types.ts";
 import { useEffect } from "react";
-import { isPending, isRunning } from "../components/profile/helpers.ts";
+import { isRunningOrPending } from "../components/profile/helpers.ts";
 
 const getProfile = createServerFn({
   method: "GET",
@@ -31,16 +31,15 @@ const getProfile = createServerFn({
   .handler(async ({ data: profileId }) => {
     await dbConnect();
     const profile = await ScanProfileModel.findById(profileId).exec();
+    await profile?.populate("nextScan");
     const lastScan = await ScanModel.lastScanOfProfile(profileId);
-    const nextScan = await ScanModel.nextScanOfProfile(profileId);
 
     return {
       profile: {
-        ...profile?.toJSON(),
+        ...profile?.toObject(),
         issueSummary: lastScan?.getIssueSummary(),
       } as unknown as ScanProfile,
-      lastScan: lastScan?.toJSON() as unknown as Scan | undefined,
-      nextScan: nextScan?.toJSON() as unknown as Scan | undefined,
+      lastScan: lastScan as unknown as Scan | undefined,
     };
   });
 
@@ -50,15 +49,14 @@ export const Route = createFileRoute("/profiles/$profileId")({
 });
 
 function RouteComponent() {
-  const { profile, lastScan, nextScan } = Route.useLoaderData();
+  const { profile, lastScan } = Route.useLoaderData();
   const router = useRouter();
 
-  const isRunningOrPending =
-    nextScan && (isRunning(nextScan) || isPending(nextScan));
+  const shouldReloadData = isRunningOrPending(lastScan);
 
   useEffect(() => {
     let interval = null;
-    if (isRunningOrPending) {
+    if (shouldReloadData) {
       interval = setInterval(() => {
         router.invalidate();
       }, 5000);
@@ -69,7 +67,7 @@ function RouteComponent() {
         clearInterval(interval);
       }
     };
-  }, [router, isRunningOrPending]);
+  }, [router, shouldReloadData]);
 
   return (
     <Section>

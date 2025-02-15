@@ -1,11 +1,11 @@
 import type { DocumentType, Ref } from "@typegoose/typegoose";
-import { modelOptions } from "@typegoose/typegoose";
-import { prop } from "@typegoose/typegoose";
+import { modelOptions, prop } from "@typegoose/typegoose";
 import cronParser from "cron-parser";
 import { ObjectId } from "mongodb";
 import { Project, ProjectModel } from "../project/project.model.js";
 import { getModel } from "../lib/mongoose.js";
 import { ReturnModelType } from "@typegoose/typegoose/lib/types";
+import { Scan } from "../scan/scan.model.js";
 
 @modelOptions({ schemaOptions: { _id: false } })
 class CronSchedule {
@@ -13,7 +13,13 @@ class CronSchedule {
   expression!: string;
 }
 
-@modelOptions({ schemaOptions: { versionKey: false } })
+@modelOptions({
+  schemaOptions: {
+    versionKey: false,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  },
+})
 export class ScanProfile {
   @prop()
   public _id!: ObjectId;
@@ -62,6 +68,16 @@ export class ScanProfile {
   @prop({ default: Date.now })
   public updatedAt!: Date;
 
+  @prop({
+    ref: () => "Scan",
+    foreignField: "profile",
+    localField: "_id",
+    justOne: true,
+    match: { status: { $in: ["queued", "running"] } },
+    options: { sort: { executionScheduledFor: 1 } },
+  })
+  public nextScan: Scan | null = null;
+
   public static async findForProject(
     this: ReturnModelType<typeof ScanProfile>,
     projectId: string,
@@ -70,7 +86,13 @@ export class ScanProfile {
     if (!project) {
       return null;
     }
-    return ScanProfileModel.find({ project: projectId }).exec();
+    const profiles = await ScanProfileModel.find({ project: projectId }).exec();
+    await Promise.all(
+      profiles.map(async (p) => {
+        await p.populate("nextScan");
+      }),
+    );
+    return profiles;
   }
 
   public nextExecution(this: DocumentType<ScanProfile>) {

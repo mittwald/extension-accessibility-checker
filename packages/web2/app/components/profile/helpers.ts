@@ -5,6 +5,9 @@ export const isRunning = (scan: Scan) => {
 };
 
 export const isPending = (scan: Scan) => {
-  const nextExecution = new Date(scan.executionScheduledFor);
-  return scan.status === "queued" && nextExecution <= new Date();
+  return scan.status === "queued" && scan.executionScheduledFor <= new Date();
+};
+
+export const isRunningOrPending = (scan: Scan | undefined) => {
+  return scan && (isRunning(scan) || isPending(scan));
 };
