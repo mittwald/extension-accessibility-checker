@@ -24,6 +24,7 @@ export interface ScanProfile {
   updatedAt: Date;
   issueSummary?: Issues;
 
+  lastScan?: Scan;
   nextScan?: Scan;
 }
 

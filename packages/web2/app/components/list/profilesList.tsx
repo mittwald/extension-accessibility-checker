@@ -124,9 +124,14 @@ export const ProfilesList = (props: { profiles: ScanProfile[] }) => {
               <StateBatch profile={profile} />
             </Heading>
             <Text>
-              {profile.domain} | {profile.standard} | Anzahl Pfade:{" "}
+              {profile.domain} | {profile.standard} | Unterseiten:{" "}
               {profile.paths.length}
             </Text>
+            {profile.lastScan && (
+              <Text>
+                Letzter Scan: {profile.lastScan.completedAt?.toLocaleString()}
+              </Text>
+            )}
             {profile.nextScan && (
               <Text>
                 Nächster Scan:{" "}

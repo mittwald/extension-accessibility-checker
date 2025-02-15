@@ -73,6 +73,16 @@ export class ScanProfile {
     foreignField: "profile",
     localField: "_id",
     justOne: true,
+    match: { completedAt: { $exists: true } },
+    options: { sort: { completedAt: -1 } },
+  })
+  public lastScan: Scan | null = null;
+
+  @prop({
+    ref: () => "Scan",
+    foreignField: "profile",
+    localField: "_id",
+    justOne: true,
     match: { status: { $in: ["queued", "running"] } },
     options: { sort: { executionScheduledFor: 1 } },
   })
@@ -90,6 +100,7 @@ export class ScanProfile {
     await Promise.all(
       profiles.map(async (p) => {
         await p.populate("nextScan");
+        await p.populate({ path: "lastScan", select: "-issues" });
       }),
     );
     return profiles;
