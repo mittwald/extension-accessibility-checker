@@ -12,7 +12,7 @@
     "preview": "nx vite:preview"
   },
   "dependencies": {
-    "@mittwald/flow-react-components": "^0.2.0-alpha.29",
+    "@mittwald/flow-react-components": "^0.2.0-alpha.34",
     "@tabler/icons-react": "^3.29.0",
     "@tanstack/react-router": "^1.99.13",
     "@tanstack/start": "^1.99.13",

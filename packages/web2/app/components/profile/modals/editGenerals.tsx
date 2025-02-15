@@ -13,7 +13,10 @@ import {
   Button,
 } from "@mittwald/flow-react-components";
 import { useForm } from "react-hook-form";
-import { Field, Form } from "@mittwald/flow-react-components/react-hook-form";
+import {
+  Form,
+  typedField,
+} from "@mittwald/flow-react-components/react-hook-form";
 import cronParser from "cron-parser";
 import { updateProfileSettings } from "../../../actions.ts";
 import { useRouter } from "@tanstack/react-router";
@@ -28,17 +31,16 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
   const router = useRouter();
 
   const form = useForm<FormValues>({
-    values: {
+    defaultValues: {
       cronExpression: profile.cronSchedule?.expression,
       includeWarnings: profile.includeWarnings,
       includeNotices: profile.includeNotices,
     },
   });
 
-  console.log(form.getValues());
+  const Field = typedField(form);
 
   const onSubmit = async (formValues: FormValues) => {
-    console.log(formValues);
     await updateProfileSettings({
       data: {
         profileId: profile._id,
@@ -60,7 +62,9 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
                 validate: {
                   validCronExpression: (value) => {
                     try {
-                      cronParser.parseExpression(value).hasNext();
+                      if (typeof value === "string") {
+                        cronParser.parseExpression(value).hasNext();
+                      }
                       return true;
                     } catch (e) {
                       if (!(e instanceof Error)) {

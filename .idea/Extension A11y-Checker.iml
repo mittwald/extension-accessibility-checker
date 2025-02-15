@@ -3,6 +3,8 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.nx" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/web2/.output" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/web2/.vinxi" />
       <excludePattern pattern="yarm.lock" />
       <excludePattern pattern="tsconfig.tsbuildinfo" />
     </content>

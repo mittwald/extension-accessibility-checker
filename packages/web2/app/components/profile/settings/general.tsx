@@ -44,7 +44,7 @@ export const GeneralSettings = () => {
             startScan({ data: profile._id });
           }}
         >
-          Scan ausführen
+          Scan starten
         </Button>
       </Header>
       <ColumnLayout>

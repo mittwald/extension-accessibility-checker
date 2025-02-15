@@ -1,5 +1,4 @@
 import {
-  AlertBadge,
   Avatar,
   Badge,
   CodeBlock,
@@ -98,15 +97,17 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
           <ul>
             {issue.selectors.map((o) => (
               <li key={o.selector} style={{ paddingBottom: "1rem" }}>
-                <CodeBlock code={o.selector} copyable />
-                <CodeBlock code={o.context} language="html" copyable />
-                <Text>
-                  <ul>
-                    {o.urls.map((url) => (
-                      <li key={url}>{url}</li>
-                    ))}
-                  </ul>
-                </Text>
+                <Section>
+                  <CodeBlock code={o.selector} copyable />
+                  <CodeBlock code={o.context} language="html" copyable />
+                  <Text>
+                    <ul>
+                      {o.urls.map((url) => (
+                        <li key={url}>{url}</li>
+                      ))}
+                    </ul>
+                  </Text>
+                </Section>
               </li>
             ))}
           </ul>

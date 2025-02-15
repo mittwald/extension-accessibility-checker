@@ -1,6 +1,6 @@
 import wcagLinks from "../../../wcagLinks.json";
 import techniquesLinks from "../../../techniquesLinks.json";
-import { Issue as ApiIssue } from "../../../api/types";
+import { Issue as ApiIssue } from "../../../api/types.ts";
 
 export interface IssueMeta {
   wcagLevel: string;
