@@ -10,10 +10,12 @@ import {
   IconWarning,
 } from "@mittwald/flow-react-components";
 import { Section } from "@mittwald/flow-react-components";
+import { CurrentScan } from "./currentScan.tsx";
 
 export const Overview = ({ profile }: { profile: ScanProfile }) => {
   return (
     <Section>
+      <CurrentScan />
       <Heading>Übersicht</Heading>
       <ColumnLayout>
         <LabeledValue>

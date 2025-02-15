@@ -1,6 +1,6 @@
 // app/routes/__root.tsx
-import { Outlet, createRootRoute } from "@tanstack/react-router";
-import { Meta, Scripts } from "@tanstack/start";
+import { Outlet, createRootRoute, HeadContent } from "@tanstack/react-router";
+import { Scripts } from "@tanstack/start";
 import type { ReactNode } from "react";
 
 export const Route = createRootRoute({
@@ -33,7 +33,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html>
       <head>
-        <Meta />
+        <HeadContent />
       </head>
       <body style={{ backgroundColor: "#00205C" }}>
         {children}

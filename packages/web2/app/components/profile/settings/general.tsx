@@ -14,17 +14,16 @@ import {
 } from "@mittwald/flow-react-components";
 import { Route } from "../../../routes/profiles.$profileId.tsx";
 import { startScan } from "../../../actions.ts";
-import cronParser from "cron-parser";
 import { EditGeneralsModal } from "../modals/editGenerals.tsx";
+import { isPending, isRunning } from "../helpers.ts";
+import { useRouter } from "@tanstack/react-router";
 
 export const GeneralSettings = () => {
-  const { profile } = Route.useLoaderData();
+  const { profile, nextScan } = Route.useLoaderData();
+  const router = useRouter();
 
-  const nextExecution = profile.cronSchedule
-    ? cronParser
-        .parseExpression(profile.cronSchedule.expression)
-        .next()
-        .toDate()
+  const nextExecution = nextScan
+    ? new Date(nextScan?.executionScheduledFor)
     : null;
 
   return (
@@ -39,10 +38,11 @@ export const GeneralSettings = () => {
         </ModalTrigger>
         <Button
           color="accent"
-          onPress={() => {
-            // todo: disable if currently running
-            startScan({ data: profile._id });
+          onPress={async () => {
+            await startScan({ data: profile._id });
+            await router.invalidate({ sync: true });
           }}
+          isDisabled={nextScan && (isRunning(nextScan) || isPending(nextScan))}
         >
           Scan starten
         </Button>

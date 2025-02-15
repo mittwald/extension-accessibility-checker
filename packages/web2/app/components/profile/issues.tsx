@@ -8,6 +8,7 @@ import {
 import { Scan } from "../../api/types.ts";
 import { groupIssuesByGuidelineAndTechnique } from "./issues/helpers.ts";
 import { IssueGroupView } from "./issues/components/issueGroup.tsx";
+import { CurrentScan } from "./currentScan.tsx";
 
 interface IssuesProps {
   scan: Scan;
@@ -29,6 +30,7 @@ export const Issues = ({ scan }: IssuesProps) => {
 
   return (
     <Section>
+      <CurrentScan />
       <ColumnLayout>
         <LabeledValue>
           <Label>Ausgeführt am</Label>

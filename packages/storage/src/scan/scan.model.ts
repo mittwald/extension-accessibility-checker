@@ -96,13 +96,30 @@ export class Scan {
     }).exec();
   }
 
+  public static async nextScanOfProfile(
+    this: ReturnModelType<typeof Scan>,
+    profileId: string,
+  ) {
+    return this.findOne(
+      { profile: profileId, status: { $in: ["queued", "running"] } },
+      null,
+      {
+        sort: { executionScheduledFor: 1 },
+      },
+    ).exec();
+  }
+
   public static async lastScanOfProfile(
     this: ReturnModelType<typeof Scan>,
     profileId: string,
   ) {
-    return this.findOne({ profile: profileId }, null, {
-      sort: { completedAt: -1 },
-    }).exec();
+    return this.findOne(
+      { profile: profileId, completedAt: { $exists: true } },
+      null,
+      {
+        sort: { completedAt: -1 },
+      },
+    ).exec();
   }
 
   public static async createForProfile(

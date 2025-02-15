@@ -16,7 +16,6 @@
     "@tabler/icons-react": "^3.29.0",
     "@tanstack/react-router": "^1.99.13",
     "@tanstack/start": "^1.99.13",
-    "cron-parser": "^4.9.0",
     "extension-a11y-checker-storage": "workspace:*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

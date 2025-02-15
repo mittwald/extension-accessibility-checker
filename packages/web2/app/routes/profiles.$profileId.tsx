@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 import {
   Tabs,
   Tab,
@@ -21,6 +21,8 @@ import {
   ScanProfileModel,
 } from "extension-a11y-checker-storage";
 import { Scan, ScanProfile } from "../api/types.ts";
+import { useEffect } from "react";
+import { isPending, isRunning } from "../components/profile/helpers.ts";
 
 const getProfile = createServerFn({
   method: "GET",
@@ -30,6 +32,7 @@ const getProfile = createServerFn({
     await dbConnect();
     const profile = await ScanProfileModel.findById(profileId).exec();
     const lastScan = await ScanModel.lastScanOfProfile(profileId);
+    const nextScan = await ScanModel.nextScanOfProfile(profileId);
 
     return {
       profile: {
@@ -37,6 +40,7 @@ const getProfile = createServerFn({
         issueSummary: lastScan?.getIssueSummary(),
       } as unknown as ScanProfile,
       lastScan: lastScan?.toJSON() as unknown as Scan | undefined,
+      nextScan: nextScan?.toJSON() as unknown as Scan | undefined,
     };
   });
 
@@ -46,7 +50,26 @@ export const Route = createFileRoute("/profiles/$profileId")({
 });
 
 function RouteComponent() {
-  const { profile, lastScan } = Route.useLoaderData();
+  const { profile, lastScan, nextScan } = Route.useLoaderData();
+  const router = useRouter();
+
+  const isRunningOrPending =
+    nextScan && (isRunning(nextScan) || isPending(nextScan));
+
+  useEffect(() => {
+    let interval = null;
+    if (isRunningOrPending) {
+      interval = setInterval(() => {
+        router.invalidate();
+      }, 5000);
+    }
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [router, isRunningOrPending]);
 
   return (
     <Section>

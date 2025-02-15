@@ -1,0 +1,48 @@
+import { Route } from "../../routes/profiles.$profileId.tsx";
+import {
+  Alert,
+  Align,
+  LoadingSpinner,
+  Text,
+} from "@mittwald/flow-react-components";
+import { isPending, isRunning } from "./helpers.ts";
+
+const RunningScan = () => {
+  return (
+    <Alert>
+      <Align>
+        <LoadingSpinner size="m"></LoadingSpinner>
+        <Text>Scan wird ausgeführt …</Text>
+      </Align>
+    </Alert>
+  );
+};
+
+const PendingScan = () => {
+  return (
+    <Alert>
+      <Align>
+        <LoadingSpinner></LoadingSpinner>
+        <Text>Scan wird in Kürze gestartet …</Text>
+      </Align>
+    </Alert>
+  );
+};
+
+export const CurrentScan = () => {
+  const { nextScan } = Route.useLoaderData();
+
+  if (!nextScan) {
+    return <>Nope!</>;
+  }
+
+  if (isRunning(nextScan)) {
+    return <RunningScan />;
+  }
+
+  if (isPending(nextScan)) {
+    return <PendingScan />;
+  }
+
+  return <></>;
+};
