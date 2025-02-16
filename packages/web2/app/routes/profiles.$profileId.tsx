@@ -1,6 +1,7 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import {
   Breadcrumb,
+  Header,
   Heading,
   LayoutCard,
   Link,
@@ -16,6 +17,7 @@ import { Settings } from "../components/profile/settings.tsx";
 import { useEffect } from "react";
 import { isRunningOrPending } from "../components/profile/helpers.ts";
 import { getProfile } from "../actions/profile.ts";
+import { RenameProfileModal } from "../components/profile/modals/renameProfileModal.tsx";
 
 export const Route = createFileRoute("/profiles/$profileId")({
   component: RouteComponent,
@@ -50,9 +52,12 @@ function RouteComponent() {
         <Link href="/">A11y Checker</Link>
         <Link href="#">{profile.name}</Link>
       </Breadcrumb>
-      <Heading level={1} color="light">
-        {profile.name}
-      </Heading>
+      <Header>
+        <Heading level={1} color="light">
+          {profile.name}
+        </Heading>
+        <RenameProfileModal profile={profile} />
+      </Header>
       <LayoutCard>
         <Tabs>
           <Tab id="overview">

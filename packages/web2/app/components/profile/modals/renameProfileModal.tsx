@@ -1,0 +1,75 @@
+import { ScanProfile } from "../../../api/types.ts";
+import { useForm } from "react-hook-form";
+import {
+  Action,
+  ActionGroup,
+  Button,
+  Content,
+  Heading,
+  Label,
+  Modal,
+  ModalTrigger,
+  Section,
+  Text,
+  TextField,
+} from "@mittwald/flow-react-components";
+import { Field, Form } from "@mittwald/flow-react-components/react-hook-form";
+import { updateProfileName } from "../../../actions/profile.ts";
+import { useRouter } from "@tanstack/react-router";
+
+interface FormValues {
+  name: string;
+}
+
+export const RenameProfileModal = ({ profile }: { profile: ScanProfile }) => {
+  const router = useRouter();
+
+  const form = useForm<FormValues>({
+    defaultValues: {
+      name: profile.name,
+    },
+  });
+
+  const onSubmit = async (formValues: FormValues) => {
+    await updateProfileName({
+      data: { profileId: profile._id, name: formValues.name },
+    });
+    await router.invalidate({ sync: true });
+  };
+
+  return (
+    <ModalTrigger>
+      <Button variant="outline" slot="secondary" color="light" size="m">
+        Umbenennen
+      </Button>
+      <Modal>
+        <Form form={form} onSubmit={onSubmit}>
+          <Heading>Profil umbenennen</Heading>
+          <Content>
+            <Section>
+              <Text>
+                Gib deinem Profil einen aussagekräftigen Namen, sodass du es
+                schnell identifizieren kannst.
+              </Text>
+              <Field name="name" rules={{ required: true }}>
+                <TextField autoFocus>
+                  <Label>Profilname</Label>
+                </TextField>
+              </Field>
+            </Section>
+          </Content>
+          <ActionGroup>
+            <Action closeOverlay="Modal">
+              <Button color="accent" type="submit">
+                Speichern
+              </Button>
+              <Button slot="abort" color="secondary" variant="soft">
+                Abbrechen
+              </Button>
+            </Action>
+          </ActionGroup>
+        </Form>
+      </Modal>
+    </ModalTrigger>
+  );
+};

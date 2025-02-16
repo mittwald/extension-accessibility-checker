@@ -70,6 +70,26 @@ export const updateProfilePaths = createServerFn({ method: "POST" })
     }
     return profile.toJSON() as unknown as ScanProfile;
   });
+
+export const updateProfileName = createServerFn({ method: "POST" })
+  .validator(
+    z.object({
+      profileId: z.string(),
+      name: z.string().optional(),
+    }),
+  )
+  .handler(async ({ data: { profileId, name } }) => {
+    const profile = await ScanProfileModel.findOneAndUpdate(
+      { _id: profileId },
+      { $set: { name } },
+      { new: true },
+    );
+    if (!profile) {
+      return new Response("Profile not found", { status: 404 });
+    }
+    return profile.toJSON() as unknown as ScanProfile;
+  });
+
 export const updateProfileSettings = createServerFn({ method: "POST" })
   .validator(
     z.object({
