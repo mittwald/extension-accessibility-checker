@@ -8,6 +8,9 @@ export class ScanExecutor {
 
   static async executePendingScans() {
     const scans = await ScanModel.findPending();
+    if (scans.length === 0) {
+      return;
+    }
     console.log(`Scans found to execute: ${scans.length}`);
     for (const scan of scans) {
       await this.executeScan(scan);

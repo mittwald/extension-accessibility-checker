@@ -9,9 +9,9 @@ async function main() {
   const db = await dbConnect();
 
   const execScans = async () => {
-    console.info("››› Starting scans...");
+    // console.info("››› Starting scans...");
     await ScanExecutor.executePendingScans();
-    console.info("✓✓✓ Scans finished");
+    // console.info("✓✓✓ Scans finished");
   };
 
   await execScans();
