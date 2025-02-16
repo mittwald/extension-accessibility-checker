@@ -8,7 +8,7 @@ export const IssuesList = ({ groups }: { groups: Issue[] }) => {
   return (
     <IssueList.List batchSize={groups.length} accordion>
       <IssueList.StaticData data={groups} />
-      <IssueList.Item>
+      <IssueList.Item textValue={(i) => i.errorCode}>
         {(group) => <IssueListItemView issue={group} />}
       </IssueList.Item>
     </IssueList.List>

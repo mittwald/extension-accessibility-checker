@@ -1,14 +1,21 @@
 import {
+  Button,
   ColumnLayout,
   Content,
+  ContextMenu,
+  ContextMenuTrigger,
+  IconFilter,
   Label,
   LabeledValue,
+  MenuItem,
   Section,
 } from "@mittwald/flow-react-components";
 import { Scan } from "../../api/types.ts";
 import { groupIssuesByGuidelineAndTechnique } from "./issues/helpers.ts";
 import { IssueGroupView } from "./issues/components/issueGroup.tsx";
 import { CurrentScan } from "./currentScan.tsx";
+import { useState } from "react";
+import { NoIssues } from "./noIssues.tsx";
 
 interface IssuesProps {
   scan: Scan;
@@ -17,14 +24,30 @@ interface IssuesProps {
 export const Issues = ({ scan }: IssuesProps) => {
   const date = scan.completedAt ?? scan.executionScheduledFor;
 
-  const preparedIssues = (scan.issues ?? []).sort((a, b) => {
-    const order = {
-      error: 0,
-      warning: 1,
-      notice: 2,
-    };
-    return order[a.severity] - order[b.severity];
-  });
+  const [viewOptions, setViewOptions] = useState([
+    "error",
+    "warning",
+    "notice",
+  ]);
+
+  const toggleOption = (option: string) => () => {
+    if (viewOptions.includes(option)) {
+      setViewOptions(viewOptions.filter((o) => o !== option));
+    } else {
+      setViewOptions([...viewOptions, option]);
+    }
+  };
+
+  const preparedIssues = (scan.issues ?? [])
+    .filter((issue) => viewOptions.includes(issue.severity))
+    .sort((a, b) => {
+      const order = {
+        error: 0,
+        warning: 1,
+        notice: 2,
+      };
+      return order[a.severity] - order[b.severity];
+    });
 
   const issueGroups = groupIssuesByGuidelineAndTechnique(preparedIssues ?? []);
 
@@ -36,8 +59,25 @@ export const Issues = ({ scan }: IssuesProps) => {
           <Label>Ausgeführt am</Label>
           <Content>{date.toLocaleString()}</Content>
         </LabeledValue>
+        <ContextMenuTrigger>
+          <Button variant={"outline"} color={"secondary"}>
+            <IconFilter /> Darstellungsoptionen
+          </Button>
+          <ContextMenu selectionMode="switch" defaultSelectedKeys={viewOptions}>
+            <MenuItem id="error" onAction={toggleOption("error")}>
+              Fehler
+            </MenuItem>
+            <MenuItem id="warning" onAction={toggleOption("warning")}>
+              Warnungen
+            </MenuItem>
+            <MenuItem id="notice" onAction={toggleOption("notice")}>
+              Hinweise
+            </MenuItem>
+          </ContextMenu>
+        </ContextMenuTrigger>
       </ColumnLayout>
       <Section>
+        {issueGroups.length === 0 && <NoIssues />}
         {issueGroups.map((issueGroup) => (
           <IssueGroupView key={issueGroup.groupKey} group={issueGroup} />
         ))}

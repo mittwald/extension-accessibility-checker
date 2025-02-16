@@ -14,7 +14,7 @@ export const Meta = () => {
         <Section>
           <Heading level={2}>Manuell testen</Heading>
           <Text>
-            Eine automatisierter Scan kann nicht alle Kriterien der WCAG 2
+            Ein automatisierter Scan kann nicht alle Kriterien der WCAG 2
             erfassen.{" "}
             <Link href="https://web.dev/articles/how-to-review?hl=de">
               Teste daher auch immer manuell
