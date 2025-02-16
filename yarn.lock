@@ -5570,18 +5570,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typegoose/typegoose@npm:^12.10.1":
-  version: 12.10.1
-  resolution: "@typegoose/typegoose@npm:12.10.1"
+"@typegoose/typegoose@npm:^12.11.0":
+  version: 12.11.0
+  resolution: "@typegoose/typegoose@npm:12.11.0"
   dependencies:
     lodash: "npm:^4.17.20"
     loglevel: "npm:^1.9.2"
     reflect-metadata: "npm:^0.2.2"
-    semver: "npm:^7.6.3"
+    semver: "npm:^7.7.1"
     tslib: "npm:^2.8.1"
   peerDependencies:
-    mongoose: ~8.9.0
-  checksum: 10c0/b881238f91ffa82c405c5424c1695bb17ddb88d48a2fab3535805ffafa63129456a389961facf94e46ff2f617bbb128e0055c3cfa6a0e1a82e164b046ac05f37
+    mongoose: ~8.10.0
+  checksum: 10c0/e45d23ba2012b1d24c89e83489a8b7f1bf866bf1b0fb57b5b2b0bd399de4ec4f2b51013f7320f57c748d73c74906365954a5ed2052780765aee1148313315fc7
   languageName: node
   linkType: hard
 
@@ -8580,12 +8580,12 @@ __metadata:
   resolution: "extension-a11y-checker-storage@workspace:packages/storage"
   dependencies:
     "@eslint/eslintrc": "npm:^3"
-    "@typegoose/typegoose": "npm:^12.10.1"
+    "@typegoose/typegoose": "npm:^12.11.0"
     "@types/node": "npm:^20"
     cron-parser: "npm:^4.9.0"
     eslint: "npm:^9"
     mongodb: "npm:^6.12.0"
-    mongoose: "npm:^8.9.5"
+    mongoose: "npm:^8.10.0"
     typescript: "npm:^5"
   languageName: unknown
   linkType: soft
@@ -11124,7 +11124,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^6.12.0, mongodb@npm:~6.12.0":
+"mongodb@npm:^6.12.0":
   version: 6.12.0
   resolution: "mongodb@npm:6.12.0"
   dependencies:
@@ -11158,18 +11158,52 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongoose@npm:^8.9.5":
-  version: 8.9.5
-  resolution: "mongoose@npm:8.9.5"
+"mongodb@npm:~6.13.0":
+  version: 6.13.0
+  resolution: "mongodb@npm:6.13.0"
+  dependencies:
+    "@mongodb-js/saslprep": "npm:^1.1.9"
+    bson: "npm:^6.10.1"
+    mongodb-connection-string-url: "npm:^3.0.0"
+  peerDependencies:
+    "@aws-sdk/credential-providers": ^3.188.0
+    "@mongodb-js/zstd": ^1.1.0 || ^2.0.0
+    gcp-metadata: ^5.2.0
+    kerberos: ^2.0.1
+    mongodb-client-encryption: ">=6.0.0 <7"
+    snappy: ^7.2.2
+    socks: ^2.7.1
+  peerDependenciesMeta:
+    "@aws-sdk/credential-providers":
+      optional: true
+    "@mongodb-js/zstd":
+      optional: true
+    gcp-metadata:
+      optional: true
+    kerberos:
+      optional: true
+    mongodb-client-encryption:
+      optional: true
+    snappy:
+      optional: true
+    socks:
+      optional: true
+  checksum: 10c0/8fe03ef208113a47842a0ae3676abe287d6e1cff81d47414abf501c7b78257c7fecb80cafc5ba16b3e42821fffcd3652c62650302c8f4f58464c802a17910478
+  languageName: node
+  linkType: hard
+
+"mongoose@npm:^8.10.0":
+  version: 8.10.1
+  resolution: "mongoose@npm:8.10.1"
   dependencies:
     bson: "npm:^6.10.1"
     kareem: "npm:2.6.3"
-    mongodb: "npm:~6.12.0"
+    mongodb: "npm:~6.13.0"
     mpath: "npm:0.9.0"
     mquery: "npm:5.0.0"
     ms: "npm:2.1.3"
     sift: "npm:17.1.3"
-  checksum: 10c0/9d4741fdd8a047ca56a6b375f54cdb6e5f7b00baddf7675369dddd28e89abcb644fd15c65794d8321adc39a8baa53a987a02c4aac619fea712660003de135a88
+  checksum: 10c0/7d3251a2897d8e51fbfbe7c4a1c0be025047cb24ec307d78093a59b8fdec4bd478dc434ab80086524fca1e655d0930f3b8f75f18336a56d3ee258db38a03911e
   languageName: node
   linkType: hard
 
