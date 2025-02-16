@@ -1,7 +1,7 @@
 // app/routes/__root.tsx
-import { createRootRoute, HeadContent, Outlet } from "@tanstack/react-router";
-import { Scripts } from "@tanstack/start";
-import type { ReactNode } from "react";
+import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { ErrorRoot } from "../components/errorRoot.tsx";
+import { RootDocument } from "../components/rootDocument.tsx";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -19,6 +19,7 @@ export const Route = createRootRoute({
     ],
   }),
   component: RootComponent,
+  errorComponent: ErrorRoot,
 });
 
 function RootComponent() {
@@ -26,19 +27,5 @@ function RootComponent() {
     <RootDocument>
       <Outlet />
     </RootDocument>
-  );
-}
-
-function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
-  return (
-    <html>
-      <head>
-        <HeadContent />
-      </head>
-      <body style={{ backgroundColor: "#00205C" }}>
-        {children}
-        <Scripts />
-      </body>
-    </html>
   );
 }
