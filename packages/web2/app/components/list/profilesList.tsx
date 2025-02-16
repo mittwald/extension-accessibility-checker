@@ -8,6 +8,7 @@ import {
   Heading,
   Icon,
   IconDelete,
+  IconEdit,
   IconInfo,
   IconSubdomain,
   MenuItem,
@@ -27,6 +28,7 @@ import {
   isRunningOrPending,
 } from "../profile/helpers.ts";
 import { startScan } from "../../actions/scan.ts";
+import { RenameProfileModal } from "../profile/modals/renameProfileModal.tsx";
 
 const StateBatch = ({ profile }: { profile: ScanProfile }) => {
   if (!profile.nextScan) {
@@ -46,6 +48,7 @@ export const ProfilesList = (props: { profiles: ScanProfile[] }) => {
 
   const navigate = useNavigate();
   const router = useRouter();
+  const renameModalController = useOverlayController("Modal");
   const deleteModalController = useOverlayController("Modal");
 
   const shouldReloadData = props.profiles.some((p) =>
@@ -153,11 +156,19 @@ export const ProfilesList = (props: { profiles: ScanProfile[] }) => {
                 </Icon>
                 Scan starten
               </MenuItem>
+              <MenuItem onAction={renameModalController.open}>
+                <IconEdit />
+                Umbenennen
+              </MenuItem>
               <MenuItem onAction={deleteModalController.open}>
                 <IconDelete />
                 Löschen
               </MenuItem>
             </ContextMenu>
+            <RenameProfileModal
+              controller={renameModalController}
+              profile={profile}
+            />
             <DeleteConfirmationModal
               profile={profile}
               controller={deleteModalController}

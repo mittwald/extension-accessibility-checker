@@ -1,6 +1,7 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import {
   Breadcrumb,
+  Button,
   Header,
   Heading,
   LayoutCard,
@@ -10,6 +11,7 @@ import {
   Tabs,
   TabTitle,
   Text,
+  useOverlayController,
 } from "@mittwald/flow-react-components";
 import { Overview } from "../components/profile/overview.tsx";
 import { Issues } from "../components/profile/issues.tsx";
@@ -26,6 +28,9 @@ export const Route = createFileRoute("/profiles/$profileId")({
 
 function RouteComponent() {
   const { profile, lastScan } = Route.useLoaderData();
+
+  const renameModalController = useOverlayController("Modal");
+
   const router = useRouter();
 
   const shouldReloadData = isRunningOrPending(lastScan);
@@ -56,7 +61,19 @@ function RouteComponent() {
         <Heading level={1} color="light">
           {profile.name}
         </Heading>
-        <RenameProfileModal profile={profile} />
+        <Button
+          variant="outline"
+          slot="secondary"
+          color="light"
+          size="m"
+          onPress={renameModalController.open}
+        >
+          Umbenennen
+        </Button>
+        <RenameProfileModal
+          profile={profile}
+          controller={renameModalController}
+        />
       </Header>
       <LayoutCard>
         <Tabs>

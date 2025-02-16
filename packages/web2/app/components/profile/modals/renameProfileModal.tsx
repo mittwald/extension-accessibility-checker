@@ -8,7 +8,7 @@ import {
   Heading,
   Label,
   Modal,
-  ModalTrigger,
+  OverlayController,
   Section,
   Text,
   TextField,
@@ -21,7 +21,13 @@ interface FormValues {
   name: string;
 }
 
-export const RenameProfileModal = ({ profile }: { profile: ScanProfile }) => {
+export const RenameProfileModal = ({
+  controller,
+  profile,
+}: {
+  controller: OverlayController;
+  profile: ScanProfile;
+}) => {
   const router = useRouter();
 
   const form = useForm<FormValues>({
@@ -38,38 +44,33 @@ export const RenameProfileModal = ({ profile }: { profile: ScanProfile }) => {
   };
 
   return (
-    <ModalTrigger>
-      <Button variant="outline" slot="secondary" color="light" size="m">
-        Umbenennen
-      </Button>
-      <Modal>
-        <Form form={form} onSubmit={onSubmit}>
-          <Heading>Profil umbenennen</Heading>
-          <Content>
-            <Section>
-              <Text>
-                Gib deinem Profil einen aussagekräftigen Namen, sodass du es
-                schnell identifizieren kannst.
-              </Text>
-              <Field name="name" rules={{ required: true }}>
-                <TextField autoFocus>
-                  <Label>Profilname</Label>
-                </TextField>
-              </Field>
-            </Section>
-          </Content>
-          <ActionGroup>
-            <Action closeOverlay="Modal">
-              <Button color="accent" type="submit">
-                Speichern
-              </Button>
-              <Button slot="abort" color="secondary" variant="soft">
-                Abbrechen
-              </Button>
-            </Action>
-          </ActionGroup>
-        </Form>
-      </Modal>
-    </ModalTrigger>
+    <Modal controller={controller}>
+      <Form form={form} onSubmit={onSubmit}>
+        <Heading>Profil umbenennen</Heading>
+        <Content>
+          <Section>
+            <Text>
+              Gib deinem Profil einen aussagekräftigen Namen, sodass du es
+              schnell identifizieren kannst.
+            </Text>
+            <Field name="name" rules={{ required: true }}>
+              <TextField autoFocus>
+                <Label>Profilname</Label>
+              </TextField>
+            </Field>
+          </Section>
+        </Content>
+        <ActionGroup>
+          <Action closeOverlay="Modal">
+            <Button color="accent" type="submit">
+              Speichern
+            </Button>
+            <Button slot="abort" color="secondary" variant="soft">
+              Abbrechen
+            </Button>
+          </Action>
+        </ActionGroup>
+      </Form>
+    </Modal>
   );
 };
