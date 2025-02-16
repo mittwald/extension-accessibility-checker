@@ -14,7 +14,8 @@ import { FormValues } from "../../create/types.ts";
 import { useForm } from "react-hook-form";
 import { PathsList } from "../../create/components/pathsList.tsx";
 import { useRouter } from "@tanstack/react-router";
-import { updateProfilePaths } from "../../../actions.ts";
+
+import { updateProfilePaths } from "../../../actions/profile.ts";
 
 type PathFormValues = Pick<FormValues, "paths">;
 

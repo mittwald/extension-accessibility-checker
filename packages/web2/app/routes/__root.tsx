@@ -1,5 +1,5 @@
 // app/routes/__root.tsx
-import { Outlet, createRootRoute, HeadContent } from "@tanstack/react-router";
+import { createRootRoute, HeadContent, Outlet } from "@tanstack/react-router";
 import { Scripts } from "@tanstack/start";
 import type { ReactNode } from "react";
 

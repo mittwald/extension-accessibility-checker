@@ -1,47 +1,21 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import {
-  Tabs,
+  Breadcrumb,
+  Heading,
+  LayoutCard,
+  Link,
+  Section,
   Tab,
+  Tabs,
   TabTitle,
   Text,
-  Section,
 } from "@mittwald/flow-react-components";
 import { Overview } from "../components/profile/overview.tsx";
 import { Issues } from "../components/profile/issues.tsx";
 import { Settings } from "../components/profile/settings.tsx";
-import { Heading } from "@mittwald/flow-react-components";
-import { Breadcrumb } from "@mittwald/flow-react-components";
-import { Link } from "@mittwald/flow-react-components";
-import { LayoutCard } from "@mittwald/flow-react-components";
-import { createServerFn } from "@tanstack/start";
-import { z } from "zod";
-import {
-  dbConnect,
-  ScanModel,
-  ScanProfileModel,
-} from "extension-a11y-checker-storage";
-import { Scan, ScanProfile } from "../api/types.ts";
 import { useEffect } from "react";
 import { isRunningOrPending } from "../components/profile/helpers.ts";
-
-const getProfile = createServerFn({
-  method: "GET",
-})
-  .validator(z.string())
-  .handler(async ({ data: profileId }) => {
-    await dbConnect();
-    const profile = await ScanProfileModel.findById(profileId).exec();
-    await profile?.populate("nextScan");
-    const lastScan = await ScanModel.lastScanOfProfile(profileId);
-
-    return {
-      profile: {
-        ...profile?.toObject(),
-        issueSummary: lastScan?.getIssueSummary(),
-      } as unknown as ScanProfile,
-      lastScan: lastScan as unknown as Scan | undefined,
-    };
-  });
+import { getProfile } from "../actions/profile.ts";
 
 export const Route = createFileRoute("/profiles/$profileId")({
   component: RouteComponent,

@@ -17,7 +17,6 @@ import {
   useOverlayController,
 } from "@mittwald/flow-react-components";
 import { useNavigate, useRouter } from "@tanstack/react-router";
-import { startScan } from "../../actions.ts";
 import { DeleteConfirmationModal } from "../profile/modals/deleteConfirmation.tsx";
 import { IconWorldSearch } from "@tabler/icons-react";
 import { CreateModal } from "../create/createModal.tsx";
@@ -27,6 +26,7 @@ import {
   isRunning,
   isRunningOrPending,
 } from "../profile/helpers.ts";
+import { startScan } from "../../actions/scan.ts";
 
 const StateBatch = ({ profile }: { profile: ScanProfile }) => {
   if (!profile.nextScan) {

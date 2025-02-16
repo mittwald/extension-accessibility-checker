@@ -1,9 +1,11 @@
-import { LayoutCard } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { Link } from "@mittwald/flow-react-components";
-import { ColumnLayout } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
+import {
+  ColumnLayout,
+  Heading,
+  LayoutCard,
+  Link,
+  Section,
+  Text,
+} from "@mittwald/flow-react-components";
 
 export const Meta = () => {
   return (

@@ -1,17 +1,17 @@
 import {
+  Action,
+  ActionGroup,
+  Button,
   Content,
-  Text,
   Heading,
   Modal,
-  Section,
-  ActionGroup,
-  Action,
-  Button,
   OverlayController,
+  Section,
+  Text,
 } from "@mittwald/flow-react-components";
-import { deleteProfile } from "../../../actions.ts";
 import { ScanProfile } from "../../../api/types.ts";
 import { useRouter } from "@tanstack/react-router";
+import { deleteProfile } from "../../../actions/profile.ts";
 
 export const DeleteConfirmationModal = ({
   profile,

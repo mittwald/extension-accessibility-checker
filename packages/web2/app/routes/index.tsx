@@ -10,7 +10,8 @@ import { Meta } from "../components/list/meta.tsx";
 import { NoProfiles } from "../components/list/noProfiles.tsx";
 import "@mittwald/flow-react-components/all.css";
 import { ProfilesList } from "../components/list/profilesList.tsx";
-import { getProfiles } from "../actions.ts";
+
+import { getProfiles } from "../actions/profile.ts";
 
 export const Route = createFileRoute("/")({
   component: Home,

@@ -1,15 +1,15 @@
 import { ScanProfile } from "../../api/types.ts";
-import { ColumnLayout } from "@mittwald/flow-react-components";
-import { LabeledValue } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
-import { Content } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
 import {
+  ColumnLayout,
+  Content,
+  Heading,
   IconDanger,
   IconInfo,
   IconWarning,
+  Label,
+  LabeledValue,
+  Section,
 } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
 import { CurrentScan } from "./currentScan.tsx";
 
 export const Overview = ({ profile }: { profile: ScanProfile }) => {

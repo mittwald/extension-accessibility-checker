@@ -1,16 +1,16 @@
 import { ScanProfile } from "../../../api/types.ts";
 import {
-  Modal,
-  Heading,
-  Section,
-  Content,
-  Label,
-  TextField,
-  Switch,
-  ColumnLayout,
   Action,
   ActionGroup,
   Button,
+  ColumnLayout,
+  Content,
+  Heading,
+  Label,
+  Modal,
+  Section,
+  Switch,
+  TextField,
 } from "@mittwald/flow-react-components";
 import { useForm } from "react-hook-form";
 import {
@@ -18,8 +18,8 @@ import {
   typedField,
 } from "@mittwald/flow-react-components/react-hook-form";
 import cronParser from "cron-parser";
-import { updateProfileSettings } from "../../../actions.ts";
 import { useRouter } from "@tanstack/react-router";
+import { updateProfileSettings } from "../../../actions/profile.ts";
 
 interface FormValues {
   cronExpression?: string;

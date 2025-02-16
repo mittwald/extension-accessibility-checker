@@ -5,9 +5,9 @@ import {
   ScanModel,
   ScanProfileModel,
 } from "extension-a11y-checker-storage";
-import { ScanProfile } from "./api/types.ts";
+import { Scan, ScanProfile } from "../api/types.ts";
 import { ObjectId } from "mongodb";
-import { projectId } from "./poc.ts";
+import { projectId } from "../poc.ts";
 
 export const getProfiles = createServerFn().handler(async () => {
   await dbConnect();
@@ -15,14 +15,23 @@ export const getProfiles = createServerFn().handler(async () => {
   return data as unknown as ScanProfile[] | null;
 });
 
-export const startScan = createServerFn({ method: "POST" })
+export const getProfile = createServerFn({
+  method: "GET",
+})
   .validator(z.string())
   .handler(async ({ data: profileId }) => {
-    const profile = await ScanProfileModel.findById(profileId);
-    if (!profile) {
-      return new Response("Profile not found", { status: 404 });
-    }
-    await ScanModel.createForProfile(profile, new Date(), "user");
+    await dbConnect();
+    const profile = await ScanProfileModel.findById(profileId).exec();
+    await profile?.populate("nextScan");
+    const lastScan = await ScanModel.lastScanOfProfile(profileId);
+
+    return {
+      profile: {
+        ...profile?.toObject(),
+        issueSummary: lastScan?.getIssueSummary(),
+      } as unknown as ScanProfile,
+      lastScan: lastScan as unknown as Scan | undefined,
+    };
   });
 
 export const createProfile = createServerFn({ method: "POST" })
@@ -43,7 +52,6 @@ export const createProfile = createServerFn({ method: "POST" })
     // todo: startScan({ data: profile._id.toString() });
     return profile.toJSON() as unknown as ScanProfile;
   });
-
 export const updateProfilePaths = createServerFn({ method: "POST" })
   .validator(
     z.object({
@@ -62,7 +70,6 @@ export const updateProfilePaths = createServerFn({ method: "POST" })
     }
     return profile.toJSON() as unknown as ScanProfile;
   });
-
 export const updateProfileSettings = createServerFn({ method: "POST" })
   .validator(
     z.object({

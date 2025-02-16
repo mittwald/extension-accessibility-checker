@@ -13,10 +13,10 @@ import { useForm } from "react-hook-form";
 import { Form } from "@mittwald/flow-react-components/react-hook-form";
 import { FormValues } from "./types.ts";
 import { PathsList } from "./components/pathsList.tsx";
-import { createProfile } from "../../actions.ts";
 import { projectId } from "../../poc.ts";
 import { useRouter } from "@tanstack/react-router";
 import { Domain } from "./components/domain.tsx";
+import { createProfile } from "../../actions/profile.ts";
 
 export const CreateModal = () => {
   const router = useRouter();
