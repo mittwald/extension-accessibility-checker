@@ -16,8 +16,10 @@
   },
   "dependencies": {
     "extension-a11y-checker-storage": "workspace:*",
+    "lighthouse": "^12.3.0",
     "node-cron": "^3.0.3",
     "pa11y": "^8.0.0",
+    "puppeteer": "^24.2.1",
     "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {

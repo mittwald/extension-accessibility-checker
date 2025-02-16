@@ -45,6 +45,8 @@ export class Page {
   public title?: string;
   @prop()
   public issues?: Issues;
+  @prop()
+  public score?: number;
 
   public constructor(url: string) {
     this.url = url;
@@ -157,16 +159,19 @@ export class Scan {
   }
 
   public getIssueSummary(this: DocumentType<Scan>) {
-    return this.pages.reduce(
-      (c: Issues, page) => {
+    const summary = this.pages.reduce(
+      (c: Issues & { score: number }, page) => {
         return {
           errors: c.errors + (page.issues?.errors || 0),
           warnings: c.warnings + (page.issues?.warnings || 0),
           notices: c.notices + (page.issues?.notices || 0),
+          score: c.score + (page.score || 0),
         };
       },
-      { errors: 0, warnings: 0, notices: 0 },
+      { errors: 0, warnings: 0, notices: 0, score: 0 },
     );
+    summary.score = Math.round(summary.score / this.pages.length);
+    return summary;
   }
 }
 

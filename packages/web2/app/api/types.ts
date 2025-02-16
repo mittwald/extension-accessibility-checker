@@ -22,7 +22,7 @@ export interface ScanProfile {
   cronSchedule?: CronScheduleJSON;
   createdAt: Date;
   updatedAt: Date;
-  issueSummary?: Issues;
+  issueSummary?: IssueSummary;
 
   lastScan?: Scan;
   nextScan?: Scan;
@@ -43,10 +43,15 @@ export interface Issues {
   notices: number;
 }
 
+export interface IssueSummary extends Issues {
+  score?: number;
+}
+
 export interface Page {
   url: string;
   title?: string;
   issues?: Issues;
+  score?: number;
 }
 
 export interface Scan {

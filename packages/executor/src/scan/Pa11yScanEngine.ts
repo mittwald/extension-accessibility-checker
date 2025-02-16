@@ -2,6 +2,8 @@ import { Issue, Page, Scan } from "extension-a11y-checker-storage";
 import pa11y, { Pa11yOptions, Pa11yResults, Pa11yIssue } from "pa11y";
 import { DocumentType, isDocument } from "@typegoose/typegoose";
 import { ScanEngine } from "./ScanEngine.js";
+import puppeteer from "puppeteer";
+import lighthouse, { Flags } from "lighthouse";
 
 export class Pa11yScanEngine implements ScanEngine {
   public async executeScan(scan: DocumentType<Scan>): Promise<void> {
@@ -20,8 +22,11 @@ export class Pa11yScanEngine implements ScanEngine {
     }
 
     try {
-      for (const url of scan.pages) {
-        await this.executeURL(url, options, scan);
+      for (const page of scan.pages) {
+        await Promise.all([
+          this.executePa11yForURL(page, options, scan),
+          this.calculateLighthouseScore(page, scan),
+        ]);
       }
       scan.status = "completed";
     } catch (e) {
@@ -29,7 +34,11 @@ export class Pa11yScanEngine implements ScanEngine {
     }
   }
 
-  protected async executeURL(page: Page, options: Pa11yOptions, scan: Scan) {
+  protected async executePa11yForURL(
+    page: Page,
+    options: Pa11yOptions,
+    scan: Scan,
+  ) {
     const results = await new Pa11yRunner().run(page.url, options);
     page.title = results.documentTitle;
     const mappedIssues: Issue[] = results.issues.map((i) =>
@@ -58,6 +67,37 @@ export class Pa11yScanEngine implements ScanEngine {
     i.selector = issue.selector;
     i.context = issue.context;
     return i;
+  }
+
+  private async calculateLighthouseScore(page: Page, scan: DocumentType<Scan>) {
+    const browser = await puppeteer.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox", "--headless"],
+      headless: true,
+    });
+    const { port } = new URL(browser.wsEndpoint());
+
+    const flags: Flags = {
+      logLevel: "info",
+      output: "html",
+      onlyCategories: ["accessibility"],
+      port: parseInt(port),
+    };
+
+    try {
+      const runnerResult = await lighthouse(page.url, flags);
+      if (!runnerResult?.lhr.categories.accessibility.score) {
+        return;
+      }
+      const score = Math.round(
+        runnerResult.lhr.categories.accessibility.score * 100,
+      );
+      console.log("LH Accessibility score:", score);
+      page.score = score;
+    } catch (e) {
+      console.error("Error calculating accessibility score:", e);
+    } finally {
+      await browser.close();
+    }
   }
 }
 
