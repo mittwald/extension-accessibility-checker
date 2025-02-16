@@ -21,7 +21,6 @@ import { useNavigate, useRouter } from "@tanstack/react-router";
 import { DeleteConfirmationModal } from "../profile/modals/deleteConfirmation.tsx";
 import { IconWorldSearch } from "@tabler/icons-react";
 import { CreateModal } from "../create/createModal.tsx";
-import { useEffect } from "react";
 import {
   isPending,
   isRunning,
@@ -29,6 +28,7 @@ import {
 } from "../profile/helpers.ts";
 import { startScan } from "../../actions/scan.ts";
 import { RenameProfileModal } from "../profile/modals/renameProfileModal.tsx";
+import { useAutoRefresh } from "../../hooks/useAutoRefresh.tsx";
 
 const StateBatch = ({ profile }: { profile: ScanProfile }) => {
   if (!profile.nextScan) {
@@ -54,21 +54,7 @@ export const ProfilesList = (props: { profiles: ScanProfile[] }) => {
   const shouldReloadData = props.profiles.some((p) =>
     isRunningOrPending(p.nextScan),
   );
-
-  useEffect(() => {
-    let interval = null;
-    if (shouldReloadData) {
-      interval = setInterval(() => {
-        router.invalidate();
-      }, 5000);
-    }
-
-    return () => {
-      if (interval) {
-        clearInterval(interval);
-      }
-    };
-  }, [router, shouldReloadData]);
+  useAutoRefresh(shouldReloadData);
 
   const goToProfile = (profile: ScanProfile) =>
     navigate({

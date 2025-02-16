@@ -8,6 +8,6 @@ export const isPending = (scan: Scan) => {
   return scan.status === "queued" && scan.executionScheduledFor <= new Date();
 };
 
-export const isRunningOrPending = (scan: Scan | undefined) => {
-  return scan && (isRunning(scan) || isPending(scan));
+export const isRunningOrPending = (scan: Scan | undefined | null): boolean => {
+  return !!(scan && (isRunning(scan) || isPending(scan)));
 };

@@ -1,4 +1,4 @@
-import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import {
   Breadcrumb,
   Button,
@@ -16,10 +16,10 @@ import {
 import { Overview } from "../components/profile/overview.tsx";
 import { Issues } from "../components/profile/issues.tsx";
 import { Settings } from "../components/profile/settings.tsx";
-import { useEffect } from "react";
 import { isRunningOrPending } from "../components/profile/helpers.ts";
 import { getProfile } from "../actions/profile.ts";
 import { RenameProfileModal } from "../components/profile/modals/renameProfileModal.tsx";
+import { useAutoRefresh } from "../hooks/useAutoRefresh.tsx";
 
 export const Route = createFileRoute("/profiles/$profileId")({
   component: RouteComponent,
@@ -31,24 +31,8 @@ function RouteComponent() {
 
   const renameModalController = useOverlayController("Modal");
 
-  const router = useRouter();
-
   const shouldReloadData = isRunningOrPending(profile.nextScan);
-
-  useEffect(() => {
-    let interval = null;
-    if (shouldReloadData) {
-      interval = setInterval(() => {
-        router.invalidate();
-      }, 5000);
-    }
-
-    return () => {
-      if (interval) {
-        clearInterval(interval);
-      }
-    };
-  }, [router, shouldReloadData]);
+  useAutoRefresh(shouldReloadData);
 
   return (
     <Section>
