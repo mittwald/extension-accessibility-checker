@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
-import { HeadContent } from "@tanstack/react-router";
-import { Scripts } from "@tanstack/start";
+import { HeadContent, Scripts } from "@tanstack/react-router";
 
 export function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
   return (
