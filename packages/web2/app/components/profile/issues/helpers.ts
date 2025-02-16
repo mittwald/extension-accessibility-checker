@@ -85,7 +85,7 @@ export const groupIssuesByGuidelineAndTechnique = (
   // Transform the grouped issues into IssueGroup objects
   return Object.entries(groupedByCode).map(([errorCode, selectorGroups]) => ({
     groupKey: errorCode,
-    label: wcagLinks[errorCode as keyof typeof wcagLinks].label ?? "",
+    label: wcagLinks[errorCode as keyof typeof wcagLinks]?.label ?? "",
     issues: Object.entries(selectorGroups).map(([key, issueData]) => ({
       key,
       ...issueData,
