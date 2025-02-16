@@ -7,7 +7,7 @@ import {
   Text,
 } from "@mittwald/flow-react-components";
 
-export const Meta = () => {
+export const EducationCards = () => {
   return (
     <ColumnLayout m={[1, 1]}>
       <LayoutCard>

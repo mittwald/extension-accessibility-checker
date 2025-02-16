@@ -6,7 +6,7 @@ import {
   Heading,
   LayoutCard,
 } from "@mittwald/flow-react-components";
-import { Meta } from "../components/list/meta.tsx";
+import { EducationCards } from "../components/list/educationCards.tsx";
 import { NoProfiles } from "../components/list/noProfiles.tsx";
 import "@mittwald/flow-react-components/all.css";
 import { ProfilesList } from "../components/list/profilesList.tsx";
@@ -32,7 +32,7 @@ function Home() {
       <Heading level={1} color="light">
         A11y Checker
       </Heading>
-      <Meta />
+      <EducationCards />
       <LayoutCard>
         {hasProfiles ? <ProfilesList profiles={profiles} /> : <NoProfiles />}
       </LayoutCard>

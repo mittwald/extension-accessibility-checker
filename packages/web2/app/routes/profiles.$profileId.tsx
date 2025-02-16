@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
   Breadcrumb,
-  Button,
   Header,
   Heading,
   LayoutCard,
@@ -11,15 +10,14 @@ import {
   Tabs,
   TabTitle,
   Text,
-  useOverlayController,
 } from "@mittwald/flow-react-components";
 import { Overview } from "../components/profile/overview.tsx";
 import { Issues } from "../components/profile/issues.tsx";
 import { Settings } from "../components/profile/settings.tsx";
 import { isRunningOrPending } from "../components/profile/helpers.ts";
 import { getProfile } from "../actions/profile.ts";
-import { RenameProfileModal } from "../components/profile/modals/renameProfileModal.tsx";
 import { useAutoRefresh } from "../hooks/useAutoRefresh.tsx";
+import { RenameProfileButton } from "../components/profile/renameProfileButton.tsx";
 
 export const Route = createFileRoute("/profiles/$profileId")({
   component: RouteComponent,
@@ -28,8 +26,6 @@ export const Route = createFileRoute("/profiles/$profileId")({
 
 function RouteComponent() {
   const { profile, lastScan } = Route.useLoaderData();
-
-  const renameModalController = useOverlayController("Modal");
 
   const shouldReloadData = isRunningOrPending(profile.nextScan);
   useAutoRefresh(shouldReloadData);
@@ -45,19 +41,7 @@ function RouteComponent() {
         <Heading level={1} color="light">
           {profile.name}
         </Heading>
-        <Button
-          variant="outline"
-          slot="secondary"
-          color="light"
-          size="m"
-          onPress={renameModalController.open}
-        >
-          Umbenennen
-        </Button>
-        <RenameProfileModal
-          profile={profile}
-          controller={renameModalController}
-        />
+        <RenameProfileButton profile={profile} />
       </Header>
       <LayoutCard>
         <Tabs>
