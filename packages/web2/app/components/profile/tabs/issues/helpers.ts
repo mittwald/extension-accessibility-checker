@@ -1,6 +1,6 @@
-import { Issue as APIIssue } from "../../../api/types.ts";
-import wcagLinks from "../../../wcagLinks.json";
-import techniquesLinks from "../../../techniquesLinks.json";
+import { Issue as APIIssue } from "../../../../api/types.ts";
+import wcagLinks from "../../../../wcagLinks.json";
+import techniquesLinks from "../../../../techniquesLinks.json";
 import { Issue, IssueGroup, IssueMeta } from "./types.ts";
 
 export const getLinkForTechnique = (technique: string) => {

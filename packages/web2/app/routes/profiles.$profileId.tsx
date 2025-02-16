@@ -6,18 +6,13 @@ import {
   LayoutCard,
   Link,
   Section,
-  Tab,
-  Tabs,
-  TabTitle,
-  Text,
 } from "@mittwald/flow-react-components";
-import { Overview } from "../components/profile/overview.tsx";
-import { Issues } from "../components/profile/issues.tsx";
-import { Settings } from "../components/profile/settings.tsx";
 import { isRunningOrPending } from "../components/profile/helpers.ts";
 import { getProfile } from "../actions/profile.ts";
 import { useAutoRefresh } from "../hooks/useAutoRefresh.tsx";
 import { RenameProfileButton } from "../components/profile/renameProfileButton.tsx";
+import { ProfileTabs } from "../components/profile/profileTabs.tsx";
+import { NoScans } from "../components/profile/noScans.tsx";
 
 export const Route = createFileRoute("/profiles/$profileId")({
   component: RouteComponent,
@@ -44,24 +39,11 @@ function RouteComponent() {
         <RenameProfileButton profile={profile} />
       </Header>
       <LayoutCard>
-        <Tabs>
-          <Tab id="overview">
-            <TabTitle>Übersicht</TabTitle>
-            <Overview profile={profile} />
-          </Tab>
-          <Tab id="issues">
-            <TabTitle>Fehler</TabTitle>
-            {lastScan ? (
-              <Issues scan={lastScan} />
-            ) : (
-              <Text>Noch nicht ausgeführt.</Text>
-            )}
-          </Tab>
-          <Tab id="settings">
-            <TabTitle>Einstellungen</TabTitle>
-            <Settings />
-          </Tab>
-        </Tabs>
+        {lastScan ? (
+          <ProfileTabs profile={profile} lastScan={lastScan} />
+        ) : (
+          <NoScans profile={profile} />
+        )}
       </LayoutCard>
     </Section>
   );

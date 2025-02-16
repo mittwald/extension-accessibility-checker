@@ -12,8 +12,8 @@ import {
   Section,
   Text,
 } from "@mittwald/flow-react-components";
-import wcagLinks from "../../../wcagLinks.json";
-import techniquesLinks from "../../../techniquesLinks.json";
+import wcagLinks from "../../../../wcagLinks.json";
+import techniquesLinks from "../../../../techniquesLinks.json";
 import { getLinkForTechnique } from "./helpers.ts";
 import { Issue } from "./types.ts";
 

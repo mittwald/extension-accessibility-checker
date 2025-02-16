@@ -12,11 +12,11 @@ import {
   Section,
   Text,
 } from "@mittwald/flow-react-components";
-import { Route } from "../../../routes/profiles.$profileId.tsx";
-import { EditGeneralsModal } from "../modals/editGenerals.tsx";
-import { isRunningOrPending } from "../helpers.ts";
+import { Route } from "../../../../routes/profiles.$profileId.tsx";
+import { EditGeneralsModal } from "../../modals/editGenerals.tsx";
+import { isRunningOrPending } from "../../helpers.ts";
 import { useRouter } from "@tanstack/react-router";
-import { startScan } from "../../../actions/scan.ts";
+import { startScan } from "../../../../actions/scan.ts";
 
 export const GeneralSettings = () => {
   const { profile } = Route.useLoaderData();

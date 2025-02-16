@@ -1,4 +1,4 @@
-import { ScanProfile } from "../../api/types.ts";
+import { ScanProfile } from "../../../api/types.ts";
 import {
   ColumnLayout,
   Content,
@@ -10,7 +10,7 @@ import {
   LabeledValue,
   Section,
 } from "@mittwald/flow-react-components";
-import { CurrentScan } from "./currentScan.tsx";
+import { CurrentScan } from "../currentScan.tsx";
 
 export const Overview = ({ profile }: { profile: ScanProfile }) => {
   return (

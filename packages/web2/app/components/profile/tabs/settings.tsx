@@ -1,6 +1,6 @@
 import { GeneralSettings } from "./settings/general.tsx";
 import { PathSettings } from "./settings/paths.tsx";
-import { CurrentScan } from "./currentScan.tsx";
+import { CurrentScan } from "../currentScan.tsx";
 import { Section } from "@mittwald/flow-react-components";
 
 export const Settings = () => {

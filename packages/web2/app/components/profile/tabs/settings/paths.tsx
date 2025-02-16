@@ -12,8 +12,8 @@ import {
   TableRow,
   Text,
 } from "@mittwald/flow-react-components";
-import { Route } from "../../../routes/profiles.$profileId.tsx";
-import { EditPathsModal } from "../modals/editPaths.tsx";
+import { Route } from "../../../../routes/profiles.$profileId.tsx";
+import { EditPathsModal } from "../../modals/editPaths.tsx";
 
 export const PathSettings = () => {
   const { profile } = Route.useLoaderData();

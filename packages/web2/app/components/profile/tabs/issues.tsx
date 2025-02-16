@@ -10,12 +10,12 @@ import {
   MenuItem,
   Section,
 } from "@mittwald/flow-react-components";
-import { Scan } from "../../api/types.ts";
+import { Scan } from "../../../api/types.ts";
 import { groupIssuesByGuidelineAndTechnique } from "./issues/helpers.ts";
 import { IssueGroupView } from "./issues/components/issueGroup.tsx";
-import { CurrentScan } from "./currentScan.tsx";
+import { CurrentScan } from "../currentScan.tsx";
 import { useState } from "react";
-import { NoIssues } from "./noIssues.tsx";
+import { NoIssues } from "../noIssues.tsx";
 
 interface IssuesProps {
   scan: Scan;
