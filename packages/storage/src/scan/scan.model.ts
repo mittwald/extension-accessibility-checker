@@ -18,11 +18,11 @@ export class Issue {
   @prop({ required: true })
   public description: string;
 
-  @prop({ required: true })
-  public context: string;
+  @prop()
+  public context?: string;
 
-  @prop({ required: true })
-  public selector: string;
+  @prop()
+  public selector?: string;
 }
 
 @modelOptions({

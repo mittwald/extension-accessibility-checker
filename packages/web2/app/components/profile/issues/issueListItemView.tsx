@@ -98,8 +98,10 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
             {issue.selectors.map((o) => (
               <li key={o.selector} style={{ paddingBottom: "1rem" }}>
                 <Section>
-                  <CodeBlock code={o.selector} copyable />
+                  {o.selector && <CodeBlock code={o.selector} copyable />}
+                  {o.context && (
                   <CodeBlock code={o.context} language="html" copyable />
+                  )}
                   <Text>
                     <ul>
                       {o.urls.map((url) => (

@@ -32,8 +32,8 @@ export interface Issue {
   errorCode: string;
   severity: "error" | "warning" | "notice";
   description: string;
-  context: string;
-  selector: string;
+  context?: string;
+  selector?: string;
   url: string;
 }
 
