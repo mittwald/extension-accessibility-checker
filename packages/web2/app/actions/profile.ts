@@ -8,6 +8,7 @@ import {
 import { Scan, ScanProfile } from "../api/types.ts";
 import { ObjectId } from "mongodb";
 import { projectId } from "../poc.ts";
+import { startScan } from "./scan.ts";
 
 export const getProfiles = createServerFn().handler(async () => {
   await dbConnect();
@@ -49,7 +50,7 @@ export const createProfile = createServerFn({ method: "POST" })
       project: projectId,
       ...data,
     });
-    // todo: startScan({ data: profile._id.toString() });
+    await startScan({ data: profile._id.toString() });
     return profile.toJSON() as unknown as ScanProfile;
   });
 export const updateProfilePaths = createServerFn({ method: "POST" })

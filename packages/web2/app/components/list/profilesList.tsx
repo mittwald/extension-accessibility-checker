@@ -52,8 +52,6 @@ export const ProfilesList = (props: { profiles: ScanProfile[] }) => {
     isRunningOrPending(p.nextScan),
   );
 
-  console.log("shouldReloadData", shouldReloadData);
-
   useEffect(() => {
     let interval = null;
     if (shouldReloadData) {

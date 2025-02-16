@@ -35,7 +35,8 @@ export const CurrentScan = () => {
   } = Route.useLoaderData();
 
   if (!nextScan) {
-    return <>Nope!</>;
+    console.warn("Kein Scan geplant!");
+    return null;
   }
 
   if (isRunning(nextScan)) {
