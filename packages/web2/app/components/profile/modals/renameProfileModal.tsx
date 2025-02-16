@@ -46,7 +46,7 @@ export const RenameProfileModal = ({
   return (
     <Modal controller={controller}>
       <Form form={form} onSubmit={onSubmit}>
-        <Heading>Profil umbenennen</Heading>
+        <Heading slot="title">Profil umbenennen</Heading>
         <Content>
           <Section>
             <Text>

@@ -38,7 +38,7 @@ export const EditPathsModal = ({ profile }: { profile: ScanProfile }) => {
 
   return (
     <Modal offCanvas>
-      <Heading>Unterseiten bearbeiten</Heading>
+      <Heading slot="title">Unterseiten bearbeiten</Heading>
       <Form form={form} onSubmit={onSubmit}>
         <Content>
           <Section>

@@ -23,13 +23,13 @@ export const DeleteConfirmationModal = ({
   const router = useRouter();
   return (
     <Modal controller={controller}>
-      <Heading>Profil löschen</Heading>
+      <Heading slot="title">Profil löschen</Heading>
       <Content>
         <Section>
           <Text>
-            Sind Sie sicher, dass Sie das Profil <strong>{profile.name}</strong>{" "}
-            löschen wollen? Mit dem Profil werden alle dafür durchgeführten
-            Scans gelöscht.
+            Bist Du, dass Du das Profil <strong>{profile.name}</strong> löschen
+            willst? Mit dem Profil werden alle dafür durchgeführten Scans
+            gelöscht.
           </Text>
         </Section>
       </Content>

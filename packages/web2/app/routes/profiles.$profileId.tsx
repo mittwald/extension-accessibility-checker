@@ -33,7 +33,7 @@ function RouteComponent() {
 
   const router = useRouter();
 
-  const shouldReloadData = isRunningOrPending(lastScan);
+  const shouldReloadData = isRunningOrPending(profile.nextScan);
 
   useEffect(() => {
     let interval = null;

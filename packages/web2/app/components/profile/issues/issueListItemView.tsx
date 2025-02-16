@@ -27,13 +27,13 @@ const IssueAvatar = ({ issue }: { issue: Issue }) => {
       );
     case "warning":
       return (
-        <Avatar color="violet" aria-label="Warnung">
+        <Avatar color="lilac" aria-label="Warnung">
           <IconWarning />
         </Avatar>
       );
     case "notice":
       return (
-        <Avatar color="violet" aria-label="Hinweis">
+        <Avatar color="teal" aria-label="Hinweis">
           <IconInfo />
         </Avatar>
       );
@@ -100,7 +100,7 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
                 <Section>
                   {o.selector && <CodeBlock code={o.selector} copyable />}
                   {o.context && (
-                  <CodeBlock code={o.context} language="html" copyable />
+                    <CodeBlock code={o.context} language="html" copyable />
                   )}
                   <Text>
                     <ul>
