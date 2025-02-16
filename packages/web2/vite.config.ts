@@ -5,7 +5,12 @@ import viteReact from "@vitejs/plugin-react";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    TanStackRouterVite({ autoCodeSplitting: true }),
+    TanStackRouterVite({
+      autoCodeSplitting: true,
+      routesDirectory: "./app/routes",
+      generatedRouteTree: "./app/routeTree.gen.ts",
+      quoteStyle: "double",
+    }),
     viteReact({
       babel: { plugins: [["babel-plugin-react-compiler", {}]] },
     }),
