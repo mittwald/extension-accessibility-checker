@@ -10,7 +10,7 @@ import {
 import { isRunningOrPending } from "../components/profile/helpers.ts";
 import { getProfile } from "../actions/profile.ts";
 import { useAutoRefresh } from "../hooks/useAutoRefresh.tsx";
-import { RenameProfileButton } from "../components/profile/renameProfileButton.tsx";
+import { ProfileActions } from "../components/profile/profileActions.tsx";
 import { ProfileTabs } from "../components/profile/profileTabs.tsx";
 import { NoScans } from "../components/profile/noScans.tsx";
 
@@ -36,7 +36,7 @@ function RouteComponent() {
         <Heading level={1} color="light">
           {profile.name}
         </Heading>
-        <RenameProfileButton profile={profile} />
+        <ProfileActions profile={profile} />
       </Header>
       <LayoutCard>
         {lastScan ? (
