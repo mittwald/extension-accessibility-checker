@@ -37,7 +37,7 @@ export function NoScans({ profile }: { profile: ScanProfile }) {
       <Button
         color="accent"
         onPress={async () => {
-          await startScan({ data: profile._id.toString() });
+          await startScan({ data: { profileId: profile._id.toString() } });
           await router.invalidate({ sync: true });
         }}
       >

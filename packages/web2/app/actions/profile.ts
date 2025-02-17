@@ -45,12 +45,18 @@ export const createProfile = createServerFn({ method: "POST" })
     }),
   )
   .handler(async ({ data: { projectId, ...data } }) => {
+    const now = new Date();
     const profile = await ScanProfileModel.create({
       _id: new ObjectId(),
       project: projectId,
+      cronSchedule: {
+        expression: `${now.getMinutes()} ${now.getHours()} * * *`,
+      },
       ...data,
     });
-    await startScan({ data: profile._id.toString() });
+    await startScan({
+      data: { profileId: profile._id.toString(), isSystemScan: true },
+    });
     return profile.toJSON() as unknown as ScanProfile;
   });
 export const updateProfilePaths = createServerFn({ method: "POST" })

@@ -30,7 +30,7 @@ export function ProfileListContextMenu({ profile }: { profile: ScanProfile }) {
         </MenuItem>
         <MenuItem
           onAction={async () => {
-            await startScan({ data: profile._id });
+            await startScan({ data: { profileId: profile._id.toString() } });
             await router.invalidate({ sync: true });
           }}
         >

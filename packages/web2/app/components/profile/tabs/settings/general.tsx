@@ -38,7 +38,7 @@ export const GeneralSettings = () => {
         <Button
           color="accent"
           onPress={async () => {
-            await startScan({ data: profile._id });
+            await startScan({ data: { profileId: profile._id } });
             await router.invalidate({ sync: true });
           }}
           isDisabled={isRunningOrPending(nextScan)}
