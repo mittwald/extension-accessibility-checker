@@ -12,8 +12,6 @@ export const Overview = ({ profile }: { profile: ScanProfile }) => {
       <A11yScore profile={profile} />
       <Section>
         <IssueSummary profile={profile} />
-      </Section>
-      <Section>
         <PathResultsTable />
       </Section>
     </Section>

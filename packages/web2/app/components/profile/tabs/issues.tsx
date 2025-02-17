@@ -61,7 +61,8 @@ export const Issues = ({ scan }: IssuesProps) => {
         </LabeledValue>
         <ContextMenuTrigger>
           <Button variant={"outline"} color={"secondary"}>
-            <IconFilter /> Darstellungsoptionen
+            Darstellungsoptionen
+            <IconFilter />
           </Button>
           <ContextMenu selectionMode="switch" defaultSelectedKeys={viewOptions}>
             <MenuItem id="error" onAction={toggleOption("error")}>

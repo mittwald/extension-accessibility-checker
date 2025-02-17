@@ -11,6 +11,7 @@ import {
   Section,
   Switch,
   TextField,
+  useOverlayController,
 } from "@mittwald/flow-react-components";
 import { useForm } from "react-hook-form";
 import {
@@ -40,6 +41,8 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
 
   const Field = typedField(form);
 
+  const controller = useOverlayController("Modal");
+
   const onSubmit = async (formValues: FormValues) => {
     await updateProfileSettings({
       data: {
@@ -48,6 +51,7 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
       },
     });
     await router.invalidate({ sync: true });
+    controller.close();
   };
 
   return (
@@ -102,6 +106,9 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
           </Section>
         </Content>
         <ActionGroup>
+          <Button color="accent" type="submit">
+            Änderungen speichern
+          </Button>
           <Action closeOverlay="Modal">
             <Button
               color="secondary"
@@ -109,9 +116,6 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
               onPress={() => form.reset()}
             >
               Abbrechen
-            </Button>
-            <Button color="accent" type="submit">
-              Änderungen speichern
             </Button>
           </Action>
         </ActionGroup>
