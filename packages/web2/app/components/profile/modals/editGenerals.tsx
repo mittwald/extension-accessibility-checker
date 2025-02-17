@@ -3,13 +3,13 @@ import {
   Action,
   ActionGroup,
   Button,
+  Checkbox,
   ColumnLayout,
   Content,
   Heading,
   Label,
   Modal,
   Section,
-  Switch,
   TextField,
   useOverlayController,
 } from "@mittwald/flow-react-components";
@@ -93,14 +93,14 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
             </Field>
             <ColumnLayout>
               <Field name={"includeWarnings"}>
-                <Switch>
+                <Checkbox>
                   <Label>Warnungen</Label>
-                </Switch>
+                </Checkbox>
               </Field>
               <Field name={"includeNotices"}>
-                <Switch>
+                <Checkbox>
                   <Label>Hinweise</Label>
-                </Switch>
+                </Checkbox>
               </Field>
             </ColumnLayout>
           </Section>

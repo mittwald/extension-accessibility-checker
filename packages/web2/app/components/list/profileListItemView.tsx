@@ -1,8 +1,8 @@
 import { ScanProfile } from "../../api/types.ts";
 import { isPending, isRunning } from "../profile/helpers.ts";
 import {
+  AlertBadge,
   Avatar,
-  Badge,
   Heading,
   IconSubdomain,
   ListItemView,
@@ -16,10 +16,10 @@ const StateBatch = ({ profile }: { profile: ScanProfile }) => {
   }
 
   if (isRunning(profile.nextScan)) {
-    return <Badge>Wird ausgeführt …</Badge>;
+    return <AlertBadge status="info">Wird ausgeführt …</AlertBadge>;
   }
   if (isPending(profile.nextScan)) {
-    return <Badge>Wird gestartet …</Badge>;
+    return <AlertBadge status="info">Wird gestartet …</AlertBadge>;
   }
 };
 
