@@ -27,8 +27,8 @@ export const CreateModal = () => {
     },
   });
 
-  const onSubmit = (formValues: FormValues) => {
-    createProfile({
+  const onSubmit = async (formValues: FormValues) => {
+    await createProfile({
       data: {
         ...formValues,
         name: formValues.domain,
@@ -36,7 +36,7 @@ export const CreateModal = () => {
         projectId,
       },
     });
-    router.invalidate();
+    await router.invalidate({ sync: true });
     form.reset();
   };
 
