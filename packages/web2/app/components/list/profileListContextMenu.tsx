@@ -60,6 +60,7 @@ export function ProfileListContextMenu({ profile }: { profile: ScanProfile }) {
       <DeleteConfirmationModal
         profile={profile}
         controller={deleteModalController}
+        onDelete={() => router.invalidate({ sync: true })}
       />
     </>
   );

@@ -10,17 +10,17 @@ import {
   Text,
 } from "@mittwald/flow-react-components";
 import { ScanProfile } from "../../../api/types.ts";
-import { useRouter } from "@tanstack/react-router";
 import { deleteProfile } from "../../../actions/profile.ts";
 
 export const DeleteConfirmationModal = ({
   profile,
   controller,
+  onDelete,
 }: {
   controller: OverlayController;
   profile: ScanProfile;
+  onDelete?: () => Promise<void> | void;
 }) => {
-  const router = useRouter();
   return (
     <Modal controller={controller}>
       <Heading slot="title">Profil löschen</Heading>
@@ -38,7 +38,7 @@ export const DeleteConfirmationModal = ({
           <Action
             action={async () => {
               await deleteProfile({ data: profile._id });
-              router.invalidate();
+              await onDelete?.();
             }}
           >
             <Button color="danger">Profil löschen</Button>

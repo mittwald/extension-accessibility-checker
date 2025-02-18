@@ -57,6 +57,7 @@ const ProfileActionsContextMenu = ({ profile }: { profile: ScanProfile }) => {
       <DeleteConfirmationModal
         profile={profile}
         controller={deleteModalController}
+        onDelete={() => router.navigate({ to: "/" })}
       />
     </>
   );
