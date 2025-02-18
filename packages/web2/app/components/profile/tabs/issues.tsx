@@ -9,6 +9,7 @@ import {
   LabeledValue,
   MenuItem,
   Section,
+  Text,
 } from "@mittwald/flow-react-components";
 import { Scan } from "../../../api/types.ts";
 import { groupIssuesByGuidelineAndTechnique } from "./issues/helpers.ts";
@@ -54,14 +55,14 @@ export const Issues = ({ scan }: IssuesProps) => {
   return (
     <Section>
       <CurrentScan />
-      <ColumnLayout>
+      <ColumnLayout m={[12, 1]}>
         <LabeledValue>
           <Label>Ausgeführt am</Label>
           <Content>{date.toLocaleString()}</Content>
         </LabeledValue>
         <ContextMenuTrigger>
           <Button variant={"outline"} color={"secondary"}>
-            Darstellungsoptionen
+            <Text>Darstellungsoptionen</Text>
             <IconFilter />
           </Button>
           <ContextMenu selectionMode="switch" defaultSelectedKeys={viewOptions}>

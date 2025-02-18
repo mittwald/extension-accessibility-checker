@@ -1,15 +1,15 @@
 import { ScanProfile } from "../../api/types.ts";
 import {
   Button,
-  IconContextMenu,
-  useOverlayController,
-  ContextMenuTrigger,
   ContextMenu,
-  IconChevronDown,
-  MenuItem,
+  ContextMenuTrigger,
   Icon,
-  IconEdit,
+  IconChevronDown,
   IconDelete,
+  IconEdit,
+  MenuItem,
+  Text,
+  useOverlayController,
 } from "@mittwald/flow-react-components";
 import { RenameProfileModal } from "./modals/renameProfileModal.tsx";
 import { startScan } from "../../actions/scan.ts";
@@ -58,31 +58,13 @@ const ProfileActionsContextMenu = ({ profile }: { profile: ScanProfile }) => {
 };
 
 export function ProfileActions({ profile }: { profile: ScanProfile }) {
-  const renameModalController = useOverlayController("Modal");
   return (
     <ContextMenuTrigger>
       <Button variant="outline" slot="secondary" color="light" size="m">
-        Aktionen <IconChevronDown />
+        <Text>Aktionen</Text>
+        <IconChevronDown />
       </Button>
       <ProfileActionsContextMenu profile={profile} />
     </ContextMenuTrigger>
-  );
-
-  return (
-    <>
-      <Button
-        variant="outline"
-        slot="secondary"
-        color="light"
-        size="m"
-        onPress={renameModalController.open}
-      >
-        Umbenennen
-      </Button>
-      <RenameProfileModal
-        profile={profile}
-        controller={renameModalController}
-      />
-    </>
   );
 }
