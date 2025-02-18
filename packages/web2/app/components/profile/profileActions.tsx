@@ -16,6 +16,7 @@ import { startScan } from "../../actions/scan.ts";
 import { IconWorldSearch } from "@tabler/icons-react";
 import { useRouter } from "@tanstack/react-router";
 import { DeleteConfirmationModal } from "./modals/deleteConfirmation.tsx";
+import { isRunningOrPending } from "./helpers.ts";
 
 const ProfileActionsContextMenu = ({ profile }: { profile: ScanProfile }) => {
   const router = useRouter();
@@ -30,6 +31,7 @@ const ProfileActionsContextMenu = ({ profile }: { profile: ScanProfile }) => {
             await startScan({ data: { profileId: profile._id.toString() } });
             await router.invalidate({ sync: true });
           }}
+          isDisabled={isRunningOrPending(profile.nextScan)}
         >
           <Icon>
             <IconWorldSearch />
@@ -40,7 +42,10 @@ const ProfileActionsContextMenu = ({ profile }: { profile: ScanProfile }) => {
           <IconEdit />
           Umbenennen
         </MenuItem>
-        <MenuItem onAction={deleteModalController.open}>
+        <MenuItem
+          onAction={deleteModalController.open}
+          isDisabled={isRunningOrPending(profile.nextScan)}
+        >
           <IconDelete />
           Löschen
         </MenuItem>

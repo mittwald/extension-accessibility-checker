@@ -14,6 +14,7 @@ import { startScan } from "../../actions/scan.ts";
 import { IconWorldSearch } from "@tabler/icons-react";
 import { RenameProfileModal } from "../profile/modals/renameProfileModal.tsx";
 import { DeleteConfirmationModal } from "../profile/modals/deleteConfirmation.tsx";
+import { isRunningOrPending } from "../profile/helpers.ts";
 
 export function ProfileListContextMenu({ profile }: { profile: ScanProfile }) {
   const goToProfile = useGoToProfile();
@@ -33,6 +34,7 @@ export function ProfileListContextMenu({ profile }: { profile: ScanProfile }) {
             await startScan({ data: { profileId: profile._id.toString() } });
             await router.invalidate({ sync: true });
           }}
+          isDisabled={isRunningOrPending(profile.nextScan)}
         >
           <Icon>
             <IconWorldSearch />
@@ -43,7 +45,10 @@ export function ProfileListContextMenu({ profile }: { profile: ScanProfile }) {
           <IconEdit />
           Umbenennen
         </MenuItem>
-        <MenuItem onAction={deleteModalController.open}>
+        <MenuItem
+          onAction={deleteModalController.open}
+          isDisabled={isRunningOrPending(profile.nextScan)}
+        >
           <IconDelete />
           Löschen
         </MenuItem>
