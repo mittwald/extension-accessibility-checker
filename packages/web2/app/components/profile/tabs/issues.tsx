@@ -9,14 +9,19 @@ import {
   LabeledValue,
   MenuItem,
   Section,
+  Separator,
   Text,
 } from "@mittwald/flow-react-components";
 import { Scan } from "../../../api/types.ts";
-import { groupIssuesByGuidelineAndTechnique } from "./issues/helpers.ts";
+import {
+  getIssueMeta,
+  groupIssuesByGuidelineAndTechnique,
+} from "./issues/helpers.ts";
 import { IssueGroupView } from "./issues/components/issueGroup.tsx";
 import { CurrentScan } from "../currentScan.tsx";
 import { useState } from "react";
 import { NoIssues } from "../noIssues.tsx";
+import wcagLinks from "../../../wcagLinks.json";
 
 interface IssuesProps {
   scan: Scan;
@@ -26,6 +31,9 @@ export const Issues = ({ scan }: IssuesProps) => {
   const date = scan.completedAt ?? scan.executionScheduledFor;
 
   const [viewOptions, setViewOptions] = useState([
+    "A",
+    "AA",
+    "AAA",
     "error",
     "warning",
     "notice",
@@ -41,6 +49,15 @@ export const Issues = ({ scan }: IssuesProps) => {
 
   const preparedIssues = (scan.issues ?? [])
     .filter((issue) => viewOptions.includes(issue.severity))
+    .filter((issue) => {
+      const meta = getIssueMeta(issue);
+      const wcagData = wcagLinks[meta.criterion];
+      return (
+        !wcagData ||
+        !("wcagLevel" in wcagData) ||
+        viewOptions.includes(wcagData.wcagLevel)
+      );
+    })
     .sort((a, b) => {
       const order = {
         error: 0,
@@ -66,6 +83,16 @@ export const Issues = ({ scan }: IssuesProps) => {
             <IconFilter />
           </Button>
           <ContextMenu selectionMode="switch" defaultSelectedKeys={viewOptions}>
+            <MenuItem id="A" onAction={toggleOption("A")}>
+              Level A
+            </MenuItem>
+            <MenuItem id="AA" onAction={toggleOption("AA")}>
+              Level AA
+            </MenuItem>
+            <MenuItem id="AAA" onAction={toggleOption("AAA")}>
+              Level AAA
+            </MenuItem>
+            <Separator />
             <MenuItem id="error" onAction={toggleOption("error")}>
               Fehler
             </MenuItem>
