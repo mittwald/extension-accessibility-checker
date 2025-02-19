@@ -51,6 +51,11 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
     label: techniquesLinks[technique],
   }));
 
+  const level =
+    wcagCriterionLinkData && "wcagLevel" in wcagCriterionLinkData
+      ? wcagCriterionLinkData.wcagLevel
+      : "N/A";
+
   return (
     <ListItemView>
       <IssueAvatar issue={issue} />
@@ -59,7 +64,7 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
         <Badge>{issue.count}×</Badge>
       </Heading>
       <Text>
-        {issueMeta.wcagLevel} | WCAG Kriterium {issueMeta.criterion}
+        Level {level} | WCAG Kriterium {issueMeta.criterion}
       </Text>
       <Content slot="bottom">
         <Section>
