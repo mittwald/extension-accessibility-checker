@@ -2408,25 +2408,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mittwald/flow-react-components@npm:^0.2.0-alpha.34":
-  version: 0.2.0-alpha.34
-  resolution: "@mittwald/flow-react-components@npm:0.2.0-alpha.34"
+"@mittwald/flow-react-components@npm:^0.2.0-alpha.41":
+  version: 0.2.0-alpha.41
+  resolution: "@mittwald/flow-react-components@npm:0.2.0-alpha.41"
   dependencies:
     "@chakra-ui/live-region": "npm:^2.1.0"
     "@internationalized/string-compiler": "npm:^3.2.6"
-    "@mittwald/react-tunnel": "npm:0.2.0-alpha.34"
+    "@mittwald/react-tunnel": "npm:0.2.0-alpha.41"
     "@mittwald/react-use-promise": "npm:^2.6.0"
     "@react-aria/form": "npm:^3.0.12"
     "@react-aria/utils": "npm:^3.27.0"
     "@react-stately/form": "npm:^3.1.1"
     "@react-types/shared": "npm:^3.27.0"
     "@tabler/icons-react": "npm:^3.30.0"
-    "@tanstack/react-table": "npm:^8.20.6"
+    "@tanstack/react-table": "npm:^8.21.2"
     "@types/invariant": "npm:^2.2.37"
     "@types/luxon": "npm:^3.4.2"
     "@types/prop-types": "npm:^15.7.14"
-    "@types/react": "npm:^19.0.8"
-    "@types/react-dom": "npm:^19.0.3"
+    "@types/react": "npm:^19.0.10"
+    "@types/react-dom": "npm:^19.0.4"
     "@types/react-syntax-highlighter": "npm:^15.5.13"
     clsx: "npm:^2.1.1"
     copy-to-clipboard: "npm:^3.3.3"
@@ -2444,10 +2444,10 @@ __metadata:
     react-markdown: "npm:^9.0.3"
     react-stately: "npm:^3.35.0"
     react-syntax-highlighter: "npm:^15.6.1"
-    remeda: "npm:^2.20.1"
-    type-fest: "npm:^4.34.1"
+    remeda: "npm:^2.20.2"
+    type-fest: "npm:^4.35.0"
     use-callback-ref: "npm:^1.3.3"
-    zod: "npm:^3.24.1"
+    zod: "npm:^3.24.2"
   peerDependencies:
     "@internationalized/date": ^3.6.0
     "@mittwald/react-use-promise": ^2.3.12
@@ -2462,20 +2462,20 @@ __metadata:
       optional: true
     react-hook-form:
       optional: true
-  checksum: 10c0/160dca09e7d4cdcf1590deb719a707f8d954f7f8d44b88ed89f80ce558af8d31c72a0859bfc3781075ed7de038f71dfa686071af1d9aef1c511cba4e8676d445
+  checksum: 10c0/ec22f5028240699dce39e67c4b49a9c6a53e63ece795ae25d949d0e83f59c2d47cab303bc7ec720f59d5cdd56129c509502ce2162fe148489c199ea616e29234
   languageName: node
   linkType: hard
 
-"@mittwald/react-tunnel@npm:0.2.0-alpha.34":
-  version: 0.2.0-alpha.34
-  resolution: "@mittwald/react-tunnel@npm:0.2.0-alpha.34"
+"@mittwald/react-tunnel@npm:0.2.0-alpha.41":
+  version: 0.2.0-alpha.41
+  resolution: "@mittwald/react-tunnel@npm:0.2.0-alpha.41"
   dependencies:
     mobx: "npm:^6.13.6"
     mobx-react-lite: "npm:^4.1.0"
   peerDependencies:
     react: ^19
     react-dom: ^19
-  checksum: 10c0/a50aa6191dd40270620fc57c8f70252e74b1166a61eaea3a4b3a363b284209e03ce743d3111a4fbb13261d7e8e7d02850439e3d453a0895c3a510dc78ff73052
+  checksum: 10c0/0207213784df796bf4bfde9496f381e657945064df45ace7fb330a13081e1a4ac3a653af471dc2a0ac6c85f1bb42ff8a5f9b925ec0e93a7e0883cfabbbe36d1e
   languageName: node
   linkType: hard
 
@@ -5282,7 +5282,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-table@npm:^8.20.6":
+"@tanstack/react-table@npm:^8.21.2":
   version: 8.21.2
   resolution: "@tanstack/react-table@npm:8.21.2"
   dependencies:
@@ -5892,6 +5892,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-dom@npm:^19.0.4":
+  version: 19.0.4
+  resolution: "@types/react-dom@npm:19.0.4"
+  peerDependencies:
+    "@types/react": ^19.0.0
+  checksum: 10c0/4e71853919b94df9e746a4bd73f8180e9ae13016333ce9c543dcba9f4f4c8fe6e28b038ca6ee61c24e291af8e03ca3bc5ded17c46dee938fcb32d71186fda7a3
+  languageName: node
+  linkType: hard
+
 "@types/react-syntax-highlighter@npm:^15.5.13":
   version: 15.5.13
   resolution: "@types/react-syntax-highlighter@npm:15.5.13"
@@ -5907,6 +5916,15 @@ __metadata:
   dependencies:
     csstype: "npm:^3.0.2"
   checksum: 10c0/5fa7236356b1476de03519c66ef65d4fd904826956105619e2ad60cb0b55ae7b251dd5fff02234076225b5e15333d0d936bf9dbe1d461406f8a2ba01c197ddcd
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^19.0.10":
+  version: 19.0.10
+  resolution: "@types/react@npm:19.0.10"
+  dependencies:
+    csstype: "npm:^3.0.2"
+  checksum: 10c0/41884cca21850c8b2d6578b172ca0ca4fff6021251a68532b19f2031ac23dc5a9222470208065f8d9985d367376047df2f49ece8d927f7d04cdc94922b1eb34b
   languageName: node
   linkType: hard
 
@@ -8809,7 +8827,7 @@ __metadata:
   resolution: "extension-a11y-checker-web2@workspace:packages/web2"
   dependencies:
     "@eslint/js": "npm:^9.19.0"
-    "@mittwald/flow-react-components": "npm:^0.2.0-alpha.34"
+    "@mittwald/flow-react-components": "npm:^0.2.0-alpha.41"
     "@tabler/icons-react": "npm:^3.29.0"
     "@tanstack/react-router": "npm:^1.99.13"
     "@tanstack/router-devtools": "npm:^1.99.8"
@@ -13242,12 +13260,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remeda@npm:^2.20.1":
-  version: 2.20.1
-  resolution: "remeda@npm:2.20.1"
+"remeda@npm:^2.20.2":
+  version: 2.20.2
+  resolution: "remeda@npm:2.20.2"
   dependencies:
     type-fest: "npm:^4.33.0"
-  checksum: 10c0/8240a14ec01745cab7773e489b71b61209eae5f595148dceba8920d455f29f43137973e421c9aa2141b0a61ca675c1258551699774996757390d458206953228
+  checksum: 10c0/9bb1099a97f124f99a3ed00acd5e5529a8eb06b40978c4830f2acad7f169e6426b19cefc110500ca70daee92be247435bf4ad9c81cabf0e00ef17ea7d3537d3e
   languageName: node
   linkType: hard
 
@@ -14522,10 +14540,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-fest@npm:^4.18.2, type-fest@npm:^4.33.0, type-fest@npm:^4.34.1, type-fest@npm:^4.7.1":
+"type-fest@npm:^4.18.2, type-fest@npm:^4.33.0, type-fest@npm:^4.7.1":
   version: 4.34.1
   resolution: "type-fest@npm:4.34.1"
   checksum: 10c0/4aa016be91f4225b772d77da91415cd25961a937f84e68d763b2dfeb936ef1671b039bbb0f75019affb8f591c26d65966024343aae75b17ab49db6f9c50c38a8
+  languageName: node
+  linkType: hard
+
+"type-fest@npm:^4.35.0":
+  version: 4.35.0
+  resolution: "type-fest@npm:4.35.0"
+  checksum: 10c0/7032a8a940c33d45947a4ff0f74e3aa43b6fd8bb4745b32bba8e61ee47c0dd088cacd102f8377e9e889362e1ae8e0292b64a4c0698c1e42fd297bf6f8899d220
   languageName: node
   linkType: hard
 
@@ -15645,7 +15670,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.22.2, zod@npm:^3.24.1":
+"zod@npm:^3.22.2, zod@npm:^3.24.1, zod@npm:^3.24.2":
   version: 3.24.2
   resolution: "zod@npm:3.24.2"
   checksum: 10c0/c638c7220150847f13ad90635b3e7d0321b36cce36f3fc6050ed960689594c949c326dfe2c6fa87c14b126ee5d370ccdebd6efb304f41ef5557a4aaca2824565
