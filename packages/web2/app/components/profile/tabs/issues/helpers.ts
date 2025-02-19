@@ -4,18 +4,27 @@ import techniquesLinks from "../../../../techniquesLinks.json";
 import { Issue, IssueGroup, IssueMeta } from "./types.ts";
 
 export const getLinkForTechnique = (technique: string) => {
-  switch (technique.charAt(0)) {
-    case "ARIA":
-    case "SCR":
-    case "C":
-    case "F":
-    case "G":
-    case "H":
+  switch (true) {
+    case technique.startsWith("ARIA"):
+      return `https://www.w3.org/WAI/WCAG22/Techniques/aria/${technique}`;
+    case technique.startsWith("SCR"):
+      return `https://www.w3.org/WAI/WCAG22/Techniques/client-side-script/${technique}`;
+    case technique.startsWith("C"):
+      return `https://www.w3.org/WAI/WCAG22/Techniques/css/${technique}`;
+    case technique.startsWith("F"):
+      return `https://www.w3.org/WAI/WCAG22/Techniques/failures/${technique}`;
+    case technique.startsWith("G"):
+      return `https://www.w3.org/WAI/WCAG22/Techniques/general/${technique}`;
+    case technique.startsWith("H"):
       return `https://www.w3.org/WAI/WCAG22/Techniques/html/${technique}`;
-    case "PDF":
-    case "SVR":
-    case "SM":
-    case "T":
+    case technique.startsWith("PDF"):
+      return `https://www.w3.org/WAI/WCAG22/Techniques/pdf/${technique}`;
+    case technique.startsWith("SVR"):
+      return `https://www.w3.org/WAI/WCAG22/Techniques/server-side-script/${technique}`;
+    case technique.startsWith("SM"):
+      return `https://www.w3.org/WAI/WCAG22/Techniques/smil/${technique}`;
+    case technique.startsWith("T"):
+      return `https://www.w3.org/WAI/WCAG22/Techniques/text/${technique}`;
     default:
       return null;
   }

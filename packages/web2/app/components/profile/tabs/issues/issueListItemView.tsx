@@ -45,11 +45,13 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
 
   const wcagGuidelineLinkData = wcagLinks[issueMeta.guideline];
   const wcagCriterionLinkData = wcagLinks[issueMeta.criterion];
-  const techniqueLinksData = issueMeta.techniques.map((technique) => ({
-    id: technique,
-    url: getLinkForTechnique(technique) ?? undefined,
-    label: techniquesLinks[technique],
-  }));
+  const techniqueLinksData = issueMeta.techniques
+    .map((technique) => ({
+      id: technique,
+      url: getLinkForTechnique(technique) ?? undefined,
+      label: techniquesLinks[technique],
+    }))
+    .filter((t) => !!t.url);
 
   const level =
     wcagCriterionLinkData && "wcagLevel" in wcagCriterionLinkData
