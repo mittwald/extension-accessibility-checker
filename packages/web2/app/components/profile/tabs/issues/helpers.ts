@@ -30,7 +30,10 @@ export const getIssueMeta = (issue: APIIssue): IssueMeta => {
     guideline: guideline
       .replace("Guideline", "")
       .replace("_", ".") as keyof typeof wcagLinks,
-    criterion: criterion.split("_").join(".") as keyof typeof wcagLinks,
+    criterion: criterion
+      .split("_")
+      .slice(0, 3)
+      .join(".") as keyof typeof wcagLinks,
     techniques: techniques.split(",") as (keyof typeof techniquesLinks)[],
     rest,
   };
