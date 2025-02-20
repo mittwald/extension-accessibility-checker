@@ -82,7 +82,10 @@ export const Issues = ({ scan }: IssuesProps) => {
             <Text>Darstellungsoptionen</Text>
             <IconFilter />
           </Button>
-          <ContextMenu selectionMode="switch" defaultSelectedKeys={viewOptions}>
+          <ContextMenu
+            selectionMode="multiple"
+            defaultSelectedKeys={viewOptions}
+          >
             <MenuItem id="A" onAction={toggleOption("A")}>
               Level A
             </MenuItem>

@@ -28,6 +28,8 @@ export const PathsList = ({
   const [touched, setTouched] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const paths = form.watch("paths");
+
   const isValidInputValue = () => {
     if (!pathInputValue.startsWith("/")) {
       return (
@@ -63,8 +65,6 @@ export const PathsList = ({
     values.delete(value.toString());
     form.setValue("paths", values);
   };
-
-  const paths = form.watch("paths");
 
   const PathList = typedList<String>();
   const pathsList = (
