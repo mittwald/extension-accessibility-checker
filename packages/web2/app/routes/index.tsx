@@ -8,7 +8,6 @@ import {
 } from "@mittwald/flow-react-components";
 import { EducationCards } from "../components/list/educationCards.tsx";
 import { NoProfiles } from "../components/list/noProfiles.tsx";
-import "@mittwald/flow-react-components/all.css";
 import { ProfilesList } from "../components/list/profilesList.tsx";
 
 import { getProfiles } from "../actions/profile.ts";

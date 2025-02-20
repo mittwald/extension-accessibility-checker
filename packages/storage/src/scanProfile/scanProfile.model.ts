@@ -15,10 +15,12 @@ class CronSchedule {
 
 @modelOptions({
   schemaOptions: {
+    collection: "scanprofiles",
     versionKey: false,
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   },
+  options: { automaticName: false },
 })
 export class ScanProfile {
   @prop()
@@ -118,4 +120,4 @@ export class ScanProfile {
   }
 }
 
-export const ScanProfileModel = getModel(ScanProfile);
+export const ScanProfileModel = getModel(ScanProfile, "ScanProfile");

@@ -54,7 +54,10 @@ export class Page {
 }
 
 @index({ status: 1, executionScheduledFor: 1 })
-@modelOptions({ schemaOptions: { versionKey: false } })
+@modelOptions({
+  schemaOptions: { collection: "scans", versionKey: false },
+  options: { automaticName: false },
+})
 export class Scan {
   public _id: ObjectId;
 
@@ -175,4 +178,4 @@ export class Scan {
   }
 }
 
-export const ScanModel = getModel(Scan);
+export const ScanModel = getModel(Scan, "Scan");

@@ -2,7 +2,10 @@ import { prop, modelOptions } from "@typegoose/typegoose";
 import { ObjectId } from "mongoose";
 import { getModel } from "../lib/mongoose.js";
 
-@modelOptions({ schemaOptions: { versionKey: false } })
+@modelOptions({
+  schemaOptions: { versionKey: false, collection: "projects" },
+  options: { automaticName: false },
+})
 export class Project {
   public _id: ObjectId;
 
@@ -19,4 +22,4 @@ export class Project {
   public updatedAt: Date;
 }
 
-export const ProjectModel = getModel(Project);
+export const ProjectModel = getModel(Project, "Project");

@@ -7,10 +7,10 @@ import { getModelForClass } from "@typegoose/typegoose";
 
 export function getModel<U extends AnyParamConstructor<any>>(
   modelClass: U,
+  modelName: string,
 ): ReturnModelType<U> {
-  const modelName = modelClass.name;
   return (
     (mongoose.models[modelName] as ReturnModelType<U>) ??
-    getModelForClass(modelClass)
+    getModelForClass(modelClass, { options: { customName: modelName } })
   );
 }

@@ -4,6 +4,9 @@ import viteReact from "@vitejs/plugin-react";
 
 // https://vite.dev/config/
 export default defineConfig({
+  build: {
+    minify: false,
+  },
   plugins: [
     TanStackRouterVite({
       autoCodeSplitting: true,
