@@ -7,5 +7,21 @@ services:
     volumes:
       - mongo-data-a11y-checker:/data/db
 
+  web:
+    container_name: a11y-checker
+    build:
+      context: .
+      dockerfile: ./packages/web2/Dockerfile
+    restart: unless-stopped
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/extension-a11y-checker
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
+      - DEBUG=*
+    ports:
+      - "3042:3000"
+    depends_on:
+      - mongo
+
 volumes:
   mongo-data-a11y-checker:
