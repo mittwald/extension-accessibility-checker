@@ -15,9 +15,13 @@ export const EducationCards = () => {
           <Heading level={2}>Manuell testen</Heading>
           <Text>
             Ein automatisierter Scan kann nicht alle Kriterien der WCAG 2
-            erfassen.{" "}
+            erfassen. Mache dich daher mit den{" "}
+            <Link href="https://www.w3.org/WAI/standards-guidelines/wcag/">
+              Web Content Accessibility Guidelines
+            </Link>{" "}
+            vertraut und{" "}
             <Link href="https://web.dev/articles/how-to-review?hl=de">
-              Teste daher auch immer manuell
+              teste auch immer manuell
             </Link>
             .
           </Text>
