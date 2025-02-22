@@ -1,53 +1,50 @@
-import puppeteer from "puppeteer";
-import lighthouse, { Flags } from "lighthouse";
+import { fork, ChildProcess } from "child_process";
+import path from "path";
+import { fileURLToPath } from "url";
 import { logger } from "../logger.js";
-import { puppeteerLaunchOptions } from "./helpers.js";
-import { Logger } from "pino";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const log = logger.child({ module: "Lighthouse" });
 
 export class Lighthouse {
-  protected static flags: (port: number) => Flags = (port) => ({
-    logLevel: "error",
-    output: "html",
-    onlyCategories: ["accessibility"],
-    port: port,
-    screenEmulation: { mobile: false, width: 1280, height: 1024 },
-    formFactor: "desktop",
-  });
+  private static childProcesses: Set<ChildProcess> = new Set();
 
   public static async calculateA11yScore(
     url: string,
   ): Promise<number | undefined> {
-    const log = logger.child({ url, module: "Lighthouse" });
+    return new Promise((resolve, reject) => {
+      const child = fork(path.join(__dirname, "LighthouseRunner.js"), [url]);
+      this.childProcesses.add(child);
 
-    log.debug("⛴️ Calculating LH Accessibility score");
+      child.on("message", (message) => {
+        log.debug(`Lighthouse process for ${url} returned ${message}`);
+        if (message === "undefined") {
+          resolve(undefined);
+        } else {
+          resolve(parseInt(message.toString()));
+        }
+      });
 
-    const browser = await puppeteer.launch({ ...puppeteerLaunchOptions });
-    const { port } = new URL(browser.wsEndpoint());
+      child.on("error", reject);
 
-    try {
-      const parsedPort = parseInt(port);
-      return await this.runLighthouseScan(url, parsedPort, log);
-    } catch (e) {
-      log.error(e, "💥 Error calculating LH score: %s", e);
-    } finally {
-      await browser.close();
-    }
+      child.on("exit", (code) => {
+        log.debug(`Lighthouse process for ${url} exited ${code}`);
+        this.childProcesses.delete(child);
+        if (code !== 0) {
+          reject(
+            new Error(
+              `💥 Lighthouse process for ${url} exited with code ${code}`,
+            ),
+          );
+        }
+      });
+    });
   }
 
-  protected static async runLighthouseScan(
-    url: string,
-    port: number,
-    log: Logger,
-  ): Promise<number | undefined> {
-    const lighthouseResult = await lighthouse(url, this.flags(port));
-
-    if (!lighthouseResult?.lhr.categories.accessibility.score) {
-      return;
+  public static cleanUpChildProcesses() {
+    log.debug("Stopping all Lighthouse child processes...");
+    for (const child of this.childProcesses) {
+      child.kill();
     }
-    const score = Math.round(
-      lighthouseResult.lhr.categories.accessibility.score * 100,
-    );
-    log.debug("⛴️ LH Accessibility score: %d", score);
-    return score;
   }
 }

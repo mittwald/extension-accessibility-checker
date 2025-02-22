@@ -4,6 +4,7 @@ import cron from "node-cron";
 import { dbConnect } from "extension-a11y-checker-storage";
 import { ScanExecutor } from "./scan/ScanExecutor.js";
 import { logger } from "./logger.js";
+import { Lighthouse } from "./scan/Lighthouse.js";
 
 const log = logger.child({ module: "Executor" });
 
@@ -25,11 +26,13 @@ async function main() {
   log.info("Starting scan scheduler... %o", { cronExpr });
   cron.schedule(cronExpr, execScans);
 
-  process.on("SIGINT", async () => {
+  const cleanUp = async () => {
     log.info("Shutting down gracefully...");
+    Lighthouse.cleanUpChildProcesses();
     await db.disconnect();
-    process.exit(0);
-  });
+  };
+  process.on("SIGINT", cleanUp);
+  process.on("SIGTERM", cleanUp);
 }
 
 main().catch((err) => {

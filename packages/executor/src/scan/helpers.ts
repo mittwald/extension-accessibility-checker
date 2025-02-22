@@ -8,6 +8,7 @@ export const puppeteerLaunchOptions: LaunchOptions = {
     "--disable-setuid-sandbox",
     "--headless",
     "--disable-gpu",
+    "--disable-dev-shm-usage",
   ],
   headless: true,
 };

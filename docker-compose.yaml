@@ -13,6 +13,7 @@ services:
       context: .
       dockerfile: ./packages/executor/Dockerfile
     restart: unless-stopped
+    shm_size: "2gb"
     environment:
       - MONGODB_URI=mongodb://mongo:27017/extension-a11y-checker
       - NODE_ENV=development
