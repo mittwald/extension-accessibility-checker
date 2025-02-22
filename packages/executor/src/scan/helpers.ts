@@ -1,0 +1,23 @@
+import type { LaunchOptions } from "puppeteer";
+import type { Pa11yOptions } from "pa11y";
+import { logger } from "../logger.js";
+
+export const puppeteerLaunchOptions: LaunchOptions = {
+  args: [
+    "--no-sandbox",
+    "--disable-setuid-sandbox",
+    "--headless",
+    "--disable-gpu",
+  ],
+  headless: true,
+};
+
+export const pa11yLogger = (url: string): Pa11yOptions["log"] => {
+  const pallyLogger = logger.child({ module: "Pa11y", url });
+  return {
+    debug: (m: string) => pallyLogger.debug(m),
+    error: (m: string) => pallyLogger.error(m),
+    info: (m: string) => pallyLogger.info(m),
+    log: (m: string) => pallyLogger.debug(m),
+  };
+};

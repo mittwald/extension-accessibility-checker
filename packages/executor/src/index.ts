@@ -19,10 +19,10 @@ async function main() {
 
   await execScans();
 
-  log.info("Starting scan scheduler...");
   // todo: make this configurable
   // every 10 seconds
   const cronExpr = "*/10 * * * * *";
+  log.info("Starting scan scheduler... %o", { cronExpr });
   cron.schedule(cronExpr, execScans);
 
   process.on("SIGINT", async () => {
@@ -33,6 +33,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  log.error(err, "Error initializing server: %s", err.message);
+  log.error(err, "Error handling server: %s", err.message);
   process.exit(1);
 });

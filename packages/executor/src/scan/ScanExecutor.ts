@@ -1,14 +1,11 @@
 import { Scan, ScanModel } from "extension-a11y-checker-storage";
-import { Pa11yScanEngine } from "./Pa11yScanEngine.js";
-import { ScanEngine } from "./ScanEngine";
+import { ScanEngineFactory } from "./engines/ScanEngine.js";
 import { DocumentType, isDocument } from "@typegoose/typegoose";
 import { logger } from "../logger.js";
 
 const log = logger.child({ module: "ScanExecutor" });
 
 export class ScanExecutor {
-  protected static engine: ScanEngine = new Pa11yScanEngine();
-
   static async executePendingScans() {
     const scans = await ScanModel.findPending();
     if (scans.length === 0) {
@@ -19,8 +16,8 @@ export class ScanExecutor {
 
     log.debug(`Marking scans as running: ${scans.length}`);
     await Promise.all(scans.map((s) => s.markAsRunning()));
-    log.debug("Starting Scans");
 
+    log.debug("Starting Scans");
     for (const scan of scans) {
       await this.executeScan(scan);
       await this.scheduleNextScan(scan);
@@ -36,8 +33,11 @@ export class ScanExecutor {
 
     log.info("▶️ executing scan: %s", scan._id);
     try {
-      await this.engine.executeScan(scan);
-      log.debug("✅ Issues found: %d", scan.issues?.length);
+      const engine = ScanEngineFactory.buildFor(scan);
+      const results = await engine.executeScan();
+      scan.issues = results.issues;
+      scan.pages = results.pages;
+      log.info("✅ Scan execution finished: %s", scan._id);
       await scan.markAsCompleted();
     } catch (e) {
       const message = e instanceof Error ? e.message : JSON.stringify(e);
