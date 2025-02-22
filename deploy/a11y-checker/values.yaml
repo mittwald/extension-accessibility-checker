@@ -1,0 +1,40 @@
+mongodb:
+  enabled: true
+  architecture: standalone
+  database: extension-a11y-checker
+  extraEnvVars:
+    - name: ALLOW_EMPTY_PASSWORD
+      value: 'yes'
+  auth:
+    enabled: false
+  service:
+    type: ClusterIP
+    port: 27017
+  persistence:
+    enabled: true
+    size: 4Gi
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+
+webApp:
+  enabled: true
+  name: a11y-checker-web
+  image: a11y-checker-web:latest
+  replicaCount: 1
+  service:
+    type: ClusterIP
+    port: 80
+  ingress:
+    enabled: true
+    host: a11y-checker.extension.k8s.orb.local
+
+executor:
+  enabled: true
+  name: a11y-checker-executor
+  image: a11y-checker-executor:latest
+  replicaCount: 2

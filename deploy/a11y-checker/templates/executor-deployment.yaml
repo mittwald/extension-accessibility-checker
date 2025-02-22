@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.executor.name }}
+  labels:
+    app: {{ .Values.executor.name }}
+spec:
+  replicas: {{ .Values.executor.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.executor.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.executor.name }}
+    spec:
+      containers:
+        - name: {{ .Values.executor.name }}
+          image: {{ .Values.executor.image }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: NODE_ENV
+              value: development
+            - name: LOG_LEVEL
+              value: debug
+            - name: DEBUG
+              value: '*,-puppeteer:protocol*'
+            - name: MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-uri
