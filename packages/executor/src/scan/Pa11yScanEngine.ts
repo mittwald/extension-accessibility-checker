@@ -30,6 +30,7 @@ export class Pa11yScanEngine implements ScanEngine {
       }
       scan.status = "completed";
     } catch (e) {
+      console.error(e);
       scan.status = "failed";
     }
   }
@@ -112,6 +113,11 @@ class Pa11yRunner {
         error: console.error,
         info: console.info,
         log: console.log,
+      },
+      chromeLaunchConfig: {
+        args: ["--no-sandbox", "--disable-setuid-sandbox", "--headless"],
+        headless: true,
+        timeout: 10_000,
       },
     };
 
