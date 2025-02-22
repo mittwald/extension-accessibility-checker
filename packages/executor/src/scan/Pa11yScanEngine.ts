@@ -76,7 +76,12 @@ export class Pa11yScanEngine implements ScanEngine {
     const lhLog = log.child({ url: page.url, type: "LH" });
 
     const browser = await puppeteer.launch({
-      args: ["--no-sandbox", "--disable-setuid-sandbox", "--headless"],
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--headless",
+        "--disable-gpu",
+      ],
       headless: true,
     });
     const { port } = new URL(browser.wsEndpoint());
@@ -120,7 +125,12 @@ class Pa11yRunner {
         log: (m: string) => pallyLogger.debug(m),
       },
       chromeLaunchConfig: {
-        args: ["--no-sandbox", "--disable-setuid-sandbox", "--headless"],
+        args: [
+          "--no-sandbox",
+          "--disable-setuid-sandbox",
+          "--headless",
+          "--disable-gpu",
+        ],
         headless: true,
         timeout: 10_000,
       },
