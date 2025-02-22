@@ -3,33 +3,36 @@ import "reflect-metadata";
 import cron from "node-cron";
 import { dbConnect } from "extension-a11y-checker-storage";
 import { ScanExecutor } from "./scan/ScanExecutor.js";
+import { logger } from "./logger.js";
+
+const log = logger.child({ module: "Executor" });
 
 async function main() {
-  console.info("Connecting to DB...");
+  log.info("Connecting to DB...");
   const db = await dbConnect();
 
   const execScans = async () => {
-    // console.info("››› Starting scans...");
+    log.trace("››› Starting scans...");
     await ScanExecutor.executePendingScans();
-    // console.info("✓✓✓ Scans finished");
+    log.trace("✓✓✓ Scans finished");
   };
 
   await execScans();
 
-  console.info("Starting scan scheduler...");
+  log.info("Starting scan scheduler...");
   // todo: make this configurable
   // every 10 seconds
   const cronExpr = "*/10 * * * * *";
   cron.schedule(cronExpr, execScans);
 
   process.on("SIGINT", async () => {
-    console.info("Shutting down gracefully...");
+    log.info("Shutting down gracefully...");
     await db.disconnect();
     process.exit(0);
   });
 }
 
 main().catch((err) => {
-  console.error("Error initializing:", err);
+  log.error(err, "Error initializing server: %s", err.message);
   process.exit(1);
 });

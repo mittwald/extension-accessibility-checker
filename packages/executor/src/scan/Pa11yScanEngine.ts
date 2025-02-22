@@ -4,6 +4,9 @@ import { DocumentType, isDocument } from "@typegoose/typegoose";
 import { ScanEngine } from "./ScanEngine.js";
 import puppeteer from "puppeteer";
 import lighthouse, { Flags } from "lighthouse";
+import { logger } from "../logger.js";
+
+const log = logger.child({ module: "Pa11yScanEngine" });
 
 export class Pa11yScanEngine implements ScanEngine {
   public async executeScan(scan: DocumentType<Scan>): Promise<void> {
@@ -30,8 +33,7 @@ export class Pa11yScanEngine implements ScanEngine {
       }
       scan.status = "completed";
     } catch (e) {
-      console.error(e);
-      scan.status = "failed";
+      throw e;
     }
   }
 
@@ -71,6 +73,8 @@ export class Pa11yScanEngine implements ScanEngine {
   }
 
   private async calculateLighthouseScore(page: Page, scan: DocumentType<Scan>) {
+    const lhLog = log.child({ url: page.url, type: "LH" });
+
     const browser = await puppeteer.launch({
       args: ["--no-sandbox", "--disable-setuid-sandbox", "--headless"],
       headless: true,
@@ -78,7 +82,7 @@ export class Pa11yScanEngine implements ScanEngine {
     const { port } = new URL(browser.wsEndpoint());
 
     const flags: Flags = {
-      logLevel: "info",
+      logLevel: "error",
       output: "html",
       onlyCategories: ["accessibility"],
       port: parseInt(port),
@@ -94,10 +98,10 @@ export class Pa11yScanEngine implements ScanEngine {
       const score = Math.round(
         runnerResult.lhr.categories.accessibility.score * 100,
       );
-      console.log("LH Accessibility score:", score);
+      lhLog.debug("⛴️ LH Accessibility score: %d", score);
       page.score = score;
     } catch (e) {
-      console.error("Error calculating accessibility score:", e);
+      lhLog.error(e, "💥 Error calculating LH score: %s", e);
     } finally {
       await browser.close();
     }
@@ -106,13 +110,14 @@ export class Pa11yScanEngine implements ScanEngine {
 
 class Pa11yRunner {
   public async run(url: string, options: Pa11yOptions) {
+    const pallyLogger = logger.child({ module: "Pa11y", url });
     const pa11yOptions = {
       ...options,
       log: {
-        debug: console.debug,
-        error: console.error,
-        info: console.info,
-        log: console.log,
+        debug: (m: string) => pallyLogger.debug(m),
+        error: (m: string) => pallyLogger.error(m),
+        info: (m: string) => pallyLogger.info(m),
+        log: (m: string) => pallyLogger.debug(m),
       },
       chromeLaunchConfig: {
         args: ["--no-sandbox", "--disable-setuid-sandbox", "--headless"],

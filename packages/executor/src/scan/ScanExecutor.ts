@@ -2,6 +2,9 @@ import { Scan, ScanModel } from "extension-a11y-checker-storage";
 import { Pa11yScanEngine } from "./Pa11yScanEngine.js";
 import { ScanEngine } from "./ScanEngine";
 import { DocumentType, isDocument } from "@typegoose/typegoose";
+import { logger } from "../logger.js";
+
+const log = logger.child({ module: "ScanExecutor" });
 
 export class ScanExecutor {
   protected static engine: ScanEngine = new Pa11yScanEngine();
@@ -9,13 +12,14 @@ export class ScanExecutor {
   static async executePendingScans() {
     const scans = await ScanModel.findPending();
     if (scans.length === 0) {
+      log.trace("No scans found. Try again later.");
       return;
     }
-    console.log(`Scans found to execute: ${scans.length}`);
+    log.info(`📋 Scans found to execute: ${scans.length}`);
 
-    console.log(`Marking scans as running: ${scans.length}`);
+    log.debug(`Marking scans as running: ${scans.length}`);
     await Promise.all(scans.map((s) => s.markAsRunning()));
-    console.log("Starting Scans");
+    log.debug("Starting Scans");
 
     for (const scan of scans) {
       await this.executeScan(scan);
@@ -30,14 +34,14 @@ export class ScanExecutor {
       return;
     }
 
-    console.log("executing scan: ", scan._id);
+    log.info("▶️ executing scan: %s", scan._id);
     try {
       await this.engine.executeScan(scan);
-      console.log("Issues found: ", scan.issues?.length);
+      log.debug("✅ Issues found: %d", scan.issues?.length);
       await scan.markAsCompleted();
     } catch (e) {
-      console.error(e);
       const message = e instanceof Error ? e.message : JSON.stringify(e);
+      log.error(e, "💥 Error executing scan: %s", message);
       await scan.markAsFailed(message);
     }
   }
@@ -49,15 +53,18 @@ export class ScanExecutor {
 
     const executionDate = scan.profile.nextExecution();
     if (scan.scheduledBy !== "system" || !executionDate) {
+      log.debug("user scan or no schedule -> not scheduling next scan");
       return;
     }
+
+    log.debug("scheduling next scan for profile %s", scan.profile._id);
 
     const nextScan = await ScanModel.createForProfile(
       scan.profile,
       executionDate,
     );
-    console.log(
-      "next execution scheduled for: ",
+    log.debug(
+      "next execution scheduled for: %s",
       nextScan.executionScheduledFor,
     );
   }
