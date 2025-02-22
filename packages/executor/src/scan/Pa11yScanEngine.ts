@@ -82,7 +82,7 @@ export class Pa11yScanEngine implements ScanEngine {
       output: "html",
       onlyCategories: ["accessibility"],
       port: parseInt(port),
-      screenEmulation: { mobile: false, width: 1200, height: 1080 },
+      screenEmulation: { mobile: false, width: 1280, height: 1024 },
       formFactor: "desktop",
     };
 

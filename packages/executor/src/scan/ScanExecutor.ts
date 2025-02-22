@@ -12,6 +12,11 @@ export class ScanExecutor {
       return;
     }
     console.log(`Scans found to execute: ${scans.length}`);
+
+    console.log(`Marking scans as running: ${scans.length}`);
+    await Promise.all(scans.map((s) => s.markAsRunning()));
+    console.log("Starting Scans");
+
     for (const scan of scans) {
       await this.executeScan(scan);
       await this.scheduleNextScan(scan);
@@ -19,8 +24,6 @@ export class ScanExecutor {
   }
 
   private static async executeScan(scan: DocumentType<Scan>) {
-    await scan.markAsRunning();
-
     await scan.populate("profile");
     if (!isDocument(scan.profile)) {
       await scan.markAsFailed("Profile not found");
