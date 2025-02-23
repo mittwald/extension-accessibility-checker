@@ -12,15 +12,18 @@
     "preview": "nx vite:preview"
   },
   "dependencies": {
+    "@mittwald/api-client": "^4.108.0",
     "@mittwald/flow-react-components": "^0.2.0-alpha.41",
     "@tabler/icons-react": "^3.29.0",
     "@tanstack/react-router": "^1.99.13",
     "@tanstack/start": "^1.99.13",
+    "@weissaufschwarz/mitthooks": "^0.2.1",
     "extension-a11y-checker-storage": "workspace:*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
-    "vinxi": "^0.5.2"
+    "vinxi": "^0.5.2",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
@@ -34,6 +37,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.18",
     "globals": "^15.14.0",
+    "json-schema-to-zod": "^2.6.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.22.0",
     "vite": "^6.1.0",

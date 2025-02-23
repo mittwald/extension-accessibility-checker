@@ -3,6 +3,7 @@ import { SafeParseReturnType, SafeParseSuccess } from "zod";
 
 export const handleAPIError = (e: unknown) => {
   if (e instanceof Response) {
+    console.error(e.clone().text());
     return e;
   }
   console.error(e);
@@ -25,7 +26,9 @@ export const assertValidationSuccess: <In, Out>(
 
 export const assertContextType = (context: { kind: string }) => {
   if (context.kind !== "project") {
-    console.log(`Wrong context type '${context.kind}'`);
-    throw json({ message: "Wrong context type" }, { status: 400 });
+    throw json(
+      { message: `Wrong context type '${context.kind}'` },
+      { status: 400 },
+    );
   }
 };

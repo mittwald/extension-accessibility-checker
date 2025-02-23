@@ -2408,6 +2408,41 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mittwald/api-client-commons@npm:^4.104.1":
+  version: 4.104.1
+  resolution: "@mittwald/api-client-commons@npm:4.104.1"
+  dependencies:
+    "@types/parse-path": "npm:^7.0.3"
+    axios: "npm:^1.7.9"
+    parse-path: "npm:^7.0.0"
+    path-to-regexp: "npm:^8.2.0"
+    type-fest: "npm:^4.30.0"
+  peerDependencies:
+    "@mittwald/react-use-promise": ^2.6.0
+  peerDependenciesMeta:
+    "@jest/globals":
+      optional: true
+    "@mittwald/react-use-promise":
+      optional: true
+  checksum: 10c0/4a04e055a99323bb9bcae346a1d76db4266b297aa9675cc6079f5a1fcf9af9d9c8ee07b0cf5e39079a831560084837964dcbbc3bf5e507b14d395d304e1c00f4
+  languageName: node
+  linkType: hard
+
+"@mittwald/api-client@npm:^4.108.0, @mittwald/api-client@npm:^4.61.1":
+  version: 4.108.0
+  resolution: "@mittwald/api-client@npm:4.108.0"
+  dependencies:
+    "@mittwald/api-client-commons": "npm:^4.104.1"
+    browser-or-node: "npm:^3.0.0"
+  peerDependencies:
+    "@mittwald/react-use-promise": ^2.6.0
+  peerDependenciesMeta:
+    "@mittwald/react-use-promise":
+      optional: true
+  checksum: 10c0/7d5dab31ab043378f740264c1d22165ee40c5413feb59dec457967ea48bd1fced676d740281cf7946855ec2fc4f3c3984773b1311b2bb78cbede2c097add8142
+  languageName: node
+  linkType: hard
+
 "@mittwald/flow-react-components@npm:^0.2.0-alpha.41":
   version: 0.2.0-alpha.41
   resolution: "@mittwald/flow-react-components@npm:0.2.0-alpha.41"
@@ -2541,6 +2576,13 @@ __metadata:
     "@netlify/node-cookies": "npm:^0.1.0"
     urlpattern-polyfill: "npm:8.0.2"
   checksum: 10c0/eb5bd829d4c557a66c5a39dde72faf96afa16eaa905d93066ef65248a9449721dbf038e9b83aeed329662bbdc6061e7b8e9e4cd3166da8d4fa774029bda804ef
+  languageName: node
+  linkType: hard
+
+"@noble/ed25519@npm:^2.1.0":
+  version: 2.2.3
+  resolution: "@noble/ed25519@npm:2.2.3"
+  checksum: 10c0/39d7ab81e520c7393e9356bde12d9a7a944b3cb6b97676125989d23217716c295ccc6e3a899bf57b9e10fe4409cc0092f6f15266a4b66ee9a9060690b873955f
   languageName: node
   linkType: hard
 
@@ -5876,6 +5918,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/parse-path@npm:^7.0.3":
+  version: 7.0.3
+  resolution: "@types/parse-path@npm:7.0.3"
+  checksum: 10c0/8344b6c7acba4e4e5a8d542f56f53c297685fa92f9b0c085d7532cc7e1b661432cecfc1c75c76cdb0d161c95679b6ecfe0573d9fef7c836962aacf604150a984
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:^15.7.14":
   version: 15.7.14
   resolution: "@types/prop-types@npm:15.7.14"
@@ -6229,6 +6278,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@weissaufschwarz/mitthooks@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "@weissaufschwarz/mitthooks@npm:0.2.1"
+  dependencies:
+    "@mittwald/api-client": "npm:^4.61.1"
+    "@noble/ed25519": "npm:^2.1.0"
+    zod: "npm:^3.23.8"
+  checksum: 10c0/af90ef2bd4739ca113a696b3f7f942e30c21ca6f39d7311abfc9531e599b4b33027904a028c8790a1bd680166539d2e16a8e7275092ded61e3174fe2aefb0428
+  languageName: node
+  linkType: hard
+
 "@yarnpkg/lockfile@npm:^1.1.0":
   version: 1.1.0
   resolution: "@yarnpkg/lockfile@npm:1.1.0"
@@ -6525,7 +6585,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.7.4":
+"axios@npm:^1.7.4, axios@npm:^1.7.9":
   version: 1.7.9
   resolution: "axios@npm:1.7.9"
   dependencies:
@@ -8850,6 +8910,7 @@ __metadata:
   resolution: "extension-a11y-checker-web2@workspace:packages/web2"
   dependencies:
     "@eslint/js": "npm:^9.19.0"
+    "@mittwald/api-client": "npm:^4.108.0"
     "@mittwald/flow-react-components": "npm:^0.2.0-alpha.41"
     "@tabler/icons-react": "npm:^3.29.0"
     "@tanstack/react-router": "npm:^1.99.13"
@@ -8859,12 +8920,14 @@ __metadata:
     "@types/react": "npm:^19.0.8"
     "@types/react-dom": "npm:^19.0.3"
     "@vitejs/plugin-react": "npm:^4.3.4"
+    "@weissaufschwarz/mitthooks": "npm:^0.2.1"
     babel-plugin-react-compiler: "npm:19.0.0-beta-714736e-20250131"
     eslint: "npm:^9.19.0"
     eslint-plugin-react-hooks: "npm:^5.0.0"
     eslint-plugin-react-refresh: "npm:^0.4.18"
     extension-a11y-checker-storage: "workspace:*"
     globals: "npm:^15.14.0"
+    json-schema-to-zod: "npm:^2.6.0"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     react-hook-form: "npm:^7.54.2"
@@ -8873,6 +8936,7 @@ __metadata:
     vinxi: "npm:^0.5.2"
     vite: "npm:^6.1.0"
     vite-tsconfig-paths: "npm:^5.1.4"
+    zod: "npm:^3.24.2"
   languageName: unknown
   linkType: soft
 
@@ -10415,6 +10479,15 @@ __metadata:
   version: 2.3.1
   resolution: "json-parse-even-better-errors@npm:2.3.1"
   checksum: 10c0/140932564c8f0b88455432e0f33c4cb4086b8868e37524e07e723f4eaedb9425bdc2bafd71bd1d9765bd15fd1e2d126972bc83990f55c467168c228c24d665f3
+  languageName: node
+  linkType: hard
+
+"json-schema-to-zod@npm:^2.6.0":
+  version: 2.6.0
+  resolution: "json-schema-to-zod@npm:2.6.0"
+  bin:
+    json-schema-to-zod: dist/cjs/cli.js
+  checksum: 10c0/7446a8400157f853b4de1a87f83808dca8c3934fd776ed67d5446700b833de0a5884fa838c67b49206a423d4ac91d3dd8c9ebeaddf4b363e731d6fbad594d4e6
   languageName: node
   linkType: hard
 
@@ -12428,6 +12501,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"parse-path@npm:^7.0.0":
+  version: 7.0.1
+  resolution: "parse-path@npm:7.0.1"
+  dependencies:
+    protocols: "npm:^2.0.0"
+  checksum: 10c0/687804bbd216bf45f3942a5a0a3cd74da0eb9cdaf40d32020fa05a590b3c84c985bab0dc18cb13569db4cf3294c560d3a657be06698c323b32423210e488164b
+  languageName: node
+  linkType: hard
+
 "parseurl@npm:~1.3.3":
   version: 1.3.3
   resolution: "parseurl@npm:1.3.3"
@@ -12484,6 +12566,13 @@ __metadata:
   version: 6.3.0
   resolution: "path-to-regexp@npm:6.3.0"
   checksum: 10c0/73b67f4638b41cde56254e6354e46ae3a2ebc08279583f6af3d96fe4664fc75788f74ed0d18ca44fa4a98491b69434f9eee73b97bb5314bd1b5adb700f5c18d6
+  languageName: node
+  linkType: hard
+
+"path-to-regexp@npm:^8.2.0":
+  version: 8.2.0
+  resolution: "path-to-regexp@npm:8.2.0"
+  checksum: 10c0/ef7d0a887b603c0a142fad16ccebdcdc42910f0b14830517c724466ad676107476bba2fe9fffd28fd4c141391ccd42ea426f32bb44c2c82ecaefe10c37b90f5a
   languageName: node
   linkType: hard
 
@@ -12804,6 +12893,13 @@ __metadata:
   version: 6.5.0
   resolution: "property-information@npm:6.5.0"
   checksum: 10c0/981e0f9cc2e5acdb414a6fd48a99dd0fd3a4079e7a91ab41cf97a8534cf43e0e0bc1ffada6602a1b3d047a33db8b5fc2ef46d863507eda712d5ceedac443f0ef
+  languageName: node
+  linkType: hard
+
+"protocols@npm:^2.0.0":
+  version: 2.0.2
+  resolution: "protocols@npm:2.0.2"
+  checksum: 10c0/b87d78c1fcf038d33691da28447ce94011d5c7f0c7fd25bcb5fb4d975991c99117873200c84f4b6a9d7f8b9092713a064356236960d1473a7d6fcd4228897b60
   languageName: node
   linkType: hard
 
@@ -14732,7 +14828,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-fest@npm:^4.35.0":
+"type-fest@npm:^4.30.0, type-fest@npm:^4.35.0":
   version: 4.35.0
   resolution: "type-fest@npm:4.35.0"
   checksum: 10c0/7032a8a940c33d45947a4ff0f74e3aa43b6fd8bb4745b32bba8e61ee47c0dd088cacd102f8377e9e889362e1ae8e0292b64a4c0698c1e42fd297bf6f8899d220
@@ -15855,7 +15951,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.22.2, zod@npm:^3.24.1, zod@npm:^3.24.2":
+"zod@npm:^3.22.2, zod@npm:^3.23.8, zod@npm:^3.24.1, zod@npm:^3.24.2":
   version: 3.24.2
   resolution: "zod@npm:3.24.2"
   checksum: 10c0/c638c7220150847f13ad90635b3e7d0321b36cce36f3fc6050ed960689594c949c326dfe2c6fa87c14b126ee5d370ccdebd6efb304f41ef5557a4aaca2824565
