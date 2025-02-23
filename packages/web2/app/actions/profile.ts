@@ -132,6 +132,5 @@ export const updateProfileSettings = createServerFn({ method: "POST" })
 export const deleteProfile = createServerFn({ method: "POST" })
   .validator(z.string())
   .handler(async ({ data: profileId }) => {
-    await ScanModel.deleteMany({ profile: profileId });
-    await ScanProfileModel.findByIdAndDelete(profileId);
+    await ScanProfileModel.delete(profileId);
   });

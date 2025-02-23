@@ -5,7 +5,7 @@ import { ObjectId } from "mongodb";
 import { Project, ProjectModel } from "../project/project.model.js";
 import { getModel } from "../lib/mongoose.js";
 import { ReturnModelType } from "@typegoose/typegoose/lib/types";
-import { Scan } from "../scan/scan.model.js";
+import { Scan, ScanModel } from "../scan/scan.model.js";
 
 @modelOptions({ schemaOptions: { _id: false } })
 class CronSchedule {
@@ -27,7 +27,8 @@ export class ScanProfile {
   public _id!: ObjectId;
 
   @prop({
-    ref: () => Project,
+    ref: () => "Project",
+    type: () => String,
     required: true,
   })
   public project: Ref<Project>;
@@ -89,6 +90,14 @@ export class ScanProfile {
     options: { sort: { executionScheduledFor: 1 } },
   })
   public nextScan: Scan | null = null;
+
+  public static async delete(
+    this: ReturnModelType<typeof ScanProfile>,
+    profileId: ObjectId | string,
+  ) {
+    await ScanModel.deleteMany({ profile: profileId });
+    await ScanProfileModel.findByIdAndDelete(profileId);
+  }
 
   public static async findForProject(
     this: ReturnModelType<typeof ScanProfile>,

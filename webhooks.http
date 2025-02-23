@@ -1,0 +1,74 @@
+### extensionAddedToContext
+POST http://localhost:8080/internal/calls/extensionAddedToContext HTTP/1.1
+Content-Type: application/json
+
+{
+  "context": "project",
+  "contextAggregateID": "e294bb27-a208-4512-ade3-21e4b1e917c5"
+}
+
+> {%
+    client.test("Webhook executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.test("Project created successfully", function() {
+        client.assert(response.body.statusCode === 201, "Response status is not 201");
+    });
+%}
+
+
+### instanceUpdated
+POST http://localhost:8080/internal/calls/instanceUpdated HTTP/1.1
+Content-Type: application/json
+
+{
+  "context": "project",
+  "contextAggregateID": "e294bb27-a208-4512-ade3-21e4b1e917c5"
+}
+
+> {%
+    client.test("Webhook executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.test("Project created successfully", function() {
+        client.assert(response.body.statusCode === 200, "Response status is not 200");
+    });
+%}
+
+
+### secretRotated
+POST http://localhost:8080/internal/calls/secretRotated HTTP/1.1
+Content-Type: application/json
+
+{
+  "context": "project",
+  "contextAggregateID": "e294bb27-a208-4512-ade3-21e4b1e917c5"
+}
+
+> {%
+    client.test("Webhook executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.test("Project created successfully", function() {
+        client.assert(response.body.statusCode === 200, "Response status is not 200");
+    });
+%}
+
+
+### instanceRemovedFromContext
+POST http://localhost:8080/internal/calls/instanceRemovedFromContext HTTP/1.1
+Content-Type: application/json
+
+{
+  "context": "project",
+  "contextAggregateID": "e294bb27-a208-4512-ade3-21e4b1e917c5"
+}
+
+> {%
+    client.test("Webhook executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.test("Project created successfully", function() {
+        client.assert(response.body.statusCode === 200, "Response status is not 200");
+    });
+%}

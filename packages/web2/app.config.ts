@@ -11,6 +11,9 @@ export default defineConfig({
     },
   },
   vite: {
+    server: {
+      allowedHosts: ["host.docker.internal"],
+    },
     build: {
       minify: false,
     },
