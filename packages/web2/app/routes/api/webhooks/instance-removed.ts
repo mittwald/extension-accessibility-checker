@@ -8,11 +8,12 @@ import {
 import schema from "./schemas/instanceRemoved.js";
 import { ProjectModel } from "extension-a11y-checker-storage";
 import { assertValidSignature } from "./_verifySignature.js";
+import { logger } from "../../../logger.js";
 
 export const APIRoute = createAPIFileRoute("/api/webhooks/instance-removed")({
   POST: async ({ request }) => {
     try {
-      console.log("webhook received: instance-removed");
+      logger.debug("webhook received: instance-removed");
       await assertValidSignature(request);
 
       const parseResult = await schema.safeParseAsync(await request.json());

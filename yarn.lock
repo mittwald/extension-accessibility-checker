@@ -8928,6 +8928,8 @@ __metadata:
     extension-a11y-checker-storage: "workspace:*"
     globals: "npm:^15.14.0"
     json-schema-to-zod: "npm:^2.6.0"
+    pino: "npm:^9.6.0"
+    pino-pretty: "npm:^13.0.0"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     react-hook-form: "npm:^7.54.2"

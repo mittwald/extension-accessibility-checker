@@ -8,11 +8,12 @@ import {
   handleAPIError,
 } from "./_helpers.js";
 import { assertValidSignature } from "./_verifySignature.js";
+import { logger } from "../../../logger.js";
 
 export const APIRoute = createAPIFileRoute("/api/webhooks/extension-added")({
   POST: async ({ request }) => {
     try {
-      console.log("webhook received: extension-added");
+      logger.debug("webhook received: extension-added");
       await assertValidSignature(request);
 
       const parseResult = await schema.safeParseAsync(await request.json());

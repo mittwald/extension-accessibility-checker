@@ -8,11 +8,12 @@ import {
 } from "./_helpers.js";
 import { ProjectModel } from "extension-a11y-checker-storage";
 import { assertValidSignature } from "./_verifySignature.js";
+import { logger } from "../../../logger.js";
 
 export const APIRoute = createAPIFileRoute("/api/webhooks/instance-updated")({
   POST: async ({ request }) => {
     try {
-      console.log("webhook received: instance-updated");
+      logger.debug("webhook received: instance-updated");
       await assertValidSignature(request);
 
       const parseResult = await schema.safeParseAsync(await request.json());

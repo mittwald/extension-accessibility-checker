@@ -19,6 +19,8 @@
     "@tanstack/start": "^1.99.13",
     "@weissaufschwarz/mitthooks": "^0.2.1",
     "extension-a11y-checker-storage": "workspace:*",
+    "pino": "^9.6.0",
+    "pino-pretty": "^13.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
