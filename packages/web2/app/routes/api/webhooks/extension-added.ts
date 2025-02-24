@@ -2,13 +2,13 @@ import { json } from "@tanstack/start";
 import { createAPIFileRoute } from "@tanstack/start/api";
 import schema from "./schemas/extensionAdded.js";
 import { ProjectModel } from "extension-a11y-checker-storage";
-import {
-  assertContextType,
-  assertValidationSuccess,
-  handleAPIError,
-} from "./_helpers.js";
+import { assertContextType } from "./_helpers.js";
 import { assertValidSignature } from "./_verifySignature.js";
 import { logger } from "../../../logger.js";
+import {
+  assertValidationSuccess,
+  handleAPIError,
+} from "../../../api/helpers.js";
 
 export const APIRoute = createAPIFileRoute("/api/webhooks/extension-added")({
   POST: async ({ request }) => {

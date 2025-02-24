@@ -1,14 +1,14 @@
 import { json } from "@tanstack/start";
 import { createAPIFileRoute } from "@tanstack/start/api";
 import schema from "./schemas/instanceUpdated.js";
-import {
-  assertContextType,
-  assertValidationSuccess,
-  handleAPIError,
-} from "./_helpers.js";
+import { assertContextType } from "./_helpers.js";
 import { ProjectModel } from "extension-a11y-checker-storage";
 import { assertValidSignature } from "./_verifySignature.js";
 import { logger } from "../../../logger.js";
+import {
+  assertValidationSuccess,
+  handleAPIError,
+} from "../../../api/helpers.js";
 
 export const APIRoute = createAPIFileRoute("/api/webhooks/instance-updated")({
   POST: async ({ request }) => {
