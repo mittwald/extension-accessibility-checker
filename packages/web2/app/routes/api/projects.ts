@@ -4,13 +4,8 @@ import { ProjectModel } from "extension-a11y-checker-storage";
 
 export const APIRoute = createAPIFileRoute("/api/projects")({
   GET: async () => {
+    // TODO: retrieve projects list from mStudio and return only matching
     const projects = await ProjectModel.find();
     return json(projects);
-  },
-
-  POST: async ({ request }) => {
-    const input = await request.json();
-    const project = await ProjectModel.create(input);
-    return json(project.toJSON(), { status: 201 });
   },
 });
