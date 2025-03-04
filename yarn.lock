@@ -5674,6 +5674,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/zod-adapter@npm:^1.112.11":
+  version: 1.112.11
+  resolution: "@tanstack/zod-adapter@npm:1.112.11"
+  peerDependencies:
+    "@tanstack/react-router": ">=1.43.2"
+    zod: ^3.23.8
+  checksum: 10c0/8a33721f26db558b5880eb15ece4d6d461e00200e6b6fd1aed060618aa1c2085367060c3e0dc35232cc088f1ae87dff61a66c23de9ec8c8d9d16ca7614e0748c
+  languageName: node
+  linkType: hard
+
 "@tootallnate/quickjs-emscripten@npm:^0.23.0":
   version: 0.23.0
   resolution: "@tootallnate/quickjs-emscripten@npm:0.23.0"
@@ -8917,6 +8927,7 @@ __metadata:
     "@tanstack/router-devtools": "npm:^1.99.8"
     "@tanstack/router-plugin": "npm:^1.99.8"
     "@tanstack/start": "npm:^1.99.13"
+    "@tanstack/zod-adapter": "npm:^1.112.11"
     "@types/react": "npm:^19.0.8"
     "@types/react-dom": "npm:^19.0.3"
     "@vitejs/plugin-react": "npm:^4.3.4"

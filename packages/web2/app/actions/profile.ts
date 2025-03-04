@@ -7,18 +7,19 @@ import {
 } from "extension-a11y-checker-storage";
 import { Scan, ScanProfile } from "../api/types.ts";
 import { ObjectId } from "mongodb";
-import { projectId } from "../poc.ts";
 import { startScan } from "./scan.ts";
 import { notFound } from "@tanstack/react-router";
 
-export const getProfiles = createServerFn().handler(async () => {
-  await dbConnect();
-  const data = await ScanProfileModel.findForProject(projectId);
-  if (data === null) {
-    throw notFound();
-  }
-  return data as unknown as ScanProfile[] | null;
-});
+export const getProfiles = createServerFn()
+  .validator(z.string())
+  .handler(async ({ data: contextId }) => {
+    await dbConnect();
+    const data = await ScanProfileModel.findForProject(contextId);
+    if (data === null) {
+      throw notFound();
+    }
+    return data as unknown as ScanProfile[] | null;
+  });
 
 export const getProfile = createServerFn({
   method: "GET",

@@ -13,13 +13,14 @@ import { useForm } from "react-hook-form";
 import { Form } from "@mittwald/flow-react-components/react-hook-form";
 import { FormValues } from "./types.ts";
 import { PathsList } from "./components/pathsList.tsx";
-import { projectId } from "../../poc.ts";
 import { useRouter } from "@tanstack/react-router";
 import { Domain } from "./components/domain.tsx";
 import { createProfile } from "../../actions/profile.ts";
+import { Route } from "../../routes/index.js";
 
 export const CreateModal = () => {
   const router = useRouter();
+  const { contextId } = Route.useSearch();
 
   const form = useForm<FormValues>({
     defaultValues: {
@@ -33,7 +34,7 @@ export const CreateModal = () => {
         ...formValues,
         name: formValues.domain,
         paths: Array.from(formValues.paths),
-        projectId,
+        projectId: contextId,
       },
     });
     await router.invalidate({ sync: true });

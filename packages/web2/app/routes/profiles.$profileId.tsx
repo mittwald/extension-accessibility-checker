@@ -28,8 +28,8 @@ function RouteComponent() {
   return (
     <Section>
       <Breadcrumb color="light">
-        <Link href="/">Projekt</Link>
-        <Link href="/">A11y Checker</Link>
+        <Link href={`/?contextId=${profile.project}`}>Projekt</Link>
+        <Link href={`/?contextId=${profile.project}`}>A11y Checker</Link>
         <Link href="#">{profile.name}</Link>
       </Breadcrumb>
       <Header>

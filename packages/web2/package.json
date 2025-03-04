@@ -17,6 +17,7 @@
     "@tabler/icons-react": "^3.29.0",
     "@tanstack/react-router": "^1.99.13",
     "@tanstack/start": "^1.99.13",
+    "@tanstack/zod-adapter": "^1.112.11",
     "@weissaufschwarz/mitthooks": "^0.2.1",
     "extension-a11y-checker-storage": "workspace:*",
     "pino": "^9.6.0",
