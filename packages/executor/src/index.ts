@@ -31,8 +31,12 @@ async function main() {
     Lighthouse.cleanUpChildProcesses();
     await db.disconnect();
   };
-  process.on("SIGINT", cleanUp);
-  process.on("SIGTERM", cleanUp);
+  process.on("SIGINT", () => {
+    cleanUp().then(() => process.exit(130));
+  });
+  process.on("SIGTERM", () => {
+    cleanUp().then(() => process.exit(143));
+  });
 }
 
 main().catch((err) => {
