@@ -4,7 +4,7 @@ import {
   CachingPublicKeyProvider,
 } from "@weissaufschwarz/mitthooks/verification/publicKeys";
 import { WebhookContent } from "@weissaufschwarz/mitthooks/webhook";
-import { json } from "@tanstack/start";
+import { json } from "@tanstack/react-start";
 
 class SignatureVerifier {
   private static verifier = new WebhookVerifier(

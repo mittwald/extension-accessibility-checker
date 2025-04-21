@@ -1,4 +1,4 @@
-import { json } from "@tanstack/start";
+import { json } from "@tanstack/react-start";
 
 export const assertContextType = (context: { kind: string }) => {
   if (context.kind !== "project") {

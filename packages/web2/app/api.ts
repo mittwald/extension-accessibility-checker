@@ -2,7 +2,7 @@
 import {
   createStartAPIHandler,
   defaultAPIFileRouteHandler,
-} from "@tanstack/start/api";
+} from "@tanstack/react-start/api";
 import { dbConnect } from "extension-a11y-checker-storage";
 
 await dbConnect();

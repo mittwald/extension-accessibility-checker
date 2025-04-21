@@ -1,5 +1,5 @@
-import { json } from "@tanstack/start";
-import { createAPIFileRoute } from "@tanstack/start/api";
+import { json } from "@tanstack/react-start";
+import { createAPIFileRoute } from "@tanstack/react-start/api";
 import { ScanModel } from "extension-a11y-checker-storage";
 import { assertProfile, scheduleScan } from "../../../actions/commons.js";
 import { z } from "zod";

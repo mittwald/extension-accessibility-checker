@@ -1,6 +1,6 @@
 import { logger } from "../logger.js";
 import { isNotFound } from "@tanstack/react-router";
-import { json } from "@tanstack/start";
+import { json } from "@tanstack/react-start";
 import { SafeParseReturnType, SafeParseSuccess, ZodType } from "zod";
 
 export const handleAPIError = (e: unknown, action?: string) => {

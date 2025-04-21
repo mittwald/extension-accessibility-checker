@@ -1,5 +1,5 @@
-import { json } from "@tanstack/start";
-import { createAPIFileRoute } from "@tanstack/start/api";
+import { json } from "@tanstack/react-start";
+import { createAPIFileRoute } from "@tanstack/react-start/api";
 import schema from "./schemas/extensionAdded.js";
 import { ProjectModel } from "extension-a11y-checker-storage";
 import { assertContextType } from "./_helpers.js";
