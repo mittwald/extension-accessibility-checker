@@ -43,7 +43,7 @@ export const PathResultsTable = () => {
         })}
         <TableFooterRow>
           <TableCell>
-            <strong>Gesamtbewertung</strong>
+            <strong>Gesamtbewertung Ø</strong>
           </TableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>
