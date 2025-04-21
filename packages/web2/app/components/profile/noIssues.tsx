@@ -4,7 +4,7 @@ import {
   IllustratedMessage,
   Link,
   Text,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 
 export const NoIssues = () => (
   <IllustratedMessage>

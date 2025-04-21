@@ -8,9 +8,9 @@ import {
   Modal,
   Section,
   Text,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import { useForm } from "react-hook-form";
-import { Form } from "@mittwald/flow-react-components/react-hook-form";
+import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { FormValues } from "./types.ts";
 import { PathsList } from "./components/pathsList.tsx";
 import { useRouter } from "@tanstack/react-router";

@@ -12,12 +12,12 @@ import {
   Section,
   TextField,
   useOverlayController,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import { useForm } from "react-hook-form";
 import {
   Form,
   typedField,
-} from "@mittwald/flow-react-components/react-hook-form";
+} from "@mittwald/flow-remote-react-components/react-hook-form";
 import cronParser from "cron-parser";
 import { useRouter } from "@tanstack/react-router";
 import { updateProfileSettings } from "../../../actions/profile.ts";

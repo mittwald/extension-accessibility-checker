@@ -11,7 +11,7 @@ import {
   Section,
   Separator,
   Text,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import { Scan } from "../../../api/types.ts";
 import {
   getIssueMeta,

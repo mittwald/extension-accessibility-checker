@@ -6,6 +6,7 @@ import { getProfile, getProfiles } from "../actions/profile.ts";
 import { useEffect } from "react";
 import { ProfilesRoot } from "../components/profilesRoot.js";
 import { ProfileRoot } from "../components/profileRoot.js";
+import RemoteRoot from "@mittwald/flow-remote-react-components/RemoteRoot";
 
 const QueryParams = z.object({
   contextId: z.string().optional(),
@@ -48,9 +49,17 @@ function Home() {
 
   switch (data?.page) {
     case "profile":
-      return <ProfileRoot profile={data.profile} lastScan={data.lastScan} />;
+      return (
+        <RemoteRoot>
+          <ProfileRoot profile={data.profile} lastScan={data.lastScan} />
+        </RemoteRoot>
+      );
     case "profiles":
-      return <ProfilesRoot profiles={data.profiles} />;
+      return (
+        <RemoteRoot>
+          <ProfilesRoot profiles={data.profiles} />
+        </RemoteRoot>
+      );
     default:
       return <p>Nope</p>;
   }

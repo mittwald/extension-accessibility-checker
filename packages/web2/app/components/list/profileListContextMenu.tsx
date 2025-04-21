@@ -9,7 +9,7 @@ import {
   IconInfo,
   MenuItem,
   useOverlayController,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import { startScan } from "../../actions/scan.ts";
 import { IconWorldSearch } from "@tabler/icons-react";
 import { RenameProfileModal } from "../profile/modals/renameProfileModal.tsx";

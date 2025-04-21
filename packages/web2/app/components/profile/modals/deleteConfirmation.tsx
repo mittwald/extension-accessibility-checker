@@ -8,7 +8,7 @@ import {
   OverlayController,
   Section,
   Text,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import { ScanProfile } from "../../../api/types.ts";
 import { deleteProfile } from "../../../actions/profile.ts";
 

@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableRow,
   Text,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import { Route } from "../../../../routes/index.js";
 import { EditPathsModal } from "../../modals/editPaths.tsx";
 

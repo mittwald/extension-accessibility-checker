@@ -8,7 +8,7 @@ import {
   IllustratedMessage,
   LoadingSpinner,
   Text,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import { IconWorldSearch } from "@tabler/icons-react";
 import { startScan } from "../../actions/scan.ts";
 

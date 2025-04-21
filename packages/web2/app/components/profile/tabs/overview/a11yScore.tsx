@@ -3,7 +3,7 @@ import {
   Heading,
   Icon,
   IllustratedMessage,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import { IconAccessible } from "@tabler/icons-react";
 
 export function A11yScore({ profile }: { profile: ScanProfile }) {

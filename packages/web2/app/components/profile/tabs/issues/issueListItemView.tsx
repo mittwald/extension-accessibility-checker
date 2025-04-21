@@ -11,7 +11,7 @@ import {
   ListItemView,
   Section,
   Text,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import wcagLinks from "../../../../wcagLinks.json";
 import techniquesLinks from "../../../../techniquesLinks.json";
 import { getLinkForTechnique } from "./helpers.ts";

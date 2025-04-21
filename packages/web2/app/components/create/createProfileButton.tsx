@@ -1,4 +1,4 @@
-import { Button, ModalTrigger } from "@mittwald/flow-react-components";
+import { Button, ModalTrigger } from "@mittwald/flow-remote-react-components";
 import { CreateModal } from "./createModal.tsx";
 
 export function CreateProfileButton() {

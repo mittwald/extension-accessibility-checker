@@ -3,8 +3,8 @@ import {
   Section,
   Text,
   TextField,
-} from "@mittwald/flow-react-components";
-import { Field } from "@mittwald/flow-react-components/react-hook-form";
+} from "@mittwald/flow-remote-react-components";
+import { Field } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { extractDomainFromUrl } from "../helpers.ts";
 import { FormValues } from "../types.ts";
 import { UseFormReturn } from "react-hook-form";

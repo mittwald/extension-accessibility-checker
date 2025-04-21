@@ -1,4 +1,4 @@
-import { typedList } from "@mittwald/flow-react-components";
+import { typedList } from "@mittwald/flow-remote-react-components";
 import { IssueListItemView } from "./issueListItemView.tsx";
 import { Issue } from "./types.ts";
 

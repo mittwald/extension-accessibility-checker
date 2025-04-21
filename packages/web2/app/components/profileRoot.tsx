@@ -1,10 +1,11 @@
 import {
+  Align,
   Button,
   Header,
   Heading,
   LayoutCard,
   Section,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import { ProfileActions } from "./profile/profileActions.js";
 import { ProfileTabs } from "./profile/profileTabs.js";
 import { NoScans } from "./profile/noScans.js";
@@ -27,10 +28,10 @@ export const ProfileRoot = ({
 
   return (
     <Section>
-      <Button onPress={() => goToRoot()} variant="soft">
-        Zurück
-      </Button>
       <Header>
+        <Button onPress={() => goToRoot()} variant="soft">
+          Zurück
+        </Button>
         <Heading level={1} color="light">
           {profile.name}
         </Heading>

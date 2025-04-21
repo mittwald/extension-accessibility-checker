@@ -5,7 +5,7 @@ import {
   Link,
   Section,
   Text,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 
 export const EducationCards = () => {
   return (
@@ -14,7 +14,7 @@ export const EducationCards = () => {
         <Section>
           <Heading level={2}>Manuell testen</Heading>
           <Text>
-            Ein automatisierter Scan kann nicht alle Kriterien der WCAG 2
+            Ein automatisierter Scan kann nicht alle Kriterien der WCAG&nbsp;2
             erfassen. Mache dich daher mit den{" "}
             <Link href="https://www.w3.org/WAI/standards-guidelines/wcag/">
               Web Content Accessibility Guidelines

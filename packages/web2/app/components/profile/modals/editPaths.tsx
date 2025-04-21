@@ -7,9 +7,9 @@ import {
   Modal,
   Section,
   Text,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import { ScanProfile } from "../../../api/types.ts";
-import { Form } from "@mittwald/flow-react-components/react-hook-form";
+import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { FormValues } from "../../create/types.ts";
 import { useForm } from "react-hook-form";
 import { PathsList } from "../../create/components/pathsList.tsx";

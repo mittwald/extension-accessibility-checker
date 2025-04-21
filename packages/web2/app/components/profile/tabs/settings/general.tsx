@@ -11,7 +11,7 @@ import {
   ModalTrigger,
   Section,
   Text,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import { Route } from "../../../../routes/index.js";
 import { EditGeneralsModal } from "../../modals/editGenerals.tsx";
 import { isRunningOrPending } from "../../helpers.ts";

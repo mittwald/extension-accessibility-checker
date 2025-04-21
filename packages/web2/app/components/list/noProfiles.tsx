@@ -6,7 +6,7 @@ import {
   IllustratedMessage,
   ModalTrigger,
   Text,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import { IconAccessible } from "@tabler/icons-react";
 import { CreateModal } from "../create/createModal.tsx";
 

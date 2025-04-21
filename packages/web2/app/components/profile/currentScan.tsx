@@ -4,7 +4,7 @@ import {
   Align,
   LoadingSpinner,
   Text,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import { isPending, isRunning } from "./helpers.ts";
 
 const RunningScan = () => {

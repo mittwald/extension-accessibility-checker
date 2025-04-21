@@ -7,7 +7,7 @@ import {
   IconWarning,
   Label,
   LabeledValue,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 
 export function IssueSummary({ profile }: { profile: ScanProfile }) {
   return (

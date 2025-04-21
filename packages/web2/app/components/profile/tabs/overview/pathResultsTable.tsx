@@ -7,7 +7,7 @@ import {
   TableFooterRow,
   TableHeader,
   TableRow,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 
 export const PathResultsTable = () => {
   const { profile, lastScan } = Route.useLoaderData();

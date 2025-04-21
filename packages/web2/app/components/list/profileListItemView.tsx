@@ -7,7 +7,7 @@ import {
   IconSubdomain,
   ListItemView,
   Text,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import { ProfileListContextMenu } from "./profileListContextMenu.tsx";
 
 const StateBatch = ({ profile }: { profile: ScanProfile }) => {

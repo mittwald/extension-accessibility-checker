@@ -2,7 +2,7 @@ import {
   ColumnLayout,
   Heading,
   LayoutCard,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import { EducationCards } from "./list/educationCards.js";
 import { ProfilesList } from "./list/profilesList.js";
 import { NoProfiles } from "./list/noProfiles.js";
@@ -18,9 +18,6 @@ export const ProfilesRoot = ({
 
   return (
     <ColumnLayout s={[1]}>
-      <Heading level={1} color="light">
-        A11y Checker
-      </Heading>
       <EducationCards />
       <LayoutCard>
         {hasProfiles ? <ProfilesList profiles={profiles} /> : <NoProfiles />}

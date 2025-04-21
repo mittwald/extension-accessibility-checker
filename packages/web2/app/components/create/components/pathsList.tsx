@@ -11,7 +11,7 @@ import {
   Text,
   TextField,
   typedList,
-} from "@mittwald/flow-react-components";
+} from "@mittwald/flow-remote-react-components";
 import { FormValues } from "../types.ts";
 import { extractPathFromUrl, prependPathWithSlash } from "../helpers.ts";
 
