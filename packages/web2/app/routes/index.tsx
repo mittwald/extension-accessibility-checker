@@ -1,5 +1,5 @@
 // app/routes/index.tsx
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import {
   Breadcrumb,
   ColumnLayout,
@@ -12,6 +12,7 @@ import { ProfilesList } from "../components/list/profilesList.tsx";
 import { z } from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
 import { getProfiles } from "../actions/profile.ts";
+import { useEffect } from "react";
 
 const QueryParams = z.object({
   contextId: z.string(),
@@ -20,7 +21,12 @@ const QueryParams = z.object({
 export const Route = createFileRoute("/")({
   component: Home,
   validateSearch: zodValidator(QueryParams),
+  ssr: false,
   loader: async (ctx) => {
+    if (typeof window === "undefined") {
+      return null;
+    }
+
     const contextId = ctx.location.search.contextId;
     return getProfiles({ data: contextId });
   },
@@ -29,6 +35,12 @@ export const Route = createFileRoute("/")({
 function Home() {
   const { contextId } = Route.useSearch();
   const profiles = Route.useLoaderData();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    router.invalidate({ sync: true });
+  }, []);
 
   const hasProfiles = !!profiles && profiles.length > 0;
 

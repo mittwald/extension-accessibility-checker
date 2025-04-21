@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 import {
   Breadcrumb,
   Header,
@@ -13,17 +13,34 @@ import { useAutoRefresh } from "../hooks/useAutoRefresh.tsx";
 import { ProfileActions } from "../components/profile/profileActions.tsx";
 import { ProfileTabs } from "../components/profile/profileTabs.tsx";
 import { NoScans } from "../components/profile/noScans.tsx";
+import { useEffect } from "react";
 
 export const Route = createFileRoute("/profiles/$profileId")({
   component: RouteComponent,
-  loader: ({ params: { profileId } }) => getProfile({ data: profileId }),
+  loader: ({ params: { profileId } }) => {
+    if (typeof window === "undefined") {
+      return null;
+    }
+    return getProfile({ data: profileId });
+  },
 });
 
 function RouteComponent() {
-  const { profile, lastScan } = Route.useLoaderData();
+  const data = Route.useLoaderData();
+  const { profile, lastScan } = data ?? {};
 
-  const shouldReloadData = isRunningOrPending(profile.nextScan);
+  const shouldReloadData = isRunningOrPending(profile?.nextScan);
   useAutoRefresh(shouldReloadData);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    router.invalidate({ sync: true });
+  }, []);
+
+  if (data === null) {
+    return <></>;
+  }
 
   return (
     <Section>
