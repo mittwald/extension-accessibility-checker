@@ -1,4 +1,4 @@
-import { Route } from "../../routes/profiles.$profileId.tsx";
+import { Route } from "../../routes/index.js";
 import {
   Alert,
   Align,

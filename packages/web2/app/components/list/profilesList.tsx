@@ -2,7 +2,7 @@ import { ScanProfile } from "../../api/types.ts";
 import { ActionGroup, Text, typedList } from "@mittwald/flow-react-components";
 import { isRunningOrPending } from "../profile/helpers.ts";
 import { useAutoRefresh } from "../../hooks/useAutoRefresh.tsx";
-import { useGoToProfile } from "../../hooks/useGoToProfile.tsx";
+import { useGoToProfile } from "../../hooks/useGoTo.tsx";
 import { CreateProfileButton } from "../create/createProfileButton.tsx";
 import { ProfileListItemView } from "./profileListItemView.tsx";
 

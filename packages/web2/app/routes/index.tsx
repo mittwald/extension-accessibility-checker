@@ -1,21 +1,15 @@
 // app/routes/index.tsx
-import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import {
-  Breadcrumb,
-  ColumnLayout,
-  Heading,
-  LayoutCard,
-} from "@mittwald/flow-react-components";
-import { EducationCards } from "../components/list/educationCards.tsx";
-import { NoProfiles } from "../components/list/noProfiles.tsx";
-import { ProfilesList } from "../components/list/profilesList.tsx";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { z } from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
-import { getProfiles } from "../actions/profile.ts";
+import { getProfile, getProfiles } from "../actions/profile.ts";
 import { useEffect } from "react";
+import { ProfilesRoot } from "../components/profilesRoot.js";
+import { ProfileRoot } from "../components/profileRoot.js";
 
 const QueryParams = z.object({
-  contextId: z.string(),
+  contextId: z.string().optional(),
+  profileId: z.string().optional(),
 });
 
 export const Route = createFileRoute("/")({
@@ -27,40 +21,37 @@ export const Route = createFileRoute("/")({
       return null;
     }
 
-    const contextId = ctx.location.search.contextId;
-    return getProfiles({ data: contextId });
+    const { contextId, profileId } = ctx.location.search;
+
+    if (profileId) {
+      return {
+        page: "profile" as const,
+        ...(await getProfile({ data: profileId })),
+      };
+    }
+
+    return {
+      page: "profiles" as const,
+      profiles: await getProfiles({ data: contextId }),
+    };
   },
 });
 
 function Home() {
-  const { contextId } = Route.useSearch();
-  const profiles = Route.useLoaderData();
-
   const router = useRouter();
+
+  const data = Route.useLoaderData();
 
   useEffect(() => {
     router.invalidate({ sync: true });
   }, []);
 
-  const hasProfiles = !!profiles && profiles.length > 0;
-
-  return (
-    <ColumnLayout s={[1]}>
-      <Breadcrumb color="light">
-        <Link to="/" search={{ contextId }}>
-          Projekt
-        </Link>
-        <Link to="/" search={{ contextId }}>
-          A11y Checker
-        </Link>
-      </Breadcrumb>
-      <Heading level={1} color="light">
-        A11y Checker
-      </Heading>
-      <EducationCards />
-      <LayoutCard>
-        {hasProfiles ? <ProfilesList profiles={profiles} /> : <NoProfiles />}
-      </LayoutCard>
-    </ColumnLayout>
-  );
+  switch (data?.page) {
+    case "profile":
+      return <ProfileRoot profile={data.profile} lastScan={data.lastScan} />;
+    case "profiles":
+      return <ProfilesRoot profiles={data.profiles} />;
+    default:
+      return <p>Nope</p>;
+  }
 }

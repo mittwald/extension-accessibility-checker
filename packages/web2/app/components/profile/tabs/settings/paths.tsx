@@ -13,7 +13,7 @@ import {
   TableRow,
   Text,
 } from "@mittwald/flow-react-components";
-import { Route } from "../../../../routes/profiles.$profileId.tsx";
+import { Route } from "../../../../routes/index.js";
 import { EditPathsModal } from "../../modals/editPaths.tsx";
 
 export const PathSettings = () => {

@@ -1,5 +1,5 @@
 import { ScanProfile } from "../../api/types.ts";
-import { useGoToProfile } from "../../hooks/useGoToProfile.tsx";
+import { useGoToProfile } from "../../hooks/useGoTo.tsx";
 import { useRouter } from "@tanstack/react-router";
 import {
   ContextMenu,

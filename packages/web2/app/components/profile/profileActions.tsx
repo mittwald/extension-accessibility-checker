@@ -17,9 +17,11 @@ import { IconWorldSearch } from "@tabler/icons-react";
 import { useRouter } from "@tanstack/react-router";
 import { DeleteConfirmationModal } from "./modals/deleteConfirmation.tsx";
 import { isRunningOrPending } from "./helpers.ts";
+import { useGoToRoot } from "../../hooks/useGoTo.js";
 
 const ProfileActionsContextMenu = ({ profile }: { profile: ScanProfile }) => {
   const router = useRouter();
+  const goToRoot = useGoToRoot();
   const renameModalController = useOverlayController("Modal");
   const deleteModalController = useOverlayController("Modal");
 
@@ -57,7 +59,7 @@ const ProfileActionsContextMenu = ({ profile }: { profile: ScanProfile }) => {
       <DeleteConfirmationModal
         profile={profile}
         controller={deleteModalController}
-        onDelete={() => router.navigate({ to: "/" })}
+        onDelete={() => goToRoot()}
       />
     </>
   );
