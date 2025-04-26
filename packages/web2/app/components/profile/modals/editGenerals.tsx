@@ -7,6 +7,7 @@ import {
   ColumnLayout,
   Content,
   ContextualHelpTrigger,
+  FieldDescription,
   Heading,
   Label,
   Modal,
@@ -95,6 +96,12 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
             >
               <TextField>
                 <Label>Ausführungsintervall</Label>
+                <FieldDescription>
+                  Cron-Ausdruck. Um Ressourcen zu sparen, führe den Scan nicht
+                  öfters automatisiert aus als nötig. Du kannst den Scan
+                  jederzeit manuell starten. Leer lassen, um automatisches
+                  ausführen zu deaktivieren.
+                </FieldDescription>
               </TextField>
             </Field>
             <Field

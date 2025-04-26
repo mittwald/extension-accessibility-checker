@@ -122,6 +122,29 @@ export const updateProfileSettings = createServerFn({ method: "POST" })
         standard,
       },
     }) => {
+      if (cronExpression) {
+        try {
+          const interval = cronParser.parseExpression(cronExpression);
+          const firstDate = interval.next();
+          const secondDate = interval.next();
+          const hoursDiff =
+            (secondDate.getTime() - firstDate.getTime()) / (1000 * 60 * 60);
+
+          if (hoursDiff < 1) {
+            return new Response(
+              "Cron expression must not run more than once per hour",
+              { status: 400 },
+            );
+          }
+        } catch (e) {
+          return new Response("Invalid cron expression", { status: 400 });
+        }
+      }
+
+      const cronUpdateSet = cronExpression
+        ? { cronSchedule: { expression: cronExpression } }
+        : undefined;
+
       const profile = await ScanProfileModel.findOneAndUpdate(
         { _id: profileId },
         {
@@ -129,7 +152,7 @@ export const updateProfileSettings = createServerFn({ method: "POST" })
             standard,
             includeWarnings,
             includeNotices,
-            cronSchedule: { expression: cronExpression },
+            ...cronUpdateSet,
           },
           $unset: { cronSchedule: cronExpression ? undefined : 1 },
         },
