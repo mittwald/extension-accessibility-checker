@@ -61,6 +61,6 @@ function Home() {
         </RemoteRoot>
       );
     default:
-      return <p>Nope</p>;
+      return <RemoteRoot></RemoteRoot>;
   }
 }
