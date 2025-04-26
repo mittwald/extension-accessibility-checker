@@ -4,9 +4,6 @@ import {
   CodeBlock,
   Content,
   Heading,
-  IconDanger,
-  IconInfo,
-  IconWarning,
   Link,
   ListItemView,
   Section,
@@ -20,23 +17,22 @@ import { Issue } from "./types.ts";
 const IssueAvatar = ({ issue }: { issue: Issue }) => {
   switch (issue.severity) {
     case "error":
-      return (
-        <Avatar color="blue" aria-label="Fehler">
-          <IconDanger />
-        </Avatar>
-      );
+      return <Avatar status="danger" aria-label="" />;
     case "warning":
-      return (
-        <Avatar color="lilac" aria-label="Warnung">
-          <IconWarning />
-        </Avatar>
-      );
+      return <Avatar status="warning" aria-label="" />;
     case "notice":
-      return (
-        <Avatar color="teal" aria-label="Hinweis">
-          <IconInfo />
-        </Avatar>
-      );
+      return <Avatar status="info" aria-label="" />;
+  }
+};
+
+const IssueSeverityText = ({ issue }: { issue: Issue }) => {
+  switch (issue.severity) {
+    case "error":
+      return "Fehler";
+    case "warning":
+      return "Warnung";
+    case "notice":
+      return "Hinweis";
   }
 };
 
@@ -66,7 +62,8 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
         <Badge>{issue.count}×</Badge>
       </Heading>
       <Text>
-        Level {level} | WCAG Kriterium {issueMeta.criterion}
+        <IssueSeverityText issue={issue} /> | Level {level} | WCAG Kriterium{" "}
+        {issueMeta.criterion}
       </Text>
       <Content slot="bottom">
         <Section>
