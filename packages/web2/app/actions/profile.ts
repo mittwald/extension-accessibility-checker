@@ -1,19 +1,23 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import {
-  dbConnect,
-  ScanModel,
-  ScanProfileModel,
-} from "extension-a11y-checker-storage";
+import { ScanModel, ScanProfileModel } from "extension-a11y-checker-storage";
 import { Scan, ScanProfile } from "../api/types.ts";
 import { ObjectId } from "mongodb";
 import { startScan } from "./scan.ts";
 import { notFound } from "@tanstack/react-router";
+import {
+  authorizeMiddleware,
+  contextMatchingMiddleware,
+  dbMiddleware,
+  profileAuthorizeMiddleware,
+  profileIdAuthorizeMiddleware,
+} from "./middleware.js";
+import cronParser from "cron-parser";
 
 export const getProfiles = createServerFn()
+  .middleware([dbMiddleware, authorizeMiddleware])
   .validator(z.string())
   .handler(async ({ data: contextId }) => {
-    await dbConnect();
     const data = await ScanProfileModel.findForProject(contextId);
     if (data === null) {
       throw notFound();
@@ -24,9 +28,9 @@ export const getProfiles = createServerFn()
 export const getProfile = createServerFn({
   method: "GET",
 })
+  .middleware([dbMiddleware, profileIdAuthorizeMiddleware])
   .validator(z.string())
   .handler(async ({ data: profileId }) => {
-    await dbConnect();
     const profile = await ScanProfileModel.findById(profileId).exec();
     await profile?.populate("nextScan");
     const lastScan = await ScanModel.lastScanOfProfile(profileId);
@@ -41,6 +45,7 @@ export const getProfile = createServerFn({
   });
 
 export const createProfile = createServerFn({ method: "POST" })
+  .middleware([dbMiddleware, contextMatchingMiddleware])
   .validator(
     z.object({
       projectId: z.string(),
@@ -64,7 +69,9 @@ export const createProfile = createServerFn({ method: "POST" })
     });
     return profile.toJSON() as unknown as ScanProfile;
   });
+
 export const updateProfilePaths = createServerFn({ method: "POST" })
+  .middleware([dbMiddleware, profileAuthorizeMiddleware])
   .validator(
     z.object({
       profileId: z.string(),
@@ -84,6 +91,7 @@ export const updateProfilePaths = createServerFn({ method: "POST" })
   });
 
 export const updateProfileName = createServerFn({ method: "POST" })
+  .middleware([dbMiddleware, profileAuthorizeMiddleware])
   .validator(
     z.object({
       profileId: z.string(),
@@ -103,6 +111,7 @@ export const updateProfileName = createServerFn({ method: "POST" })
   });
 
 export const updateProfileSettings = createServerFn({ method: "POST" })
+  .middleware([dbMiddleware, profileAuthorizeMiddleware])
   .validator(
     z.object({
       profileId: z.string(),
@@ -166,6 +175,7 @@ export const updateProfileSettings = createServerFn({ method: "POST" })
   );
 
 export const deleteProfile = createServerFn({ method: "POST" })
+  .middleware([profileIdAuthorizeMiddleware])
   .validator(z.string())
   .handler(async ({ data: profileId }) => {
     await ScanProfileModel.delete(profileId);

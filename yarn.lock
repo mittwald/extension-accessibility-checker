@@ -2444,7 +2444,42 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mittwald/api-client@npm:^4.108.0, @mittwald/api-client@npm:^4.61.1":
+"@mittwald/api-client-commons@npm:^4.129.2":
+  version: 4.129.2
+  resolution: "@mittwald/api-client-commons@npm:4.129.2"
+  dependencies:
+    "@types/parse-path": "npm:^7.0.3"
+    axios: "npm:^1.8.2"
+    parse-path: "npm:^7.0.0"
+    path-to-regexp: "npm:^8.2.0"
+    type-fest: "npm:^4.30.0"
+  peerDependencies:
+    "@mittwald/react-use-promise": ^2.6.0
+  peerDependenciesMeta:
+    "@jest/globals":
+      optional: true
+    "@mittwald/react-use-promise":
+      optional: true
+  checksum: 10c0/97595ed6d80489cf93d45ea05e2bec270dc319e93b4410cd278a155f28509d72d7ccf429ae18b385bc3ca6ab32921af1e8b6cfe1748f8553de07aca00b40e952
+  languageName: node
+  linkType: hard
+
+"@mittwald/api-client@npm:^4.131.0":
+  version: 4.131.0
+  resolution: "@mittwald/api-client@npm:4.131.0"
+  dependencies:
+    "@mittwald/api-client-commons": "npm:^4.129.2"
+    browser-or-node: "npm:^3.0.0"
+  peerDependencies:
+    "@mittwald/react-use-promise": ^2.6.0
+  peerDependenciesMeta:
+    "@mittwald/react-use-promise":
+      optional: true
+  checksum: 10c0/f121841c9ea3f67d2ef52c2895fd35a4d5c6d1d907e5fd5efb1273d4c8b961bbaccac7859263dd9cd4b842d63d9d0a63386b8575d64fd14d1f84b249ada5af07
+  languageName: node
+  linkType: hard
+
+"@mittwald/api-client@npm:^4.61.1":
   version: 4.108.0
   resolution: "@mittwald/api-client@npm:4.108.0"
   dependencies:
@@ -7038,7 +7073,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.8.3":
+"axios@npm:^1.8.2, axios@npm:^1.8.3":
   version: 1.8.4
   resolution: "axios@npm:1.8.4"
   dependencies:
@@ -9492,7 +9527,7 @@ __metadata:
   resolution: "extension-a11y-checker-web2@workspace:packages/web2"
   dependencies:
     "@eslint/js": "npm:^9.19.0"
-    "@mittwald/api-client": "npm:^4.108.0"
+    "@mittwald/api-client": "npm:^4.131.0"
     "@mittwald/ext-bridge": "npm:0.2.0-alpha.156"
     "@mittwald/flow-remote-react-components": "npm:0.2.0-alpha.156"
     "@mittwald/flow-remote-react-renderer": "npm:0.2.0-alpha.156"
