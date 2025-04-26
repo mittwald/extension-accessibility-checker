@@ -109,16 +109,24 @@ export const updateProfileSettings = createServerFn({ method: "POST" })
       cronExpression: z.string().optional(),
       includeWarnings: z.boolean(),
       includeNotices: z.boolean(),
+      standard: z.enum(["WCAG2A", "WCAG2AA", "WCAG2AAA"]),
     }),
   )
   .handler(
     async ({
-      data: { profileId, cronExpression, includeWarnings, includeNotices },
+      data: {
+        profileId,
+        cronExpression,
+        includeWarnings,
+        includeNotices,
+        standard,
+      },
     }) => {
       const profile = await ScanProfileModel.findOneAndUpdate(
         { _id: profileId },
         {
           $set: {
+            standard,
             includeWarnings,
             includeNotices,
             cronSchedule: { expression: cronExpression },

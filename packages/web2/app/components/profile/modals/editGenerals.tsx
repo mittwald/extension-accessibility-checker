@@ -6,10 +6,13 @@ import {
   Checkbox,
   ColumnLayout,
   Content,
+  ContextualHelpTrigger,
   Heading,
   Label,
   Modal,
   Section,
+  Segment,
+  SegmentedControl,
   TextField,
   useOverlayController,
 } from "@mittwald/flow-remote-react-components";
@@ -21,9 +24,11 @@ import {
 import cronParser from "cron-parser";
 import { useRouter } from "@tanstack/react-router";
 import { updateProfileSettings } from "../../../actions/profile.ts";
+import { WcagStandardContextualHelp } from "../wcagStandardContextualHelp.js";
 
 interface FormValues {
   cronExpression?: string;
+  standard: ScanProfile["standard"];
   includeWarnings: boolean;
   includeNotices: boolean;
 }
@@ -34,6 +39,7 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
   const form = useForm<FormValues>({
     defaultValues: {
       cronExpression: profile.cronSchedule?.expression,
+      standard: profile.standard,
       includeWarnings: profile.includeWarnings,
       includeNotices: profile.includeNotices,
     },
@@ -90,6 +96,25 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
               <TextField>
                 <Label>Ausführungsintervall</Label>
               </TextField>
+            </Field>
+            <Field
+              name={"standard"}
+              rules={{
+                required: "Bitte wähle eine Konformitätsstufe aus",
+              }}
+            >
+              <SegmentedControl defaultValue={profile.standard}>
+                <Label>
+                  Konformitätsstufe
+                  <ContextualHelpTrigger>
+                    <Button />
+                    <WcagStandardContextualHelp />
+                  </ContextualHelpTrigger>
+                </Label>
+                <Segment value="WCAG2A">WCAG2 A</Segment>
+                <Segment value="WCAG2AA">WCAG2 AA</Segment>
+                <Segment value="WCAG2AAA">WCAG2 AAA</Segment>
+              </SegmentedControl>
             </Field>
             <ColumnLayout>
               <Field name={"includeWarnings"}>

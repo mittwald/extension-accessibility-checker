@@ -17,6 +17,7 @@ import { EditGeneralsModal } from "../../modals/editGenerals.tsx";
 import { isRunningOrPending } from "../../helpers.ts";
 import { useRouter } from "@tanstack/react-router";
 import { startScan } from "../../../../actions/scan.ts";
+import { WcagStandardContextualHelp } from "../../wcagStandardContextualHelp.js";
 
 export const GeneralSettings = () => {
   const { profile } = Route.useLoaderData();
@@ -76,6 +77,16 @@ export const GeneralSettings = () => {
             </LabeledValue>
           </>
         )}
+        <LabeledValue>
+          <Label>
+            Konformitätsstufe
+            <ContextualHelpTrigger>
+              <Button />
+              <WcagStandardContextualHelp />
+            </ContextualHelpTrigger>
+          </Label>
+          <Content>{profile.standard}</Content>
+        </LabeledValue>
         <LabeledValue>
           <Label>Warnungen</Label>
           <Content>
