@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.webApp.name }}-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/tls-acme: "true"
 spec:
   ingressClassName: nginx
   rules:
@@ -17,3 +18,7 @@ spec:
                 name: {{ .Values.webApp.name }}
                 port:
                   number: 80
+  tls:
+    - hosts:
+        - {{ .Values.webApp.ingress.host }}
+      secretName: {{ .Values.webApp.name }}-le-tls
