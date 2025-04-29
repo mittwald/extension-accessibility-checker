@@ -10,7 +10,15 @@ stages:
 - publish
 - deploy
 
+.buildx-install:
+  before_script:
+    - echo "${CI_JOB_TOKEN}" | docker login -u gitlab-ci-token --password-stdin "${CI_REGISTRY}"
+    - docker buildx create --name multiarch_builder --driver docker-container --use
+      --platform ${PLATFORM}
+    - docker buildx ls
+
 publish:tag:web:
+  extends: .buildx-install
   stage: publish
   tags:
   - dockermultistage
