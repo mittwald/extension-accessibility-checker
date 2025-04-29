@@ -30,5 +30,10 @@ spec:
             - name: MONGODB_URI
               valueFrom:
                 secretKeyRef:
-                  name: mongodb-secret
+                  name: a11y-checker-secret
                   key: mongo-uri
+            - name: EXTENSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: a11y-checker-secret
+                  key: extension-secret

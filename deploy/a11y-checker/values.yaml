@@ -39,3 +39,5 @@ executor:
     repository: ~
     tag: ~
   replicaCount: 2
+
+extensionSecret: ~

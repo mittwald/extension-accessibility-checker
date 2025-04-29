@@ -46,7 +46,8 @@ deploy:tag:prod:
     --set webApp.image.repository=${CI_REGISTRY_IMAGE_WEB}
     --set webApp.image.tag=${REGISTRY_IMAGE_TAG} 
     --set executor.image.repository=${CI_REGISTRY_IMAGE_WEB}
-    --set executor.image.tag=${REGISTRY_IMAGE_TAG} 
+    --set executor.image.tag=${REGISTRY_IMAGE_TAG}
+    --set extensionSecret=${EXTENSION_SECRET}
     ${HELM_CHART_PATH}
     '
   rules:
