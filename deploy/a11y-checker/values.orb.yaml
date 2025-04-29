@@ -1,0 +1,13 @@
+webApp:
+  image:
+    repository: a11y-checker-web
+    tag: latest
+  ingress:
+    enabled: true
+    host: a11y-checker.extension.k8s.orb.local
+
+executor:
+  image:
+    repository: a11y-checker-executor
+    tag: latest
+  replicaCount: 2

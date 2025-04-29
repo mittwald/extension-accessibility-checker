@@ -24,17 +24,18 @@ mongodb:
 webApp:
   enabled: true
   name: a11y-checker-web
-  image: a11y-checker-web:latest
+  image:
+    repository: ~
+    tag: ~
   replicaCount: 1
   service:
     type: ClusterIP
     port: 80
-  ingress:
-    enabled: true
-    host: a11y-checker.extension.k8s.orb.local
 
 executor:
   enabled: true
   name: a11y-checker-executor
-  image: a11y-checker-executor:latest
+  image:
+    repository: ~
+    tag: ~
   replicaCount: 2
