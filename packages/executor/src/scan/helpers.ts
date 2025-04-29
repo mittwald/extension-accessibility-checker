@@ -9,6 +9,9 @@ export const puppeteerLaunchOptions: LaunchOptions = {
     "--headless",
     "--disable-gpu",
     "--disable-dev-shm-usage",
+    "--disable-accelerated-2d-canvas",
+    "--no-first-run",
+    "--no-zygote",
   ],
   headless: true,
 };

@@ -5,6 +5,7 @@ import { PageResult, ScanEngine, ScanResults } from "./ScanEngine.js";
 import { logger } from "../../logger.js";
 import { Lighthouse } from "../Lighthouse.js";
 import { pa11yLogger, puppeteerLaunchOptions } from "../helpers.js";
+import puppeteer from "puppeteer";
 
 const log = logger.child({ module: "Pa11yScanEngine" });
 
@@ -62,13 +63,29 @@ export class Pa11yScanEngine implements ScanEngine, ScanResults {
   protected async executePa11yForURL(
     url: string,
   ): Promise<URLExecutionResults> {
-    const pa11yResults = await pa11y(url, {
-      ...this.options,
-      log: pa11yLogger(url),
-      chromeLaunchConfig: { ...puppeteerLaunchOptions },
-    });
+    let browser;
+    let page;
+    try {
+      browser = await puppeteer.launch({
+        ...puppeteerLaunchOptions,
+      });
+      page = await browser.newPage();
 
-    return this.convertPallyResults(pa11yResults);
+      const pa11yResults = await pa11y(url, {
+        ...this.options,
+        browser,
+        page,
+        log: pa11yLogger(url),
+      });
+
+      page.close();
+      browser.close();
+      return this.convertPallyResults(pa11yResults);
+    } catch (e) {
+      await page?.close();
+      await browser?.close();
+      throw e;
+    }
   }
 
   private convertPallyResults(pa11yResults: Pa11yResults): URLExecutionResults {
