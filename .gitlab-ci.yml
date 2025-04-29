@@ -41,7 +41,7 @@ deploy:tag:prod:
   before_script:
   - helm version
   script:
-  - 'helm upgrade --force --install ${K8S_CHART_NAME} --namespace ${K8S_NAMESPACE}
+  - 'helm upgrade --install ${K8S_CHART_NAME} --namespace ${K8S_NAMESPACE}
     -f ${HELM_CHART_PATH}/values.prod.yaml 
     --set webApp.image.repository=${CI_REGISTRY_IMAGE_WEB}
     --set webApp.image.tag=${REGISTRY_IMAGE_TAG} 
