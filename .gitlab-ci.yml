@@ -1,4 +1,5 @@
 variables:
+  PLATFORM: linux/amd64,linux/arm64
   REGISTRY_IMAGE_TAG: "$CI_COMMIT_TAG"
   K8S_NAMESPACE: extensions
   K8S_CHART_NAME: a11y-checker
