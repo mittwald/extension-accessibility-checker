@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: {{ .Values.executor.name }}
-          image: {{ .Values.executor.image }}
+          image: {{ .Values.executor.image.repository }}:{{.Values.executor.image.tag}}
           imagePullPolicy: IfNotPresent
           env:
             - name: NODE_ENV
