@@ -7,7 +7,7 @@ COPY package.json yarn.lock .yarnrc.yml nx.json ./
 COPY packages/storage/package.json ./packages/storage/
 COPY packages/executor/package.json ./packages/executor/
 
-RUN corepack enable && yarn install
+RUN yarn install
 
 COPY packages/storage ./packages/storage
 COPY packages/executor ./packages/executor
