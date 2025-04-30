@@ -80,7 +80,7 @@ export class Pa11yScanEngine implements ScanEngine, ScanResults {
       });
 
       // void page.close();
-      void browser.close();
+      await browser.close();
       return this.convertPallyResults(pa11yResults);
     } catch (e) {
       void page?.close();
