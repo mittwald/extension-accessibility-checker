@@ -100,7 +100,7 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
           <Heading level={3}>Vorkommen</Heading>
           <ul>
             {issue.selectors.map((o) => (
-              <li key={o.selector} style={{ paddingBottom: "1rem" }}>
+              <li key={o.selector}>
                 <Section>
                   {o.selector && <CodeBlock code={o.selector} copyable />}
                   {o.context && (
