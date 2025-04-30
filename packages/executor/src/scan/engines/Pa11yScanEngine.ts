@@ -79,12 +79,12 @@ export class Pa11yScanEngine implements ScanEngine, ScanResults {
         log: pa11yLogger(url),
       });
 
-      page.close();
-      browser.close();
+      void page.close();
+      void browser.close();
       return this.convertPallyResults(pa11yResults);
     } catch (e) {
-      await page?.close();
-      await browser?.close();
+      void page?.close();
+      void browser?.close();
       throw e;
     }
   }
