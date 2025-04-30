@@ -14,6 +14,7 @@ spec:
       labels:
         app: {{ .Values.executor.name }}
     spec:
+      shareProcessNamespace: true
       containers:
         - name: {{ .Values.executor.name }}
           image: {{ .Values.executor.image.repository }}:{{.Values.executor.image.tag}}
