@@ -18,6 +18,13 @@ spec:
         - name: {{ .Values.executor.name }}
           image: {{ .Values.executor.image.repository }}:{{.Values.executor.image.tag}}
           imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: {{ .Values.executor.resources.requests.cpu | default "100m" }}
+              memory: {{ .Values.executor.resources.requests.memory | default "128Mi" }}
+            limits:
+              cpu: {{ .Values.executor.resources.limits.cpu | default "500m" }}
+              memory: {{ .Values.executor.resources.limits.memory | default "512Mi" }}
           env:
             - name: NODE_ENV
               value: development

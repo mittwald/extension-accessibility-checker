@@ -39,5 +39,13 @@ executor:
     repository: ~
     tag: ~
   replicaCount: 2
+  resources:
+    requests:
+      cpu: 1
+      memory: 1Gi
+    limits:
+      cpu: 2
+      memory: 4Gi
+
 
 extensionSecret: ~
