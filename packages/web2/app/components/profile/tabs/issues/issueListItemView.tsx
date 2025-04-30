@@ -102,20 +102,18 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
           <ul>
             {issue.selectors.map((o) => (
               <li key={o.selector}>
-                <Flex paddingBottom="m" direction="column">
-                  <Section>
-                    {o.selector && <CodeBlock code={o.selector} copyable />}
-                    {o.context && (
-                      <CodeBlock code={o.context} language="html" copyable />
-                    )}
-                    <Text>
-                      <ul>
-                        {o.urls.map((url) => (
-                          <li key={url}>{url}</li>
-                        ))}
-                      </ul>
-                    </Text>
-                  </Section>
+                <Flex rowGap="s" paddingBottom="m" direction="column">
+                  {o.selector && <CodeBlock code={o.selector} copyable />}
+                  {o.context && (
+                    <CodeBlock code={o.context} language="html" copyable />
+                  )}
+                  <Text>
+                    <ul>
+                      {o.urls.map((url) => (
+                        <li key={url}>{url}</li>
+                      ))}
+                    </ul>
+                  </Text>
                 </Flex>
               </li>
             ))}
