@@ -49,7 +49,8 @@ export class Pa11yScanEngine implements ScanEngine, ScanResults {
   protected async runPageScan(page: Page) {
     const [pa11yResults, lighthousePageScore] = await Promise.all([
       this.executePa11yForURL(page.url),
-      Lighthouse.calculateA11yScore(page.url),
+      // Lighthouse.calculateA11yScore(page.url),
+      Promise.resolve(42),
     ]);
 
     this.issues.push(...pa11yResults.issues);
