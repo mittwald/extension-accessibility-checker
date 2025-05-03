@@ -19,7 +19,8 @@ export const Domain = ({ form }: { form: UseFormReturn<FormValues> }) => {
         name="domain"
         rules={{
           pattern: {
-            value: /^[a-z0-9-]+\.[a-z0-9-]+\.[a-z0-9-]+$/,
+            value:
+              /^(((?!-))(xn--|_)?[a-z0-9-]{0,61}[a-z0-9]{1,1}\.)*(xn--)?([a-z0-9][a-z0-9\-]{0,60}|[a-z0-9-]{1,30}\.[a-z]{2,})$/,
             message:
               "Bitte gib die Domain ohne Protokoll ein. Beispiel: www.example.com oder example.com",
           },
