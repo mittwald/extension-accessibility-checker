@@ -65,9 +65,7 @@ export const createProfile = createServerFn({ method: "POST" })
       },
       ...data,
     });
-    console.log("starting scan");
     await scheduleScan(profile._id.toString(), true);
-    console.log("scan started");
     return profile.toJSON() as unknown as ScanProfile;
   });
 

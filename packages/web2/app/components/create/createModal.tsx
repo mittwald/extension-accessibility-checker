@@ -29,7 +29,6 @@ export const CreateModal = () => {
   });
 
   const onSubmit = async (formValues: FormValues) => {
-    console.log("creating profile");
     const profile = await createProfile({
       data: {
         ...formValues,
@@ -38,7 +37,6 @@ export const CreateModal = () => {
         projectId: contextId,
       },
     });
-    console.log("profile created, reloading");
     await goToProfile(profile);
     form.reset();
   };

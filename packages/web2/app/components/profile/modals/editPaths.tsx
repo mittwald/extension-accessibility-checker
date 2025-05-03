@@ -29,7 +29,6 @@ export const EditPathsModal = ({ profile }: { profile: ScanProfile }) => {
   });
 
   const onSubmit = async (formValues: PathFormValues) => {
-    console.log(formValues);
     await updateProfilePaths({
       data: { profileId: profile._id, paths: Array.from(formValues.paths) },
     });

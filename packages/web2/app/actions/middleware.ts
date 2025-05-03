@@ -16,8 +16,6 @@ export const dbMiddleware = createMiddleware()
 
 const getToken = async (sessionToken: string) => {
   const extensionSecret = process.env.EXTENSION_SECRET!;
-  console.log("using extensionSecret: ", extensionSecret);
-
   return (await getAccessToken(sessionToken, extensionSecret)).publicToken;
 };
 
@@ -60,22 +58,15 @@ export async function canAccessContext(
 
 export const authenticateMiddleware = createMiddleware({ validateClient: true })
   .client(async ({ next }) => {
-    console.log("trying to get session token");
     const token = await getSessionToken();
-    console.log("extBridge session token", token);
     return next({
       headers: { "x-session-token": token },
     });
   })
   .server(async ({ next }) => {
-    console.log("validating session token");
     const sessionToken = getHeader("x-session-token");
-    console.log("session-token:", sessionToken);
     const verifiedToken = await verify(sessionToken!);
-    console.log(verifiedToken);
-    console.log("getting API token");
     const apiToken = await getToken(sessionToken!);
-    console.log("apiToken", apiToken);
 
     return next({
       context: {
@@ -89,15 +80,12 @@ export const authenticateMiddleware = createMiddleware({ validateClient: true })
 export const authorizeMiddleware = createMiddleware()
   .middleware([authenticateMiddleware])
   .server(async ({ next, context }) => {
-    console.log(JSON.stringify(context));
     const { contextType, contextId, apiToken } = context;
 
-    console.log("checking access to context");
     const canAccess = await canAccessContext(contextType, contextId, apiToken);
     if (!canAccess) {
       throw notFound();
     }
-    console.log("access granted");
 
     return next();
   });
@@ -112,10 +100,7 @@ export const contextMatchingMiddleware = createMiddleware()
   .middleware([authorizeMiddleware])
   .validator(contextSchema)
   .server(async ({ next, context, data: { projectId } }) => {
-    const { contextId } = context;
-
-    console.log("validating context matching", contextId, projectId);
-    if (contextId !== projectId) {
+    if (context.contextId !== projectId) {
       throw notFound();
     }
     return next();
@@ -129,17 +114,14 @@ const profileSchema = z
   .catchall(z.any());
 
 async function assertContextMatching(profileId: string, contextId: string) {
-  console.log("retrieving profile", profileId);
   const profile = await ScanProfileModel.findById(profileId);
   if (!profile) {
     throw notFound();
   }
 
-  console.log("validating context matching", contextId, profile.project);
   if (contextId !== profile.project) {
     throw notFound();
   }
-  console.log("context matches, continuing");
 }
 
 export const profileIdAuthorizeMiddleware = createMiddleware()
