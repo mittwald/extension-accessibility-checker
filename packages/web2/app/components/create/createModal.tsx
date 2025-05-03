@@ -13,13 +13,13 @@ import { useForm } from "react-hook-form";
 import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { FormValues } from "./types.ts";
 import { PathsList } from "./components/pathsList.tsx";
-import { useRouter } from "@tanstack/react-router";
 import { Domain } from "./components/domain.tsx";
 import { createProfile } from "../../actions/profile.ts";
 import { Route } from "../../routes/index.js";
+import { useGoToProfile } from "../../hooks/useGoTo.js";
 
 export const CreateModal = () => {
-  const router = useRouter();
+  const goToProfile = useGoToProfile();
   const { contextId } = Route.useSearch();
 
   const form = useForm<FormValues>({
@@ -29,7 +29,8 @@ export const CreateModal = () => {
   });
 
   const onSubmit = async (formValues: FormValues) => {
-    await createProfile({
+    console.log("creating profile");
+    const profile = await createProfile({
       data: {
         ...formValues,
         name: formValues.domain,
@@ -37,7 +38,8 @@ export const CreateModal = () => {
         projectId: contextId,
       },
     });
-    await router.invalidate({ sync: true });
+    console.log("profile created, reloading");
+    await goToProfile(profile);
     form.reset();
   };
 

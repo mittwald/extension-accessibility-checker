@@ -13,6 +13,7 @@ import {
   profileIdAuthorizeMiddleware,
 } from "./middleware.js";
 import cronParser from "cron-parser";
+import { scheduleScan } from "./commons.js";
 
 export const getProfiles = createServerFn()
   .middleware([dbMiddleware, authorizeMiddleware])
@@ -64,9 +65,9 @@ export const createProfile = createServerFn({ method: "POST" })
       },
       ...data,
     });
-    await startScan({
-      data: { profileId: profile._id.toString(), isSystemScan: true },
-    });
+    console.log("starting scan");
+    await scheduleScan(profile._id.toString(), true);
+    console.log("scan started");
     return profile.toJSON() as unknown as ScanProfile;
   });
 

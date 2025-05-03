@@ -6,7 +6,7 @@ export const useGoToProfile = () => {
   const router = useRouter();
   const search = Route.useSearch();
 
-  return (profile: ScanProfile) => {
+  return async (profile: ScanProfile) => {
     router.navigate({
       search: {
         ...search,
@@ -15,7 +15,7 @@ export const useGoToProfile = () => {
       replace: true,
     });
 
-    router.invalidate({ sync: true });
+    await router.invalidate({ sync: true });
   };
 };
 
