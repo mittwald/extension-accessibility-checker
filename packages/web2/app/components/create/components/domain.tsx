@@ -1,4 +1,5 @@
 import {
+  FieldDescription,
   Label,
   Section,
   Text,
@@ -17,7 +18,12 @@ export const Domain = ({ form }: { form: UseFormReturn<FormValues> }) => {
       <Field
         name="domain"
         rules={{
-          required: "The domain is required",
+          pattern: {
+            value: /^[a-z0-9-]+\.[a-z0-9-]+\.[a-z0-9-]+$/,
+            message:
+              "Bitte gib die Domain ohne Protokoll ein. Beispiel: www.example.com oder example.com",
+          },
+          required: "Die Domain ist erforderlich.",
         }}
       >
         <Text>Gib hier die Domain ein, die gescannt werden soll.</Text>
@@ -33,6 +39,7 @@ export const Domain = ({ form }: { form: UseFormReturn<FormValues> }) => {
           }}
         >
           <Label>Domain</Label>
+          <FieldDescription>Domain ohne https-Protokoll</FieldDescription>
         </TextField>
       </Field>
     </Section>

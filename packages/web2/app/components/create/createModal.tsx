@@ -67,10 +67,10 @@ export const CreateModal = () => {
             >
               Abbrechen
             </Button>
-            <Button color="accent" type="submit">
-              Scan Starten
-            </Button>
           </Action>
+          <Button color="accent" type="submit">
+            Scan Starten
+          </Button>
         </ActionGroup>
       </Form>
     </Modal>
