@@ -3,7 +3,6 @@ import { z } from "zod";
 import { ScanModel, ScanProfileModel } from "extension-a11y-checker-storage";
 import { Scan, ScanProfile } from "../api/types.ts";
 import { ObjectId } from "mongodb";
-import { startScan } from "./scan.ts";
 import { notFound } from "@tanstack/react-router";
 import {
   authorizeMiddleware,
@@ -19,7 +18,7 @@ export const getProfiles = createServerFn()
   .middleware([dbMiddleware, authorizeMiddleware])
   .validator(z.string())
   .handler(async ({ data: contextId }) => {
-    const data = await ScanProfileModel.findForProject(contextId);
+    const data = await ScanProfileModel.findForContext(contextId);
     if (data === null) {
       throw notFound();
     }
@@ -49,17 +48,17 @@ export const createProfile = createServerFn({ method: "POST" })
   .middleware([dbMiddleware, contextMatchingMiddleware])
   .validator(
     z.object({
-      projectId: z.string(),
+      contextId: z.string(),
       domain: z.string(),
       name: z.string(),
       paths: z.array(z.string()),
     }),
   )
-  .handler(async ({ data: { projectId, ...data } }) => {
+  .handler(async ({ data: { contextId, ...data } }) => {
     const now = new Date();
     const profile = await ScanProfileModel.create({
       _id: new ObjectId(),
-      project: projectId,
+      context: contextId,
       cronSchedule: {
         expression: `${now.getMinutes()} ${now.getHours()} * * *`,
       },

@@ -1,18 +1,10 @@
-export interface Project {
-  _id: string;
-  name?: string;
-  description?: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
 interface CronScheduleJSON {
   expression: string;
 }
 
 export interface ScanProfile {
   _id: string;
-  project: string;
+  context: string;
   name: string;
   domain: string;
   paths: string[];

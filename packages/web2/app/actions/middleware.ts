@@ -92,15 +92,15 @@ export const authorizeMiddleware = createMiddleware()
 
 const contextSchema = z
   .object({
-    projectId: z.string(),
+    contextId: z.string(),
   })
   .catchall(z.any());
 
 export const contextMatchingMiddleware = createMiddleware()
   .middleware([authorizeMiddleware])
   .validator(contextSchema)
-  .server(async ({ next, context, data: { projectId } }) => {
-    if (context.contextId !== projectId) {
+  .server(async ({ next, context, data: { contextId } }) => {
+    if (context.contextId !== contextId) {
       throw notFound();
     }
     return next();
@@ -119,7 +119,7 @@ async function assertContextMatching(profileId: string, contextId: string) {
     throw notFound();
   }
 
-  if (contextId !== profile.project) {
+  if (contextId !== profile.context) {
     throw notFound();
   }
 }

@@ -2,7 +2,7 @@ import type { DocumentType, Ref } from "@typegoose/typegoose";
 import { modelOptions, prop } from "@typegoose/typegoose";
 import cronParser from "cron-parser";
 import { ObjectId } from "mongodb";
-import { Project, ProjectModel } from "../project/project.model.js";
+import { Context, ContextModel } from "../context/context.model.js";
 import { getModel } from "../lib/mongoose.js";
 import { ReturnModelType } from "@typegoose/typegoose/lib/types";
 import { Scan, ScanModel } from "../scan/scan.model.js";
@@ -27,11 +27,11 @@ export class ScanProfile {
   public _id!: ObjectId;
 
   @prop({
-    ref: () => "Project",
+    ref: () => "Context",
     type: () => String,
     required: true,
   })
-  public project: Ref<Project>;
+  public context: Ref<Context>;
 
   @prop({ required: true })
   public name!: string;
@@ -99,15 +99,15 @@ export class ScanProfile {
     await ScanProfileModel.findByIdAndDelete(profileId);
   }
 
-  public static async findForProject(
+  public static async findForContext(
     this: ReturnModelType<typeof ScanProfile>,
-    projectId: string,
+    contextId: string,
   ) {
-    const project = await ProjectModel.findById(projectId);
-    if (!project) {
+    const context = await ContextModel.findById(contextId);
+    if (!context) {
       return null;
     }
-    const profiles = await ScanProfileModel.find({ project: projectId }).exec();
+    const profiles = await ScanProfileModel.find({ context: contextId }).exec();
     await Promise.all(
       profiles.map(async (p) => {
         await p.populate("nextScan");

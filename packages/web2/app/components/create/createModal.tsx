@@ -28,13 +28,17 @@ export const CreateModal = () => {
     },
   });
 
+  if (!contextId) {
+    return null;
+  }
+
   const onSubmit = async (formValues: FormValues) => {
     const profile = await createProfile({
       data: {
         ...formValues,
         name: formValues.domain,
         paths: Array.from(formValues.paths),
-        projectId: contextId,
+        contextId,
       },
     });
     await goToProfile(profile);

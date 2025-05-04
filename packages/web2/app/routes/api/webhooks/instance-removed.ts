@@ -2,7 +2,7 @@ import { json } from "@tanstack/react-start";
 import { createAPIFileRoute } from "@tanstack/react-start/api";
 import { assertContextType } from "./_helpers.js";
 import schema from "./schemas/instanceRemoved.js";
-import { ProjectModel } from "extension-a11y-checker-storage";
+import { ContextModel } from "extension-a11y-checker-storage";
 import { assertValidSignature } from "./_verifySignature.js";
 import { logger } from "../../../logger.js";
 import {
@@ -22,7 +22,7 @@ export const APIRoute = createAPIFileRoute("/api/webhooks/instance-removed")({
       const { data } = parseResult;
       assertContextType(data.context);
 
-      await ProjectModel.delete(data.context.id);
+      await ContextModel.delete(data.context.id);
 
       return json({ message: "ok" }, { status: 200 });
     } catch (e) {

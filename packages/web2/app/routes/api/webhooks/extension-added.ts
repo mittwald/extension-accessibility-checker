@@ -1,7 +1,7 @@
 import { json } from "@tanstack/react-start";
 import { createAPIFileRoute } from "@tanstack/react-start/api";
 import schema from "./schemas/extensionAdded.js";
-import { ProjectModel } from "extension-a11y-checker-storage";
+import { ContextModel } from "extension-a11y-checker-storage";
 import { assertContextType } from "./_helpers.js";
 import { assertValidSignature } from "./_verifySignature.js";
 import { logger } from "../../../logger.js";
@@ -21,7 +21,7 @@ export const APIRoute = createAPIFileRoute("/api/webhooks/extension-added")({
 
       const { data } = parseResult;
       assertContextType(data.context);
-      await ProjectModel.instanceAdded(data.context.id);
+      await ContextModel.instanceAdded(data.context.id);
 
       return json({ message: "ok" }, { status: 201 });
     } catch (e) {

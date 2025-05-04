@@ -8,6 +8,7 @@ export const useGoToProfile = () => {
 
   return async (profile: ScanProfile) => {
     router.navigate({
+      to: "/",
       search: {
         ...search,
         profileId: profile._id,
@@ -25,6 +26,7 @@ export const useGoToRoot = () => {
 
   return () => {
     router.navigate({
+      to: "/",
       search: {
         contextId: search.contextId,
       },

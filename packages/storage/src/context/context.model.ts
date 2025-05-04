@@ -6,10 +6,10 @@ import { ScanProfileModel } from "../scanProfile/scanProfile.model.js";
 import { ScanModel } from "../scan/scan.model.js";
 
 @modelOptions({
-  schemaOptions: { versionKey: false, collection: "projects" },
+  schemaOptions: { versionKey: false, collection: "contexts" },
   options: { automaticName: false },
 })
-export class Project {
+export class Context {
   @prop({ required: true })
   public _id: string;
 
@@ -26,24 +26,24 @@ export class Project {
   public updatedAt: Date;
 
   public static async instanceAdded(
-    this: ReturnModelType<typeof Project>,
-    projectId: string,
+    this: ReturnModelType<typeof Context>,
+    contextId: string,
   ) {
     return this.updateOne(
-      { _id: projectId },
+      { _id: contextId },
       {
-        $setOnInsert: { _id: projectId },
+        $setOnInsert: { _id: contextId },
       },
       { upsert: true, new: true, runValidators: true },
     );
   }
 
   public static async update(
-    this: ReturnModelType<typeof Project>,
-    projectId: string,
+    this: ReturnModelType<typeof Context>,
+    contextId: string,
   ) {
     return this.updateOne(
-      { _id: projectId },
+      { _id: contextId },
       {
         $set: { updatedAt: new Date() },
       },
@@ -51,13 +51,13 @@ export class Project {
   }
 
   public static async delete(
-    this: ReturnModelType<typeof Project>,
-    projectId: string,
+    this: ReturnModelType<typeof Context>,
+    contextId: string,
   ) {
-    const profiles = (await ScanProfileModel.findForProject(projectId)) ?? [];
+    const profiles = (await ScanProfileModel.findForContext(contextId)) ?? [];
     await Promise.all(profiles.map((p) => ScanProfileModel.delete(p._id)));
-    await this.findByIdAndDelete(projectId);
+    await this.findByIdAndDelete(contextId);
   }
 }
 
-export const ProjectModel = getModel(Project, "Project");
+export const ContextModel = getModel(Context, "Context");

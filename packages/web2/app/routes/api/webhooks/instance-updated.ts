@@ -2,7 +2,7 @@ import { json } from "@tanstack/react-start";
 import { createAPIFileRoute } from "@tanstack/react-start/api";
 import schema from "./schemas/instanceUpdated.js";
 import { assertContextType } from "./_helpers.js";
-import { ProjectModel } from "extension-a11y-checker-storage";
+import { ContextModel } from "extension-a11y-checker-storage";
 import { assertValidSignature } from "./_verifySignature.js";
 import { logger } from "../../../logger.js";
 import {
@@ -22,7 +22,7 @@ export const APIRoute = createAPIFileRoute("/api/webhooks/instance-updated")({
       const { data } = parseResult;
       assertContextType(data.context);
 
-      const update = await ProjectModel.update(data.context.id);
+      const update = await ContextModel.update(data.context.id);
       if (update.modifiedCount === 0) {
         return json({ message: "Project not found" }, { status: 404 });
       }
