@@ -10,10 +10,8 @@ export const Overview = ({ profile }: { profile: ScanProfile }) => {
     <Section>
       <CurrentScan />
       <A11yScore profile={profile} />
-      <Section>
-        <IssueSummary profile={profile} />
-        <PathResultsTable />
-      </Section>
+      <IssueSummary profile={profile} />
+      <PathResultsTable />
     </Section>
   );
 };

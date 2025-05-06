@@ -1,35 +1,42 @@
 import { ScanProfile } from "../../../../api/types.ts";
 import {
+  AccentBox,
+  BigNumber,
   ColumnLayout,
-  Content,
-  IconDanger,
-  IconInfo,
-  IconWarning,
-  Label,
-  LabeledValue,
+  Flex,
+  Text,
 } from "@mittwald/flow-remote-react-components";
 
 export function IssueSummary({ profile }: { profile: ScanProfile }) {
   return (
-    <ColumnLayout>
-      <LabeledValue>
-        <Label>
-          <IconDanger /> Fehler
-        </Label>
-        <Content>{profile.issueSummary?.errors}</Content>
-      </LabeledValue>
-      <LabeledValue>
-        <Label>
-          <IconWarning /> Warnungen
-        </Label>
-        <Content>{profile.issueSummary?.warnings}</Content>
-      </LabeledValue>
-      <LabeledValue>
-        <Label>
-          <IconInfo /> Hinweise
-        </Label>
-        <Content>{profile.issueSummary?.notices}</Content>
-      </LabeledValue>
+    <ColumnLayout m={[2, 2]}>
+      <AccentBox color="neutral">
+        <Flex direction="column" gap="s" align="center" text-align="center">
+          <BigNumber>
+            <Text>{profile.issueSummary?.errors}</Text>
+            <Text>Fehler</Text>
+          </BigNumber>
+          {profile.issueSummary?.errors === 0 ? (
+            <Text>🎉 🥳</Text>
+          ) : (
+            <Text>
+              kritische Fehler, die mit höchster Priorität umgesetzt werden
+              sollten
+            </Text>
+          )}
+        </Flex>
+      </AccentBox>
+      <AccentBox color="neutral">
+        <Flex direction="column" gap="xs" align="center">
+          <BigNumber>
+            <Text>{profile.issueSummary?.warnings}</Text>
+            <Text>Warnungen</Text>
+          </BigNumber>
+          <Text>
+            Punkte, die überprüft und bei Bedarf verbessert werden sollten
+          </Text>
+        </Flex>
+      </AccentBox>
     </ColumnLayout>
   );
 }
