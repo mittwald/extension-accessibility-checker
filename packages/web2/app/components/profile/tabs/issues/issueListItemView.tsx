@@ -110,7 +110,7 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
           <ul>
             {issue.selectors.map((o) => (
               <li key={o.selector}>
-                <Flex rowGap="s" paddingBottom="m" direction="column">
+                <Flex rowGap="s" paddingBottom="l" direction="column">
                   {o.selector && <CodeBlock code={o.selector} copyable />}
                   {o.context && (
                     <CodeBlock code={o.context} language="html" copyable />
