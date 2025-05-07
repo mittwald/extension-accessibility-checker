@@ -72,14 +72,10 @@ export const Issues = ({ scan }: IssuesProps) => {
   return (
     <Section>
       <CurrentScan />
-      <ColumnLayout m={[12, 1]}>
-        <LabeledValue>
-          <Label>Ausgeführt am</Label>
-          <Content>{date.toLocaleString()}</Content>
-        </LabeledValue>
+      <ColumnLayout>
         <ContextMenuTrigger>
           <Button variant={"outline"} color={"secondary"}>
-            <Text>Darstellungsoptionen</Text>
+            <Text>Filteroptionen</Text>
             <IconFilter />
           </Button>
           <ContextMenu
@@ -107,13 +103,16 @@ export const Issues = ({ scan }: IssuesProps) => {
             </MenuItem>
           </ContextMenu>
         </ContextMenuTrigger>
+        <LabeledValue>
+          <Label>Ausgeführt am</Label>
+          <Content>{date.toLocaleString()}</Content>
+        </LabeledValue>
       </ColumnLayout>
-      <Section>
-        {issueGroups.length === 0 && <NoIssues />}
-        {issueGroups.map((issueGroup) => (
-          <IssueGroupView key={issueGroup.groupKey} group={issueGroup} />
-        ))}
-      </Section>
+
+      {issueGroups.length === 0 && <NoIssues />}
+      {issueGroups.map((issueGroup) => (
+        <IssueGroupView key={issueGroup.groupKey} group={issueGroup} />
+      ))}
     </Section>
   );
 };
