@@ -1,5 +1,10 @@
 import { ScanProfile } from "../../api/types.ts";
-import { ActionGroup, Text, typedList } from "@mittwald/flow-remote-react-components";
+import {
+  ActionGroup,
+  Flex,
+  Text,
+  typedList,
+} from "@mittwald/flow-remote-react-components";
 import { isRunningOrPending } from "../profile/helpers.ts";
 import { useAutoRefresh } from "../../hooks/useAutoRefresh.tsx";
 import { useGoToProfile } from "../../hooks/useGoTo.tsx";
@@ -49,21 +54,20 @@ export const ProfilesList = ({ profiles }: { profiles: ScanProfile[] }) => {
             </ProfileList.TableCell>
             <ProfileList.TableCell>
               {(profile) => (
-                <>
+                <Flex direction="column">
                   {profile.lastScan && (
                     <Text>
                       Letzter Scan:{" "}
                       {profile.lastScan.completedAt?.toLocaleString()}
                     </Text>
                   )}
-                  {profile.lastScan && profile.nextScan && <br />}
                   {profile.nextScan && (
                     <Text>
                       Nächster Scan:{" "}
                       {profile.nextScan.executionScheduledFor.toLocaleString()}
                     </Text>
                   )}
-                </>
+                </Flex>
               )}
             </ProfileList.TableCell>
           </ProfileList.TableRow>
