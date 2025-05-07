@@ -55,8 +55,8 @@ export const CreateModal = () => {
             <Header>
               <Heading>Unterseiten hinzufügen</Heading>
               <Text>
-                Füge Unterseiten hinzu. So kannst du mit einem Profil den
-                Überblick über mehrere Seiten deiner Website bekommen.
+                Füge Unterseiten hinzu, um mit einem Scanprofil mehrere Bereiche
+                deiner Website im Blick zu behalten.
               </Text>
             </Header>
             <PathsList form={form} autoFocus={!!form.getValues("domain")} />
@@ -73,7 +73,7 @@ export const CreateModal = () => {
             </Button>
           </Action>
           <Button color="accent" type="submit">
-            Scan Starten
+            Scan starten
           </Button>
         </ActionGroup>
       </Form>

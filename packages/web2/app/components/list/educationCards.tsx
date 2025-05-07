@@ -14,16 +14,16 @@ export const EducationCards = () => {
         <Section>
           <Heading level={2}>Manuell testen</Heading>
           <Text>
-            Ein automatisierter Scan kann nicht alle Kriterien der WCAG&nbsp;2
-            erfassen. Mache dich daher mit den{" "}
+            Automatische Scans sind super – aber sie sehen nicht alles. Mache
+            dich daher mit den{" "}
             <Link href="https://www.w3.org/WAI/standards-guidelines/wcag/">
               Web Content Accessibility Guidelines
             </Link>{" "}
             vertraut und{" "}
             <Link href="https://web.dev/articles/how-to-review?hl=de">
-              teste auch immer manuell
-            </Link>
-            .
+              überprüfe dein Website
+            </Link>{" "}
+            zusätzlich manuell.
           </Text>
         </Section>
       </LayoutCard>
@@ -31,10 +31,8 @@ export const EducationCards = () => {
         <Section>
           <Heading level={2}>Barrierefreiheitsstärkungsgesetz</Heading>
           <Text>
-            Im Juni tritt das
-            Barriere&shy;frei&shy;heits&shy;stärkungs&shy;gesetz (BFSG) in
-            Kraft. Im Blog findest du mehr Informationen dazu und kannst
-            nachlesen ob dein Projekt betroffen ist.
+            Inhalt, Verpflichtungen und Ausnahmen – Alles dazu erfährst du in
+            unserem Blog.
           </Text>
           <Link href="https://www.mittwald.de/blog/webentwicklung-design/barrierefreiheitsstaerkungsgesetz-inhalt-verpflichtungen-und-ausnahmen">
             Blog-Artikel

@@ -18,9 +18,8 @@ export const NoProfiles = () => {
       </Icon>
       <Heading>Scanprofil anlegen</Heading>
       <Text>
-        Lege ein Bewertungsprofil für deine Website an, um einen
-        Barrierefreiheitsbewertung basierend auf den WCAG-Richtlinien zu
-        ermitteln.
+        Lege ein Scanprofil an und erhalte eine Barrierefreiheitsbewertung
+        deiner Webseite gemäß der WCAG-Standards.
       </Text>
       <ActionGroup>
         <ModalTrigger>

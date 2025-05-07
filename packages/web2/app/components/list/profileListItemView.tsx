@@ -4,7 +4,7 @@ import {
   AlertBadge,
   Avatar,
   Heading,
-  IconSubdomain,
+  IconDomain,
   ListItemView,
   Text,
 } from "@mittwald/flow-remote-react-components";
@@ -27,7 +27,7 @@ export function ProfileListItemView(props: { profile: ScanProfile }) {
   return (
     <ListItemView>
       <Avatar color="blue">
-        <IconSubdomain aria-label="" />
+        <IconDomain aria-label="" />
       </Avatar>
       <Heading>
         {props.profile.name}

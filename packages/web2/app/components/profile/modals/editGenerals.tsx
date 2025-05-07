@@ -6,6 +6,7 @@ import {
   Checkbox,
   ColumnLayout,
   Content,
+  ContextualHelp,
   ContextualHelpTrigger,
   FieldDescription,
   Heading,
@@ -14,6 +15,7 @@ import {
   Section,
   Segment,
   SegmentedControl,
+  Text,
   TextField,
   useOverlayController,
 } from "@mittwald/flow-remote-react-components";
@@ -95,13 +97,23 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
               }}
             >
               <TextField>
-                <Label>Ausführungsintervall</Label>
-                <FieldDescription>
-                  Cron-Ausdruck. Um Ressourcen zu sparen, führe den Scan nicht
-                  öfters automatisiert aus als nötig. Du kannst den Scan
-                  jederzeit manuell starten. Leer lassen, um automatisches
-                  ausführen zu deaktivieren.
-                </FieldDescription>
+                <Label>
+                  Ausführungsintervall
+                  <ContextualHelpTrigger>
+                    <Button />
+                    <ContextualHelp>
+                      <Heading>Ausführungsintervall</Heading>
+                      <Text>
+                        Lege nur dann einen automatischen Scan-Intervall fest,
+                        wenn es wirklich nötig ist – so schonst du Ressourcen.
+                        Lässt du das Feld leer, wird keine automatische
+                        Ausführung eingerichtet. Ein manueller Scan ist
+                        jederzeit möglich.
+                      </Text>
+                    </ContextualHelp>
+                  </ContextualHelpTrigger>
+                </Label>
+                <FieldDescription>Verwende Cron-Syntax</FieldDescription>
               </TextField>
             </Field>
             <Field
@@ -139,7 +151,7 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
         </Content>
         <ActionGroup>
           <Button color="accent" type="submit">
-            Änderungen speichern
+            Speichern
           </Button>
           <Action closeOverlay="Modal">
             <Button

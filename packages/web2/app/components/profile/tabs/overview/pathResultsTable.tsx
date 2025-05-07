@@ -7,6 +7,7 @@ import {
   TableFooterRow,
   TableHeader,
   TableRow,
+  Text,
 } from "@mittwald/flow-remote-react-components";
 
 export const PathResultsTable = () => {
@@ -43,13 +44,13 @@ export const PathResultsTable = () => {
         })}
         <TableFooterRow>
           <TableCell>
-            <strong>Gesamtbewertung Ø</strong>
+            <strong>Gesamtbewertung</strong>
           </TableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>
           <TableCell>
-            <strong>{profile.issueSummary?.score}</strong>
+            <strong>Ø {profile.issueSummary?.score}</strong>
           </TableCell>
         </TableFooterRow>
       </TableBody>

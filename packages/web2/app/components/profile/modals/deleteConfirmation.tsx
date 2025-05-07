@@ -27,9 +27,9 @@ export const DeleteConfirmationModal = ({
       <Content>
         <Section>
           <Text>
-            Bist Du, dass Du das Profil <strong>{profile.name}</strong> löschen
-            willst? Mit dem Profil werden alle dafür durchgeführten Scans
-            gelöscht.
+            Bist Du sicher, dass Du das Profil <strong>{profile.name}</strong>{" "}
+            löschen willst? Mit dem Profil werden alle dafür durchgeführten
+            Scans gelöscht.
           </Text>
         </Section>
       </Content>
@@ -41,7 +41,7 @@ export const DeleteConfirmationModal = ({
               await onDelete?.();
             }}
           >
-            <Button color="danger">Profil löschen</Button>
+            <Button color="danger">Löschen</Button>
           </Action>
           <Button variant="soft" color="secondary">
             Abbrechen

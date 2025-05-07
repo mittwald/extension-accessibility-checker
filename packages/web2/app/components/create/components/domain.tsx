@@ -27,7 +27,7 @@ export const Domain = ({ form }: { form: UseFormReturn<FormValues> }) => {
           required: "Die Domain ist erforderlich.",
         }}
       >
-        <Text>Gib hier die Domain ein, die gescannt werden soll.</Text>
+        <Text>Gib hier die Domain deiner Website ein.</Text>
         <TextField
           value={domain}
           onChange={(value) => form.setValue("domain", value)}

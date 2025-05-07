@@ -16,13 +16,20 @@ export function NoScans({ profile }: { profile: ScanProfile }) {
   const router = useRouter();
 
   if (isRunningOrPending(profile.nextScan)) {
-    const text = isRunning(profile.nextScan!)
-      ? "Scan wird ausgeführt …"
-      : "Scan wird in Kürze gestartet …";
     return (
       <IllustratedMessage>
         <LoadingSpinner size="l" />
-        <Heading>{text}</Heading>
+        {isRunning(profile.nextScan!) ? (
+          <>
+            <Heading>Scan wird ausgeführt …</Heading>
+            <Text>
+              Der Barrierefreiheits-Score wird ermittelt. Je nach Anzahl der
+              Seiten kann das einen Moment dauern.
+            </Text>
+          </>
+        ) : (
+          <Heading>Scan wird in Kürze gestartet …</Heading>
+        )}
       </IllustratedMessage>
     );
   }
