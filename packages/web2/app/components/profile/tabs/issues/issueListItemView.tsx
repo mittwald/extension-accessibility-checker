@@ -74,7 +74,11 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
             <ul>
               {wcagGuidelineLinkData && (
                 <li>
-                  <Link href={wcagGuidelineLinkData.understanding}>
+                  <Link
+                    href={wcagGuidelineLinkData.understanding}
+                    target="_blank"
+                    rel="noopener"
+                  >
                     WCAG Richtlinie {issueMeta.guideline}:{" "}
                     {wcagGuidelineLinkData.label}
                   </Link>
@@ -82,7 +86,11 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
               )}
               {wcagCriterionLinkData && (
                 <li>
-                  <Link href={wcagCriterionLinkData.understanding}>
+                  <Link
+                    href={wcagCriterionLinkData.understanding}
+                    target="_blank"
+                    rel="noopener"
+                  >
                     WCAG Kriterium {issueMeta.criterion}:{" "}
                     {wcagCriterionLinkData.label}
                   </Link>
@@ -91,7 +99,7 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
               {techniqueLinksData.length > 0 &&
                 techniqueLinksData.map(({ url, label, id }) => (
                   <li key={id}>
-                    <Link href={url}>
+                    <Link href={url} target="_blank" rel="noopener">
                       Technik {id}: {label}
                     </Link>
                   </li>
