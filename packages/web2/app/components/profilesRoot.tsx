@@ -1,12 +1,10 @@
 import {
   ColumnLayout,
-  Heading,
   LayoutCard,
 } from "@mittwald/flow-remote-react-components";
 import { EducationCards } from "./list/educationCards.js";
 import { ProfilesList } from "./list/profilesList.js";
 import { NoProfiles } from "./list/noProfiles.js";
-import { Route } from "../routes/index.js";
 import { ScanProfile } from "../api/types.js";
 
 export const ProfilesRoot = ({

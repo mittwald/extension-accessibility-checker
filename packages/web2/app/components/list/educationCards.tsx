@@ -12,7 +12,7 @@ export const EducationCards = () => {
     <ColumnLayout m={[1, 1]}>
       <LayoutCard>
         <Section>
-          <Heading level={2}>Manuell testen</Heading>
+          <Heading level={2}>Hinweis: Manuell testen</Heading>
           <Text>
             Automatische Scans sind super – aber sie sehen nicht alles. Mache
             dich daher mit den{" "}
@@ -21,7 +21,7 @@ export const EducationCards = () => {
             </Link>{" "}
             vertraut und{" "}
             <Link href="https://web.dev/articles/how-to-review?hl=de">
-              überprüfe dein Website
+              überprüfe deine Website
             </Link>{" "}
             zusätzlich manuell.
           </Text>

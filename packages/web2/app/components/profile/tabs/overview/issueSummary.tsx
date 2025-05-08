@@ -20,7 +20,7 @@ export function IssueSummary({ profile }: { profile: ScanProfile }) {
             <Text>🎉 🥳</Text>
           ) : (
             <Text align="center">
-              kritische Fehler, die mit höchster Priorität behoben werden
+              Kritische Fehler, die mit höchster Priorität behoben werden
               sollten
             </Text>
           )}
