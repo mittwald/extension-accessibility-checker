@@ -1,4 +1,4 @@
-import { Route } from "../../../../routes/index.js";
+import { Route } from "../../../../routes/profiles.$profileId.tsx";
 import {
   Table,
   TableBody,

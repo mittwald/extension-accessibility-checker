@@ -12,7 +12,7 @@ import {
   Section,
   Text,
 } from "@mittwald/flow-remote-react-components";
-import { Route } from "../../../../routes/index.js";
+import { Route } from "../../../../routes/profiles.$profileId.tsx";
 import { EditGeneralsModal } from "../../modals/editGenerals.tsx";
 import { isRunningOrPending } from "../../helpers.ts";
 import { useRouter } from "@tanstack/react-router";

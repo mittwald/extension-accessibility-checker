@@ -12,12 +12,19 @@
 
 import { Route as rootRoute } from "./routes/__root"
 import { Route as IndexImport } from "./routes/index"
+import { Route as ProfilesProfileIdImport } from "./routes/profiles.$profileId"
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
   id: "/",
   path: "/",
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProfilesProfileIdRoute = ProfilesProfileIdImport.update({
+  id: "/profiles/$profileId",
+  path: "/profiles/$profileId",
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -32,6 +39,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    "/profiles/$profileId": {
+      id: "/profiles/$profileId"
+      path: "/profiles/$profileId"
+      fullPath: "/profiles/$profileId"
+      preLoaderRoute: typeof ProfilesProfileIdImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -39,32 +53,37 @@ declare module "@tanstack/react-router" {
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
+  "/profiles/$profileId": typeof ProfilesProfileIdRoute
 }
 
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
+  "/profiles/$profileId": typeof ProfilesProfileIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   "/": typeof IndexRoute
+  "/profiles/$profileId": typeof ProfilesProfileIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/"
+  fullPaths: "/" | "/profiles/$profileId"
   fileRoutesByTo: FileRoutesByTo
-  to: "/"
-  id: "__root__" | "/"
+  to: "/" | "/profiles/$profileId"
+  id: "__root__" | "/" | "/profiles/$profileId"
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProfilesProfileIdRoute: typeof ProfilesProfileIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProfilesProfileIdRoute: ProfilesProfileIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +96,15 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/profiles/$profileId"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/profiles/$profileId": {
+      "filePath": "profiles.$profileId.tsx"
     }
   }
 }

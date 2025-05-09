@@ -1,6 +1,7 @@
 import { useRouter } from "@tanstack/react-router";
 import { ScanProfile } from "../api/types.ts";
-import { Route } from "../routes/index.js";
+import { Route } from "../routes/index.tsx";
+import { useConfig } from "@mittwald/ext-bridge/react";
 
 export const useGoToProfile = () => {
   const router = useRouter();
@@ -8,29 +9,29 @@ export const useGoToProfile = () => {
 
   return async (profile: ScanProfile) => {
     router.navigate({
-      to: "/",
+      to: "/profiles/$profileId",
+      params: { profileId: profile._id },
       search: {
         ...search,
-        profileId: profile._id,
       },
-      replace: true,
     });
 
-    await router.invalidate({ sync: true });
+    // await router.invalidate({ sync: true });
   };
 };
 
 export const useGoToRoot = () => {
   const router = useRouter();
-  const search = Route.useSearch();
+  // const search = Route.useSearch();
+
+  const { customerId } = useConfig();
 
   return () => {
     router.navigate({
       to: "/",
       search: {
-        contextId: search.contextId,
+        contextId: customerId,
       },
-      replace: true,
     });
 
     router.invalidate({ sync: true });

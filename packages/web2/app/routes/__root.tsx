@@ -3,6 +3,8 @@ import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { ErrorRoot } from "../components/errorRoot.tsx";
 import { RootDocument } from "../components/rootDocument.tsx";
 import { NotFoundRoot } from "../components/notFoundRoot.js";
+import { useNavigate } from "@tanstack/react-router";
+import RemoteRoot from "@mittwald/flow-remote-react-components/RemoteRoot";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -25,9 +27,20 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
+  const navigate = useNavigate();
+
   return (
     <RootDocument>
-      <Outlet />
+      <RemoteRoot
+        onHostPathnameChanged={(path) => {
+          console.log("onHostPathnameChanged", path);
+          return navigate({
+            to: path,
+          });
+        }}
+      >
+        <Outlet />
+      </RemoteRoot>
     </RootDocument>
   );
 }
