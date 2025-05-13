@@ -25,7 +25,7 @@ export const ProfileRoot = ({
     <Section>
       <Title>{profile.name}</Title>
       <Breadcrumb>
-        <Link href="#">Profil</Link>
+        <Link href="#">Scanprofil</Link>
       </Breadcrumb>
       <ProfileActions profile={profile} />
       <LayoutCard>
