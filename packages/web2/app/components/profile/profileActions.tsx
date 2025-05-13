@@ -1,14 +1,9 @@
 import { ScanProfile } from "../../api/types.ts";
 import {
-  Button,
-  ContextMenu,
-  ContextMenuTrigger,
   Icon,
-  IconChevronDown,
   IconDelete,
   IconEdit,
   MenuItem,
-  Text,
   useOverlayController,
 } from "@mittwald/flow-remote-react-components";
 import { RenameProfileModal } from "./modals/renameProfileModal.tsx";
@@ -18,8 +13,9 @@ import { useRouter } from "@tanstack/react-router";
 import { DeleteConfirmationModal } from "./modals/deleteConfirmation.tsx";
 import { isRunningOrPending } from "./helpers.ts";
 import { useGoToRoot } from "../../hooks/useGoTo.js";
+import { Actions } from "@mittwald/mstudio-ext-react-components";
 
-const ProfileActionsContextMenu = ({ profile }: { profile: ScanProfile }) => {
+export function ProfileActions({ profile }: { profile: ScanProfile }) {
   const router = useRouter();
   const goToRoot = useGoToRoot();
   const renameModalController = useOverlayController("Modal");
@@ -27,7 +23,7 @@ const ProfileActionsContextMenu = ({ profile }: { profile: ScanProfile }) => {
 
   return (
     <>
-      <ContextMenu>
+      <Actions>
         <MenuItem
           onAction={async () => {
             await startScan({ data: { profileId: profile._id.toString() } });
@@ -51,7 +47,7 @@ const ProfileActionsContextMenu = ({ profile }: { profile: ScanProfile }) => {
           <IconDelete />
           Löschen
         </MenuItem>
-      </ContextMenu>
+      </Actions>
       <RenameProfileModal
         profile={profile}
         controller={renameModalController}
@@ -62,17 +58,5 @@ const ProfileActionsContextMenu = ({ profile }: { profile: ScanProfile }) => {
         onDelete={() => goToRoot()}
       />
     </>
-  );
-};
-
-export function ProfileActions({ profile }: { profile: ScanProfile }) {
-  return (
-    <ContextMenuTrigger>
-      <Button variant="outline" slot="secondary" color="light" size="m">
-        <Text>Aktionen</Text>
-        <IconChevronDown />
-      </Button>
-      <ProfileActionsContextMenu profile={profile} />
-    </ContextMenuTrigger>
   );
 }
