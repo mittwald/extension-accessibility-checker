@@ -9,10 +9,11 @@ import {
 export const NoIssues = () => (
   <IllustratedMessage>
     <IconCheck />
-    <Heading>Keine Fehler, Warnungen oder Hinweise gefunden.</Heading>
+    <Heading>Keine Fehler, Warnungen oder Hinweise erkannt</Heading>
     <Text>
-      Passe die Filter an und denke daran: Ein automatisierter Scan kann nicht
-      alle Kriterien der WCAG 2 erfassen. Teste daher auch immer manuell.
+      Ein automatisierter Scan deckt jedoch nicht alle WCAG 2-Kriterien ab.
+      Manuelle Prüfungen bleiben weiterhin wichtig. Kontrolliere zusätzlich die
+      Filter-Einstellungen, um sicher zu sein, dass keine Fehler vorliegen.
     </Text>
     <Link href="https://web.dev/articles/how-to-review?hl=de">
       Wie man manuell testet
