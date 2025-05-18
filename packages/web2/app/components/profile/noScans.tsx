@@ -21,14 +21,14 @@ export function NoScans({ profile }: { profile: ScanProfile }) {
         <LoadingSpinner size="l" />
         {isRunning(profile.nextScan!) ? (
           <>
-            <Heading>Scan wird ausgeführt …</Heading>
-            <Text>
+            <Heading wrap="balance">Scan wird ausgeführt …</Heading>
+            <Text wrap="balance">
               Der Barrierefreiheits-Score wird ermittelt. Je nach Anzahl der
               Seiten kann das einen Moment dauern.
             </Text>
           </>
         ) : (
-          <Heading>Scan wird in Kürze gestartet …</Heading>
+          <Heading wrap="balance">Scan wird in Kürze gestartet …</Heading>
         )}
       </IllustratedMessage>
     );
@@ -40,7 +40,7 @@ export function NoScans({ profile }: { profile: ScanProfile }) {
         <IconWorldSearch />
       </Icon>
       <Heading>Los geht’s!</Heading>
-      <Text>Der Scan wurde noch nicht ausgeführt.</Text>
+      <Text wrap="balance">Der Scan wurde noch nicht ausgeführt.</Text>
       <Button
         color="accent"
         onPress={async () => {

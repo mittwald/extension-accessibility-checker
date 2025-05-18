@@ -17,7 +17,7 @@ export const NoProfiles = () => {
         <IconAccessible />
       </Icon>
       <Heading>Scanprofil anlegen</Heading>
-      <Text>
+      <Text wrap="balance">
         Lege ein Scanprofil an und erhalte eine Barrierefreiheitsbewertung
         deiner Webseite gemäß der WCAG-Standards.
       </Text>

@@ -9,8 +9,10 @@ import {
 export const NoIssues = () => (
   <IllustratedMessage>
     <IconCheck />
-    <Heading>Keine Fehler, Warnungen oder Hinweise erkannt</Heading>
-    <Text>
+    <Heading wrap="balance">
+      Keine Fehler, Warnungen oder Hinweise erkannt
+    </Heading>
+    <Text wrap="balance">
       Ein automatisierter Scan deckt jedoch nicht alle WCAG 2-Kriterien ab.
       Manuelle Prüfungen bleiben weiterhin wichtig. Kontrolliere zusätzlich die
       Filter-Einstellungen, um sicher zu sein, dass keine Fehler vorliegen.

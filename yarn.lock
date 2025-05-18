@@ -2914,9 +2914,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mittwald/ext-bridge@npm:0.2.0-alpha.181":
-  version: 0.2.0-alpha.181
-  resolution: "@mittwald/ext-bridge@npm:0.2.0-alpha.181"
+"@mittwald/ext-bridge@npm:0.2.0-alpha.187":
+  version: 0.2.0-alpha.187
+  resolution: "@mittwald/ext-bridge@npm:0.2.0-alpha.187"
   dependencies:
     "@mittwald/react-use-promise": "npm:^3.0.4"
     axios: "npm:^1.8.3"
@@ -2931,17 +2931,17 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10c0/c3751d3cb7e7fddd441ec7ddd29dad9fa2f27bf9ad785cbade82e0b6105e83b376bb1f7d2aeef91b53ec54d720afc963b505f1f8827bfd88695b1ea8e05b0f34
+  checksum: 10c0/3a63be3fb7046b7a9005d33e101a0c10cf1144bc51c2b2026d64bdf19548ff8793d43fafbceef72bed6b08ca1341dab506a0a4de97252ed1e9befad5131179f7
   languageName: node
   linkType: hard
 
-"@mittwald/flow-react-components@npm:0.2.0-alpha.181":
-  version: 0.2.0-alpha.181
-  resolution: "@mittwald/flow-react-components@npm:0.2.0-alpha.181"
+"@mittwald/flow-react-components@npm:0.2.0-alpha.187":
+  version: 0.2.0-alpha.187
+  resolution: "@mittwald/flow-react-components@npm:0.2.0-alpha.187"
   dependencies:
     "@chakra-ui/live-region": "npm:^2.1.0"
     "@internationalized/string-compiler": "npm:^3.2.6"
-    "@mittwald/react-tunnel": "npm:0.2.0-alpha.181"
+    "@mittwald/react-tunnel": "npm:0.2.0-alpha.187"
     "@mittwald/react-use-promise": "npm:^3.0.4"
     "@react-aria/form": "npm:^3.0.14"
     "@react-aria/utils": "npm:^3.28.1"
@@ -2971,7 +2971,7 @@ __metadata:
     react-markdown: "npm:^10.1.0"
     react-stately: "npm:^3.36.1"
     react-syntax-highlighter: "npm:^15.6.1"
-    recharts: "npm:3.0.0-alpha.9"
+    recharts: "npm:3.0.0-beta.1"
     remeda: "npm:^2.21.1"
     type-fest: "npm:^4.37.0"
     use-callback-ref: "npm:^1.3.3"
@@ -2990,13 +2990,13 @@ __metadata:
       optional: true
     react-hook-form:
       optional: true
-  checksum: 10c0/7ff4fe61be349c94bde910d4a64f99d1b7ad078779d106639c5f2a80d5775f7bb1ea9a5ecc48a7ee84425bd459f34d1e1ee32b2fc9cba521b1c7840080b0a268
+  checksum: 10c0/53fb9f5a1aeec9e912167008548cc7d23e0f69164334c18609fa521fb98ced2a57372f7b45fcdba4a28a062515d38e225cf5f5c72d5fea7a81b59882caf0b3bd
   languageName: node
   linkType: hard
 
-"@mittwald/flow-remote-core@npm:0.2.0-alpha.181":
-  version: 0.2.0-alpha.181
-  resolution: "@mittwald/flow-remote-core@npm:0.2.0-alpha.181"
+"@mittwald/flow-remote-core@npm:0.2.0-alpha.187":
+  version: 0.2.0-alpha.187
+  resolution: "@mittwald/flow-remote-core@npm:0.2.0-alpha.187"
   dependencies:
     "@lit-labs/ssr-dom-shim": "npm:^1.3.0"
     "@mittwald/remote-dom-core": "npm:1.7.0-mittwald.3"
@@ -3007,30 +3007,30 @@ __metadata:
   peerDependenciesMeta:
     "@mittwald/ext-bridge":
       optional: true
-  checksum: 10c0/16b2c731240594c4dd87bb9e42f7fee83b024dce7d07dcc47b974e0c5730e013b92a6bc70172393831e5099e5d5563cd99c77396abc314d184729ca94e90393c
+  checksum: 10c0/f4f3711c79f213a2f764c1128e1e5f9a7a59c7a5a9b4dbe73103137248968921747de224ddd5b5b8987caa9f1de60264763353b47d6ad9ff0ce50f6403e81add
   languageName: node
   linkType: hard
 
-"@mittwald/flow-remote-elements@npm:0.2.0-alpha.181":
-  version: 0.2.0-alpha.181
-  resolution: "@mittwald/flow-remote-elements@npm:0.2.0-alpha.181"
+"@mittwald/flow-remote-elements@npm:0.2.0-alpha.187":
+  version: 0.2.0-alpha.187
+  resolution: "@mittwald/flow-remote-elements@npm:0.2.0-alpha.187"
   dependencies:
-    "@mittwald/flow-remote-core": "npm:0.2.0-alpha.181"
+    "@mittwald/flow-remote-core": "npm:0.2.0-alpha.187"
     remeda: "npm:^2.21.1"
     type-fest: "npm:^4.37.0"
   peerDependencies:
     "@mittwald/flow-react-components": "*"
-  checksum: 10c0/68570780ded4b01ee1e58f2be87c840ebf7266e769a76f3d6455f67d35be3c6c6f4247b6d6bd4c388b5b3c931b2139a2b5be378f8add25cfe4f53b01d8197f99
+  checksum: 10c0/2a801fec90adcb84b2d34051c5cc4e6791cc7a600d360e5b73b1b325b7106913e80048ced34f1eb64a9030ba1a580da38899607c49a64771be4941d142869faa
   languageName: node
   linkType: hard
 
-"@mittwald/flow-remote-react-components@npm:0.2.0-alpha.181":
-  version: 0.2.0-alpha.181
-  resolution: "@mittwald/flow-remote-react-components@npm:0.2.0-alpha.181"
+"@mittwald/flow-remote-react-components@npm:0.2.0-alpha.187":
+  version: 0.2.0-alpha.187
+  resolution: "@mittwald/flow-remote-react-components@npm:0.2.0-alpha.187"
   dependencies:
-    "@mittwald/flow-react-components": "npm:0.2.0-alpha.181"
-    "@mittwald/flow-remote-core": "npm:0.2.0-alpha.181"
-    "@mittwald/flow-remote-elements": "npm:0.2.0-alpha.181"
+    "@mittwald/flow-react-components": "npm:0.2.0-alpha.187"
+    "@mittwald/flow-remote-core": "npm:0.2.0-alpha.187"
+    "@mittwald/flow-remote-elements": "npm:0.2.0-alpha.187"
     "@mittwald/remote-dom-react": "npm:1.2.2-mittwald.3"
     "@types/react": "npm:^19"
     react-error-boundary: "npm:^5.0.0"
@@ -3043,17 +3043,17 @@ __metadata:
       optional: true
     react-hook-form:
       optional: true
-  checksum: 10c0/f8b63ea6089b556654ae92a26c47f03491fb18fefde40aff011de95643112b4bbee5e7f576e683bb3d52775d75b05f05c3de4fbfaae6e11dadf5b8b8cbcd1a1e
+  checksum: 10c0/b8ef650d7893b4e9806dc5f2d0ffac0b2e1e134217e7be508d4455964bd1ccf6d436d6ee7c83e8c1f630079dff401913b7c2b679b46739424135e87cbbf20fa6
   languageName: node
   linkType: hard
 
-"@mittwald/flow-remote-react-renderer@npm:0.2.0-alpha.181":
-  version: 0.2.0-alpha.181
-  resolution: "@mittwald/flow-remote-react-renderer@npm:0.2.0-alpha.181"
+"@mittwald/flow-remote-react-renderer@npm:0.2.0-alpha.187":
+  version: 0.2.0-alpha.187
+  resolution: "@mittwald/flow-remote-react-renderer@npm:0.2.0-alpha.187"
   dependencies:
-    "@mittwald/ext-bridge": "npm:0.2.0-alpha.181"
-    "@mittwald/flow-remote-core": "npm:0.2.0-alpha.181"
-    "@mittwald/flow-remote-elements": "npm:0.2.0-alpha.181"
+    "@mittwald/ext-bridge": "npm:0.2.0-alpha.187"
+    "@mittwald/flow-remote-core": "npm:0.2.0-alpha.187"
+    "@mittwald/flow-remote-elements": "npm:0.2.0-alpha.187"
     "@mittwald/react-use-promise": "npm:^3.0.4"
     "@mittwald/remote-dom-react": "npm:1.2.2-mittwald.3"
     "@types/react": "npm:^19"
@@ -3068,32 +3068,32 @@ __metadata:
   peerDependenciesMeta:
     react-hook-form:
       optional: true
-  checksum: 10c0/948220530e3086933483ec64c61c8407cc334a65af0d0495b47230bd58be0ce9d7b3e9fe139ec8068013e5732d425cc4a739d9ff2d8c6fead4e45e1bf4ed689a
+  checksum: 10c0/c535610d7caf0880f3c972cbf23fdbe93e54a6260203f49dc88876032b2bce149a1542c09eb1c930cd321a1c1f8e16811b0463abd43931164b10cbeabba6ccbb
   languageName: node
   linkType: hard
 
-"@mittwald/mstudio-ext-react-components@npm:0.2.0-alpha.181":
-  version: 0.2.0-alpha.181
-  resolution: "@mittwald/mstudio-ext-react-components@npm:0.2.0-alpha.181"
+"@mittwald/mstudio-ext-react-components@npm:0.2.0-alpha.187":
+  version: 0.2.0-alpha.187
+  resolution: "@mittwald/mstudio-ext-react-components@npm:0.2.0-alpha.187"
   dependencies:
-    "@mittwald/flow-remote-react-components": "npm:0.2.0-alpha.181"
+    "@mittwald/flow-remote-react-components": "npm:0.2.0-alpha.187"
     "@types/react": "npm:^19"
   peerDependencies:
     react: ^19
-  checksum: 10c0/1f09492f0f130f8a76ae533fa3d38c78b88fd427325836da211f2f4b9df01e94254b4fbc2b1a7e5a906d3806edf0854481004566748852917a307e094014d075
+  checksum: 10c0/52393feced816117d2067736b2732b559d80e188dedd821ac5c3ec530af2f273aa0c4dca0299e3140e100cc9c9bcd6dd90343555210c18b4c33977195fca72a8
   languageName: node
   linkType: hard
 
-"@mittwald/react-tunnel@npm:0.2.0-alpha.181":
-  version: 0.2.0-alpha.181
-  resolution: "@mittwald/react-tunnel@npm:0.2.0-alpha.181"
+"@mittwald/react-tunnel@npm:0.2.0-alpha.187":
+  version: 0.2.0-alpha.187
+  resolution: "@mittwald/react-tunnel@npm:0.2.0-alpha.187"
   dependencies:
     mobx: "npm:^6.13.6"
     mobx-react-lite: "npm:^4.1.0"
   peerDependencies:
     react: ^19
     react-dom: ^19
-  checksum: 10c0/de93f1cb8c53790d779b8e67fd9fc38e98f040dfbc6263ad48c19bc5545ba68fe172cc87b66a75fbf3d390251751ad3fe88460eab7ec8f3968887b6e16ac2842
+  checksum: 10c0/54a84ec614b4fd0772364db4ef04c92ffa9311c91de0c516248e476733bb8a8e01893f6ccf1977044c153c3e7abbad372db582ddfe444b31f2e18ac9c6ae3cef
   languageName: node
   linkType: hard
 
@@ -10133,6 +10133,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"es-toolkit@npm:^1.37.1":
+  version: 1.38.0
+  resolution: "es-toolkit@npm:1.38.0"
+  dependenciesMeta:
+    "@trivago/prettier-plugin-sort-imports@4.3.0":
+      unplugged: true
+    prettier-plugin-sort-re-exports@0.0.1:
+      unplugged: true
+  checksum: 10c0/1bffc2d8dbe8db45969cf6674a674bdf9d40d803c923b01645b8a433f43f9304b1d369b6cde2a6ef3889a5aa71ddc741bf8e4103b4d4b48a366e04b4b3d30519
+  languageName: node
+  linkType: hard
+
 "esbuild@npm:0.19.11":
   version: 0.19.11
   resolution: "esbuild@npm:0.19.11"
@@ -11065,10 +11077,10 @@ __metadata:
   dependencies:
     "@eslint/js": "npm:^9.19.0"
     "@mittwald/api-client": "npm:^4.131.0"
-    "@mittwald/ext-bridge": "npm:0.2.0-alpha.181"
-    "@mittwald/flow-remote-react-components": "npm:0.2.0-alpha.181"
-    "@mittwald/flow-remote-react-renderer": "npm:0.2.0-alpha.181"
-    "@mittwald/mstudio-ext-react-components": "npm:0.2.0-alpha.181"
+    "@mittwald/ext-bridge": "npm:0.2.0-alpha.187"
+    "@mittwald/flow-remote-react-components": "npm:0.2.0-alpha.187"
+    "@mittwald/flow-remote-react-renderer": "npm:0.2.0-alpha.187"
+    "@mittwald/mstudio-ext-react-components": "npm:0.2.0-alpha.187"
     "@tabler/icons-react": "npm:^3.29.0"
     "@tanstack/react-router": "npm:1.116.0"
     "@tanstack/react-start": "npm:1.116.0"
@@ -13354,7 +13366,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.20, lodash@npm:^4.17.21":
+"lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.20":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 10c0/d8cbea072bb08655bb4c989da418994b073a608dffa608b09ac04b43a791b12aeae7cd7ad919aa4c925f33b48490b5cfe6c1f71d827956071dae2e7bb3a6b74c
@@ -16462,16 +16474,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"recharts@npm:3.0.0-alpha.9":
-  version: 3.0.0-alpha.9
-  resolution: "recharts@npm:3.0.0-alpha.9"
+"recharts@npm:3.0.0-beta.1":
+  version: 3.0.0-beta.1
+  resolution: "recharts@npm:3.0.0-beta.1"
   dependencies:
     "@reduxjs/toolkit": "npm:1.x.x || 2.x.x"
     clsx: "npm:^2.1.1"
     decimal.js-light: "npm:^2.5.1"
+    es-toolkit: "npm:^1.37.1"
     eventemitter3: "npm:^5.0.1"
     immer: "npm:^10.1.1"
-    lodash: "npm:^4.17.21"
     react: "npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
     react-dom: "npm:^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
     react-is: "npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
@@ -16481,7 +16493,7 @@ __metadata:
     tiny-invariant: "npm:^1.3.3"
     use-sync-external-store: "npm:^1.2.2"
     victory-vendor: "npm:^37.0.2"
-  checksum: 10c0/d91c9f0bb946e0c14c52d58cfbe8a830cfc7846866b8a1ee5636e71d4ffb49523ae530227135381ac6a65941416206d949169e206aeda0966b48e17fbc3c62da
+  checksum: 10c0/db36457b6c404800af8d014c0859da4492c06919fed74aedad4e5b502489e98a16d6017f0d75424ba33987c42963b9b7a00427f10debba489b4da14e9cd99738
   languageName: node
   linkType: hard
 

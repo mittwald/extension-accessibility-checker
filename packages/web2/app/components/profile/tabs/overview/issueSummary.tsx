@@ -19,7 +19,7 @@ export function IssueSummary({ profile }: { profile: ScanProfile }) {
           {profile.issueSummary?.errors === 0 ? (
             <Text>🎉 🥳</Text>
           ) : (
-            <Text align="center">
+            <Text align="center" wrap="balance">
               Kritische Fehler, die mit höchster Priorität behoben werden
               sollten
             </Text>
@@ -32,7 +32,7 @@ export function IssueSummary({ profile }: { profile: ScanProfile }) {
             <Text>{profile.issueSummary?.warnings}</Text>
             <Text>Warnungen</Text>
           </BigNumber>
-          <Text align="center">
+          <Text align="center" wrap="balance">
             Punkte, die überprüft und bei Bedarf verbessert werden sollten
           </Text>
         </Flex>
