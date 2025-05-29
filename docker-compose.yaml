@@ -1,0 +1,56 @@
+services:
+  mongo:
+    image: mongo:5
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data-a11y-checker:/data/db
+
+  executor:
+    container_name: executor
+    build:
+      context: .
+      dockerfile: ./packages/executor/Dockerfile
+    restart: unless-stopped
+    shm_size: "2gb"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/extension-a11y-checker
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
+      - DEBUG="*"
+    depends_on:
+      - mongo
+
+  frontend.web:
+    container_name: a11y-checker
+    build:
+      context: .
+      dockerfile: ./packages/web2/Dockerfile
+    restart: unless-stopped
+    environment:
+      - MITTWALD_KEY_PROVIDER_API_URL=http://dev-marketplace:8080
+      - MONGODB_URI=mongodb://mongo:27017/extension-a11y-checker
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
+      - DEBUG=*
+    ports:
+      - "3042:3000"
+    depends_on:
+      - mongo
+
+  dev-marketplace:
+    container_name: dev-marketplace
+    image: mittwald/marketplace-local-dev-server
+    environment:
+      - DEVSRV_HTTP_TIMEOUT=4s
+      - DEVSRV_HTTP_SKIPTLSVERIFICATION=true
+      - DEVSRV_BACKEND_EXTENSIONADDEDTOCONTEXT=http://frontend.web:3000/api/webhooks/extension-added
+      - DEVSRV_BACKEND_EXTENSIONINSTANCEUPDATED=http://frontend.web:3000/api/webhooks/instance-updated
+      - DEVSRV_BACKEND_EXTENSIONINSTANCESECRETROTATED=http://frontend.web:3000/api/webhooks/secret-rotated
+      - DEVSRV_BACKEND_EXTENSIONINSTANCEREMOVEDFROMCONTEXT=http://frontend.web:3000/api/webhooks/instance-removed
+    ports:
+      - "8080:8080"
+
+volumes:
+  mongo-data-a11y-checker:

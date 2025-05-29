@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.nx" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/web2/.output" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/web2/.vinxi" />
+      <excludePattern pattern="yarm.lock" />
+      <excludePattern pattern="tsconfig.tsbuildinfo" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

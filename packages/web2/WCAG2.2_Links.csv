@@ -1,0 +1,87 @@
+Guideline,Understanding,"How to meet"
+1.1 Text Alternatives,https://www.w3.org/WAI/WCAG22/Understanding/text-alternatives,https://www.w3.org/WAI/WCAG22/quickref/#text-alternatives
+1.1.1 Non-text Content,https://www.w3.org/WAI/WCAG22/Understanding/non-text-content,https://www.w3.org/WAI/WCAG22/quickref/#non-text-content
+1.2 Time-based Media,https://www.w3.org/WAI/WCAG22/Understanding/time-based-media,https://www.w3.org/WAI/WCAG22/quickref/#time-based-media
+1.2.1 Audio-only and Video-only (Prerecorded),https://www.w3.org/WAI/WCAG22/Understanding/audio-only-and-video-only-prerecorded,https://www.w3.org/WAI/WCAG22/quickref/#audio-only-and-video-only-prerecorded
+1.2.2 Captions (Prerecorded),https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded,https://www.w3.org/WAI/WCAG22/quickref/#captions-prerecorded
+1.2.3 Audio Description or Media Alternative (Prerecorded),https://www.w3.org/WAI/WCAG22/Understanding/audio-description-or-media-alternative-prerecorded,https://www.w3.org/WAI/WCAG22/quickref/#audio-description-or-media-alternative-prerecorded
+1.2.4 Captions (Live),https://www.w3.org/WAI/WCAG22/Understanding/captions-live,https://www.w3.org/WAI/WCAG22/quickref/#captions-live
+1.2.5 Audio Description (Prerecorded),https://www.w3.org/WAI/WCAG22/Understanding/audio-description-prerecorded,https://www.w3.org/WAI/WCAG22/quickref/#audio-description-prerecorded
+1.2.6 Sign Language (Prerecorded),https://www.w3.org/WAI/WCAG22/Understanding/sign-language-prerecorded,https://www.w3.org/WAI/WCAG22/quickref/#sign-language-prerecorded
+1.2.7 Extended Audio Description (Prerecorded),https://www.w3.org/WAI/WCAG22/Understanding/extended-audio-description-prerecorded,https://www.w3.org/WAI/WCAG22/quickref/#extended-audio-description-prerecorded
+1.2.8 Media Alternative (Prerecorded),https://www.w3.org/WAI/WCAG22/Understanding/media-alternative-prerecorded,https://www.w3.org/WAI/WCAG22/quickref/#media-alternative-prerecorded
+1.2.9 Audio-only (Live),https://www.w3.org/WAI/WCAG22/Understanding/audio-only-live,https://www.w3.org/WAI/WCAG22/quickref/#audio-only-live
+1.3 Adaptable,https://www.w3.org/WAI/WCAG22/Understanding/adaptable,https://www.w3.org/WAI/WCAG22/quickref/#adaptable
+1.3.1 Info and Relationships,https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships,https://www.w3.org/WAI/WCAG22/quickref/#info-and-relationships
+1.3.2 Meaningful Sequence,https://www.w3.org/WAI/WCAG22/Understanding/meaningful-sequence,https://www.w3.org/WAI/WCAG22/quickref/#meaningful-sequence
+1.3.3 Sensory Characteristics,https://www.w3.org/WAI/WCAG22/Understanding/sensory-characteristics,https://www.w3.org/WAI/WCAG22/quickref/#sensory-characteristics
+1.3.4 Orientation,https://www.w3.org/WAI/WCAG22/Understanding/orientation,https://www.w3.org/WAI/WCAG22/quickref/#orientation
+1.3.5 Identify Input Purpose,https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose,https://www.w3.org/WAI/WCAG22/quickref/#identify-input-purpose
+1.3.6 Identify Purpose,https://www.w3.org/WAI/WCAG22/Understanding/identify-purpose,https://www.w3.org/WAI/WCAG22/quickref/#identify-purpose
+1.4 Distinguishable,https://www.w3.org/WAI/WCAG22/Understanding/distinguishable,https://www.w3.org/WAI/WCAG22/quickref/#distinguishable
+1.4.1 Use of Color,https://www.w3.org/WAI/WCAG22/Understanding/use-of-color,https://www.w3.org/WAI/WCAG22/quickref/#use-of-color
+1.4.2 Audio Control,https://www.w3.org/WAI/WCAG22/Understanding/audio-control,https://www.w3.org/WAI/WCAG22/quickref/#audio-control
+1.4.3 Contrast (Minimum),https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum,https://www.w3.org/WAI/WCAG22/quickref/#contrast-minimum
+1.4.4 Resize Text,https://www.w3.org/WAI/WCAG22/Understanding/resize-text,https://www.w3.org/WAI/WCAG22/quickref/#resize-text
+1.4.5 Images of Text,https://www.w3.org/WAI/WCAG22/Understanding/images-of-text,https://www.w3.org/WAI/WCAG22/quickref/#images-of-text
+1.4.6 Contrast (Enhanced),https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced,https://www.w3.org/WAI/WCAG22/quickref/#contrast-enhanced
+1.4.7 Low or No Background Audio,https://www.w3.org/WAI/WCAG22/Understanding/low-or-no-background-audio,https://www.w3.org/WAI/WCAG22/quickref/#low-or-no-background-audio
+1.4.8 Visual Presentation,https://www.w3.org/WAI/WCAG22/Understanding/visual-presentation,https://www.w3.org/WAI/WCAG22/quickref/#visual-presentation
+1.4.9 Images of Text (No Exception),https://www.w3.org/WAI/WCAG22/Understanding/images-of-text-no-exception,https://www.w3.org/WAI/WCAG22/quickref/#images-of-text-no-exception
+1.4.10 Reflow,https://www.w3.org/WAI/WCAG22/Understanding/reflow,https://www.w3.org/WAI/WCAG22/quickref/#reflow
+1.4.11 Non-text Contrast,https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast,https://www.w3.org/WAI/WCAG22/quickref/#non-text-contrast
+1.4.12 Text Spacing,https://www.w3.org/WAI/WCAG22/Understanding/text-spacing,https://www.w3.org/WAI/WCAG22/quickref/#text-spacing
+1.4.13 Content on Hover or Focus,https://www.w3.org/WAI/WCAG22/Understanding/content-on-hover-or-focus,https://www.w3.org/WAI/WCAG22/quickref/#content-on-hover-or-focus
+2.1 Keyboard Accessible,https://www.w3.org/WAI/WCAG22/Understanding/keyboard-accessible,https://www.w3.org/WAI/WCAG22/quickref/#keyboard-accessible
+2.1.1 Keyboard,https://www.w3.org/WAI/WCAG22/Understanding/keyboard,https://www.w3.org/WAI/WCAG22/quickref/#keyboard
+2.1.2 No Keyboard Trap,https://www.w3.org/WAI/WCAG22/Understanding/no-keyboard-trap,https://www.w3.org/WAI/WCAG22/quickref/#no-keyboard-trap
+2.1.3 Keyboard (No Exception),https://www.w3.org/WAI/WCAG22/Understanding/keyboard-no-exception,https://www.w3.org/WAI/WCAG22/quickref/#keyboard-no-exception
+2.2 Enough Time,https://www.w3.org/WAI/WCAG22/Understanding/enough-time,https://www.w3.org/WAI/WCAG22/quickref/#enough-time
+2.2.1 Timing Adjustable,https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable,https://www.w3.org/WAI/WCAG22/quickref/#timing-adjustable
+"2.2.2 Pause, Stop, Hide",https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide,https://www.w3.org/WAI/WCAG22/quickref/#pause-stop-hide
+2.2.3 No Timing,https://www.w3.org/WAI/WCAG22/Understanding/no-timing,https://www.w3.org/WAI/WCAG22/quickref/#no-timing
+2.2.4 Interruptions,https://www.w3.org/WAI/WCAG22/Understanding/interruptions,https://www.w3.org/WAI/WCAG22/quickref/#interruptions
+2.2.5 Re-authenticating,https://www.w3.org/WAI/WCAG22/Understanding/re-authenticating,https://www.w3.org/WAI/WCAG22/quickref/#re-authenticating
+2.2.6 Timeouts,https://www.w3.org/WAI/WCAG22/Understanding/timeouts,https://www.w3.org/WAI/WCAG22/quickref/#timeouts
+2.3 Seizures and Physical Reactions,https://www.w3.org/WAI/WCAG22/Understanding/seizures-and-physical-reactions,https://www.w3.org/WAI/WCAG22/quickref/#seizures-and-physical-reactions
+2.3.1 Three Flashes or Below Threshold,https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold,https://www.w3.org/WAI/WCAG22/quickref/#three-flashes-or-below-threshold
+2.3.2 Three Flashes,https://www.w3.org/WAI/WCAG22/Understanding/three-flashes,https://www.w3.org/WAI/WCAG22/quickref/#three-flashes
+2.3.3 Animation from Interactions,https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions,https://www.w3.org/WAI/WCAG22/quickref/#animation-from-interactions
+2.4 Navigable,https://www.w3.org/WAI/WCAG22/Understanding/navigable,https://www.w3.org/WAI/WCAG22/quickref/#navigable
+2.4.1 Bypass Blocks,https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks,https://www.w3.org/WAI/WCAG22/quickref/#bypass-blocks
+2.4.2 Page Titled,https://www.w3.org/WAI/WCAG22/Understanding/page-titled,https://www.w3.org/WAI/WCAG22/quickref/#page-titled
+2.4.3 Focus Order,https://www.w3.org/WAI/WCAG22/Understanding/focus-order,https://www.w3.org/WAI/WCAG22/quickref/#focus-order
+2.4.4 Link Purpose (In Context),https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context,https://www.w3.org/WAI/WCAG22/quickref/#link-purpose-in-context
+2.4.5 Multiple Ways,https://www.w3.org/WAI/WCAG22/Understanding/multiple-ways,https://www.w3.org/WAI/WCAG22/quickref/#multiple-ways
+2.4.6 Headings and Labels,https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels,https://www.w3.org/WAI/WCAG22/quickref/#headings-and-labels
+2.4.7 Focus Visible,https://www.w3.org/WAI/WCAG22/Understanding/focus-visible,https://www.w3.org/WAI/WCAG22/quickref/#focus-visible
+2.4.8 Location,https://www.w3.org/WAI/WCAG22/Understanding/location,https://www.w3.org/WAI/WCAG22/quickref/#location
+2.4.9 Link Purpose (Link Only),https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-link-only,https://www.w3.org/WAI/WCAG22/quickref/#link-purpose-link-only
+2.4.10 Section Headings,https://www.w3.org/WAI/WCAG22/Understanding/section-headings,https://www.w3.org/WAI/WCAG22/quickref/#section-headings
+2.4.11 Focus Appearance (Minimum),https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance-minimum,https://www.w3.org/WAI/WCAG22/quickref/#focus-appearance-minimum
+2.4.12 Focus Appearance (Enhanced),https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance-enhanced,https://www.w3.org/WAI/WCAG22/quickref/#focus-appearance-enhanced
+2.4.13 Page Break Navigation,https://www.w3.org/WAI/WCAG22/Understanding/page-break-navigation,https://www.w3.org/WAI/WCAG22/quickref/#page-break-navigation
+3.1 Readable,https://www.w3.org/WAI/WCAG22/Understanding/readable,https://www.w3.org/WAI/WCAG22/quickref/#readable
+3.1.1 Language of Page,https://www.w3.org/WAI/WCAG22/Understanding/language-of-page,https://www.w3.org/WAI/WCAG22/quickref/#language-of-page
+3.1.2 Language of Parts,https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts,https://www.w3.org/WAI/WCAG22/quickref/#language-of-parts
+3.1.3 Unusual Words,https://www.w3.org/WAI/WCAG22/Understanding/unusual-words,https://www.w3.org/WAI/WCAG22/quickref/#unusual-words
+3.1.4 Abbreviations,https://www.w3.org/WAI/WCAG22/Understanding/abbreviations,https://www.w3.org/WAI/WCAG22/quickref/#abbreviations
+3.1.5 Reading Level,https://www.w3.org/WAI/WCAG22/Understanding/reading-level,https://www.w3.org/WAI/WCAG22/quickref/#reading-level
+3.1.6 Pronunciation,https://www.w3.org/WAI/WCAG22/Understanding/pronunciation,https://www.w3.org/WAI/WCAG22/quickref/#pronunciation
+3.2 Predictable,https://www.w3.org/WAI/WCAG22/Understanding/predictable,https://www.w3.org/WAI/WCAG22/quickref/#predictable
+3.2.1 On Focus,https://www.w3.org/WAI/WCAG22/Understanding/on-focus,https://www.w3.org/WAI/WCAG22/quickref/#on-focus
+3.2.2 On Input,https://www.w3.org/WAI/WCAG22/Understanding/on-input,https://www.w3.org/WAI/WCAG22/quickref/#on-input
+3.2.3 Consistent Navigation,https://www.w3.org/WAI/WCAG22/Understanding/consistent-navigation,https://www.w3.org/WAI/WCAG22/quickref/#consistent-navigation
+3.2.4 Consistent Identification,https://www.w3.org/WAI/WCAG22/Understanding/consistent-identification,https://www.w3.org/WAI/WCAG22/quickref/#consistent-identification
+3.2.5 Change on Request,https://www.w3.org/WAI/WCAG22/Understanding/change-on-request,https://www.w3.org/WAI/WCAG22/quickref/#change-on-request
+3.3 Input Assistance,https://www.w3.org/WAI/WCAG22/Understanding/input-assistance,https://www.w3.org/WAI/WCAG22/quickref/#input-assistance
+3.3.1 Error Identification,https://www.w3.org/WAI/WCAG22/Understanding/error-identification,https://www.w3.org/WAI/WCAG22/quickref/#error-identification
+3.3.2 Labels or Instructions,https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions,https://www.w3.org/WAI/WCAG22/quickref/#labels-or-instructions
+3.3.3 Error Suggestion,https://www.w3.org/WAI/WCAG22/Understanding/error-suggestion,https://www.w3.org/WAI/WCAG22/quickref/#error-suggestion
+"3.3.4 Error Prevention (Legal, Financial, Data)",https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-legal-financial-data,https://www.w3.org/WAI/WCAG22/quickref/#error-prevention-legal-financial-data
+3.3.5 Help,https://www.w3.org/WAI/WCAG22/Understanding/help,https://www.w3.org/WAI/WCAG22/quickref/#help
+3.3.6 Error Prevention (All),https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-all,https://www.w3.org/WAI/WCAG22/quickref/#error-prevention-all
+4.1 Compatible,https://www.w3.org/WAI/WCAG22/Understanding/compatible,https://www.w3.org/WAI/WCAG22/quickref/#compatible
+4.1.1 Parsing,https://www.w3.org/WAI/WCAG22/Understanding/parsing,https://www.w3.org/WAI/WCAG22/quickref/#parsing
+"4.1.2 Name, Role, Value",https://www.w3.org/WAI/WCAG22/Understanding/name-role-value,https://www.w3.org/WAI/WCAG22/quickref/#name-role-value
+4.1.3 Status Messages,https://www.w3.org/WAI/WCAG22/Understanding/status-messages,https://www.w3.org/WAI/WCAG22/quickref/#status-messages

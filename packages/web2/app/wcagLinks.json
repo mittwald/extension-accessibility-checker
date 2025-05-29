@@ -1,0 +1,583 @@
+{
+  "1.1": {
+    "label": "Text Alternatives",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/text-alternatives",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#text-alternatives"
+  },
+  "1.1.1": {
+    "label": "Non-text Content",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-content",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#non-text-content",
+    "wcagLevel": "A"
+  },
+  "1.2": {
+    "label": "Time-based Media",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/time-based-media",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#time-based-media"
+  },
+  "1.2.1": {
+    "label": "Audio-only and Video-only (Prerecorded)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/audio-only-and-video-only-prerecorded",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#audio-only-and-video-only-prerecorded",
+    "wcagLevel": "A"
+  },
+  "1.2.2": {
+    "label": "Captions (Prerecorded)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#captions-prerecorded",
+    "wcagLevel": "A"
+  },
+  "1.2.3": {
+    "label": "Audio Description or Media Alternative (Prerecorded)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/audio-description-or-media-alternative-prerecorded",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#audio-description-or-media-alternative-prerecorded",
+    "wcagLevel": "AA"
+  },
+  "1.2.4": {
+    "label": "Captions (Live)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/captions-live",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#captions-live",
+    "wcagLevel": "AA"
+  },
+  "1.2.5": {
+    "label": "Audio Description (Prerecorded)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/audio-description-prerecorded",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#audio-description-prerecorded",
+    "wcagLevel": "AAA"
+  },
+  "1.2.6": {
+    "label": "Sign Language (Prerecorded)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/sign-language-prerecorded",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#sign-language-prerecorded",
+    "wcagLevel": "AAA"
+  },
+  "1.2.7": {
+    "label": "Extended Audio Description (Prerecorded)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/extended-audio-description-prerecorded",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#extended-audio-description-prerecorded",
+    "wcagLevel": "AAA"
+  },
+  "1.2.8": {
+    "label": "Media Alternative (Prerecorded)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/media-alternative-prerecorded",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#media-alternative-prerecorded",
+    "wcagLevel": "AAA"
+  },
+  "1.2.9": {
+    "label": "Audio-only (Live)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/audio-only-live",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#audio-only-live",
+    "wcagLevel": "AAA"
+  },
+  "1.3": {
+    "label": "Adaptable",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/adaptable",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#adaptable"
+  },
+  "1.3.1": {
+    "label": "Info and Relationships",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#info-and-relationships",
+    "wcagLevel": "A"
+  },
+  "1.3.2": {
+    "label": "Meaningful Sequence",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/meaningful-sequence",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#meaningful-sequence",
+    "wcagLevel": "A"
+  },
+  "1.3.3": {
+    "label": "Sensory Characteristics",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/sensory-characteristics",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#sensory-characteristics",
+    "wcagLevel": "AA"
+  },
+  "1.3.4": {
+    "label": "Orientation",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/orientation",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#orientation",
+    "wcagLevel": "AA"
+  },
+  "1.3.5": {
+    "label": "Identify Input Purpose",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#identify-input-purpose",
+    "wcagLevel": "AAA"
+  },
+  "1.3.6": {
+    "label": "Identify Purpose",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/identify-purpose",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#identify-purpose",
+    "wcagLevel": "AAA"
+  },
+  "1.4": {
+    "label": "Distinguishable",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/distinguishable",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#distinguishable"
+  },
+  "1.4.1": {
+    "label": "Use of Color",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#use-of-color",
+    "wcagLevel": "A"
+  },
+  "1.4.2": {
+    "label": "Audio Control",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/audio-control",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#audio-control",
+    "wcagLevel": "A"
+  },
+  "1.4.3": {
+    "label": "Contrast (Minimum)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#contrast-minimum",
+    "wcagLevel": "AA"
+  },
+  "1.4.4": {
+    "label": "Resize Text",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/resize-text",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#resize-text",
+    "wcagLevel": "AA"
+  },
+  "1.4.5": {
+    "label": "Images of Text",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/images-of-text",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#images-of-text",
+    "wcagLevel": "AAA"
+  },
+  "1.4.6": {
+    "label": "Contrast (Enhanced)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#contrast-enhanced",
+    "wcagLevel": "AAA"
+  },
+  "1.4.7": {
+    "label": "Low or No Background Audio",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/low-or-no-background-audio",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#low-or-no-background-audio",
+    "wcagLevel": "AAA"
+  },
+  "1.4.8": {
+    "label": "Visual Presentation",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/visual-presentation",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#visual-presentation",
+    "wcagLevel": "AAA"
+  },
+  "1.4.9": {
+    "label": "Images of Text (No Exception)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/images-of-text-no-exception",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#images-of-text-no-exception",
+    "wcagLevel": "AAA"
+  },
+  "1.4.10": {
+    "label": "Reflow",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/reflow",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#reflow",
+    "wcagLevel": "AA"
+  },
+  "1.4.11": {
+    "label": "Non-text Contrast",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#non-text-contrast",
+    "wcagLevel": "AA"
+  },
+  "1.4.12": {
+    "label": "Text Spacing",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/text-spacing",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#text-spacing",
+    "wcagLevel": "AA"
+  },
+  "1.4.13": {
+    "label": "Content on Hover or Focus",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/content-on-hover-or-focus",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#content-on-hover-or-focus",
+    "wcagLevel": "AA"
+  },
+  "2.1": {
+    "label": "Keyboard Accessible",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard-accessible",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#keyboard-accessible"
+  },
+  "2.1.1": {
+    "label": "Keyboard",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#keyboard",
+    "wcagLevel": "A"
+  },
+  "2.1.2": {
+    "label": "No Keyboard Trap",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/no-keyboard-trap",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#no-keyboard-trap",
+    "wcagLevel": "A"
+  },
+  "2.1.3": {
+    "label": "Keyboard (No Exception)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard-no-exception",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#keyboard-no-exception",
+    "wcagLevel": "AAA"
+  },
+  "2.1.4": {
+    "label": "Character Key Shortcuts",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/character-key-shortcuts",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#character-key-shortcuts",
+    "wcagLevel": "AA"
+  },
+  "2.2": {
+    "label": "Enough Time",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/enough-time",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#enough-time"
+  },
+  "2.2.1": {
+    "label": "Timing Adjustable",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#timing-adjustable",
+    "wcagLevel": "A"
+  },
+  "2.2.2": {
+    "label": "Pause, Stop, Hide",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#pause-stop-hide",
+    "wcagLevel": "A"
+  },
+  "2.2.3": {
+    "label": "No Timing",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/no-timing",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#no-timing",
+    "wcagLevel": "AAA"
+  },
+  "2.2.4": {
+    "label": "Interruptions",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/interruptions",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#interruptions",
+    "wcagLevel": "AAA"
+  },
+  "2.2.5": {
+    "label": "Re-authenticating",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/re-authenticating",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#re-authenticating",
+    "wcagLevel": "AAA"
+  },
+  "2.2.6": {
+    "label": "Timeouts",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/timeouts",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#timeouts",
+    "wcagLevel": "AAA"
+  },
+  "2.3": {
+    "label": "Seizures and Physical Reactions",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/seizures-and-physical-reactions",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#seizures-and-physical-reactions"
+  },
+  "2.3.1": {
+    "label": "Three Flashes or Below Threshold",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#three-flashes-or-below-threshold",
+    "wcagLevel": "A"
+  },
+  "2.3.2": {
+    "label": "Three Flashes",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/three-flashes",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#three-flashes",
+    "wcagLevel": "AAA"
+  },
+  "2.3.3": {
+    "label": "Animation from Interactions",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#animation-from-interactions",
+    "wcagLevel": "AAA"
+  },
+  "2.4": {
+    "label": "Navigable",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/navigable",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#navigable"
+  },
+  "2.4.1": {
+    "label": "Bypass Blocks",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#bypass-blocks",
+    "wcagLevel": "A"
+  },
+  "2.4.2": {
+    "label": "Page Titled",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/page-titled",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#page-titled",
+    "wcagLevel": "A"
+  },
+  "2.4.3": {
+    "label": "Focus Order",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#focus-order",
+    "wcagLevel": "A"
+  },
+  "2.4.4": {
+    "label": "Link Purpose (In Context)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#link-purpose-in-context",
+    "wcagLevel": "A"
+  },
+  "2.4.5": {
+    "label": "Multiple Ways",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/multiple-ways",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#multiple-ways",
+    "wcagLevel": "AA"
+  },
+  "2.4.6": {
+    "label": "Headings and Labels",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#headings-and-labels",
+    "wcagLevel": "AA"
+  },
+  "2.4.7": {
+    "label": "Focus Visible",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#focus-visible",
+    "wcagLevel": "AA"
+  },
+  "2.4.8": {
+    "label": "Location",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/location",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#location",
+    "wcagLevel": "AAA"
+  },
+  "2.4.9": {
+    "label": "Link Purpose (Link Only)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-link-only",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#link-purpose-link-only",
+    "wcagLevel": "AAA"
+  },
+  "2.4.10": {
+    "label": "Section Headings",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/section-headings",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#section-headings",
+    "wcagLevel": "AAA"
+  },
+  "2.4.11": {
+    "label": "Focus Appearance (Minimum)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance-minimum",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#focus-appearance-minimum",
+    "wcagLevel": "AA"
+  },
+  "2.4.12": {
+    "label": "Focus Appearance (Enhanced)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance-enhanced",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#focus-appearance-enhanced",
+    "wcagLevel": "AAA"
+  },
+  "2.4.13": {
+    "label": "Page Break Navigation",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/page-break-navigation",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#page-break-navigation",
+    "wcagLevel": "AAA"
+  },
+  "2.5": {
+    "label": "Input Modalities",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/input-modalities",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#input-modalities"
+  },
+  "2.5.1": {
+    "label": "Pointer Gestures",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/pointer-gestures",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#pointer-gestures",
+    "wcagLevel": "A"
+  },
+  "2.5.2": {
+    "label": "Pointer Cancellation",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/pointer-cancellation",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#pointer-cancellation",
+    "wcagLevel": "A"
+  },
+  "2.5.3": {
+    "label": "Label in Name",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/label-in-name",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#label-in-name",
+    "wcagLevel": "A"
+  },
+  "2.5.4": {
+    "label": "Motion Actuation",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/motion-actuation",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#motion-actuation",
+    "wcagLevel": "AA"
+  },
+  "2.5.5": {
+    "label": "Target Size (Enhanced)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#target-size-enhanced",
+    "wcagLevel": "AAA"
+  },
+  "2.5.6": {
+    "label": "Concurrent Input Mechanisms",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/concurrent-input-mechanisms",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#concurrent-input-mechanisms",
+    "wcagLevel": "AAA"
+  },
+  "2.5.7": {
+    "label": "Dragging Movements",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#dragging-movements",
+    "wcagLevel": "AA"
+  },
+  "2.5.8": {
+    "label": "Target Size (Minimum)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#target-size-minimum",
+    "wcagLevel": "AA"
+  },
+  "3.1": {
+    "label": "Readable",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/readable",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#readable"
+  },
+  "3.1.1": {
+    "label": "Language of Page",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/language-of-page",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#language-of-page",
+    "wcagLevel": "A"
+  },
+  "3.1.2": {
+    "label": "Language of Parts",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#language-of-parts",
+    "wcagLevel": "AA"
+  },
+  "3.1.3": {
+    "label": "Unusual Words",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/unusual-words",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#unusual-words",
+    "wcagLevel": "AAA"
+  },
+  "3.1.4": {
+    "label": "Abbreviations",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/abbreviations",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#abbreviations",
+    "wcagLevel": "AAA"
+  },
+  "3.1.5": {
+    "label": "Reading Level",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/reading-level",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#reading-level",
+    "wcagLevel": "AAA"
+  },
+  "3.1.6": {
+    "label": "Pronunciation",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/pronunciation",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#pronunciation",
+    "wcagLevel": "AAA"
+  },
+  "3.2": {
+    "label": "Predictable",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/predictable",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#predictable"
+  },
+  "3.2.1": {
+    "label": "On Focus",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/on-focus",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#on-focus",
+    "wcagLevel": "A"
+  },
+  "3.2.2": {
+    "label": "On Input",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/on-input",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#on-input",
+    "wcagLevel": "A"
+  },
+  "3.2.3": {
+    "label": "Consistent Navigation",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/consistent-navigation",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#consistent-navigation",
+    "wcagLevel": "AA"
+  },
+  "3.2.4": {
+    "label": "Consistent Identification",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/consistent-identification",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#consistent-identification",
+    "wcagLevel": "AA"
+  },
+  "3.2.5": {
+    "label": "Change on Request",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/change-on-request",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#change-on-request",
+    "wcagLevel": "AAA"
+  },
+  "3.3": {
+    "label": "Input Assistance",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/input-assistance",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#input-assistance"
+  },
+  "3.3.1": {
+    "label": "Error Identification",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/error-identification",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#error-identification",
+    "wcagLevel": "A"
+  },
+  "3.3.2": {
+    "label": "Labels or Instructions",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#labels-or-instructions",
+    "wcagLevel": "A"
+  },
+  "3.3.3": {
+    "label": "Error Suggestion",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/error-suggestion",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#error-suggestion",
+    "wcagLevel": "AA"
+  },
+  "3.3.4": {
+    "label": "Error Prevention (Legal, Financial, Data)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-legal-financial-data",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#error-prevention-legal-financial-data",
+    "wcagLevel": "AA"
+  },
+  "3.3.5": {
+    "label": "Help",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/help",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#help",
+    "wcagLevel": "AAA"
+  },
+  "3.3.6": {
+    "label": "Error Prevention (All)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-all",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#error-prevention-all",
+    "wcagLevel": "AAA"
+  },
+  "3.3.7": {
+    "label": "Redundant Entry",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#redundant-entry",
+    "wcagLevel": "A"
+  },
+  "3.3.8": {
+    "label": "Accessible Authentication (Minimum)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#accessible-authentication-minimum",
+    "wcagLevel": "AA"
+  },
+  "3.3.9": {
+    "label": "Accessible Authentication (Enhanced)",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-enhanced",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#accessible-authentication-enhanced",
+    "wcagLevel": "AAA"
+  },
+  "4.1": {
+    "label": "Compatible",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/compatible",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#compatible"
+  },
+  "4.1.1": {
+    "label": "Parsing",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/parsing",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#parsing",
+    "wcagLevel": "A"
+  },
+  "4.1.2": {
+    "label": "Name, Role, Value",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#name-role-value",
+    "wcagLevel": "A"
+  },
+  "4.1.3": {
+    "label": "Status Messages",
+    "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/status-messages",
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#status-messages",
+    "wcagLevel": "AA"
+  }
+}

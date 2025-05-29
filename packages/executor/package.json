@@ -1,0 +1,36 @@
+{
+  "name": "extension-a11y-checker-executor",
+  "version": "0.1.0",
+  "author": {
+    "name": "Lukas Fritze",
+    "email": "l.fritze@mittwald.de"
+  },
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'yarn start'",
+    "build": "tsc",
+    "compile": "yarn build",
+    "start": "yarn build && LOG_LEVEL=debug DEBUG='*,-puppeteer:protocol*' MONGODB_URI=mongodb://localhost:27017/extension-a11y-checker node --no-experimental-require-module dist/index.js",
+    "format": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --write"
+  },
+  "dependencies": {
+    "extension-a11y-checker-storage": "workspace:*",
+    "lighthouse": "^12.3.0",
+    "node-cron": "^3.0.3",
+    "pa11y": "^8.0.0",
+    "pino": "^9.6.0",
+    "pino-pretty": "^13.0.0",
+    "puppeteer": "^24.2.1",
+    "reflect-metadata": "^0.2.2"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^20",
+    "@types/node-cron": "^3.0.11",
+    "eslint": "^9",
+    "nodemon": "^3.1.9",
+    "typescript": "^5"
+  },
+  "packageManager": "yarn@4.6.0"
+}
