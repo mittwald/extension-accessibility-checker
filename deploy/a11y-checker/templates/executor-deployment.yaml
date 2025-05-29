@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.executor.name }}
+  labels:
+    app: {{ .Values.executor.name }}
+spec:
+  replicas: {{ .Values.executor.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.executor.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.executor.name }}
+    spec:
+      shareProcessNamespace: true
+      containers:
+        - name: {{ .Values.executor.name }}
+          image: {{ .Values.executor.image.repository }}:{{.Values.executor.image.tag}}
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: {{ .Values.executor.resources.requests.cpu | default "100m" }}
+              memory: {{ .Values.executor.resources.requests.memory | default "128Mi" }}
+            limits:
+              cpu: {{ .Values.executor.resources.limits.cpu | default "500m" }}
+              memory: {{ .Values.executor.resources.limits.memory | default "512Mi" }}
+          env:
+            - name: NODE_ENV
+              value: development
+            - name: LOG_LEVEL
+              value: debug
+            - name: DEBUG
+              value: '*,-puppeteer:protocol*'
+            - name: MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: a11y-checker-secret
+                  key: mongo-uri

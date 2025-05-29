@@ -1,0 +1,13 @@
+webApp:
+  image:
+    repository: gitlab-registry.mittwald.it/coab-0x7e7/extensions/barriere-checker/web
+    tag: ~
+  ingress:
+    enabled: true
+    host: barriere-checker.extensions.mittwald.de
+
+executor:
+  image:
+    repository: gitlab-registry.mittwald.it/coab-0x7e7/extensions/barriere-checker/executor
+    tag: ~
+  replicaCount: 1
