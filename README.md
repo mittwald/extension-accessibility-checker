@@ -1,5 +1,27 @@
 # Accessibility-Checker – mStudio Extension
 
+> ️️⚠️️️️⚠️️️️⚠️️\
+> This is the private mittwald branch of this project\
+> ⚠️️️️⚠️️️️⚠️️
+
+The branch `main` is intended to be pushed to the
+[GitHub repository](https://github.com/mittwald/Extension-Barriere-Checker). The
+branch `mw` has the helmchart and is not intended to be pushed.
+
+To update the github branch run:
+
+```shell
+git remote add gh git@github.com:mittwald/Extension-Barriere-Checker.git
+git fetch gh
+git checkout mw
+git merge gh/main mw
+git push
+```
+
+This could be changed so that the docker image is built on GitHub and pushed in
+the github image registry. Then this repository can be changed to be a manifest
+repo only.
+
 ![](./barriere_checker_logo.png)
 
 ## Overview
