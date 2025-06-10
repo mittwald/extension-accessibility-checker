@@ -101,6 +101,18 @@ export class Scan {
     }).exec();
   }
 
+  public static async getNextPending(this: ReturnModelType<typeof Scan>) {
+    return this.findOneAndUpdate(
+      {
+        status: { $in: ["queued"] },
+        executionScheduledFor: { $lte: new Date() },
+      },
+      {
+        status: "running",
+      },
+    ).exec();
+  }
+
   public static async nextScanOfProfile(
     this: ReturnModelType<typeof Scan>,
     profileId: string | ObjectId,

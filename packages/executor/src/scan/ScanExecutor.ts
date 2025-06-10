@@ -6,22 +6,17 @@ import { logger } from "../logger.js";
 const log = logger.child({ module: "ScanExecutor" });
 
 export class ScanExecutor {
-  static async executePendingScans() {
-    const scans = await ScanModel.findPending();
-    if (scans.length === 0) {
+  static async executePendingScan() {
+    const scan = await ScanModel.getNextPending();
+    if (!scan) {
       log.trace("No scans found. Try again later.");
       return;
     }
-    log.info(`📋 Scans found to execute: ${scans.length}`);
+    log.info(`📋 Scan found to execute`);
 
-    log.debug(`Marking scans as running: ${scans.length}`);
-    await Promise.all(scans.map((s) => s.markAsRunning()));
-
-    log.debug("Starting Scans");
-    for (const scan of scans) {
-      await this.executeScan(scan);
-      await this.scheduleNextScan(scan);
-    }
+    log.debug("Starting Scan");
+    await this.executeScan(scan);
+    await this.scheduleNextScan(scan);
   }
 
   private static async executeScan(scan: DocumentType<Scan>) {

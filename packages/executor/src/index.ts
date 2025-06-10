@@ -14,7 +14,7 @@ async function main() {
 
   const execScans = async () => {
     log.trace("››› Starting scans...");
-    await ScanExecutor.executePendingScans();
+    await ScanExecutor.executePendingScan();
     log.trace("✓✓✓ Scans finished");
   };
 
