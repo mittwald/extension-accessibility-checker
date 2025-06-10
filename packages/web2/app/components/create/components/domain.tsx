@@ -11,8 +11,6 @@ import { FormValues } from "../types.ts";
 import { UseFormReturn } from "react-hook-form";
 
 export const Domain = ({ form }: { form: UseFormReturn<FormValues> }) => {
-  const domain = form.watch("domain");
-
   return (
     <Section>
       <Field
@@ -29,14 +27,14 @@ export const Domain = ({ form }: { form: UseFormReturn<FormValues> }) => {
       >
         <Text>Gib hier die Domain deiner Website ein.</Text>
         <TextField
-          value={domain}
           onChange={(value) => form.setValue("domain", value)}
           autoFocus={!form.getValues("domain")}
           isRequired
           onPaste={(event) => {
-            event.preventDefault();
             const data = event.clipboardData.getData("text");
-            form.setValue("domain", extractDomainFromUrl(data));
+            setTimeout(() => {
+              form.setValue("domain", extractDomainFromUrl(data));
+            });
           }}
         >
           <Label>Domain</Label>
