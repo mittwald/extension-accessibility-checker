@@ -26,7 +26,6 @@ export const PathsList = ({
 }) => {
   const [pathInputValue, setPathInputValue] = useState("/");
   const [touched, setTouched] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const paths = form.watch("paths");
 
@@ -53,11 +52,6 @@ export const PathsList = ({
     values.add(value);
     form.setValue("paths", values);
     setTouched(false);
-
-    if (inputRef.current) {
-      inputRef.current.select();
-      inputRef.current.focus();
-    }
   }
 
   const removePathFromFormValues = (value: string | String) => {
@@ -96,13 +90,7 @@ export const PathsList = ({
     <>
       <Align>
         <TextField
-          ref={inputRef}
           autoFocus={autoFocus}
-          onFocus={() => {
-            if (inputRef.current) {
-              inputRef.current.select();
-            }
-          }}
           isInvalid={touched && isValidInputValue() !== true}
           value={pathInputValue}
           onChange={(value) => {
@@ -110,10 +98,11 @@ export const PathsList = ({
             setTouched(true);
           }}
           onPaste={(event) => {
-            event.preventDefault();
             const data = event.clipboardData.getData("text");
             const path = prependPathWithSlash(extractPathFromUrl(data));
-            setPathInputValue(path);
+            setTimeout(() => {
+              setPathInputValue(path);
+            });
           }}
           onKeyDown={(event) => {
             if (event.key === "Enter" || event.key === "NumpadEnter") {

@@ -24,6 +24,7 @@ export const CreateModal = () => {
 
   const form = useForm<FormValues>({
     defaultValues: {
+      domain: "",
       paths: new Set(["/"]),
     },
   });
