@@ -17,6 +17,7 @@
   "dependencies": {
     "extension-a11y-checker-storage": "workspace:*",
     "lighthouse": "^12.3.0",
+    "mongodb": "^6.17.0",
     "node-cron": "^3.0.3",
     "pa11y": "^8.0.0",
     "pino": "^9.6.0",

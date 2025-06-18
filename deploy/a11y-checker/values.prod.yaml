@@ -11,3 +11,8 @@ executor:
     repository: gitlab-registry.mittwald.it/coab-0x7e7/extensions/barriere-checker/executor
     tag: ~
   replicaCount: 4
+
+marketingScanner:
+  image:
+    repository: gitlab-registry.mittwald.it/coab-0x7e7/extensions/barriere-checker/executor
+    tag: ~
