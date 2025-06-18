@@ -47,5 +47,20 @@ executor:
       cpu: 2
       memory: 4Gi
 
+marketingScanner:
+  enabled: true
+  name: a11y-checker-marketing-scanner
+  image:
+    repository: ~
+    tag: ~
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 2
+      memory: 8Gi
+    limits:
+      cpu: 6
+      memory: 16Gi
+
 
 extensionSecret: ~
