@@ -38,5 +38,6 @@ RUN npx puppeteer@24.2.1 browsers install chrome
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 COPY --from=builder /app /app
+COPY ./packages/executor/domainQueue.csv /app/domainQueue.csv
 
 CMD ["node", "--no-experimental-require-module", "packages/executor/dist/index.js"]

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.marketingScanner.name }}
+  labels:
+    app: {{ .Values.marketingScanner.name }}
+spec:
+  replicas: {{ .Values.marketingScanner.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.marketingScanner.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.marketingScanner.name }}
+    spec:
+      shareProcessNamespace: true
+      containers:
+        - name: {{ .Values.marketingScanner.name }}
+          image: {{ .Values.executor.image.repository }}:{{.Values.executor.image.tag}}
+          imagePullPolicy: IfNotPresent
+          command: ["node", "--no-experimental-require-module", "packages/executor/dist/script.js"]
+          resources:
+            requests:
+              cpu: {{ .Values.marketingScanner.resources.requests.cpu | default "100m" }}
+              memory: {{ .Values.marketingScanner.resources.requests.memory | default "128Mi" }}
+            limits:
+              cpu: {{ .Values.marketingScanner.resources.limits.cpu | default "500m" }}
+              memory: {{ .Values.marketingScanner.resources.limits.memory | default "512Mi" }}
+          env:
+            - name: NODE_ENV
+              value: development
+            - name: MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: a11y-checker-secret
+                  key: mongo-uri
