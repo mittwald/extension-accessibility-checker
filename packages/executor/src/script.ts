@@ -85,6 +85,12 @@ await Promise.all([
   runScanProcess(4),
   runScanProcess(5),
   runScanProcess(6),
+  runScanProcess(7),
+  runScanProcess(8),
+  runScanProcess(9),
+  runScanProcess(10),
+  runScanProcess(11),
+  runScanProcess(12),
 ]);
 
 interval.unref();

@@ -15,6 +15,12 @@ spec:
         app: {{ .Values.marketingScanner.name }}
     spec:
       shareProcessNamespace: true
+      nodeSelector:
+        node.mittwald.systems/instance-type: scraper
+      tolerations:
+        - effect: NoSchedule
+          key: m3.services/scraper
+          operator: Exists
       containers:
         - name: {{ .Values.marketingScanner.name }}
           image: {{ .Values.executor.image.repository }}:{{.Values.executor.image.tag}}

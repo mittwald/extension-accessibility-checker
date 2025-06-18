@@ -59,8 +59,8 @@ marketingScanner:
       cpu: 2
       memory: 8Gi
     limits:
-      cpu: 6
-      memory: 16Gi
+      cpu: 12
+      memory: 24Gi
 
 
 extensionSecret: ~
