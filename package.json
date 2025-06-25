@@ -5,6 +5,7 @@
     "email": "l.fritze@mittwald.de"
   },
   "packageManager": "yarn@4.6.0",
+  "license": "MIT",
   "private": true,
   "workspaces": [
     "packages/*"
