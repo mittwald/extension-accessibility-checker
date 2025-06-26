@@ -6,6 +6,7 @@ import { EducationCards } from "./list/educationCards.js";
 import { ProfilesList } from "./list/profilesList.js";
 import { NoProfiles } from "./list/noProfiles.js";
 import { ScanProfile } from "../api/types.js";
+import { FeedbackBox } from "./list/feedbackBox.tsx";
 
 export const ProfilesRoot = ({
   profiles,
@@ -20,6 +21,7 @@ export const ProfilesRoot = ({
       <LayoutCard>
         {hasProfiles ? <ProfilesList profiles={profiles} /> : <NoProfiles />}
       </LayoutCard>
+      <FeedbackBox />
     </ColumnLayout>
   );
 };
