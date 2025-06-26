@@ -24,7 +24,7 @@ export const FeedbackBox = () => {
           </Text>
           <Link
             target="_blank"
-            href="https://github.com/mittwald/extension-accessibility-checker/issues/new"
+            href="https://github.com/mittwald/extension-accessibility-checker/issues/new?template=feedback.md"
           >
             Feedback auf GitHub
           </Link>
