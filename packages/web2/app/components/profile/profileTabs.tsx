@@ -18,7 +18,7 @@ export function ProfileTabs({
         <Overview profile={profile} />
       </Tab>
       <Tab id="issues">
-        <TabTitle>Fehler</TabTitle>
+        <TabTitle>Details</TabTitle>
         <Issues scan={lastScan} />
       </Tab>
       <Tab id="settings">
