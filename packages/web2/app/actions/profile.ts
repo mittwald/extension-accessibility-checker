@@ -58,13 +58,9 @@ export const createProfile = createServerFn({ method: "POST" })
     }),
   )
   .handler(async ({ data: { contextId, ...data } }) => {
-    const now = new Date();
     const profile = await ScanProfileModel.create({
       _id: new ObjectId(),
       context: contextId,
-      cronSchedule: {
-        expression: `${now.getMinutes()} ${now.getHours()} * * *`,
-      },
       ...data,
     });
     await scheduleScan(profile._id.toString(), true);
