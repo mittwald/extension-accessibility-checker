@@ -34,6 +34,8 @@ export const getProfile = createServerFn({
     const profile = await ScanProfileModel.findById(profileId).exec();
     await profile?.populate("nextScan");
     const lastScan = await ScanModel.lastScanOfProfile(profileId);
+    const lastSuccessfulScan =
+      await ScanModel.lastSuccessfulScanOfProfile(profileId);
 
     return {
       profile: {
@@ -41,6 +43,7 @@ export const getProfile = createServerFn({
         issueSummary: lastScan?.getIssueSummary(),
       } as unknown as ScanProfile,
       lastScan: lastScan as unknown as Scan | undefined,
+      lastSuccessfulScan: lastSuccessfulScan as unknown as Scan | undefined,
     };
   });
 
@@ -93,7 +96,7 @@ export const updateProfileName = createServerFn({ method: "POST" })
   .validator(
     z.object({
       profileId: z.string(),
-      name: z.string().optional(),
+      name: z.string(),
     }),
   )
   .handler(async ({ data: { profileId, name } }) => {
@@ -105,6 +108,39 @@ export const updateProfileName = createServerFn({ method: "POST" })
     if (!profile) {
       return new Response("Profile not found", { status: 404 });
     }
+    return profile.toJSON() as unknown as ScanProfile;
+  });
+
+export const updateProfileDomain = createServerFn({ method: "POST" })
+  .middleware([dbMiddleware, profileAuthorizeMiddleware])
+  .validator(
+    z.object({
+      profileId: z.string(),
+      updateName: z.boolean().optional(),
+      domain: z
+        .string()
+        .regex(
+          /^(((?!-))(xn--|_)?[a-z0-9-]{0,61}[a-z0-9]{1,1}\.)*(xn--)?([a-z0-9][a-z0-9\-]{0,60}|[a-z0-9-]{1,30}\.[a-z]{2,})$/,
+          "Not a valid domain name.",
+        ),
+    }),
+  )
+  .handler(async ({ data: { profileId, domain, updateName } }) => {
+    const additionalUpdates = updateName ? { name: domain } : {};
+    const profile = await ScanProfileModel.findOneAndUpdate(
+      { _id: profileId },
+      { $set: { domain, ...additionalUpdates } },
+      { new: true },
+    );
+    if (!profile) {
+      return new Response("Profile not found", { status: 404 });
+    }
+
+    const nextScan = await ScanModel.nextScanOfProfile(profileId);
+    if (nextScan) {
+      await nextScan.regeneratePageUrls();
+    }
+
     return profile.toJSON() as unknown as ScanProfile;
   });
 

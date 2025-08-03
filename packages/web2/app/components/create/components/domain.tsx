@@ -7,10 +7,21 @@ import {
 } from "@mittwald/flow-remote-react-components";
 import { Field } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { extractDomainFromUrl } from "../helpers.ts";
-import { FormValues } from "../types.ts";
 import { UseFormReturn } from "react-hook-form";
 
-export const Domain = ({ form }: { form: UseFormReturn<FormValues> }) => {
+interface DomainFormValues {
+  domain: string;
+}
+
+export const Domain = ({
+  form,
+  helpText,
+  autoFocus,
+}: {
+  form: UseFormReturn<DomainFormValues>;
+  helpText?: string;
+  autoFocus?: boolean;
+}) => {
   return (
     <Section>
       <Field
@@ -25,10 +36,10 @@ export const Domain = ({ form }: { form: UseFormReturn<FormValues> }) => {
           required: "Die Domain ist erforderlich.",
         }}
       >
-        <Text>Gib hier die Domain deiner Website ein.</Text>
+        <Text>{helpText || "Gib hier die Domain deiner Website ein."}</Text>
         <TextField
           onChange={(value) => form.setValue("domain", value)}
-          autoFocus={!form.getValues("domain")}
+          autoFocus={autoFocus || !form.getValues("domain")}
           isRequired
           onPaste={(event) => {
             const data = event.clipboardData.getData("text");
