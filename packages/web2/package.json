@@ -22,6 +22,7 @@
     "@tanstack/react-start": "1.116.0",
     "@tanstack/zod-adapter": "1.116.0",
     "@weissaufschwarz/mitthooks": "^0.2.1",
+    "cronstrue": "^3.2.0",
     "extension-a11y-checker-storage": "workspace:*",
     "pino": "^9.6.0",
     "pino-pretty": "^13.0.0",
