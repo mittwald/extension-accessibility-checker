@@ -34,6 +34,8 @@ export const getProfile = createServerFn({
     const profile = await ScanProfileModel.findById(profileId).exec();
     await profile?.populate("nextScan");
     const lastScan = await ScanModel.lastScanOfProfile(profileId);
+    const lastSuccessfulScan =
+      await ScanModel.lastSuccessfulScanOfProfile(profileId);
 
     return {
       profile: {
@@ -41,6 +43,7 @@ export const getProfile = createServerFn({
         issueSummary: lastScan?.getIssueSummary(),
       } as unknown as ScanProfile,
       lastScan: lastScan as unknown as Scan | undefined,
+      lastSuccessfulScan: lastSuccessfulScan as unknown as Scan | undefined,
     };
   });
 

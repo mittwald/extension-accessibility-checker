@@ -131,6 +131,19 @@ export class Scan {
     profileId: string,
   ) {
     return this.findOne(
+      { profile: profileId, status: { $ne: "queued" } },
+      null,
+      {
+        sort: { executionScheduledFor: -1 },
+      },
+    ).exec();
+  }
+
+  public static async lastSuccessfulScanOfProfile(
+    this: ReturnModelType<typeof Scan>,
+    profileId: string,
+  ) {
+    return this.findOne(
       { profile: profileId, completedAt: { $exists: true } },
       null,
       {
