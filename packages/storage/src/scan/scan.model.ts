@@ -1,4 +1,5 @@
 import type { Ref, DocumentType, ReturnModelType } from "@typegoose/typegoose";
+import { isDocument } from "@typegoose/typegoose";
 import { index, modelOptions, prop } from "@typegoose/typegoose";
 import { ObjectId } from "mongodb";
 import { ScanProfile } from "../scanProfile/scanProfile.model.js";
@@ -167,6 +168,21 @@ export class Scan {
         (path) => new Page(`https://${profile.domain}${path}`),
       ),
     });
+  }
+
+  public async regeneratePageUrls(this: DocumentType<Scan>) {
+    if (this.status !== "queued") {
+      throw new Error("Can only regenerate page urls for queued scans");
+    }
+    await this.populate("profile");
+    const profile = this.profile;
+    if (!isDocument(profile)) {
+      throw new Error("Profile population failed ");
+    }
+    this.pages = profile.paths.map(
+      (path) => new Page(`https://${profile.domain}${path}`),
+    );
+    await this.save();
   }
 
   public async markAsRunning(this: DocumentType<Scan>) {
