@@ -25,6 +25,7 @@
     "@weissaufschwarz/mitthooks": "^0.2.1",
     "cronstrue": "^3.2.0",
     "extension-a11y-checker-storage": "workspace:*",
+    "fast-xml-parser": "^5.2.5",
     "pino": "^9.6.0",
     "pino-pretty": "^13.0.0",
     "react": "^19.0.0",

@@ -1,5 +1,5 @@
 import { UseFormReturn } from "react-hook-form";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import {
   Align,
   Button,
@@ -14,6 +14,7 @@ import {
 } from "@mittwald/flow-remote-react-components";
 import { FormValues } from "../types.ts";
 import { extractPathFromUrl, prependPathWithSlash } from "../helpers.ts";
+import { GeneratePaths } from "./generatePaths.js";
 
 type PathFormValues = Pick<FormValues, "paths">;
 
@@ -29,22 +30,23 @@ export const PathsList = ({
 
   const paths = form.watch("paths");
 
-  const isValidInputValue = () => {
-    if (!pathInputValue.startsWith("/")) {
+  const isValidPath = (path?: string) => {
+    const p = path ?? pathInputValue;
+    if (!p.startsWith("/")) {
       return (
         <Text>
           Muss mit <InlineCode>/</InlineCode> beginnen.
         </Text>
       );
     }
-    if (paths.has(pathInputValue)) {
+    if (paths.has(p)) {
       return "Pfad ist bereits hinzugefügt.";
     }
     return true;
   };
 
-  function addPathToFormValues(value: string) {
-    if (isValidInputValue() !== true) {
+  const addPathToFormValues = (value: string) => {
+    if (isValidPath(value) !== true) {
       return;
     }
 
@@ -52,7 +54,7 @@ export const PathsList = ({
     values.add(value);
     form.setValue("paths", values);
     setTouched(false);
-  }
+  };
 
   const removePathFromFormValues = (value: string | String) => {
     const values = form.getValues("paths");
@@ -91,7 +93,7 @@ export const PathsList = ({
       <Align>
         <TextField
           autoFocus={autoFocus}
-          isInvalid={touched && isValidInputValue() !== true}
+          isInvalid={touched && isValidPath() !== true}
           value={pathInputValue}
           onChange={(value) => {
             setPathInputValue(value);
@@ -112,19 +114,20 @@ export const PathsList = ({
           }}
         >
           <Label>Pfad</Label>
-          {touched && isValidInputValue() !== true && (
-            <FieldError>{isValidInputValue()}</FieldError>
+          {touched && isValidPath() !== true && (
+            <FieldError>{isValidPath()}</FieldError>
           )}
         </TextField>
         <Button
           color="primary"
-          isDisabled={isValidInputValue() !== true}
+          isDisabled={isValidPath() !== true}
           onPress={() => addPathToFormValues(pathInputValue)}
         >
           Hinzufügen
         </Button>
       </Align>
       {pathsList}
+      <GeneratePaths form={form} onAdd={addPathToFormValues} />
     </>
   );
 };
