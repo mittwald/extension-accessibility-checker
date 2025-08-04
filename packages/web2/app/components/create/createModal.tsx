@@ -5,8 +5,11 @@ import {
   Content,
   Header,
   Heading,
+  Label,
   Modal,
   Section,
+  Segment,
+  SegmentedControl,
   Text,
 } from "@mittwald/flow-remote-react-components";
 import { useForm } from "react-hook-form";
@@ -17,10 +20,13 @@ import { Domain } from "./components/domain.tsx";
 import { createProfile } from "../../actions/profile.ts";
 import { Route } from "../../routes/index.js";
 import { useGoToProfile } from "../../hooks/useGoTo.js";
+import { DomainSelect } from "./components/DomainSelect.js";
+import { useState } from "react";
 
 export const CreateModal = () => {
   const goToProfile = useGoToProfile();
   const { contextId } = Route.useSearch();
+  const [showCustomDomain, setShowCustomDomain] = useState(false);
 
   const form = useForm<FormValues>({
     defaultValues: {
@@ -51,8 +57,17 @@ export const CreateModal = () => {
       <Heading slot="title">Profil anlegen</Heading>
       <Form form={form} onSubmit={onSubmit}>
         <Content>
-          <Domain form={form} />
           <Section>
+            <SegmentedControl
+              defaultValue="mstudio"
+              onChange={() => setShowCustomDomain(!showCustomDomain)}
+            >
+              <Label>Domain-Art</Label>
+              <Segment value="mstudio">mStudioDomain</Segment>
+              <Segment value="custom">Individuelle Eingabe</Segment>
+            </SegmentedControl>
+            {!showCustomDomain && <DomainSelect />}
+            {showCustomDomain && <Domain form={form} />}
             <Header>
               <Heading>Unterseiten hinzufügen</Heading>
               <Text>
