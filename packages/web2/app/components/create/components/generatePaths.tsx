@@ -1,6 +1,6 @@
 import { UseFormReturn, useWatch } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
-import { getPaths } from "../../../actions/domain.js";
+import { getPaths, getPathsFromMenu } from "../../../actions/domain.js";
 import { Action, Button } from "@mittwald/flow-remote-react-components";
 import { extractPathFromUrl } from "../helpers.js";
 
@@ -13,7 +13,7 @@ export const GeneratePaths = (props: {
 
   const { data: sitemap, isLoading } = useQuery({
     queryKey: ["sitemap", domain],
-    queryFn: () => getPaths({ data: domain ?? "" }),
+    queryFn: () => getPathsFromMenu({ data: domain ?? "" }),
     enabled: !!domain,
   });
 

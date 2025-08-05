@@ -4,7 +4,9 @@ import { assertStatus, MittwaldAPIV2Client } from "@mittwald/api-client";
 import { z } from "zod";
 import { extractPathFromUrl } from "../components/create/helpers.js";
 import { XMLParser } from "fast-xml-parser";
-import { log } from "vinxi/dist/types/lib/logger";
+import axios from "axios";
+import * as cheerio from "cheerio";
+import { CheerioAPI, AcceptedElems } from "cheerio";
 
 export const getDomains = createServerFn({
   method: "GET",
@@ -37,17 +39,74 @@ export const getPaths = createServerFn({
         return path.split("/").filter(Boolean).length;
       };
 
-      const locations = xml.urlset.url
+      const locations: string[] = xml.urlset.url
         .map(({ loc }: { loc: string }) => loc)
         .filter((url: string) => {
           const segmentCount = countPathSegments(url);
           return segmentCount <= 1;
         });
 
-      console.log(locations);
       return locations;
     } catch (e) {
       console.error(e);
+      return null;
+    }
+  });
+
+function extractLinks($: CheerioAPI, el: AcceptedElems<any>) {
+  return $(el)
+    .find("a")
+    .map((_, a) => {
+      const href = $(a).attr("href");
+      return href ? resolveUrl(href) : null;
+    })
+    .get()
+    .filter(Boolean);
+}
+
+function resolveUrl(relative: string) {
+  if (relative.startsWith("/") && !relative.startsWith("/#")) {
+    return relative;
+  }
+  return null;
+}
+
+export const getPathsFromMenu = createServerFn({
+  method: "GET",
+})
+  .validator(z.string())
+  .handler(async ({ data: domain }) => {
+    if (!domain) return null;
+    try {
+      const response = await axios.get("https://" + domain);
+      const $ = cheerio.load(response.data);
+
+      let navLinks: string[] = [];
+
+      // === STRATEGY 1: <nav> elements ===
+      $("nav").each((_, nav) => {
+        const links = extractLinks($, nav);
+        navLinks.push(...links);
+      });
+
+      // === STRATEGY 2: [role="navigation"] ===
+      if (navLinks.length === 0) {
+        $('[role="navigation"]').each((_, nav) => {
+          const links = extractLinks($, nav);
+          navLinks.push(...links);
+        });
+      }
+
+      // === STRATEGY 3: <ul> or <div> with at least 3 <a> ===
+      if (navLinks.length === 0) {
+        $("ul, div").each((_, el) => {
+          const links = extractLinks($, el);
+          navLinks.push(...links);
+        });
+      }
+
+      return navLinks;
+    } catch (error) {
       return null;
     }
   });
