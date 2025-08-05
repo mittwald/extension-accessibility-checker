@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import {
+  Action,
   ActionGroup,
   Button,
   Content,
@@ -12,7 +13,6 @@ import {
 import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { useForm, type UseFormReturn } from "react-hook-form";
 import { Time } from "@internationalized/date";
-import { Action } from "@mittwald/flow-remote-react-components";
 import {
   CronInterval,
   getIntervalValueFromCronSyntax,
