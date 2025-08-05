@@ -11,8 +11,7 @@ import {
   profileAuthorizeMiddleware,
   profileIdAuthorizeMiddleware,
 } from "./middleware.js";
-import cronParser from "cron-parser";
-import { scheduleScan } from "./commons.js";
+import { scheduleScan, validateCron } from "./commons.js";
 
 export const getProfiles = createServerFn()
   .middleware([dbMiddleware, authorizeMiddleware])
@@ -34,6 +33,8 @@ export const getProfile = createServerFn({
     const profile = await ScanProfileModel.findById(profileId).exec();
     await profile?.populate("nextScan");
     const lastScan = await ScanModel.lastScanOfProfile(profileId);
+    const lastSuccessfulScan =
+      await ScanModel.lastSuccessfulScanOfProfile(profileId);
 
     return {
       profile: {
@@ -41,6 +42,7 @@ export const getProfile = createServerFn({
         issueSummary: lastScan?.getIssueSummary(),
       } as unknown as ScanProfile,
       lastScan: lastScan as unknown as Scan | undefined,
+      lastSuccessfulScan: lastSuccessfulScan as unknown as Scan | undefined,
     };
   });
 
@@ -55,13 +57,9 @@ export const createProfile = createServerFn({ method: "POST" })
     }),
   )
   .handler(async ({ data: { contextId, ...data } }) => {
-    const now = new Date();
     const profile = await ScanProfileModel.create({
       _id: new ObjectId(),
       context: contextId,
-      cronSchedule: {
-        expression: `${now.getMinutes()} ${now.getHours()} * * *`,
-      },
       ...data,
     });
     await scheduleScan(profile._id.toString(), true);
@@ -93,13 +91,79 @@ export const updateProfileName = createServerFn({ method: "POST" })
   .validator(
     z.object({
       profileId: z.string(),
-      name: z.string().optional(),
+      name: z.string(),
     }),
   )
   .handler(async ({ data: { profileId, name } }) => {
     const profile = await ScanProfileModel.findOneAndUpdate(
       { _id: profileId },
       { $set: { name } },
+      { new: true },
+    );
+    if (!profile) {
+      return new Response("Profile not found", { status: 404 });
+    }
+    return profile.toJSON() as unknown as ScanProfile;
+  });
+
+export const updateProfileDomain = createServerFn({ method: "POST" })
+  .middleware([dbMiddleware, profileAuthorizeMiddleware])
+  .validator(
+    z.object({
+      profileId: z.string(),
+      updateName: z.boolean().optional(),
+      domain: z
+        .string()
+        .regex(
+          /^(((?!-))(xn--|_)?[a-z0-9-]{0,61}[a-z0-9]{1,1}\.)*(xn--)?([a-z0-9][a-z0-9\-]{0,60}|[a-z0-9-]{1,30}\.[a-z]{2,})$/,
+          "Not a valid domain name.",
+        ),
+    }),
+  )
+  .handler(async ({ data: { profileId, domain, updateName } }) => {
+    const additionalUpdates = updateName ? { name: domain } : {};
+    const profile = await ScanProfileModel.findOneAndUpdate(
+      { _id: profileId },
+      { $set: { domain, ...additionalUpdates } },
+      { new: true },
+    );
+    if (!profile) {
+      return new Response("Profile not found", { status: 404 });
+    }
+
+    const nextScan = await ScanModel.nextScanOfProfile(profileId);
+    if (nextScan) {
+      await nextScan.regeneratePageUrls();
+    }
+
+    return profile.toJSON() as unknown as ScanProfile;
+  });
+
+export const updateProfileCron = createServerFn({ method: "POST" })
+  .middleware([dbMiddleware, profileAuthorizeMiddleware])
+  .validator(
+    z.object({
+      profileId: z.string(),
+      cronExpression: z.string(),
+    }),
+  )
+  .handler(async ({ data: { profileId, cronExpression } }) => {
+    const validationResult = validateCron(cronExpression);
+    if (validationResult !== true) {
+      return validationResult;
+    }
+
+    const cronUpdateSet = cronExpression
+      ? { cronSchedule: { expression: cronExpression } }
+      : undefined;
+    const cronDeleteSet = cronExpression ? undefined : { cronSchedule: 1 };
+
+    const profile = await ScanProfileModel.findOneAndUpdate(
+      { _id: profileId },
+      {
+        $set: cronUpdateSet ?? {},
+        $unset: cronDeleteSet ?? {},
+      },
       { new: true },
     );
     if (!profile) {
@@ -129,23 +193,9 @@ export const updateProfileSettings = createServerFn({ method: "POST" })
         standard,
       },
     }) => {
-      if (cronExpression) {
-        try {
-          const interval = cronParser.parseExpression(cronExpression);
-          const firstDate = interval.next();
-          const secondDate = interval.next();
-          const hoursDiff =
-            (secondDate.getTime() - firstDate.getTime()) / (1000 * 60 * 60);
-
-          if (hoursDiff < 1) {
-            return new Response(
-              "Cron expression must not run more than once per hour",
-              { status: 400 },
-            );
-          }
-        } catch (e) {
-          return new Response("Invalid cron expression", { status: 400 });
-        }
+      const validationResult = validateCron(cronExpression);
+      if (validationResult !== true) {
+        return validationResult;
       }
 
       const cronUpdateSet = cronExpression

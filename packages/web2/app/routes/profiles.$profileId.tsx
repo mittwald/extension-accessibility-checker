@@ -18,7 +18,7 @@ export const Route = createFileRoute("/profiles/$profileId")({
 
 function RouteComponent() {
   const data = Route.useLoaderData();
-  const { profile, lastScan } = data ?? {};
+  const { profile, lastScan, lastSuccessfulScan } = data ?? {};
 
   const shouldReloadData = isRunningOrPending(profile?.nextScan);
   useAutoRefresh(shouldReloadData);
@@ -33,5 +33,11 @@ function RouteComponent() {
     return null;
   }
 
-  return <ProfileRoot profile={profile} lastScan={lastScan} />;
+  return (
+    <ProfileRoot
+      profile={profile}
+      lastScan={lastScan}
+      lastSuccessfulScan={lastSuccessfulScan}
+    />
+  );
 }

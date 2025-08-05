@@ -10,16 +10,23 @@ import { Scan, ScanProfile } from "../api/types.js";
 import { isRunningOrPending } from "./profile/helpers.js";
 import { useAutoRefresh } from "../hooks/useAutoRefresh.js";
 import { Breadcrumb, Title } from "@mittwald/mstudio-ext-react-components";
+import { ErrorScan } from "./profile/errorScan.js";
 
 export const ProfileRoot = ({
   profile,
   lastScan,
+  lastSuccessfulScan,
 }: {
   profile: ScanProfile;
   lastScan?: Scan;
+  lastSuccessfulScan?: Scan;
 }) => {
   const shouldReloadData = isRunningOrPending(profile?.nextScan);
   useAutoRefresh(shouldReloadData);
+
+  const hasSuccessfulScan = !!lastSuccessfulScan;
+  const hasScan = !!lastScan;
+  const lastScanIsError = lastScan?.status === "failed";
 
   return (
     <Section>
@@ -29,10 +36,15 @@ export const ProfileRoot = ({
       </Breadcrumb>
       <ProfileActions profile={profile} />
       <LayoutCard>
-        {lastScan ? (
-          <ProfileTabs profile={profile} lastScan={lastScan} />
+        {hasScan && lastScanIsError && !shouldReloadData && (
+          <ErrorScan profile={profile} lastScan={lastScan} />
+        )}
+        {hasSuccessfulScan ? (
+          <ProfileTabs profile={profile} lastScan={lastSuccessfulScan} />
         ) : (
-          <NoScans profile={profile} />
+          (!lastScanIsError || shouldReloadData) && (
+            <NoScans profile={profile} />
+          )
         )}
       </LayoutCard>
     </Section>

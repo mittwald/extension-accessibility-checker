@@ -18,6 +18,8 @@ import { isRunningOrPending } from "../../helpers.ts";
 import { useRouter } from "@tanstack/react-router";
 import { startScan } from "../../../../actions/scan.ts";
 import { WcagStandardContextualHelp } from "../../wcagStandardContextualHelp.js";
+import { EditIntervalModal } from "../../modals/EditIntervalModal.js";
+import { CronText } from "../../CronFields/CronText.js";
 
 export const GeneralSettings = () => {
   const { profile } = Route.useLoaderData();
@@ -30,6 +32,12 @@ export const GeneralSettings = () => {
     <Section>
       <Header>
         <Heading>Generelle Einstellungen</Heading>
+        <ModalTrigger>
+          <Button color="secondary" variant="soft">
+            Interval bearbeiten
+          </Button>
+          <EditIntervalModal profile={profile} />
+        </ModalTrigger>
         <ModalTrigger>
           <Button color="secondary" variant="soft">
             Bearbeiten
@@ -56,7 +64,9 @@ export const GeneralSettings = () => {
           <>
             <LabeledValue>
               <Label>Ausführungsintervall</Label>
-              <Content>{profile.cronSchedule?.expression}</Content>
+              <Content>
+                <CronText cronSyntax={profile.cronSchedule.expression} />
+              </Content>
             </LabeledValue>
             <LabeledValue>
               <Label>
@@ -73,7 +83,7 @@ export const GeneralSettings = () => {
                   </ContextualHelp>
                 </ContextualHelpTrigger>
               </Label>
-              <Content>{nextExecution?.toLocaleString()}</Content>
+              <Content>{nextExecution?.toLocaleString() ?? "–"}</Content>
             </LabeledValue>
           </>
         )}

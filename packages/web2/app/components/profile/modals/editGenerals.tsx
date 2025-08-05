@@ -6,17 +6,13 @@ import {
   Checkbox,
   ColumnLayout,
   Content,
-  ContextualHelp,
   ContextualHelpTrigger,
-  FieldDescription,
   Heading,
   Label,
   Modal,
   Section,
   Segment,
   SegmentedControl,
-  Text,
-  TextField,
   useOverlayController,
 } from "@mittwald/flow-remote-react-components";
 import { useForm } from "react-hook-form";
@@ -24,7 +20,6 @@ import {
   Form,
   typedField,
 } from "@mittwald/flow-remote-react-components/react-hook-form";
-import cronParser from "cron-parser";
 import { useRouter } from "@tanstack/react-router";
 import { updateProfileSettings } from "../../../actions/profile.ts";
 import { WcagStandardContextualHelp } from "../wcagStandardContextualHelp.js";
@@ -69,53 +64,6 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
       <Form form={form} onSubmit={onSubmit}>
         <Content>
           <Section>
-            <Field
-              name={"cronExpression"}
-              rules={{
-                validate: {
-                  validCronExpression: (value) => {
-                    try {
-                      if (typeof value === "string") {
-                        cronParser.parseExpression(value).hasNext();
-                      }
-                      return true;
-                    } catch (e) {
-                      if (!(e instanceof Error)) {
-                        console.log(e);
-                        return "Ungültiger Ausführungsintervall";
-                      }
-                      if (e.message === "Invalid cron expression") {
-                        return "Ungültiger Cron-Ausdruck";
-                      }
-                      return (
-                        "Ungültiger Ausführungsintervall: " +
-                        (e as Error).message
-                      );
-                    }
-                  },
-                },
-              }}
-            >
-              <TextField>
-                <Label>
-                  Ausführungsintervall
-                  <ContextualHelpTrigger>
-                    <Button />
-                    <ContextualHelp>
-                      <Heading>Ausführungsintervall</Heading>
-                      <Text>
-                        Lege nur dann einen automatischen Scan-Intervall fest,
-                        wenn es wirklich nötig ist – so schonst du Ressourcen.
-                        Lässt du das Feld leer, wird keine automatische
-                        Ausführung eingerichtet. Ein manueller Scan ist
-                        jederzeit möglich.
-                      </Text>
-                    </ContextualHelp>
-                  </ContextualHelpTrigger>
-                </Label>
-                <FieldDescription>Verwende Cron-Syntax</FieldDescription>
-              </TextField>
-            </Field>
             <Field
               name={"standard"}
               rules={{
