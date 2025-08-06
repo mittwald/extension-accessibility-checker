@@ -170,6 +170,29 @@ export class Scan {
     });
   }
 
+  public static async scheduleNextForProfile(
+    this: ReturnModelType<typeof Scan>,
+    profile: DocumentType<ScanProfile>,
+  ) {
+    const executionDate = profile.nextExecution();
+    if (!executionDate) {
+      return null;
+    }
+
+    return this.createForProfile(profile, executionDate);
+  }
+
+  public static async deleteScheduledForProfile(
+    this: ReturnModelType<typeof Scan>,
+    profile: DocumentType<ScanProfile>,
+  ) {
+    return this.findOneAndDelete({
+      profile: profile._id,
+      status: "queued",
+      scheduledBy: "system",
+    }).exec();
+  }
+
   public async regeneratePageUrls(this: DocumentType<Scan>) {
     if (this.status !== "queued") {
       throw new Error("Can only regenerate page urls for queued scans");

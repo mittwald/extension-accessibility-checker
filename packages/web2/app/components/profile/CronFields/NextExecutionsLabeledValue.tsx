@@ -5,7 +5,7 @@ import {
 } from "@mittwald/flow-remote-react-components";
 import type { FC } from "react";
 import React, { useMemo } from "react";
-import { isValidCron, getExecutions } from "./lib";
+import { getExecutions, isValidCron } from "./lib";
 
 interface Props {
   cron: string;

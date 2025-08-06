@@ -9,13 +9,9 @@ import {
   Modal,
   OverlayController,
   Section,
-  Text,
 } from "@mittwald/flow-remote-react-components";
 import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
-import {
-  updateProfileDomain,
-  updateProfileName,
-} from "../../../actions/profile.ts";
+import { updateProfileDomain } from "../../../actions/profile.ts";
 import { useRouter } from "@tanstack/react-router";
 import { startScan } from "../../../actions/scan.js";
 import { Domain } from "../../create/components/domain.js";
@@ -56,11 +52,13 @@ export const ChangeDomainModal = ({
       <Form form={form} onSubmit={onSubmit}>
         <Heading slot="title">Domain bearbeiten</Heading>
         <Content>
-          <Domain
-            autoFocus
-            form={form}
-            helpText="Kontrolliere die Domain auf Richtigkeit und versuche es erneut."
-          />
+          <Section>
+            <Domain
+              autoFocus
+              form={form}
+              helpText="Kontrolliere die Domain auf Richtigkeit und versuche es erneut."
+            />
+          </Section>
         </Content>
         <ActionGroup>
           <Action closeOverlay="Modal">

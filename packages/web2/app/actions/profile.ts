@@ -169,6 +169,10 @@ export const updateProfileCron = createServerFn({ method: "POST" })
     if (!profile) {
       return new Response("Profile not found", { status: 404 });
     }
+
+    await ScanModel.deleteScheduledForProfile(profile);
+    await ScanModel.scheduleNextForProfile(profile);
+
     return profile.toJSON() as unknown as ScanProfile;
   });
 

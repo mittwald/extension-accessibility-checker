@@ -4,7 +4,7 @@ import { notFound } from "@tanstack/react-router";
 import { dbConnect, ScanProfileModel } from "extension-a11y-checker-storage";
 import { z } from "zod";
 import { getHeader } from "@tanstack/react-start/server";
-import { verify, getAccessToken } from "@mittwald/ext-bridge/node";
+import { getAccessToken, verify } from "@mittwald/ext-bridge/node";
 import { getSessionToken } from "@mittwald/ext-bridge/browser";
 
 export const dbMiddleware = createMiddleware()

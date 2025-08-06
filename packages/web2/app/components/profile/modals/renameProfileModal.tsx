@@ -13,7 +13,10 @@ import {
   Text,
   TextField,
 } from "@mittwald/flow-remote-react-components";
-import { Field, Form } from "@mittwald/flow-remote-react-components/react-hook-form";
+import {
+  Field,
+  Form,
+} from "@mittwald/flow-remote-react-components/react-hook-form";
 import { updateProfileName } from "../../../actions/profile.ts";
 import { useRouter } from "@tanstack/react-router";
 

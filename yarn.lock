@@ -6429,6 +6429,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.83.1":
+  version: 5.83.1
+  resolution: "@tanstack/query-core@npm:5.83.1"
+  checksum: 10c0/3eeacf678fcf9803585f1be74979548a33c7f659b8d5f33c1e3b3834ef3b9f3401070b2e2d38bbaa9c6e5a3c359baaa3828078e38007b7c99fb8c9f1e3911142
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.84.1":
+  version: 5.84.1
+  resolution: "@tanstack/react-query@npm:5.84.1"
+  dependencies:
+    "@tanstack/query-core": "npm:5.83.1"
+  peerDependencies:
+    react: ^18 || ^19
+  checksum: 10c0/a57fed2e6f3c7a42309383e03056f1ff1506ad5fdc8d20a1a6a945006442e71871dfd5eac6e90fb8a506036b2e8a2a5463fa0f5bed826de170aa5926a4728f99
+  languageName: node
+  linkType: hard
+
 "@tanstack/react-router@npm:1.116.0, @tanstack/react-router@npm:^1.116.0":
   version: 1.116.0
   resolution: "@tanstack/react-router@npm:1.116.0"
@@ -11379,6 +11397,7 @@ __metadata:
     "@mittwald/flow-remote-react-renderer": "npm:0.2.0-alpha.378"
     "@mittwald/mstudio-ext-react-components": "npm:0.2.0-alpha.378"
     "@tabler/icons-react": "npm:^3.29.0"
+    "@tanstack/react-query": "npm:^5.84.1"
     "@tanstack/react-router": "npm:1.116.0"
     "@tanstack/react-start": "npm:1.116.0"
     "@tanstack/router-plugin": "npm:^1.99.8"
