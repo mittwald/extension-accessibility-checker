@@ -22,6 +22,13 @@ spec:
           env:
             - name: MONGO_INITDB_DATABASE
               value: {{ .Values.mongodb.database }}
+          resources:
+            requests:
+              memory: "256M"
+              cpu: "250m"
+            limits:
+              memory: "4G"
+              cpu: "1"
           volumeMounts:
             - name: mongo-storage
               mountPath: /data/db
