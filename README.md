@@ -22,6 +22,12 @@ This could be changed so that the docker image is built on GitHub and pushed in
 the github image registry. Then this repository can be changed to be a manifest
 repo only.
 
+## View Executor Logs in cluster
+
+```
+k logs -f --namespace extensions --context mittwald-prod -l app=a11y-checker-executor
+```
+
 ![](./barriere_checker_logo.png)
 
 ## Overview
