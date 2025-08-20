@@ -35,18 +35,22 @@ export const ProfileRoot = ({
         <Link href="#">Scanprofil</Link>
       </Breadcrumb>
       <ProfileActions profile={profile} />
-      <LayoutCard>
-        {hasScan && lastScanIsError && !shouldReloadData && (
+      {hasScan && lastScanIsError && !shouldReloadData && (
+        <LayoutCard>
           <ErrorScan profile={profile} lastScan={lastScan} />
-        )}
-        {hasSuccessfulScan ? (
+        </LayoutCard>
+      )}
+      {hasSuccessfulScan ? (
+        <LayoutCard>
           <ProfileTabs profile={profile} lastScan={lastSuccessfulScan} />
-        ) : (
-          (!lastScanIsError || shouldReloadData) && (
+        </LayoutCard>
+      ) : (
+        (!lastScanIsError || shouldReloadData) && (
+          <LayoutCard>
             <NoScans profile={profile} />
-          )
-        )}
-      </LayoutCard>
+          </LayoutCard>
+        )
+      )}
     </Section>
   );
 };
