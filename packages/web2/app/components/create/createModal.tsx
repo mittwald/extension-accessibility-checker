@@ -67,7 +67,7 @@ export const CreateModal = () => {
               onChange={() => setShowCustomDomain(!showCustomDomain)}
             >
               <Label>Domain-Art</Label>
-              <Segment value="mstudio">mStudioDomain</Segment>
+              <Segment value="mstudio">mStudio Domain</Segment>
               <Segment value="custom">Individuelle Eingabe</Segment>
             </SegmentedControl>
             {!showCustomDomain && <DomainSelect />}

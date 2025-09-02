@@ -1,5 +1,4 @@
 import { createMiddleware } from "@tanstack/react-start";
-import { MittwaldAPIV2Client } from "@mittwald/api-client";
 import { notFound } from "@tanstack/react-router";
 import { dbConnect, ScanProfileModel } from "extension-a11y-checker-storage";
 import { z } from "zod";
@@ -18,43 +17,6 @@ const getToken = async (sessionToken: string) => {
   const extensionSecret = process.env.EXTENSION_SECRET!;
   return (await getAccessToken(sessionToken, extensionSecret)).publicToken;
 };
-
-export async function canAccessProject(projectId: string, token: string) {
-  const client = MittwaldAPIV2Client.newWithToken(token);
-  try {
-    const response = await client.project.getProject({
-      projectId: projectId,
-    });
-    return response.status === 200;
-  } catch (e) {
-    return false;
-  }
-}
-
-export async function canAccessCustomer(customerId: string, token: string) {
-  const client = MittwaldAPIV2Client.newWithToken(token);
-  try {
-    const response = await client.customer.getCustomer({
-      customerId: customerId,
-    });
-    return response.status === 200;
-  } catch (e) {
-    return false;
-  }
-}
-
-export async function canAccessContext(
-  type: "project" | "customer",
-  contextId: string,
-  token: string,
-) {
-  switch (type) {
-    case "project":
-      return canAccessProject(contextId, token);
-    case "customer":
-      return canAccessCustomer(contextId, token);
-  }
-}
 
 export const authenticateMiddleware = createMiddleware({ validateClient: true })
   .client(async ({ next }) => {
@@ -77,19 +39,6 @@ export const authenticateMiddleware = createMiddleware({ validateClient: true })
     });
   });
 
-export const authorizeMiddleware = createMiddleware()
-  .middleware([authenticateMiddleware])
-  .server(async ({ next, context }) => {
-    const { contextType, contextId, apiToken } = context;
-
-    const canAccess = await canAccessContext(contextType, contextId, apiToken);
-    if (!canAccess) {
-      throw notFound();
-    }
-
-    return next();
-  });
-
 const contextSchema = z
   .object({
     contextId: z.string(),
@@ -97,7 +46,7 @@ const contextSchema = z
   .catchall(z.any());
 
 export const contextMatchingMiddleware = createMiddleware()
-  .middleware([authorizeMiddleware])
+  .middleware([authenticateMiddleware])
   .validator(contextSchema)
   .server(async ({ next, context, data: { contextId } }) => {
     if (context.contextId !== contextId) {
@@ -125,7 +74,7 @@ async function assertContextMatching(profileId: string, contextId: string) {
 }
 
 export const profileIdAuthorizeMiddleware = createMiddleware()
-  .middleware([dbMiddleware, authorizeMiddleware])
+  .middleware([dbMiddleware, authenticateMiddleware])
   .validator(profileIdSchema)
   .server(async ({ next, context, data: profileId }) => {
     const { contextId } = context;
@@ -134,7 +83,7 @@ export const profileIdAuthorizeMiddleware = createMiddleware()
   });
 
 export const profileAuthorizeMiddleware = createMiddleware()
-  .middleware([dbMiddleware, authorizeMiddleware])
+  .middleware([dbMiddleware, authenticateMiddleware])
   .validator(profileSchema)
   .server(async ({ next, context, data: { profileId } }) => {
     const { contextId } = context;
