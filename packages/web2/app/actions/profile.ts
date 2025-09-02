@@ -5,7 +5,7 @@ import { Scan, ScanProfile } from "../api/types.ts";
 import { ObjectId } from "mongodb";
 import { notFound } from "@tanstack/react-router";
 import {
-  authorizeMiddleware,
+  authenticateMiddleware,
   contextMatchingMiddleware,
   dbMiddleware,
   profileAuthorizeMiddleware,
@@ -14,7 +14,7 @@ import {
 import { scheduleScan, validateCron } from "./commons.js";
 
 export const getProfiles = createServerFn()
-  .middleware([dbMiddleware, authorizeMiddleware])
+  .middleware([dbMiddleware, authenticateMiddleware])
   .validator(z.string())
   .handler(async ({ data: contextId }) => {
     const data = await ScanProfileModel.findForContext(contextId);
