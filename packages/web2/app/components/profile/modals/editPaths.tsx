@@ -43,7 +43,7 @@ export const EditPathsModal = ({ profile }: { profile: ScanProfile }) => {
           <Section>
             <Text>
               Füge Unterseiten hinzu. So kannst du mit einem Profil den
-              Überblick über mehrere Seiten deiner Website bekommen.
+              Überblick über mehrere Seiten deiner Website bekommen.!!!!!
             </Text>
             <PathsList form={form} autoFocus={true} />
           </Section>

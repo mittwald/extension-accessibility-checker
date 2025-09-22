@@ -13,12 +13,14 @@ import {
   Text,
 } from "@mittwald/flow-remote-react-components";
 import { Route } from "../../../../routes/profiles.$profileId.tsx";
-import { EditGeneralsModal } from "../../modals/editGenerals.tsx";
+import { isRunningOrPending } from "../../helpers.ts";
 import { useRouter } from "@tanstack/react-router";
+import { startScan } from "../../../../actions/scan.ts";
 import { WcagStandardContextualHelp } from "../../wcagStandardContextualHelp.js";
+import { EditIntervalModal } from "../../modals/EditIntervalModal.js";
 import { CronText } from "../../CronFields/CronText.js";
 
-export const GeneralSettings = () => {
+export const IntarvallSettings = () => {
   const { profile } = Route.useLoaderData();
   const nextScan = profile.nextScan;
   const router = useRouter();
@@ -28,19 +30,31 @@ export const GeneralSettings = () => {
   return (
     <Section>
       <Header>
-        <Heading>Scan-Profil</Heading>
+        <Heading>Intervall</Heading>
         <ModalTrigger>
           <Button color="secondary" variant="soft">
             Bearbeiten
           </Button>
-          <EditGeneralsModal profile={profile} />
+          <EditIntervalModal profile={profile} />
         </ModalTrigger>
+        <Button
+          color="accent"
+          onPress={async () => {
+            await startScan({ data: { profileId: profile._id } });
+            await router.invalidate({ sync: true });
+          }}
+          isDisabled={isRunningOrPending(nextScan)}
+        >
+          Scan starten
+        </Button>
       </Header>
+
       <ColumnLayout>
         <LabeledValue>
-          <Label>Domain</Label>
+          <Label>Intervall</Label>
           <Content>{profile.domain}</Content>
         </LabeledValue>
+
         {profile.cronSchedule && (
           <>
             <LabeledValue>
@@ -49,6 +63,7 @@ export const GeneralSettings = () => {
                 <CronText cronSyntax={profile.cronSchedule.expression} />
               </Content>
             </LabeledValue>
+
             <LabeledValue>
               <Label>
                 Nächste Ausführung
@@ -68,9 +83,10 @@ export const GeneralSettings = () => {
             </LabeledValue>
           </>
         )}
+
         <LabeledValue>
           <Label>
-            Konformitätsstufe
+            Nächste Ausführung
             <ContextualHelpTrigger>
               <Button />
               <WcagStandardContextualHelp />
@@ -78,18 +94,7 @@ export const GeneralSettings = () => {
           </Label>
           <Content>{profile.standard}</Content>
         </LabeledValue>
-        <LabeledValue>
-          <Label>Hinweise</Label>
-          <Content>
-            {profile.includeNotices ? "aktiviert" : "deaktiviert"}
-          </Content>
-        </LabeledValue>
-        <LabeledValue>
-          <Label>Warnungen</Label>
-          <Content>
-            {profile.includeWarnings ? "aktiviert" : "deaktiviert"}
-          </Content>
-        </LabeledValue>
+
       </ColumnLayout>
     </Section>
   );
