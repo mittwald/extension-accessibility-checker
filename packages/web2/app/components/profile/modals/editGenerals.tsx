@@ -61,7 +61,7 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
 
   return (
     <Modal>
-      <Heading slot="title">Einstellungen bearbeiten</Heading>
+      <Heading slot="title">Scan-Profil bearbeiten</Heading>
       <Form form={form} onSubmit={onSubmit}>
         <Content>
           <Section>
