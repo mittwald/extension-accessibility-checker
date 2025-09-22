@@ -3,8 +3,8 @@ import {
   Action,
   ActionGroup,
   Button,
-  Checkbox,
-  ColumnLayout,
+  CheckboxButton,
+  CheckboxGroup,
   Content,
   ContextualHelpTrigger,
   Heading,
@@ -22,7 +22,8 @@ import {
 } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { useRouter } from "@tanstack/react-router";
 import { updateProfileSettings } from "../../../actions/profile.ts";
-import { WcagStandardContextualHelp } from "../wcagStandardContextualHelp.js";
+import { WcagStandardContextualHelp } from "../wcagStandardContextualHelp.tsx";
+import { CriteriaContextualHelp } from "../criteriaContextualHelp.tsx" 
 
 interface FormValues {
   cronExpression?: string;
@@ -83,18 +84,17 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
                 <Segment value="WCAG2AAA">WCAG2 AAA</Segment>
               </SegmentedControl>
             </Field>
-            <ColumnLayout>
-              <Field name={"includeWarnings"}>
-                <Checkbox>
-                  <Label>Warnungen</Label>
-                </Checkbox>
-              </Field>
-              <Field name={"includeNotices"}>
-                <Checkbox>
-                  <Label>Hinweise</Label>
-                </Checkbox>
-              </Field>
-            </ColumnLayout>
+            <CheckboxGroup>
+              <Label>
+                Kriterien
+                <ContextualHelpTrigger>
+                  <Button />
+                  <CriteriaContextualHelp/>
+                </ContextualHelpTrigger>
+              </Label>
+              <CheckboxButton value="includeWarnings">Warnungen</CheckboxButton>
+              <CheckboxButton value="includeNotices">Hinweise</CheckboxButton>
+            </CheckboxGroup>
           </Section>
         </Content>
         <ActionGroup>
