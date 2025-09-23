@@ -12,7 +12,7 @@ mongodb:
     port: 27017
   persistence:
     enabled: true
-    size: 4Gi
+    size: 8Gi
   resources:
     limits:
       cpu: 500m
