@@ -5,8 +5,9 @@ import {
   Button,
   CheckboxButton,
   CheckboxGroup,
+  // Checkbox,
   Content,
-  ContextualHelpTrigger,
+  ContextualHelpTrigger,  
   Heading,
   Label,
   Modal,
@@ -84,7 +85,8 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
                 <Segment value="WCAG2AAA">WCAG2 AAA</Segment>
               </SegmentedControl>
             </Field>
-            <CheckboxGroup>
+
+            <CheckboxGroup l={[1, 1]} m={[1]}>
               <Label>
                 Kriterien
                 <ContextualHelpTrigger>
@@ -92,8 +94,14 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
                   <CriteriaContextualHelp/>
                 </ContextualHelpTrigger>
               </Label>
-              <CheckboxButton value="includeWarnings">Warnungen</CheckboxButton>
-              <CheckboxButton value="includeNotices">Hinweise</CheckboxButton>
+              
+              <Field name={"includeWarnings"}>
+                <CheckboxButton value="warnings">Warnungen</CheckboxButton>
+              </Field>
+
+              <Field name={"includeNotices"}>
+                <CheckboxButton value="notices">Hinweise</CheckboxButton>
+              </Field>
             </CheckboxGroup>
           </Section>
         </Content>
