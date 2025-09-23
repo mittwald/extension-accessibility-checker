@@ -16,7 +16,6 @@ import { Route } from "../../../../routes/profiles.$profileId.tsx";
 import { isRunningOrPending } from "../../helpers.ts";
 import { useRouter } from "@tanstack/react-router";
 import { startScan } from "../../../../actions/scan.ts";
-// import { WcagStandardContextualHelp } from "../../wcagStandardContextualHelp.js";
 import { EditIntervalModal } from "../../modals/EditIntervalModal.js";
 import { CronText } from "../../CronFields/CronText.js";
 
@@ -57,12 +56,12 @@ export const IntarvallSettings = () => {
                 <CronText cronSyntax={profile.cronSchedule.expression} />
               </Content>
             </LabeledValue>
+
             <LabeledValue>
               <Label>
                 Nächste Ausführung
                 <ContextualHelpTrigger>
                   <Button />
-
                   <ContextualHelp>
                     <Heading>Nächste Ausführung</Heading>
                     <Text>
@@ -72,25 +71,11 @@ export const IntarvallSettings = () => {
                   </ContextualHelp>
                 </ContextualHelpTrigger>
               </Label>
+              
               <Content>{nextExecution?.toLocaleString() ?? "–"}</Content>
             </LabeledValue>
           </>
         )}
-
-        {/* <LabeledValue>
-          <Label>Intervall</Label>
-          <Content>---</Content>
-        </LabeledValue>
-        <LabeledValue>
-          <Label>
-            Nächste Ausführung
-            <ContextualHelpTrigger>
-              <Button />
-              <WcagStandardContextualHelp />
-            </ContextualHelpTrigger>
-          </Label>
-          <Content>---</Content>
-        </LabeledValue> */}
       </ColumnLayout>
     </Section>
   );
