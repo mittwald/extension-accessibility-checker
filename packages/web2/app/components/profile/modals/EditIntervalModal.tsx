@@ -70,7 +70,7 @@ export const EditIntervalModal: FC<Props> = (props) => {
   return (
     <Modal controller={controller}>
       <Form form={form} onSubmit={handleOnSubmit}>
-        <Heading>Ausführungsintervall bearbeiten</Heading>
+        <Heading>Intervall bearbeiten</Heading>
         <Content>
           <Section>
             <Text>

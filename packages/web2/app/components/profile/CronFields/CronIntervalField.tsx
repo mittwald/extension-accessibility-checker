@@ -9,7 +9,7 @@ const intervals: { value: CronInterval; label: string }[] = [
   { value: "7d", label: "Alle 7 Tage" },
   { value: "14d", label: "Alle 14 Tage" },
   { value: "30d", label: "Alle 30 Tage" },
-  { value: "custom", label: "Individuell" },
+  { value: "custom", label: "Cron-Syntax" },
 ];
 
 export const CronIntervalField: FC = () => {
