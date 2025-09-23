@@ -3,10 +3,11 @@ import {
   Action,
   ActionGroup,
   Button,
-  Checkbox,
-  ColumnLayout,
+  CheckboxButton,
+  CheckboxGroup,
+  // Checkbox,
   Content,
-  ContextualHelpTrigger,
+  ContextualHelpTrigger,  
   Heading,
   Label,
   Modal,
@@ -22,24 +23,32 @@ import {
 } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { useRouter } from "@tanstack/react-router";
 import { updateProfileSettings } from "../../../actions/profile.ts";
-import { WcagStandardContextualHelp } from "../wcagStandardContextualHelp.js";
+import { WcagStandardContextualHelp } from "../wcagStandardContextualHelp.tsx";
+import { CriteriaContextualHelp } from "../criteriaContextualHelp.tsx" 
 
 interface FormValues {
   cronExpression?: string;
   standard: ScanProfile["standard"];
-  includeWarnings: boolean;
-  includeNotices: boolean;
+  includedCriteria: string[];
 }
 
 export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
   const router = useRouter();
 
+  const criteria = [];
+  if(profile.includeWarnings) {
+    criteria.push("includeWarnings")
+  } 
+
+  if(profile.includeNotices) {
+    criteria.push("includeNotices")
+  } 
+
   const form = useForm<FormValues>({
     defaultValues: {
       cronExpression: profile.cronSchedule?.expression,
       standard: profile.standard,
-      includeWarnings: profile.includeWarnings,
-      includeNotices: profile.includeNotices,
+      includedCriteria: criteria,
     },
   });
 
@@ -51,6 +60,8 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
     await updateProfileSettings({
       data: {
         profileId: profile._id,
+        includeNotices: formValues.includedCriteria.includes("includeNotices") ? true : false,
+        includeWarnings: formValues.includedCriteria.includes("includeWarnings") ? true : false,
         ...formValues,
       },
     });
@@ -60,7 +71,7 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
 
   return (
     <Modal>
-      <Heading slot="title">Einstellungen bearbeiten</Heading>
+      <Heading slot="title">Scan-Profil bearbeiten</Heading>
       <Form form={form} onSubmit={onSubmit}>
         <Content>
           <Section>
@@ -83,18 +94,20 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
                 <Segment value="WCAG2AAA">WCAG2 AAA</Segment>
               </SegmentedControl>
             </Field>
-            <ColumnLayout>
-              <Field name={"includeWarnings"}>
-                <Checkbox>
-                  <Label>Warnungen</Label>
-                </Checkbox>
-              </Field>
-              <Field name={"includeNotices"}>
-                <Checkbox>
-                  <Label>Hinweise</Label>
-                </Checkbox>
-              </Field>
-            </ColumnLayout>
+
+            <Field name="includedCriteria">
+              <CheckboxGroup>
+                <Label>
+                  Kriterien
+                  <ContextualHelpTrigger>
+                    <Button />
+                    <CriteriaContextualHelp/>
+                  </ContextualHelpTrigger>
+                </Label>
+                <CheckboxButton value="includeWarnings">Warnungen</CheckboxButton>
+                <CheckboxButton value="includeNotices">Hinweise</CheckboxButton>
+              </CheckboxGroup>
+            </Field>
           </Section>
         </Content>
         <ActionGroup>
