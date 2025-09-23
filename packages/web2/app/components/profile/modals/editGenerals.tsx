@@ -29,19 +29,26 @@ import { CriteriaContextualHelp } from "../criteriaContextualHelp.tsx"
 interface FormValues {
   cronExpression?: string;
   standard: ScanProfile["standard"];
-  includeWarnings: boolean;
-  includeNotices: boolean;
+  includedCriteria: string[];
 }
 
 export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
   const router = useRouter();
 
+  const criteria = [];
+  if(profile.includeWarnings) {
+    criteria.push("includeWarnings")
+  } 
+
+  if(profile.includeNotices) {
+    criteria.push("includeNotices")
+  } 
+
   const form = useForm<FormValues>({
     defaultValues: {
       cronExpression: profile.cronSchedule?.expression,
       standard: profile.standard,
-      includeWarnings: profile.includeWarnings,
-      includeNotices: profile.includeNotices,
+      includedCriteria: criteria,
     },
   });
 
@@ -53,6 +60,8 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
     await updateProfileSettings({
       data: {
         profileId: profile._id,
+        includeNotices: formValues.includedCriteria.includes("includeNotices") ? true : false,
+        includeWarnings: formValues.includedCriteria.includes("includeWarnings") ? true : false,
         ...formValues,
       },
     });
@@ -86,23 +95,19 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
               </SegmentedControl>
             </Field>
 
-            <CheckboxGroup l={[1, 1]} m={[1]}>
-              <Label>
-                Kriterien
-                <ContextualHelpTrigger>
-                  <Button />
-                  <CriteriaContextualHelp/>
-                </ContextualHelpTrigger>
-              </Label>
-              
-              <Field name={"includeWarnings"}>
-                <CheckboxButton value="warnings">Warnungen</CheckboxButton>
-              </Field>
-
-              <Field name={"includeNotices"}>
-                <CheckboxButton value="notices">Hinweise</CheckboxButton>
-              </Field>
-            </CheckboxGroup>
+            <Field name="includedCriteria">
+              <CheckboxGroup>
+                <Label>
+                  Kriterien
+                  <ContextualHelpTrigger>
+                    <Button />
+                    <CriteriaContextualHelp/>
+                  </ContextualHelpTrigger>
+                </Label>
+                <CheckboxButton value="includeWarnings">Warnungen</CheckboxButton>
+                <CheckboxButton value="includeNotices">Hinweise</CheckboxButton>
+              </CheckboxGroup>
+            </Field>
           </Section>
         </Content>
         <ActionGroup>
