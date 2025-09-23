@@ -2,7 +2,7 @@ import {
   Button,
   ColumnLayout,
   Content,
-  ContextualHelp,
+  // ContextualHelp,
   ContextualHelpTrigger,
   Header,
   Heading,
@@ -10,20 +10,20 @@ import {
   LabeledValue,
   ModalTrigger,
   Section,
-  Text,
+  // Text,
 } from "@mittwald/flow-remote-react-components";
 import { Route } from "../../../../routes/profiles.$profileId.tsx";
 import { EditGeneralsModal } from "../../modals/editGenerals.tsx";
-import { useRouter } from "@tanstack/react-router";
+// import { useRouter } from "@tanstack/react-router";
 import { WcagStandardContextualHelp } from "../../wcagStandardContextualHelp.js";
-import { CronText } from "../../CronFields/CronText.js";
+// import { CronText } from "../../CronFields/CronText.js";
 
 export const GeneralSettings = () => {
   const { profile } = Route.useLoaderData();
-  const nextScan = profile.nextScan;
-  const router = useRouter();
+  // const nextScan = profile.nextScan;
+  // const router = useRouter();
 
-  const nextExecution = nextScan?.executionScheduledFor;
+  // const nextExecution = nextScan?.executionScheduledFor;
 
   return (
     <Section>
@@ -41,7 +41,7 @@ export const GeneralSettings = () => {
           <Label>Domain</Label>
           <Content>{profile.domain}</Content>
         </LabeledValue>
-        {profile.cronSchedule && (
+        {/* {profile.cronSchedule && (
           <>
             <LabeledValue>
               <Label>Ausführungsintervall</Label>
@@ -67,7 +67,7 @@ export const GeneralSettings = () => {
               <Content>{nextExecution?.toLocaleString() ?? "–"}</Content>
             </LabeledValue>
           </>
-        )}
+        )} */}
         <LabeledValue>
           <Label>
             Konformitätsstufe
