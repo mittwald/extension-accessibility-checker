@@ -10,9 +10,9 @@
 
 // Import Routes
 
-import { Route as rootRoute } from "./routes/__root"
-import { Route as IndexImport } from "./routes/index"
-import { Route as ProfilesProfileIdImport } from "./routes/profiles.$profileId"
+import { Route as rootRoute } from "./routes/__root";
+import { Route as IndexImport } from "./routes/index";
+import { Route as ProfilesProfileIdImport } from "./routes/profiles.$profileId";
 
 // Create/Update Routes
 
@@ -20,75 +20,75 @@ const IndexRoute = IndexImport.update({
   id: "/",
   path: "/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const ProfilesProfileIdRoute = ProfilesProfileIdImport.update({
   id: "/profiles/$profileId",
   path: "/profiles/$profileId",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 // Populate the FileRoutesByPath interface
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
     "/": {
-      id: "/"
-      path: "/"
-      fullPath: "/"
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
     "/profiles/$profileId": {
-      id: "/profiles/$profileId"
-      path: "/profiles/$profileId"
-      fullPath: "/profiles/$profileId"
-      preLoaderRoute: typeof ProfilesProfileIdImport
-      parentRoute: typeof rootRoute
-    }
+      id: "/profiles/$profileId";
+      path: "/profiles/$profileId";
+      fullPath: "/profiles/$profileId";
+      preLoaderRoute: typeof ProfilesProfileIdImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute
-  "/profiles/$profileId": typeof ProfilesProfileIdRoute
+  "/": typeof IndexRoute;
+  "/profiles/$profileId": typeof ProfilesProfileIdRoute;
 }
 
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute
-  "/profiles/$profileId": typeof ProfilesProfileIdRoute
+  "/": typeof IndexRoute;
+  "/profiles/$profileId": typeof ProfilesProfileIdRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  "/": typeof IndexRoute
-  "/profiles/$profileId": typeof ProfilesProfileIdRoute
+  __root__: typeof rootRoute;
+  "/": typeof IndexRoute;
+  "/profiles/$profileId": typeof ProfilesProfileIdRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/profiles/$profileId"
-  fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/profiles/$profileId"
-  id: "__root__" | "/" | "/profiles/$profileId"
-  fileRoutesById: FileRoutesById
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths: "/" | "/profiles/$profileId";
+  fileRoutesByTo: FileRoutesByTo;
+  to: "/" | "/profiles/$profileId";
+  id: "__root__" | "/" | "/profiles/$profileId";
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  ProfilesProfileIdRoute: typeof ProfilesProfileIdRoute
+  IndexRoute: typeof IndexRoute;
+  ProfilesProfileIdRoute: typeof ProfilesProfileIdRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ProfilesProfileIdRoute: ProfilesProfileIdRoute,
-}
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {

@@ -1,5 +1,10 @@
 import { Scan, ScanProfile } from "../../api/types.ts";
-import { AlertIcon, Tab, Tabs, TabTitle } from "@mittwald/flow-remote-react-components";
+import {
+  AlertIcon,
+  Tab,
+  Tabs,
+  TabTitle,
+} from "@mittwald/flow-remote-react-components";
 import { Overview } from "./tabs/overview.tsx";
 import { Issues } from "./tabs/issues.tsx";
 import { Settings } from "./tabs/settings.tsx";
