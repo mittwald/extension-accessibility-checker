@@ -1,5 +1,4 @@
 import {
-  Alert,
   Button,
   ColumnLayout,
   Content,
@@ -21,9 +20,11 @@ import { startScan } from "../../../../actions/scan.ts";
 import { WcagStandardContextualHelp } from "../../wcagStandardContextualHelp.js";
 import { EditIntervalModal } from "../../modals/EditIntervalModal.js";
 import { CronText } from "../../CronFields/CronText.js";
+import { SaveResourcesBanner } from "./components/saveResourcesBanner.tsx";
+import { hasDailyCronInterval } from "../../../../lib/hasDailyCronInterval.ts";
 
 export const GeneralSettings = () => {
-  const { profile } = Route.useLoaderData();
+  const { profile } = Route.useLoaderData()!;
   const nextScan = profile.nextScan;
   const router = useRouter();
 
@@ -35,7 +36,7 @@ export const GeneralSettings = () => {
         <Heading>Generelle Einstellungen</Heading>
         <ModalTrigger>
           <Button color="secondary" variant="soft">
-            Intervall bearbeiten
+            Interval bearbeiten
           </Button>
           <EditIntervalModal profile={profile} />
         </ModalTrigger>
@@ -56,18 +57,9 @@ export const GeneralSettings = () => {
           Scan starten
         </Button>
       </Header>
-      <Alert>
-        <Heading>Gemeinsam Ressourcen sparen</Heading>
-        <Content>
-          Seit dem 06.08.2025 ist der automatische Tages-Check für neue Profile deaktiviert, um den ökologischen Fußabdruck zu senken. Bitte prüfe, ob dieses Profil weiterhin ein tägliches Intervall braucht und passe die Einstellung bei Bedarf an.
-        </Content>
-        <ModalTrigger>
-          <Button color="primary" variant="solid" size="s">
-            Intervall bearbeiten
-          </Button>
-          <EditIntervalModal profile={profile} />
-        </ModalTrigger>
-      </Alert>
+      {hasDailyCronInterval(profile) && (
+        <SaveResourcesBanner profile={profile} />
+      )}
       <ColumnLayout>
         <LabeledValue>
           <Label>Domain</Label>
