@@ -8,6 +8,7 @@ import {
 import { Overview } from "./tabs/overview.tsx";
 import { Issues } from "./tabs/issues.tsx";
 import { Settings } from "./tabs/settings.tsx";
+import { hasDailyCronInterval } from "../../lib/hasDailyCronInterval.ts";
 
 export function ProfileTabs({
   profile,
@@ -29,7 +30,7 @@ export function ProfileTabs({
       <Tab id="settings">
         <TabTitle>
           Einstellungen
-          <AlertIcon status="info" />
+          {hasDailyCronInterval(profile) && <AlertIcon status="info" />}
         </TabTitle>
         <Settings />
       </Tab>
