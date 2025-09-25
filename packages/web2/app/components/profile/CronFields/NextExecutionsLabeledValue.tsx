@@ -14,11 +14,11 @@ interface Props {
 export const NextExecutionsLabeledValue: FC<Props> = (props) => {
   const { cron } = props;
 
+  const executions = useMemo(() => getExecutions(cron), [cron]);
+
   if (cron === "" || !isValidCron(cron)) {
     return null;
   }
-
-  const executions = useMemo(() => getExecutions(cron), [cron]);
 
   const nextExecutions = executions.map((date) => {
     return (

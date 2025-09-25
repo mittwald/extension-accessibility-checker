@@ -54,13 +54,13 @@ export const PathsList = ({
     setTouched(false);
   }
 
-  const removePathFromFormValues = (value: string | String) => {
+  const removePathFromFormValues = (value: string | string) => {
     const values = form.getValues("paths");
     values.delete(value.toString());
     form.setValue("paths", values);
   };
 
-  const PathList = typedList<String>();
+  const PathList = typedList<string>();
   const pathsList = (
     <PathList.List aria-label="Pfade">
       <PathList.StaticData data={Array.from(paths)} />
