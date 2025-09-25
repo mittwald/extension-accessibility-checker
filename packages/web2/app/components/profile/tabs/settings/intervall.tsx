@@ -48,7 +48,7 @@ export const IntarvallSettings = () => {
         </Button>
       </Header>
       <ColumnLayout>
-        {profile.cronSchedule && (
+        {profile.cronSchedule ? (
           <>
             <LabeledValue>
               <Label>Intervall</Label>
@@ -75,6 +75,11 @@ export const IntarvallSettings = () => {
               <Content>{nextExecution?.toLocaleString() ?? "–"}</Content>
             </LabeledValue>
           </>
+        ) : (
+          <LabeledValue>
+            <Label>Intervall</Label>
+            <Content>Manuelle Ausführung</Content>
+          </LabeledValue>
         )}
       </ColumnLayout>
     </Section>
