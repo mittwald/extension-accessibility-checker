@@ -43,7 +43,7 @@ export const getIntervalValueFromCronSyntax = (
     case /^\d+ \d+ \d+ \* \*$/.test(cronSyntax):
       return "30d";
     default:
-      return "never";
+      return "custom";
   }
 };
 
