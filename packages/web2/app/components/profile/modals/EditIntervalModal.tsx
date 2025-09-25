@@ -77,7 +77,7 @@ export const EditIntervalModal: FC<Props> = (props) => {
               Das Intervall legt fest, ob und wann dein Scan automatisch
               ausgeführt werden soll. Lege nur dann einen automatischen
               Scan-Intervall fest, wenn es wirklich nötig ist – so schonst du
-              Ressourcen. Wählst du »Nur manuell«, wird keine automatische
+              Ressourcen. Wählst du »Manuelle Ausführung«, wird keine automatische
               Ausführung eingerichtet. Ein manueller Scan ist jederzeit möglich.
             </Text>
             <CronFields
