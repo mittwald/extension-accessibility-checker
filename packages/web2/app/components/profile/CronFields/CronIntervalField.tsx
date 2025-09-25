@@ -4,12 +4,12 @@ import type { FC } from "react";
 import type { CronInterval } from "./lib";
 
 const intervals: { value: CronInterval; label: string }[] = [
-  { value: "never", label: "Nur manuell" },
+  { value: "never", label: "Manuelle Ausführung" },
   { value: "1d", label: "Jeden Tag" },
   { value: "7d", label: "Alle 7 Tage" },
   { value: "14d", label: "Alle 14 Tage" },
   { value: "30d", label: "Alle 30 Tage" },
-  { value: "custom", label: "Individuell" },
+  { value: "custom", label: "Cron-Syntax" },
 ];
 
 export const CronIntervalField: FC = () => {

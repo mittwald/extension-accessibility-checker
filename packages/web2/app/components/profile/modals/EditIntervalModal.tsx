@@ -70,14 +70,14 @@ export const EditIntervalModal: FC<Props> = (props) => {
   return (
     <Modal controller={controller}>
       <Form form={form} onSubmit={handleOnSubmit}>
-        <Heading>Ausführungsintervall bearbeiten</Heading>
+        <Heading>Intervall bearbeiten</Heading>
         <Content>
           <Section>
             <Text>
               Das Intervall legt fest, ob und wann dein Scan automatisch
               ausgeführt werden soll. Lege nur dann einen automatischen
               Scan-Intervall fest, wenn es wirklich nötig ist – so schonst du
-              Ressourcen. Wählst du »Nur manuell«, wird keine automatische
+              Ressourcen. Wählst du »Manuelle Ausführung«, wird keine automatische
               Ausführung eingerichtet. Ein manueller Scan ist jederzeit möglich.
             </Text>
             <CronFields
