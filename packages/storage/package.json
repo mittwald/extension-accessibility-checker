@@ -22,8 +22,8 @@
     "dev": "tsc --watch",
     "build": "tsc",
     "compile": "yarn build",
-    "lint": "exit 1",
-    "format": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --write"
+    "format": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --write",
+    "format:check": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --check"
   },
   "dependencies": {
     "@typegoose/typegoose": "^12.11.0",

@@ -11,6 +11,12 @@
     },
     "lint": {
       "cache": true
+    },
+    "lint:fix": {
+      "cache": true
+    },
+    "format:check": {
+      "cache": true
     }
   },
   "defaultBase": "main",
