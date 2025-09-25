@@ -17,7 +17,7 @@ import { SaveResourcesBanner } from "./components/saveResourcesBanner.tsx";
 import { hasDailyCronInterval } from "../../../../lib/hasDailyCronInterval.ts";
 
 export const GeneralSettings = () => {
-  const { profile } = Route.useLoaderData()!;
+  const { profile } = Route.useLoaderData();
 
   return (
     <Section>

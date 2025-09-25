@@ -5,9 +5,8 @@ import {
   Button,
   CheckboxButton,
   CheckboxGroup,
-  // Checkbox,
   Content,
-  ContextualHelpTrigger,  
+  ContextualHelpTrigger,
   Heading,
   Label,
   Modal,
@@ -24,7 +23,7 @@ import {
 import { useRouter } from "@tanstack/react-router";
 import { updateProfileSettings } from "../../../actions/profile.ts";
 import { WcagStandardContextualHelp } from "../wcagStandardContextualHelp.tsx";
-import { CriteriaContextualHelp } from "../criteriaContextualHelp.tsx" 
+import { CriteriaContextualHelp } from "../criteriaContextualHelp.tsx";
 
 interface FormValues {
   cronExpression?: string;
@@ -36,13 +35,13 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
   const router = useRouter();
 
   const criteria = [];
-  if(profile.includeWarnings) {
-    criteria.push("includeWarnings")
-  } 
+  if (profile.includeWarnings) {
+    criteria.push("includeWarnings");
+  }
 
-  if(profile.includeNotices) {
-    criteria.push("includeNotices")
-  } 
+  if (profile.includeNotices) {
+    criteria.push("includeNotices");
+  }
 
   const form = useForm<FormValues>({
     defaultValues: {
@@ -60,8 +59,9 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
     await updateProfileSettings({
       data: {
         profileId: profile._id,
-        includeNotices: formValues.includedCriteria.includes("includeNotices") ? true : false,
-        includeWarnings: formValues.includedCriteria.includes("includeWarnings") ? true : false,
+        includeNotices: formValues.includedCriteria.includes("includeNotices"),
+        includeWarnings:
+          formValues.includedCriteria.includes("includeWarnings"),
         ...formValues,
       },
     });
@@ -101,10 +101,12 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
                   Kriterien
                   <ContextualHelpTrigger>
                     <Button />
-                    <CriteriaContextualHelp/>
+                    <CriteriaContextualHelp />
                   </ContextualHelpTrigger>
                 </Label>
-                <CheckboxButton value="includeWarnings">Warnungen</CheckboxButton>
+                <CheckboxButton value="includeWarnings">
+                  Warnungen
+                </CheckboxButton>
                 <CheckboxButton value="includeNotices">Hinweise</CheckboxButton>
               </CheckboxGroup>
             </Field>
