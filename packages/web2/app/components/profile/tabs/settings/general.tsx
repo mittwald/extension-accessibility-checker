@@ -13,6 +13,8 @@ import {
 import { Route } from "../../../../routes/profiles.$profileId.tsx";
 import { EditGeneralsModal } from "../../modals/editGenerals.tsx";
 import { WcagStandardContextualHelp } from "../../wcagStandardContextualHelp.js";
+import { SaveResourcesBanner } from "./components/saveResourcesBanner.tsx";
+import { hasDailyCronInterval } from "../../../../lib/hasDailyCronInterval.ts";
 
 export const GeneralSettings = () => {
   const { profile } = Route.useLoaderData();
@@ -28,6 +30,9 @@ export const GeneralSettings = () => {
           <EditGeneralsModal profile={profile} />
         </ModalTrigger>
       </Header>
+      {hasDailyCronInterval(profile) && (
+        <SaveResourcesBanner profile={profile} />
+      )}
       <ColumnLayout>
         <LabeledValue>
           <Label>Domain</Label>

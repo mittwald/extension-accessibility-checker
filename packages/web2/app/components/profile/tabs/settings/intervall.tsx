@@ -71,7 +71,7 @@ export const IntarvallSettings = () => {
                   </ContextualHelp>
                 </ContextualHelpTrigger>
               </Label>
-              
+
               <Content>{nextExecution?.toLocaleString() ?? "–"}</Content>
             </LabeledValue>
           </>

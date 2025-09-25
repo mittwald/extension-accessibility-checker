@@ -1,8 +1,14 @@
 import { Scan, ScanProfile } from "../../api/types.ts";
-import { Tab, Tabs, TabTitle } from "@mittwald/flow-remote-react-components";
+import {
+  AlertIcon,
+  Tab,
+  Tabs,
+  TabTitle,
+} from "@mittwald/flow-remote-react-components";
 import { Overview } from "./tabs/overview.tsx";
 import { Issues } from "./tabs/issues.tsx";
 import { Settings } from "./tabs/settings.tsx";
+import { hasDailyCronInterval } from "../../lib/hasDailyCronInterval.ts";
 
 export function ProfileTabs({
   profile,
@@ -22,7 +28,10 @@ export function ProfileTabs({
         <Issues scan={lastScan} />
       </Tab>
       <Tab id="settings">
-        <TabTitle>Einstellungen</TabTitle>
+        <TabTitle>
+          Einstellungen
+          {hasDailyCronInterval(profile) && <AlertIcon status="info" />}
+        </TabTitle>
         <Settings />
       </Tab>
     </Tabs>
