@@ -4,7 +4,7 @@ import type { FC } from "react";
 import type { CronInterval } from "./lib";
 
 const intervals: { value: CronInterval; label: string }[] = [
-  { value: "never", label: "Nur manuell" },
+  { value: "never", label: "Manuelle Ausführung" },
   { value: "1d", label: "Jeden Tag" },
   { value: "7d", label: "Alle 7 Tage" },
   { value: "14d", label: "Alle 14 Tage" },
