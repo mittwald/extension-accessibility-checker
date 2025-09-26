@@ -20,17 +20,13 @@ interface FormValues {
   domain: string;
 }
 
-interface ChangeDomainModalProps {
-  controller: OverlayController;
-  profile: ScanProfile;
-  title?: string;
-}
-
-export const ChangeDomainModal = ({
+export const ChangeCertificateModal = ({
   controller,
   profile,
-  title = "Domain bearbeiten",
-}: ChangeDomainModalProps) => {
+}: {
+  controller: OverlayController;
+  profile: ScanProfile;
+}) => {
   const router = useRouter();
 
   const form = useForm<FormValues>({
@@ -54,13 +50,13 @@ export const ChangeDomainModal = ({
   return (
     <Modal controller={controller}>
       <Form form={form} onSubmit={onSubmit}>
-        <Heading slot="title">{title}</Heading>
+        <Heading slot="title">Zertifikat bearbeiten</Heading>
         <Content>
           <Section>
             <Domain
               autoFocus
               form={form}
-              helpText="Kontrolliere die Domain auf Richtigkeit und versuche es erneut."
+              helpText="Kontrolliere die Zertifikat auf Richtigkeit und versuche es erneut."
             />
           </Section>
         </Content>

@@ -13,26 +13,37 @@ import {
 import { RestartScanButton } from "./restartScanButton.js";
 import { ChangeDomainModal } from "../modals/changeDomainModal.js";
 
-export const DnsErrorView: FC<Props> = ({ profile, scanId }) => {
+export const ErrorViewWithEditDomain: FC<Props> = ({
+  profile,
+  scanId,
+  headline,
+  description,
+}) => {
   const controller = useOverlayController("Modal");
+  const editLabel = "Domain bearbeiten";
+  const content =
+    description ?? (
+      <>
+        Kontrolliere die Domain auf Richtigkeit und versuche es erneut.
+      </>
+    );
 
   return (
     <IllustratedMessage color="danger">
       <IconDanger />
-      <Heading>Domain nicht erreichbar</Heading>
-      <Text>
-        Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.{" "}
-        <br /> 
-        Der Scan wurde abgebrochen, da die Website nicht gefunden werden konnte. Bitte überprüfe die eingegebene Adresse und versuche es erneut.
-      </Text>
+      <Heading>{headline ?? editLabel}</Heading>
+      <Text>{content}</Text>
       <ActionGroup>
         <RestartScanButton profile={profile} scanId={scanId} />
         <Action onAction={() => controller.open()}>
-          <Button color="primary">Domain bearbeiten</Button>
+          <Button color="primary">{editLabel}</Button>
         </Action>
       </ActionGroup>
-      <ChangeDomainModal profile={profile} controller={controller} />
+      <ChangeDomainModal
+        profile={profile}
+        controller={controller}
+        title={editLabel}
+      />
     </IllustratedMessage>
   );
 };
-

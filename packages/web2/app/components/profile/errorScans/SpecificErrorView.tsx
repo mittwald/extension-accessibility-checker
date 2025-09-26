@@ -8,25 +8,26 @@ import {
 } from "@mittwald/flow-remote-react-components";
 import { RestartScanButton } from "./restartScanButton.js";
 
-export const DefaultErrorView: FC<Props & { message: string }> = ({
+export const SpecificErrorView: FC<Props> = ({
   profile,
-  message,
+  headline,
+  description,
   scanId,
 }) => {
   return (
     <IllustratedMessage color="danger">
       <IconDanger />
-      <Heading>Letzter Scan fehlgeschlagen</Heading>
+      <Heading>{headline ?? "Letzter Scan fehlgeschlagen"}</Heading>
       <Text>
-        Beim Scan ist folgender Fehler aufgetreten:
-        <br />
-        {message}
+        {description ?? (
+          <>
+            Beim Scan ist folgender Fehler aufgetreten.
+            <br />
+            Bitte versuche es erneut.
+          </>
+        )}
       </Text>
       <RestartScanButton profile={profile} scanId={scanId} />
     </IllustratedMessage>
   );
 };
-
-
-
-
