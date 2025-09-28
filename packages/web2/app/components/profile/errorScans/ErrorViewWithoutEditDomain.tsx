@@ -8,7 +8,7 @@ import {
 } from "@mittwald/flow-remote-react-components";
 import { RestartScanButton } from "./restartScanButton.js";
 
-export const SpecificErrorView: FC<Props> = ({
+export const ErrorViewWithoutEditDomain: FC<Props> = ({
   profile,
   headline,
   description,

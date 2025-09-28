@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import { Scan, ScanProfile } from "../../api/types.js";
 import { DefaultErrorView } from "./errorScans/defaultErrorView.js";
 import { ErrorViewWithEditDomain } from "./errorScans/ErrorViewWithEditDomain.js";
-import { SpecificErrorView } from "./errorScans/SpecificErrorView.js";
+import { ErrorViewWithoutEditDomain } from "./errorScans/ErrorViewWithoutEditDomain.js";
 
 interface ErrorTexts {
   headline: string;
@@ -46,6 +46,150 @@ const getErrorTexts = (
     };
   }
 
+  if (error.includes("ERR_CONNECTION_REFUSED")) {
+    return {
+      headline: "Domain nicht erreichbar",
+      description: (
+        <>
+          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
+          {" "}
+        <br /> 
+        Der Scan wurde abgebrochen, da die Verbindung zur Website vom Server abgelehnt wurde. 
+        Bitte überprüfe die Adresse und starte den Scan erneut.	
+        </>
+      ),
+      showEditDomain: true,
+    };
+  }
+
+  if (error.includes("ERR_TOO_MANY_REDIRECTS")) {
+    return {
+      headline: "Domain nicht erreichbar",
+      description: (
+        <>
+          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
+          {" "}
+        <br /> 
+        Der Scan wurde abgebrochen, da die Website zu viele Weiterleitungen enthält. 
+        Bitte überprüfe die Adresse und starte den Scan erneut.	
+        </>
+      ),
+      showEditDomain: true,
+    };
+  }
+
+  if (error.includes("ERR_TIMED_OUT")) {
+    return {
+      headline: "Domain nicht erreichbar",
+      description: (
+        <>
+          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
+          {" "}
+        <br /> 
+        Der Scan wurde abgebrochen, da beim Verbindungsaufbau keine Antwort von der Website eingegangen ist. 
+        Bitte überprüfe die Adresse und starte den Scan erneut.	
+        </>
+      ),
+      showEditDomain: true,
+    };
+  }
+
+  if (error.includes("ERR_INVALID_AUTH_CREDENTIALS")) {
+    return {
+      headline: "Domain nicht erreichbar",
+      description: (
+        <>
+          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
+          {" "}
+        <br /> 
+        Der Scan wurde abgebrochen, da die Website durch einen Passwortschutz oder eine Zugangsbeschränkung gesichert ist. 
+        Bitte nutze eine öffentlich erreichbare Adresse oder entferne die Zugriffsbeschränkung und starte den Scan erneut.	
+        </>
+      ),
+      showEditDomain: false,
+    };
+  }
+  
+  if (error.includes("ERR_CERT_AUTHORITY_INVALID")) {
+    return {
+      headline: "Domain nicht erreichbar",
+      description: (
+        <>
+          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
+          {" "}
+        <br /> 
+        Der Scan wurde abgebrochen, da die Zertifizierungsstelle (CA) des SSL-Zertifikates nicht vertrauenswürdig oder das Zertifikat abgelaufen ist. 
+        Bitte überprüfe das Zertifikat und starte den Scan erneut.	
+        </>
+      ),
+      showEditDomain: false,
+    };
+  }
+
+  if (error.includes("ERR_BLOCKED_BY_CLIENT")) {
+    return {
+      headline: "Domain nicht erreichbar",
+      description: (
+        <>
+          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
+          {" "}
+        <br /> 
+        Der Scan wurde abgebrochen, da eine Ressource der Website blockiert wurde – zum Beispiel durch einen Werbe-, Tracking- oder Script-Blocker im Browser. 
+        Bitte überprüfe die Ursache und versuche es anschließend erneut.	
+        </>
+      ),
+      showEditDomain: false,
+    };
+  }
+ 
+  if (error.includes("ERR_SSL_PROTOCOL_ERROR")) {
+    return {
+      headline: "Domain nicht erreichbar",
+      description: (
+        <>
+          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
+          {" "}
+        <br /> 
+        Der Scan wurde abgebrochen, da keine sichere Verbindung zur Website hergestellt werden konnte. 
+        Bitte überprüfe das SSL-Zertifikat sowie die Servereinstellungen und starte den Scan erneut.	
+        </>
+      ),
+      showEditDomain: false,
+    };
+  }
+
+  if (error.includes("ERR_CERT_DATE_INVALID")) {
+    return {
+      headline: "Domain nicht erreichbar",
+      description: (
+        <>
+          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
+          {" "}
+        <br /> 
+        Der Scan wurde abgebrochen, da das SSL-Zertifikat der Website abgelaufen oder ungültig ist. 
+        Bitte überprüfe das Zertifikat und versuche es erneut.	
+        </>
+      ),
+      showEditDomain: false,
+    };
+  }
+
+  if (error.includes("ERR_SSL_UNRECOGNIZED_NAME_ALERT")) {
+    return {
+      headline: "Domain nicht erreichbar",
+      description: (
+        <>
+          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
+          {" "}
+        <br /> 
+        Der Scan wurde abgebrochen, da das SSL-Zertifikat der Website nicht erkannt oder validiert werden konnte. 
+        Bitte überprüfe das Zertifikat und starte den Scan erneut.	
+        </>
+      ),
+      showEditDomain: false,
+    };
+  }
+
   return undefined;
 };
 
@@ -53,9 +197,7 @@ export const ErrorScan: FC<{ profile: ScanProfile; lastScan: Scan }> = ({
   lastScan,
   profile,
 }) => {
-  const errorInfos = lastScan.error
-    ? getErrorTexts(lastScan.error, profile)
-    : undefined;
+  const errorInfos = lastScan.error ? getErrorTexts(lastScan.error, profile) : undefined;
 
   if (errorInfos?.showEditDomain) {
     return (
@@ -69,7 +211,7 @@ export const ErrorScan: FC<{ profile: ScanProfile; lastScan: Scan }> = ({
   }
   if (errorInfos) {
     return (
-      <SpecificErrorView
+      <ErrorViewWithoutEditDomain
         profile={profile}
         scanId={lastScan._id}
         headline={errorInfos.headline}
