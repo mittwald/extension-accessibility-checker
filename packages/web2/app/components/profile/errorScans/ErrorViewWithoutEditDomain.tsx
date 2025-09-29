@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Props } from "./types.js";
+import { DetailedErrorProps } from "./types.js";
 import {
   Heading,
   IconDanger,
@@ -8,7 +8,7 @@ import {
 } from "@mittwald/flow-remote-react-components";
 import { RestartScanButton } from "./restartScanButton.js";
 
-export const ErrorViewWithoutEditDomain: FC<Props> = ({
+export const ErrorViewWithoutEditDomain: FC<DetailedErrorProps> = ({
   profile,
   headline,
   description,
@@ -17,16 +17,8 @@ export const ErrorViewWithoutEditDomain: FC<Props> = ({
   return (
     <IllustratedMessage color="danger">
       <IconDanger />
-      <Heading>{headline ?? "Letzter Scan fehlgeschlagen"}</Heading>
-      <Text>
-        {description ?? (
-          <>
-            Beim Scan ist folgender Fehler aufgetreten.
-            <br />
-            Bitte versuche es erneut.
-          </>
-        )}
-      </Text>
+      <Heading>{headline}</Heading>
+      <Text>{description}</Text>
       <RestartScanButton profile={profile} scanId={scanId} />
     </IllustratedMessage>
   );

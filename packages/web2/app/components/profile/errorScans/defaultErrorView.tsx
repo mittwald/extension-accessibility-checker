@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Props } from "./types.js";
+import { BaseProps } from "./types.js";
 import {
   Heading,
   IconDanger,
@@ -8,10 +8,10 @@ import {
 } from "@mittwald/flow-remote-react-components";
 import { RestartScanButton } from "./restartScanButton.js";
 
-export const DefaultErrorView: FC<Props & { message: string }> = ({
+export const DefaultErrorView: FC<BaseProps & { message: string }> = ({
   profile,
-  message,
   scanId,
+  message,
 }) => {
   return (
     <IllustratedMessage color="danger">
@@ -26,7 +26,3 @@ export const DefaultErrorView: FC<Props & { message: string }> = ({
     </IllustratedMessage>
   );
 };
-
-
-
-

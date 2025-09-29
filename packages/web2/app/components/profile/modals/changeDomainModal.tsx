@@ -23,13 +23,11 @@ interface FormValues {
 interface ChangeDomainModalProps {
   controller: OverlayController;
   profile: ScanProfile;
-  title?: string;
 }
 
 export const ChangeDomainModal = ({
   controller,
-  profile,
-  title = "Domain bearbeiten",
+  profile
 }: ChangeDomainModalProps) => {
   const router = useRouter();
 
@@ -54,7 +52,7 @@ export const ChangeDomainModal = ({
   return (
     <Modal controller={controller}>
       <Form form={form} onSubmit={onSubmit}>
-        <Heading slot="title">{title}</Heading>
+        <Heading slot="title">Domain bearbeiten</Heading>
         <Content>
           <Section>
             <Domain

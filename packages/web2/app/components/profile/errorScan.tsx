@@ -21,7 +21,7 @@ const getErrorTexts = (
         <>
           Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
           {" "}
-        <br /> 
+          <br /> 
           Der Scan wurde abgebrochen, da die Website nicht gefunden werden konnte.
           Bitte überprüfe die eingegebene Adresse und versuche es erneut.
         </>
@@ -37,7 +37,7 @@ const getErrorTexts = (
         <>
           Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
           {" "}
-        <br /> 
+          <br /> 
           Der Scan wurde abgebrochen, da das SSL-Zertifikat nicht zur aufgerufenen Adresse passt. 
           Bitte überprüfe die Adresse sowie das Zertifikat der Website und versuche es erneut.	
         </>
@@ -53,9 +53,9 @@ const getErrorTexts = (
         <>
           Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
           {" "}
-        <br /> 
-        Der Scan wurde abgebrochen, da die Verbindung zur Website vom Server abgelehnt wurde. 
-        Bitte überprüfe die Adresse und starte den Scan erneut.	
+          <br /> 
+          Der Scan wurde abgebrochen, da die Verbindung zur Website vom Server abgelehnt wurde. 
+          Bitte überprüfe die Adresse und starte den Scan erneut.	
         </>
       ),
       showEditDomain: true,
@@ -69,9 +69,9 @@ const getErrorTexts = (
         <>
           Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
           {" "}
-        <br /> 
-        Der Scan wurde abgebrochen, da die Website zu viele Weiterleitungen enthält. 
-        Bitte überprüfe die Adresse und starte den Scan erneut.	
+          <br /> 
+          Der Scan wurde abgebrochen, da die Website zu viele Weiterleitungen enthält. 
+          Bitte überprüfe die Adresse und starte den Scan erneut.	
         </>
       ),
       showEditDomain: true,
@@ -85,9 +85,9 @@ const getErrorTexts = (
         <>
           Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
           {" "}
-        <br /> 
-        Der Scan wurde abgebrochen, da beim Verbindungsaufbau keine Antwort von der Website eingegangen ist. 
-        Bitte überprüfe die Adresse und starte den Scan erneut.	
+          <br /> 
+          Der Scan wurde abgebrochen, da beim Verbindungsaufbau keine Antwort von der Website eingegangen ist. 
+          Bitte überprüfe die Adresse und starte den Scan erneut.	
         </>
       ),
       showEditDomain: true,
@@ -101,9 +101,9 @@ const getErrorTexts = (
         <>
           Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
           {" "}
-        <br /> 
-        Der Scan wurde abgebrochen, da die Website durch einen Passwortschutz oder eine Zugangsbeschränkung gesichert ist. 
-        Bitte nutze eine öffentlich erreichbare Adresse oder entferne die Zugriffsbeschränkung und starte den Scan erneut.	
+          <br /> 
+          Der Scan wurde abgebrochen, da die Website durch einen Passwortschutz oder eine Zugangsbeschränkung gesichert ist. 
+          Bitte nutze eine öffentlich erreichbare Adresse oder entferne die Zugriffsbeschränkung und starte den Scan erneut.	
         </>
       ),
       showEditDomain: false,

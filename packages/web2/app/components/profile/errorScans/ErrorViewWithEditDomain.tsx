@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Props } from "./types.js";
+import { DetailedErrorProps } from "./types.js";
 import {
   Action,
   ActionGroup,
@@ -13,7 +13,7 @@ import {
 import { RestartScanButton } from "./restartScanButton.js";
 import { ChangeDomainModal } from "../modals/changeDomainModal.js";
 
-export const ErrorViewWithEditDomain: FC<Props> = ({
+export const ErrorViewWithEditDomain: FC<DetailedErrorProps> = ({
   profile,
   scanId,
   headline,
@@ -21,17 +21,12 @@ export const ErrorViewWithEditDomain: FC<Props> = ({
 }) => {
   const controller = useOverlayController("Modal");
   const editLabel = "Domain bearbeiten";
-  const content =
-    description ?? (
-      <>
-        Kontrolliere die Domain auf Richtigkeit und versuche es erneut.
-      </>
-    );
+  const content = description;
 
   return (
     <IllustratedMessage color="danger">
       <IconDanger />
-      <Heading>{headline ?? editLabel}</Heading>
+      <Heading>{headline}</Heading>
       <Text>{content}</Text>
       <ActionGroup>
         <RestartScanButton profile={profile} scanId={scanId} />
@@ -42,7 +37,6 @@ export const ErrorViewWithEditDomain: FC<Props> = ({
       <ChangeDomainModal
         profile={profile}
         controller={controller}
-        title={editLabel}
       />
     </IllustratedMessage>
   );
