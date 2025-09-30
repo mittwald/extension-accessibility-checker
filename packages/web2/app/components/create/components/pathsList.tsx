@@ -54,7 +54,7 @@ export const PathsList = ({
     setTouched(false);
   }
 
-  const removePathFromFormValues = (value: string | string) => {
+  const removePathFromFormValues = (value: string) => {
     const values = form.getValues("paths");
     values.delete(value.toString());
     form.setValue("paths", values);
