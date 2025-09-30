@@ -6,9 +6,9 @@ import {
 import { ProfileActions } from "./profile/profileActions.js";
 import { ProfileTabs } from "./profile/profileTabs.js";
 import { NoScans } from "./profile/noScans.js";
-import { Scan, ScanProfile } from "../api/types.js";
+import { Scan, ScanProfile } from "~/api/types";
 import { isRunningOrPending } from "./profile/helpers.js";
-import { useAutoRefresh } from "../hooks/useAutoRefresh.js";
+import { useAutoRefresh } from "~/hooks/useAutoRefresh";
 import { Breadcrumb, Title } from "@mittwald/mstudio-ext-react-components";
 import { ErrorScan } from "./profile/errorScan.js";
 

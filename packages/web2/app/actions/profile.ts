@@ -1,6 +1,10 @@
-import { createServerFn } from "@tanstack/react-start";
+import { createServerFn, json } from "@tanstack/react-start";
 import { z } from "zod";
-import { ScanModel, ScanProfileModel } from "extension-a11y-checker-storage";
+import {
+  ScanModel,
+  ScanProfileModel,
+  serializeObjectWithIds,
+} from "extension-a11y-checker-storage";
 import { Scan, ScanProfile } from "../api/types.ts";
 import { ObjectId } from "mongodb";
 import { notFound } from "@tanstack/react-router";
@@ -15,20 +19,23 @@ import { scheduleScan, validateCron } from "./commons.js";
 
 export const getProfiles = createServerFn()
   .middleware([dbMiddleware, authenticateMiddleware])
-  .validator(z.string())
+  .inputValidator(z.string())
   .handler(async ({ data: contextId }) => {
     const data = await ScanProfileModel.findForContext(contextId);
     if (data === null) {
       throw notFound();
     }
-    return data as unknown as ScanProfile[] | null;
+
+    return data
+      .map((profile) => profile.toJSON())
+      .filter((p) => p) as unknown as ScanProfile[] | null;
   });
 
 export const getProfile = createServerFn({
   method: "GET",
 })
   .middleware([dbMiddleware, profileIdAuthorizeMiddleware])
-  .validator(z.string())
+  .inputValidator(z.string())
   .handler(async ({ data: profileId }) => {
     const profile = await ScanProfileModel.findById(profileId).exec();
     await profile?.populate("nextScan");
@@ -38,17 +45,21 @@ export const getProfile = createServerFn({
 
     return {
       profile: {
-        ...profile?.toObject(),
+        ...profile?.toJSON(),
         issueSummary: lastScan?.getIssueSummary(),
       } as unknown as ScanProfile,
-      lastScan: lastScan as unknown as Scan | undefined,
-      lastSuccessfulScan: lastSuccessfulScan as unknown as Scan | undefined,
+      lastScan: serializeObjectWithIds(lastScan?.toJSON()) as unknown as
+        | Scan
+        | undefined,
+      lastSuccessfulScan: serializeObjectWithIds(
+        lastSuccessfulScan?.toJSON(),
+      ) as unknown as Scan | undefined,
     };
   });
 
 export const createProfile = createServerFn({ method: "POST" })
   .middleware([dbMiddleware, contextMatchingMiddleware])
-  .validator(
+  .inputValidator(
     z.object({
       contextId: z.string(),
       domain: z.string(),
@@ -68,7 +79,7 @@ export const createProfile = createServerFn({ method: "POST" })
 
 export const updateProfilePaths = createServerFn({ method: "POST" })
   .middleware([dbMiddleware, profileAuthorizeMiddleware])
-  .validator(
+  .inputValidator(
     z.object({
       profileId: z.string(),
       paths: z.array(z.string()),
@@ -81,14 +92,14 @@ export const updateProfilePaths = createServerFn({ method: "POST" })
       { new: true },
     );
     if (!profile) {
-      return new Response("Profile not found", { status: 404 });
+      throw notFound({ data: "Profile not found" });
     }
     return profile.toJSON() as unknown as ScanProfile;
   });
 
 export const updateProfileName = createServerFn({ method: "POST" })
   .middleware([dbMiddleware, profileAuthorizeMiddleware])
-  .validator(
+  .inputValidator(
     z.object({
       profileId: z.string(),
       name: z.string(),
@@ -101,14 +112,14 @@ export const updateProfileName = createServerFn({ method: "POST" })
       { new: true },
     );
     if (!profile) {
-      return new Response("Profile not found", { status: 404 });
+      throw notFound({ data: "Profile not found" });
     }
     return profile.toJSON() as unknown as ScanProfile;
   });
 
 export const updateProfileDomain = createServerFn({ method: "POST" })
   .middleware([dbMiddleware, profileAuthorizeMiddleware])
-  .validator(
+  .inputValidator(
     z.object({
       profileId: z.string(),
       updateName: z.boolean().optional(),
@@ -128,7 +139,7 @@ export const updateProfileDomain = createServerFn({ method: "POST" })
       { new: true },
     );
     if (!profile) {
-      return new Response("Profile not found", { status: 404 });
+      throw notFound({ data: "Profile not found" });
     }
 
     const nextScan = await ScanModel.nextScanOfProfile(profileId);
@@ -141,7 +152,7 @@ export const updateProfileDomain = createServerFn({ method: "POST" })
 
 export const updateProfileCron = createServerFn({ method: "POST" })
   .middleware([dbMiddleware, profileAuthorizeMiddleware])
-  .validator(
+  .inputValidator(
     z.object({
       profileId: z.string(),
       cronExpression: z.string(),
@@ -150,7 +161,7 @@ export const updateProfileCron = createServerFn({ method: "POST" })
   .handler(async ({ data: { profileId, cronExpression } }) => {
     const validationResult = validateCron(cronExpression);
     if (validationResult !== true) {
-      return validationResult;
+      throw validationResult;
     }
 
     const cronUpdateSet = cronExpression
@@ -167,7 +178,7 @@ export const updateProfileCron = createServerFn({ method: "POST" })
       { new: true },
     );
     if (!profile) {
-      return new Response("Profile not found", { status: 404 });
+      throw notFound({ data: "Profile not found" });
     }
 
     await ScanModel.deleteScheduledForProfile(profile);
@@ -178,7 +189,7 @@ export const updateProfileCron = createServerFn({ method: "POST" })
 
 export const updateProfileSettings = createServerFn({ method: "POST" })
   .middleware([dbMiddleware, profileAuthorizeMiddleware])
-  .validator(
+  .inputValidator(
     z.object({
       profileId: z.string(),
       cronExpression: z.string().optional(),
@@ -199,7 +210,7 @@ export const updateProfileSettings = createServerFn({ method: "POST" })
     }) => {
       const validationResult = validateCron(cronExpression);
       if (validationResult !== true) {
-        return validationResult;
+        throw validationResult;
       }
 
       const cronUpdateSet = cronExpression
@@ -220,7 +231,7 @@ export const updateProfileSettings = createServerFn({ method: "POST" })
         { new: true },
       );
       if (!profile) {
-        return new Response("Profile not found", { status: 404 });
+        throw notFound({ data: "Profile not found" });
       }
       return profile.toJSON() as unknown as ScanProfile;
     },
@@ -228,7 +239,7 @@ export const updateProfileSettings = createServerFn({ method: "POST" })
 
 export const deleteProfile = createServerFn({ method: "POST" })
   .middleware([profileIdAuthorizeMiddleware])
-  .validator(z.string())
+  .inputValidator(z.string())
   .handler(async ({ data: profileId }) => {
     await ScanProfileModel.delete(profileId);
   });

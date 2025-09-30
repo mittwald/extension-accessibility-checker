@@ -1,4 +1,4 @@
-import { ScanProfile } from "../../../api/types.ts";
+import { ScanProfile } from "~/api/types";
 import {
   Action,
   ActionGroup,
@@ -21,9 +21,9 @@ import {
   typedField,
 } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { useRouter } from "@tanstack/react-router";
-import { updateProfileSettings } from "../../../actions/profile.ts";
-import { WcagStandardContextualHelp } from "../wcagStandardContextualHelp.tsx";
-import { CriteriaContextualHelp } from "../criteriaContextualHelp.tsx";
+import { updateProfileSettings } from "~/actions/profile";
+import { WcagStandardContextualHelp } from "~/components/profile/wcagStandardContextualHelp";
+import { CriteriaContextualHelp } from "~/components/profile/criteriaContextualHelp";
 
 interface FormValues {
   cronExpression?: string;

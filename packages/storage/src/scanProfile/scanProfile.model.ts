@@ -1,9 +1,9 @@
 import type { DocumentType, Ref } from "@typegoose/typegoose";
 import { modelOptions, prop } from "@typegoose/typegoose";
-import cronParser from "cron-parser";
+import { CronExpressionParser } from "cron-parser";
 import { ObjectId } from "mongodb";
 import { Context, ContextModel } from "../context/context.model.js";
-import { getModel } from "../lib/mongoose.js";
+import { getModel, serializeObjectWithIds } from "../lib/mongoose.js";
 import { ReturnModelType } from "@typegoose/typegoose/lib/types";
 import { Scan, ScanModel } from "../scan/scan.model.js";
 
@@ -17,7 +17,10 @@ class CronSchedule {
   schemaOptions: {
     collection: "scanprofiles",
     versionKey: false,
-    toJSON: { virtuals: true },
+    toJSON: {
+      virtuals: true,
+      transform: (doc, ret) => serializeObjectWithIds(ret),
+    },
     toObject: { virtuals: true },
   },
   options: { automaticName: false },
@@ -107,14 +110,10 @@ export class ScanProfile {
     if (!context) {
       return null;
     }
-    const profiles = await ScanProfileModel.find({ context: contextId }).exec();
-    await Promise.all(
-      profiles.map(async (p) => {
-        await p.populate("nextScan");
-        await p.populate({ path: "lastScan", select: "-issues" });
-      }),
-    );
-    return profiles;
+    return await ScanProfileModel.find({ context: contextId })
+      .populate("nextScan")
+      .populate({ path: "lastScan", select: "-issues" })
+      .exec();
   }
 
   public nextExecution(this: DocumentType<ScanProfile>) {
@@ -122,8 +121,7 @@ export class ScanProfile {
       return null;
     }
 
-    return cronParser
-      .parseExpression(this.cronSchedule.expression)
+    return CronExpressionParser.parse(this.cronSchedule.expression)
       .next()
       .toDate();
   }

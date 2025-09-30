@@ -1,7 +1,12 @@
 import { logger } from "../logger.js";
 import { isNotFound } from "@tanstack/react-router";
 import { json } from "@tanstack/react-start";
-import { SafeParseReturnType, SafeParseSuccess, ZodType } from "zod";
+import {
+  treeifyError,
+  ZodSafeParseResult,
+  ZodSafeParseSuccess,
+  ZodType,
+} from "zod";
 
 export const handleAPIError = (e: unknown, action?: string) => {
   if (e instanceof Response) {
@@ -15,22 +20,20 @@ export const handleAPIError = (e: unknown, action?: string) => {
   return json({ message: "Internal Server Error", action }, { status: 500 });
 };
 
-export const assertValidationSuccess: <In, Out>(
-  parseResult: SafeParseReturnType<In, Out>,
-) => asserts parseResult is SafeParseSuccess<Out> = <In, Out>(
-  parseResult: SafeParseReturnType<In, Out>,
-): asserts parseResult is SafeParseSuccess<Out> => {
+export function assertValidationSuccess<Out>(
+  parseResult: ZodSafeParseResult<Out>,
+): asserts parseResult is ZodSafeParseSuccess<Out> {
   if (!parseResult.success) {
     logger.debug(parseResult.error);
     throw json(
       {
         message: "Input validation failed",
-        error: { ...parseResult.error, name: "ValidationError" },
+        error: { ...treeifyError(parseResult.error), name: "ValidationError" },
       },
       { status: 400 },
     );
   }
-};
+}
 
 /*
  * Due to a missing typescript feature, the return type of this function can not be
@@ -42,8 +45,8 @@ export const assertValidationSuccess: <In, Out>(
  * // ^ this will ensure `parsedInput` gets the type information
  * ```
  */
-export const assertValidation = async <Out>(
-  schema: ZodType<Out>,
+export const assertValidation = async <T extends ZodType>(
+  schema: T,
   value: unknown,
 ) => {
   const validationResult = await schema.safeParseAsync(value);

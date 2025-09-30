@@ -20,7 +20,7 @@ import { EditIntervalModal } from "../../modals/EditIntervalModal.js";
 import { CronText } from "../../CronFields/CronText.js";
 
 export const IntarvallSettings = () => {
-  const { profile } = Route.useLoaderData();
+  const { profile } = Route.useLoaderData()!;
   const nextScan = profile.nextScan;
   const router = useRouter();
 

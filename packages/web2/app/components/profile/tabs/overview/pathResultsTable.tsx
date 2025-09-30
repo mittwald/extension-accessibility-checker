@@ -1,4 +1,4 @@
-import { Route } from "../../../../routes/profiles.$profileId.tsx";
+import { Route } from "~/routes/profiles.$profileId.tsx";
 import {
   Table,
   TableBody,
@@ -8,9 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "@mittwald/flow-remote-react-components";
+import { Page } from "~/api/types.ts";
 
 export const PathResultsTable = () => {
-  const { profile, lastScan } = Route.useLoaderData();
+  const { profile, lastScan } = Route.useLoaderData()!;
 
   if (!lastScan) {
     return null;
@@ -26,7 +27,7 @@ export const PathResultsTable = () => {
         <TableColumn>Score</TableColumn>
       </TableHeader>
       <TableBody>
-        {lastScan.pages.map((p) => {
+        {lastScan.pages.map((p: Page) => {
           const url = new URL(p.url);
           return (
             <TableRow key={p.url}>

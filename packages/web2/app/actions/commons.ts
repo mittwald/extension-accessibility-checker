@@ -1,6 +1,6 @@
 import { ScanModel, ScanProfileModel } from "extension-a11y-checker-storage";
 import { notFound } from "@tanstack/react-router";
-import cronParser from "cron-parser";
+import { CronExpressionParser } from "cron-parser";
 
 export async function assertProfile(profileId: string, contextId?: string) {
   const profile = await ScanProfileModel.findById(profileId);
@@ -23,7 +23,7 @@ export async function scheduleScan(
 export const validateCron = (cronExpression: string | undefined) => {
   if (cronExpression) {
     try {
-      const interval = cronParser.parseExpression(cronExpression);
+      const interval = CronExpressionParser.parse(cronExpression);
       const firstDate = interval.next();
       const secondDate = interval.next();
       const hoursDiff =
