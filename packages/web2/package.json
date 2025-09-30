@@ -9,8 +9,10 @@
     "start": "vinxi start",
     "compile": "yarn build",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "preview": "nx vite:preview",
-    "format": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --write"
+    "format": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --write",
+    "format:check": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --check"
   },
   "dependencies": {
     "@mittwald/api-client": "^4.131.0",

@@ -35,7 +35,7 @@ export const validateCron = (cronExpression: string | undefined) => {
           { status: 400 },
         );
       }
-    } catch (e) {
+    } catch {
       return new Response("Invalid cron expression", { status: 400 });
     }
   }
