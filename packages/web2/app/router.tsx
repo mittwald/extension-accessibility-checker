@@ -1,12 +1,12 @@
 import { createRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
-import { NotFoundRoot } from "./components/notFoundRoot.js";
+import { NotFound } from "~/components/notFound.tsx";
 
 export function getRouter() {
   return createRouter({
     routeTree,
     scrollRestoration: true,
-    defaultNotFoundComponent: NotFoundRoot,
+    defaultNotFoundComponent: NotFound,
   });
 }
 

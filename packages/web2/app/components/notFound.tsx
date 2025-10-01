@@ -1,8 +1,7 @@
 import { NotFoundRouteComponent } from "@tanstack/react-router";
-import { RootDocument } from "./rootDocument.js";
 import { LayoutCard, Text } from "@mittwald/flow-remote-react-components";
 
-export const NotFoundRoot: NotFoundRouteComponent = ({ data }) => {
+export const NotFound: NotFoundRouteComponent = ({ data }) => {
   console.error(data);
   return (
     <LayoutCard>
