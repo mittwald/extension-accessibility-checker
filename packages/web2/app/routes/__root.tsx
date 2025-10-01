@@ -1,9 +1,8 @@
 // app/routes/__root.tsx
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { createRootRoute, Outlet, useNavigate } from "@tanstack/react-router";
 import { ErrorRoot } from "../components/errorRoot.tsx";
 import { RootDocument } from "../components/rootDocument.tsx";
 import { NotFoundRoot } from "../components/notFoundRoot.js";
-import { useNavigate } from "@tanstack/react-router";
 import RemoteRoot from "@mittwald/flow-remote-react-components/RemoteRoot";
 
 export const Route = createRootRoute({

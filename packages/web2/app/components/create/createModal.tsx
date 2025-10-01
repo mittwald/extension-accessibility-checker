@@ -58,12 +58,16 @@ export const CreateModal = () => {
       <Form form={form} onSubmit={onSubmit}>
         <Content>
           <Section>
+            <Text>
+              Wähle eine bestehende Domain aus dem mStudio oder gib eine
+              individuelle Domain ein.
+            </Text>
             <SegmentedControl
               defaultValue="mstudio"
               onChange={() => setShowCustomDomain(!showCustomDomain)}
             >
               <Label>Domain-Art</Label>
-              <Segment value="mstudio">mStudioDomain</Segment>
+              <Segment value="mstudio">mStudio Domain</Segment>
               <Segment value="custom">Individuelle Eingabe</Segment>
             </SegmentedControl>
             {!showCustomDomain && <DomainSelect />}

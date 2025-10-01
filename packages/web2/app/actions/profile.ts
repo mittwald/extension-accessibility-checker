@@ -5,7 +5,7 @@ import { Scan, ScanProfile } from "../api/types.ts";
 import { ObjectId } from "mongodb";
 import { notFound } from "@tanstack/react-router";
 import {
-  authorizeMiddleware,
+  authenticateMiddleware,
   contextMatchingMiddleware,
   dbMiddleware,
   profileAuthorizeMiddleware,
@@ -14,7 +14,7 @@ import {
 import { scheduleScan, validateCron } from "./commons.js";
 
 export const getProfiles = createServerFn()
-  .middleware([dbMiddleware, authorizeMiddleware])
+  .middleware([dbMiddleware, authenticateMiddleware])
   .validator(z.string())
   .handler(async ({ data: contextId }) => {
     const data = await ScanProfileModel.findForContext(contextId);
@@ -169,6 +169,10 @@ export const updateProfileCron = createServerFn({ method: "POST" })
     if (!profile) {
       return new Response("Profile not found", { status: 404 });
     }
+
+    await ScanModel.deleteScheduledForProfile(profile);
+    await ScanModel.scheduleNextForProfile(profile);
+
     return profile.toJSON() as unknown as ScanProfile;
   });
 

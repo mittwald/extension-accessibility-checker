@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import {
+  Action,
   ActionGroup,
   Button,
   Content,
@@ -12,7 +13,6 @@ import {
 import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { useForm, type UseFormReturn } from "react-hook-form";
 import { Time } from "@internationalized/date";
-import { Action } from "@mittwald/flow-remote-react-components";
 import {
   CronInterval,
   getIntervalValueFromCronSyntax,
@@ -70,15 +70,16 @@ export const EditIntervalModal: FC<Props> = (props) => {
   return (
     <Modal controller={controller}>
       <Form form={form} onSubmit={handleOnSubmit}>
-        <Heading>Ausführungsintervall bearbeiten</Heading>
+        <Heading>Intervall bearbeiten</Heading>
         <Content>
           <Section>
             <Text>
               Das Intervall legt fest, ob und wann dein Scan automatisch
               ausgeführt werden soll. Lege nur dann einen automatischen
               Scan-Intervall fest, wenn es wirklich nötig ist – so schonst du
-              Ressourcen. Wählst du »Nur manuell«, wird keine automatische
-              Ausführung eingerichtet. Ein manueller Scan ist jederzeit möglich.
+              Ressourcen. Wählst du »Manuelle Ausführung«, wird keine
+              automatische Ausführung eingerichtet. Ein manueller Scan ist
+              jederzeit möglich.
             </Text>
             <CronFields
               form={form as unknown as UseFormReturn}

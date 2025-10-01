@@ -7,7 +7,6 @@ import {
   TableFooterRow,
   TableHeader,
   TableRow,
-  Text,
 } from "@mittwald/flow-remote-react-components";
 
 export const PathResultsTable = () => {
