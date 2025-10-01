@@ -17,8 +17,8 @@
   "plugins": [
     {
       "plugin": "@nx/vite/plugin",
+      "buildTargetName": "vite:build",
       "options": {
-        "buildTargetName": "vite:build",
         "testTargetName": "test",
         "serveTargetName": "serve",
         "devTargetName": "vite:dev",

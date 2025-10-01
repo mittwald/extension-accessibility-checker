@@ -1,6 +1,6 @@
 import { Heading } from "@mittwald/flow-remote-react-components";
-import { IssueGroup } from "../types.ts";
-import { IssuesList } from "../issueList.tsx";
+import { IssueGroup } from "~/components/profile/tabs/issues/types";
+import { IssuesList } from "~/components/profile/tabs/issues/issueList";
 
 export const IssueGroupView = ({ group }: { group: IssueGroup }) => {
   return (

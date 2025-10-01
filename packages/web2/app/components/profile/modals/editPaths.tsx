@@ -8,14 +8,14 @@ import {
   Section,
   Text,
 } from "@mittwald/flow-remote-react-components";
-import { ScanProfile } from "../../../api/types.ts";
+import { ScanProfile } from "~/api/types";
 import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
-import { FormValues } from "../../create/types.ts";
+import { FormValues } from "~/components/create/types";
 import { useForm } from "react-hook-form";
-import { PathsList } from "../../create/components/pathsList.tsx";
+import { PathsList } from "~/components/create/components/pathsList";
 import { useRouter } from "@tanstack/react-router";
 
-import { updateProfilePaths } from "../../../actions/profile.ts";
+import { updateProfilePaths } from "~/actions/profile";
 
 type PathFormValues = Pick<FormValues, "paths">;
 

@@ -1,4 +1,4 @@
-import { ScanProfile } from "../../../api/types.js";
+import { ScanProfile } from "~/api/types";
 
 export interface Props {
   profile: ScanProfile;

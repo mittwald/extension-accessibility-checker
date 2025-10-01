@@ -17,8 +17,8 @@ import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { FormValues } from "./types.ts";
 import { PathsList } from "./components/pathsList.tsx";
 import { Domain } from "./components/domain.tsx";
-import { createProfile } from "../../actions/profile.ts";
-import { Route } from "../../routes/index.js";
+import { createProfile } from "~/actions/profile.ts";
+import { Route } from "~/routes";
 import { useGoToProfile } from "../../hooks/useGoTo.js";
 import { DomainSelect } from "./components/DomainSelect.js";
 import { useState } from "react";
@@ -64,7 +64,7 @@ export const CreateModal = () => {
             </Text>
             <SegmentedControl
               defaultValue="mstudio"
-              onChange={() => setShowCustomDomain(!showCustomDomain)}
+              onChange={() => setShowCustomDomain((value) => !value)}
             >
               <Label>Domain-Art</Label>
               <Segment value="mstudio">mStudio Domain</Segment>
