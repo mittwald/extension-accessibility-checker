@@ -12,16 +12,12 @@ interface ErrorTexts {
 
 const getErrorTexts = (
   error: string,
-  profile: ScanProfile,
 ): ErrorTexts | undefined => {
   if (error.includes("ERR_NAME_NOT_RESOLVED")) {
     return {
       headline: "Domain nicht erreichbar",
       description: (
         <>
-          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
-          {" "}
-          <br /> 
           Der Scan wurde abgebrochen, da die Website nicht gefunden werden konnte.
           Bitte überprüfe die eingegebene Adresse und versuche es erneut.
         </>
@@ -32,12 +28,9 @@ const getErrorTexts = (
 
   if (error.includes("ERR_CERT_COMMON_NAME_INVALID")) {
     return {
-      headline: "Domain nicht erreichbar",
+      headline: "SSL-Zertifikat passt nicht zur URL",
       description: (
         <>
-          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
-          {" "}
-          <br /> 
           Der Scan wurde abgebrochen, da das SSL-Zertifikat nicht zur aufgerufenen Adresse passt. 
           Bitte überprüfe die Adresse sowie das Zertifikat der Website und versuche es erneut.	
         </>
@@ -51,9 +44,6 @@ const getErrorTexts = (
       headline: "Domain nicht erreichbar",
       description: (
         <>
-          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
-          {" "}
-          <br /> 
           Der Scan wurde abgebrochen, da die Verbindung zur Website vom Server abgelehnt wurde. 
           Bitte überprüfe die Adresse und starte den Scan erneut.	
         </>
@@ -67,9 +57,6 @@ const getErrorTexts = (
       headline: "Domain nicht erreichbar",
       description: (
         <>
-          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
-          {" "}
-          <br /> 
           Der Scan wurde abgebrochen, da die Website zu viele Weiterleitungen enthält. 
           Bitte überprüfe die Adresse und starte den Scan erneut.	
         </>
@@ -83,9 +70,6 @@ const getErrorTexts = (
       headline: "Domain nicht erreichbar",
       description: (
         <>
-          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
-          {" "}
-          <br /> 
           Der Scan wurde abgebrochen, da beim Verbindungsaufbau keine Antwort von der Website eingegangen ist. 
           Bitte überprüfe die Adresse und starte den Scan erneut.	
         </>
@@ -94,14 +78,12 @@ const getErrorTexts = (
     };
   }
 
+  
   if (error.includes("ERR_INVALID_AUTH_CREDENTIALS")) {
     return {
       headline: "Domain nicht erreichbar",
       description: (
         <>
-          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
-          {" "}
-          <br /> 
           Der Scan wurde abgebrochen, da die Website durch einen Passwortschutz oder eine Zugangsbeschränkung gesichert ist. 
           Bitte nutze eine öffentlich erreichbare Adresse oder entferne die Zugriffsbeschränkung und starte den Scan erneut.	
         </>
@@ -112,14 +94,11 @@ const getErrorTexts = (
   
   if (error.includes("ERR_CERT_AUTHORITY_INVALID")) {
     return {
-      headline: "Domain nicht erreichbar",
+      headline: "SSL-Zertifikat abgelaufen",
       description: (
         <>
-          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
-          {" "}
-        <br /> 
-        Der Scan wurde abgebrochen, da die Zertifizierungsstelle (CA) des SSL-Zertifikates nicht vertrauenswürdig oder das Zertifikat abgelaufen ist. 
-        Bitte überprüfe das Zertifikat und starte den Scan erneut.	
+          Der Scan wurde abgebrochen, da die Zertifizierungsstelle (CA) des SSL-Zertifikates nicht vertrauenswürdig oder das Zertifikat abgelaufen ist. 
+          Bitte überprüfe das Zertifikat und starte den Scan erneut.	
         </>
       ),
       showEditDomain: false,
@@ -131,11 +110,8 @@ const getErrorTexts = (
       headline: "Domain nicht erreichbar",
       description: (
         <>
-          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
-          {" "}
-        <br /> 
-        Der Scan wurde abgebrochen, da eine Ressource der Website blockiert wurde – zum Beispiel durch einen Werbe-, Tracking- oder Script-Blocker im Browser. 
-        Bitte überprüfe die Ursache und versuche es anschließend erneut.	
+          Der Scan wurde abgebrochen, da eine Ressource der Website blockiert wurde – zum Beispiel durch einen Werbe-, Tracking- oder Script-Blocker im Browser. 
+          Bitte überprüfe die Ursache und versuche es anschließend erneut.	
         </>
       ),
       showEditDomain: false,
@@ -144,14 +120,11 @@ const getErrorTexts = (
  
   if (error.includes("ERR_SSL_PROTOCOL_ERROR")) {
     return {
-      headline: "Domain nicht erreichbar",
+      headline: "Sichere Verbindung fehlgeschlagen",
       description: (
         <>
-          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
-          {" "}
-        <br /> 
-        Der Scan wurde abgebrochen, da keine sichere Verbindung zur Website hergestellt werden konnte. 
-        Bitte überprüfe das SSL-Zertifikat sowie die Servereinstellungen und starte den Scan erneut.	
+          Der Scan wurde abgebrochen, da keine sichere Verbindung zur Website hergestellt werden konnte. 
+          Bitte überprüfe das SSL-Zertifikat sowie die Servereinstellungen und starte den Scan erneut.	
         </>
       ),
       showEditDomain: false,
@@ -160,14 +133,11 @@ const getErrorTexts = (
 
   if (error.includes("ERR_CERT_DATE_INVALID")) {
     return {
-      headline: "Domain nicht erreichbar",
+      headline: "SSL-Zertifikat ungültig",
       description: (
         <>
-          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
-          {" "}
-        <br /> 
-        Der Scan wurde abgebrochen, da das SSL-Zertifikat der Website abgelaufen oder ungültig ist. 
-        Bitte überprüfe das Zertifikat und versuche es erneut.	
+          Der Scan wurde abgebrochen, da das SSL-Zertifikat der Website abgelaufen oder ungültig ist. 
+          Bitte überprüfe das Zertifikat und versuche es erneut.	
         </>
       ),
       showEditDomain: false,
@@ -176,14 +146,11 @@ const getErrorTexts = (
 
   if (error.includes("ERR_SSL_UNRECOGNIZED_NAME_ALERT")) {
     return {
-      headline: "Domain nicht erreichbar",
+      headline: "SSL-Zertifikat ungültig",
       description: (
         <>
-          Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.
-          {" "}
-        <br /> 
-        Der Scan wurde abgebrochen, da das SSL-Zertifikat der Website nicht erkannt oder validiert werden konnte. 
-        Bitte überprüfe das Zertifikat und starte den Scan erneut.	
+          Der Scan wurde abgebrochen, da das SSL-Zertifikat der Website nicht erkannt oder validiert werden konnte. 
+          Bitte überprüfe das Zertifikat und starte den Scan erneut.	
         </>
       ),
       showEditDomain: false,
@@ -197,7 +164,7 @@ export const ErrorScan: FC<{ profile: ScanProfile; lastScan: Scan }> = ({
   lastScan,
   profile,
 }) => {
-  const errorInfos = lastScan.error ? getErrorTexts(lastScan.error, profile) : undefined;
+  const errorInfos = lastScan.error ? getErrorTexts(lastScan.error) : undefined;
 
   if (errorInfos?.showEditDomain) {
     return (
