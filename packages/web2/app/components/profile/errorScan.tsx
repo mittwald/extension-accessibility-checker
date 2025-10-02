@@ -78,7 +78,6 @@ const getErrorTexts = (
     };
   }
 
-  
   if (error.includes("ERR_INVALID_AUTH_CREDENTIALS")) {
     return {
       headline: "Domain nicht erreichbar",
