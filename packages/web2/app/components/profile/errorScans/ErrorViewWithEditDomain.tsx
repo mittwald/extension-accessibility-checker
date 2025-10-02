@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Props } from "./types.js";
+import { DetailedErrorProps } from "./types.js";
 import {
   Action,
   ActionGroup,
@@ -13,24 +13,31 @@ import {
 import { RestartScanButton } from "./restartScanButton.js";
 import { ChangeDomainModal } from "../modals/changeDomainModal.js";
 
-export const DnsErrorView: FC<Props> = ({ profile, scanId }) => {
+export const ErrorViewWithEditDomain: FC<DetailedErrorProps> = ({
+  profile,
+  scanId,
+  headline,
+  description,
+}) => {
   const controller = useOverlayController("Modal");
+  const editLabel = "Domain bearbeiten";
+  const content = description;
 
   return (
     <IllustratedMessage color="danger">
       <IconDanger />
-      <Heading>Domain nicht erreichbar</Heading>
-      <Text>
-        Die Domain <strong>{profile.domain}</strong> ist nicht erreichbar.{" "}
-        <br /> Bitte überprüfe die Schreibweise oder versuche es erneut.
-      </Text>
+      <Heading>{headline}</Heading>
+      <Text>{content}</Text>
       <ActionGroup>
         <RestartScanButton profile={profile} scanId={scanId} />
         <Action onAction={() => controller.open()}>
-          <Button color="primary">Domain bearbeiten</Button>
+          <Button color="primary">{editLabel}</Button>
         </Action>
       </ActionGroup>
-      <ChangeDomainModal profile={profile} controller={controller} />
+      <ChangeDomainModal
+        profile={profile}
+        controller={controller}
+      />
     </IllustratedMessage>
   );
 };
