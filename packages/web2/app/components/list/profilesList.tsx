@@ -34,7 +34,7 @@ export const ProfilesList = ({ profiles }: { profiles: ScanProfile[] }) => {
           <ProfileList.TableColumn>Name</ProfileList.TableColumn>
           <ProfileList.TableColumn>Domain</ProfileList.TableColumn>
           <ProfileList.TableColumn>Standard</ProfileList.TableColumn>
-          <ProfileList.TableColumn>Pfade</ProfileList.TableColumn>
+          <ProfileList.TableColumn>Unterseiten</ProfileList.TableColumn>
           <ProfileList.TableColumn>Ausführung</ProfileList.TableColumn>
         </ProfileList.TableHeader>
 
