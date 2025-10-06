@@ -20,13 +20,15 @@ interface FormValues {
   domain: string;
 }
 
-export const ChangeDomainModal = ({
-  controller,
-  profile,
-}: {
+interface ChangeDomainModalProps {
   controller: OverlayController;
   profile: ScanProfile;
-}) => {
+}
+
+export const ChangeDomainModal = ({
+  controller,
+  profile
+}: ChangeDomainModalProps) => {
   const router = useRouter();
 
   const form = useForm<FormValues>({
