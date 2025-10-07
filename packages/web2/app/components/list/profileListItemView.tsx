@@ -57,7 +57,7 @@ export function ProfileListItemView(props: { profile: ScanProfile }) {
         </Text>
       )}
       <Text>{scoreText}</Text>
-          
+
       <ProfileListContextMenu profile={props.profile} />
     </ListItemView>
   );
