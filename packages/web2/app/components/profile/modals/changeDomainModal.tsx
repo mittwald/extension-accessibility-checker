@@ -27,7 +27,7 @@ interface ChangeDomainModalProps {
 
 export const ChangeDomainModal = ({
   controller,
-  profile
+  profile,
 }: ChangeDomainModalProps) => {
   const router = useRouter();
 
