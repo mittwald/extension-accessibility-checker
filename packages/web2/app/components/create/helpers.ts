@@ -1,7 +1,7 @@
 export function extractDomainFromUrl(url: string): string {
   try {
     return new URL(url).hostname;
-  } catch (error) {
+  } catch {
     return url;
   }
 }
@@ -9,7 +9,7 @@ export function extractDomainFromUrl(url: string): string {
 export function extractPathFromUrl(url: string): string {
   try {
     return new URL(url).pathname;
-  } catch (error) {
+  } catch {
     return url;
   }
 }
