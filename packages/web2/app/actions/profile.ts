@@ -1,4 +1,4 @@
-import { createServerFn, json } from "@tanstack/react-start";
+import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import {
   ScanModel,
