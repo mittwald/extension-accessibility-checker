@@ -34,8 +34,7 @@ export function ProfileListItemView(props: { profile: ScanProfile }) {
         <StateBatch profile={props.profile} />
       </Heading>
       <Text>
-        {props.profile.domain} | {props.profile.standard} | Unterseiten:{" "}
-        {props.profile.paths.length}
+        {props.profile.domain} | {props.profile.standard} | Unterseiten:{" "} {props.profile.paths.length} 
       </Text>
       {props.profile.lastScan && (
         <Text>
@@ -48,7 +47,10 @@ export function ProfileListItemView(props: { profile: ScanProfile }) {
           {props.profile.nextScan.executionScheduledFor.toLocaleString()}
         </Text>
       )}
-
+      <Text>
+        Score:{" "}
+        {props.profile.issueSummary?.score ?? "unbekannt wegen Scanfehler"}
+      </Text>
       <ProfileListContextMenu profile={props.profile} />
     </ListItemView>
   );
