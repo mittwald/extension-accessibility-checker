@@ -72,7 +72,15 @@ export const ProfilesList = ({ profiles }: { profiles: ScanProfile[] }) => {
               )}
             </ProfileList.TableCell>
             <ProfileList.TableCell>
-              {(profile) => profile.issueSummary?.score ?? "---"}
+              {(profile) => {
+                const pages = profile.lastScan?.pages;
+                let averageScore: string | number = "–––";
+                if (pages && pages.length > 0) {
+                  const sum = pages.reduce((acc, p) => acc + (p.score ?? 0), 0);
+                  averageScore = (sum / pages.length).toFixed(0);
+                }
+                return <Text>{averageScore}</Text>;
+              }}
             </ProfileList.TableCell>
           </ProfileList.TableRow>
         </ProfileList.TableBody>
