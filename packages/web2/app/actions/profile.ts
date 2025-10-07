@@ -26,7 +26,7 @@ export const getProfiles = createServerFn()
       return {
         ...profileObject,
         issueSummary: profileDoc.lastScan?.getIssueSummary(),
-      } as ScanProfile;
+      } as unknown as ScanProfile;
     });
     return profiles;
   });
