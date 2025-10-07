@@ -1,4 +1,4 @@
-import { UseFormReturn } from "react-hook-form";
+import { UseFormReturn, useWatch } from "react-hook-form";
 import { useState } from "react";
 import {
   Align,
@@ -29,6 +29,11 @@ export const PathsList = ({
 
   const paths = form.watch("paths");
 
+  useWatch({
+    control: form.control,
+    name: "paths",
+  });
+
   const isValidInputValue = () => {
     if (!pathInputValue.startsWith("/")) {
       return (
@@ -37,7 +42,7 @@ export const PathsList = ({
         </Text>
       );
     }
-    if (paths.has(pathInputValue)) {
+    if (paths.includes(pathInputValue)) {
       return "Pfad ist bereits hinzugefügt.";
     }
     return true;
@@ -49,15 +54,17 @@ export const PathsList = ({
     }
 
     const values = form.getValues("paths");
-    values.add(value);
+    values.push(value);
     form.setValue("paths", values);
     setTouched(false);
   }
 
   const removePathFromFormValues = (value: string) => {
     const values = form.getValues("paths");
-    values.delete(value.toString());
-    form.setValue("paths", values);
+    form.setValue(
+      "paths",
+      values.filter((v) => v != value),
+    );
   };
 
   const PathList = typedList<string>();

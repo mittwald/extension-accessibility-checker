@@ -24,7 +24,7 @@ export const EditPathsModal = ({ profile }: { profile: ScanProfile }) => {
 
   const form = useForm<PathFormValues>({
     values: {
-      paths: new Set(profile.paths),
+      paths: profile.paths,
     },
   });
 

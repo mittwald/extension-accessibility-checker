@@ -12,7 +12,7 @@ import {
   SegmentedControl,
   Text,
 } from "@mittwald/flow-remote-react-components";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormReturn } from "react-hook-form";
 import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { FormValues } from "./types.ts";
 import { PathsList } from "./components/pathsList.tsx";
@@ -31,7 +31,7 @@ export const CreateModal = () => {
   const form = useForm<FormValues>({
     defaultValues: {
       domain: "",
-      paths: new Set(["/"]),
+      paths: ["/"],
     },
   });
 
@@ -71,7 +71,13 @@ export const CreateModal = () => {
               <Segment value="custom">Individuelle Eingabe</Segment>
             </SegmentedControl>
             {!showCustomDomain && <DomainSelect />}
-            {showCustomDomain && <Domain form={form} />}
+            {showCustomDomain && (
+              <Domain
+                form={
+                  form as unknown as UseFormReturn<Pick<FormValues, "domain">>
+                }
+              />
+            )}
             <Header>
               <Heading>Unterseiten hinzufügen</Heading>
               <Text>
@@ -79,7 +85,10 @@ export const CreateModal = () => {
                 deiner Website im Blick zu behalten.
               </Text>
             </Header>
-            <PathsList form={form} autoFocus={!!form.getValues("domain")} />
+            <PathsList
+              form={form as unknown as UseFormReturn<Pick<FormValues, "paths">>}
+              autoFocus={!!form.getValues("domain")}
+            />
           </Section>
         </Content>
         <ActionGroup>
