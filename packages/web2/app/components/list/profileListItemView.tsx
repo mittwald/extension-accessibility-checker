@@ -24,15 +24,6 @@ const StateBatch = ({ profile }: { profile: ScanProfile }) => {
 };
 
 export function ProfileListItemView(props: { profile: ScanProfile }) {
-
-  const pages = props.profile.lastScan?.pages;
-  let averageScore: string | number = "-";
-  if (pages && pages.length > 0) {
-    const sum = pages.reduce((acc, p) => acc + (p.score ?? 0), 0);
-    averageScore = (sum / pages.length).toFixed(0);
-  }
-  const scoreText = `Score: ${averageScore === "-" ? "unbekannt wegen Scanfehler" : averageScore}`;
-
   return (
     <ListItemView>
       <Avatar color="blue">
@@ -43,7 +34,8 @@ export function ProfileListItemView(props: { profile: ScanProfile }) {
         <StateBatch profile={props.profile} />
       </Heading>
       <Text>
-        {props.profile.domain} | {props.profile.standard} | Unterseiten:{" "} {props.profile.paths.length} 
+        {props.profile.domain} | {props.profile.standard} | Unterseiten:{" "}
+        {props.profile.paths.length}
       </Text>
       {props.profile.lastScan && (
         <Text>
@@ -56,8 +48,10 @@ export function ProfileListItemView(props: { profile: ScanProfile }) {
           {props.profile.nextScan.executionScheduledFor.toLocaleString()}
         </Text>
       )}
-      <Text>{scoreText}</Text>
-
+      <Text>
+        Score:{" "}
+        {props.profile.issueSummary?.score ?? "unbekannt wegen Scanfehler"}
+      </Text>
       <ProfileListContextMenu profile={props.profile} />
     </ListItemView>
   );
