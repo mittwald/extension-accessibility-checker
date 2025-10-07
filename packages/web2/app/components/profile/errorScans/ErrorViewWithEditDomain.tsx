@@ -34,10 +34,7 @@ export const ErrorViewWithEditDomain: FC<DetailedErrorProps> = ({
           <Button color="primary">{editLabel}</Button>
         </Action>
       </ActionGroup>
-      <ChangeDomainModal
-        profile={profile}
-        controller={controller}
-      />
+      <ChangeDomainModal profile={profile} controller={controller} />
     </IllustratedMessage>
   );
 };
