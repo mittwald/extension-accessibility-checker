@@ -21,6 +21,7 @@ export const getProfiles = createServerFn()
     if (data === null) {
       throw notFound();
     }
+
     const profiles = data.map((profileDoc) => {
       const profileObject = profileDoc.toObject();
       return {
@@ -48,6 +49,7 @@ export const getProfile = createServerFn({
         ...profile?.toObject(),
         issueSummary: lastScan?.getIssueSummary(),
       } as unknown as ScanProfile,
+
       lastScan: lastScan as unknown as Scan | undefined,
       lastSuccessfulScan: lastSuccessfulScan as unknown as Scan | undefined,
     };
