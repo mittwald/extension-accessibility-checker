@@ -10,7 +10,7 @@ export const getCronText = (cronSyntax: string) => {
       locale: "de",
       verbose: true,
     })}`;
-  } catch (ignoredError) {
+  } catch {
     return undefined;
   }
 };
@@ -163,7 +163,7 @@ export const isSmallIntervall = (schedule: string) => {
     const dayInHours = 24;
 
     return hoursDiff < dayInHours * 5;
-  } catch (ignoredError) {
+  } catch {
     return false;
   }
 };
@@ -179,7 +179,7 @@ export const getExecutions = (cron: string) => {
     }
 
     return executions;
-  } catch (ignoredError) {
+  } catch {
     return [];
   }
 };

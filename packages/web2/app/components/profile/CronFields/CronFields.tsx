@@ -53,7 +53,9 @@ export const CronFields: FC<Props> = (props) => {
       showTimeField ? watchedCronTime : undefined,
     );
     form.setValue(name, newValue.cron);
-    newValue.time && form.setValue("cronTime", newValue.time);
+    if (newValue.time) {
+      form.setValue("cronTime", newValue.time);
+    }
   }, [watchedCronInterval]);
 
   useEffect(() => {
@@ -61,7 +63,9 @@ export const CronFields: FC<Props> = (props) => {
       watchedCronInterval === "custom"
         ? getTimeFromCron(watchedCron)
         : undefined;
-    newValue && form.setValue("cronTime", newValue);
+    if (newValue) {
+      form.setValue("cronTime", newValue);
+    }
   }, [watchedCron]);
 
   return (

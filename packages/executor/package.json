@@ -12,7 +12,8 @@
     "build": "tsc",
     "compile": "yarn build",
     "start": "yarn build && LOG_LEVEL=debug DEBUG='*,-puppeteer:protocol*' MONGODB_URI=mongodb://localhost:27017/extension-a11y-checker node --no-experimental-require-module dist/index.js",
-    "format": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --write"
+    "format": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --write",
+    "format:check": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --check"
   },
   "dependencies": {
     "extension-a11y-checker-storage": "workspace:^",
