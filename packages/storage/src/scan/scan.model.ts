@@ -3,9 +3,16 @@ import { isDocument } from "@typegoose/typegoose";
 import { index, modelOptions, prop } from "@typegoose/typegoose";
 import { ObjectId } from "mongodb";
 import { ScanProfile } from "../scanProfile/scanProfile.model.js";
-import { getModel } from "../lib/mongoose.js";
+import { getModel, serializeObjectWithIds } from "../lib/mongoose.js";
 
-@modelOptions({ schemaOptions: { _id: false } })
+@modelOptions({
+  schemaOptions: {
+    _id: false,
+    toJSON: {
+      transform: (doc, ret) => serializeObjectWithIds(ret),
+    },
+  },
+})
 export class Issue {
   @prop({ required: true })
   public url: string;
@@ -27,7 +34,13 @@ export class Issue {
 }
 
 @modelOptions({
-  schemaOptions: { _id: false, suppressReservedKeysWarning: true },
+  schemaOptions: {
+    _id: false,
+    suppressReservedKeysWarning: true,
+    toJSON: {
+      transform: (doc, ret) => serializeObjectWithIds(ret),
+    },
+  },
 })
 export class Issues {
   @prop({ required: true })
@@ -38,7 +51,14 @@ export class Issues {
   public notices: number = 0;
 }
 
-@modelOptions({ schemaOptions: { _id: false } })
+@modelOptions({
+  schemaOptions: {
+    _id: false,
+    toJSON: {
+      transform: (doc, ret) => serializeObjectWithIds(ret),
+    },
+  },
+})
 export class Page {
   @prop({ required: true })
   public url: string;
@@ -56,7 +76,13 @@ export class Page {
 
 @index({ status: 1, executionScheduledFor: 1 })
 @modelOptions({
-  schemaOptions: { collection: "scans", versionKey: false },
+  schemaOptions: {
+    collection: "scans",
+    versionKey: false,
+    toJSON: {
+      transform: (doc, ret) => serializeObjectWithIds(ret),
+    },
+  },
   options: { automaticName: false },
 })
 export class Scan {

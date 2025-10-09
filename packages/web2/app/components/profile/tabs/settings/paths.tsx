@@ -13,15 +13,16 @@ import {
   TableRow,
   Text,
 } from "@mittwald/flow-remote-react-components";
-import { Route } from "../../../../routes/profiles.$profileId.tsx";
+import { Route } from "~/routes/profiles.$profileId.tsx";
 import { EditPathsModal } from "../../modals/editPaths.tsx";
+import { Page } from "~/api/types.ts";
 
 export const PathSettings = () => {
-  const { profile, lastScan } = Route.useLoaderData();
+  const { profile, lastScan } = Route.useLoaderData()!;
 
   const getScoreForPath = (path: string) => {
     const score = lastScan?.pages.find(
-      (page) => page.url === `https://${profile.domain}${path}`,
+      (page: Page) => page.url === `https://${profile.domain}${path}`,
     )?.score;
     return score ?? "–";
   };
@@ -48,7 +49,7 @@ export const PathSettings = () => {
           <TableColumn>Score</TableColumn>
         </TableHeader>
         <TableBody>
-          {profile.paths.map((p) => (
+          {profile.paths.map((p: string) => (
             <TableRow key={p}>
               <TableCell> {p} </TableCell>
               <TableCell>{getScoreForPath(p)}</TableCell>

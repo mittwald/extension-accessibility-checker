@@ -1,4 +1,4 @@
-import { ScanProfile } from "../../api/types.ts";
+import { ScanProfile } from "~/api/types.ts";
 import { useRouter } from "@tanstack/react-router";
 import { isRunning, isRunningOrPending } from "./helpers.ts";
 import {
@@ -10,7 +10,7 @@ import {
   Text,
 } from "@mittwald/flow-remote-react-components";
 import { IconWorldSearch } from "@tabler/icons-react";
-import { startScan } from "../../actions/scan.ts";
+import { startScan } from "~/actions/scan.ts";
 
 export function NoScans({ profile }: { profile: ScanProfile }) {
   const router = useRouter();

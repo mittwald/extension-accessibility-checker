@@ -9,8 +9,8 @@ import {
   Section,
   Text,
 } from "@mittwald/flow-remote-react-components";
-import { ScanProfile } from "../../../api/types.ts";
-import { deleteProfile } from "../../../actions/profile.ts";
+import { ScanProfile } from "~/api/types";
+import { deleteProfile } from "~/actions/profile";
 
 export const DeleteConfirmationModal = ({
   profile,

@@ -1,4 +1,4 @@
-import { ScanProfile } from "../../../api/types.ts";
+import { ScanProfile } from "~/api/types";
 import { useForm } from "react-hook-form";
 import {
   Action,
@@ -17,7 +17,7 @@ import {
   Field,
   Form,
 } from "@mittwald/flow-remote-react-components/react-hook-form";
-import { updateProfileName } from "../../../actions/profile.ts";
+import { updateProfileName } from "~/actions/profile";
 import { useRouter } from "@tanstack/react-router";
 
 interface FormValues {
