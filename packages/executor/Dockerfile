@@ -13,7 +13,7 @@ COPY packages/storage ./packages/storage
 COPY packages/executor ./packages/executor
 
 ENV NX_DAEMON=false
-RUN yarn nx run executor:build
+RUN yarn nx run build extension-a11y-checker-executor
 
 
 FROM --platform=amd64 node:22-slim
