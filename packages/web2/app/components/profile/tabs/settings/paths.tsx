@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
   Text,
+  Flex,
 } from "@mittwald/flow-remote-react-components";
 import { Route } from "../../../../routes/profiles.$profileId.tsx";
 import { EditPathsModal } from "../../modals/editPaths.tsx";
@@ -59,7 +60,10 @@ export const PathSettings = () => {
               <strong>Gesamtbewertung</strong>
             </TableCell>
             <TableCell>
-              <strong>Ø {profile.issueSummary?.score}</strong>
+              <Flex wrap="nowrap" gap="xs">
+                <strong>Ø</strong>
+                <strong>{profile.issueSummary?.score}</strong>
+              </Flex>
             </TableCell>
           </TableFooterRow>
         </TableBody>

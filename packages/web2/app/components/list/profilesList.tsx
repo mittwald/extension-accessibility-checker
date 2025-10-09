@@ -34,7 +34,7 @@ export const ProfilesList = ({ profiles }: { profiles: ScanProfile[] }) => {
           <ProfileList.TableColumn>Name</ProfileList.TableColumn>
           <ProfileList.TableColumn>Domain</ProfileList.TableColumn>
           <ProfileList.TableColumn>Standard</ProfileList.TableColumn>
-          <ProfileList.TableColumn>Unterseiten</ProfileList.TableColumn>
+          <ProfileList.TableColumn>Pfade</ProfileList.TableColumn>
           <ProfileList.TableColumn>Ausführung</ProfileList.TableColumn>
           <ProfileList.TableColumn>Score</ProfileList.TableColumn>
         </ProfileList.TableHeader>
@@ -72,7 +72,7 @@ export const ProfilesList = ({ profiles }: { profiles: ScanProfile[] }) => {
               )}
             </ProfileList.TableCell>
             <ProfileList.TableCell>
-              {(profile) => profile.issueSummary?.score ?? "–––"}
+              {(profile) => profile.issueSummary?.score ?? "-"}
             </ProfileList.TableCell>
           </ProfileList.TableRow>
         </ProfileList.TableBody>
