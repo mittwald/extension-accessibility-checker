@@ -75,6 +75,7 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
       <Form form={form} onSubmit={onSubmit}>
         <Content>
           <Section>
+            {/* eslint-disable-next-line react-hooks/static-components -- intended use of Flow Components */}
             <Field
               name={"standard"}
               rules={{
@@ -95,6 +96,7 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
               </SegmentedControl>
             </Field>
 
+            {/* eslint-disable-next-line react-hooks/static-components -- intended use of Flow Components */}
             <Field name="includedCriteria">
               <CheckboxGroup>
                 <Label>
