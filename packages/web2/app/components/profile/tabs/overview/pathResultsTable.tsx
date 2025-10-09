@@ -7,7 +7,6 @@ import {
   TableFooterRow,
   TableHeader,
   TableRow,
-  Flex,
 } from "@mittwald/flow-remote-react-components";
 
 export const PathResultsTable = () => {
@@ -52,10 +51,7 @@ export const PathResultsTable = () => {
           <TableCell></TableCell>
           <TableCell></TableCell>
           <TableCell>
-            <Flex wrap="nowrap" gap="xs">
-              <strong>Ø</strong>
-              <strong>{profile.issueSummary?.score}</strong>
-            </Flex>
+            <strong>Ø&nbsp;{profile.issueSummary?.score}</strong>
           </TableCell>
         </TableFooterRow>
       </TableBody>
