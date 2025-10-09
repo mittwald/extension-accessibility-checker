@@ -2710,9 +2710,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mittwald/api-client@npm:^4.234.0":
-  version: 4.234.0
-  resolution: "@mittwald/api-client@npm:4.234.0"
+"@mittwald/api-client@npm:^4.237.0":
+  version: 4.237.0
+  resolution: "@mittwald/api-client@npm:4.237.0"
   dependencies:
     "@mittwald/api-client-commons": "npm:^4.224.1"
     browser-or-node: "npm:^3.0.0"
@@ -2721,7 +2721,7 @@ __metadata:
   peerDependenciesMeta:
     "@mittwald/react-use-promise":
       optional: true
-  checksum: 10c0/366b11fe8a5faf16a0289954e3acf131bb2ebca9a6489c6cefb2f1cc9acae17c2b14b11c1e14ccd38fd8ddb09739e5a945c75d3775a340d2d03481776ec85aa1
+  checksum: 10c0/be92729209bde76b44512d80bc84e4cd1b6ec04745144f2ee5db92dd943006859ede3fc4eeadf65a06e184d7d4a8e3c60824afb030924e944ccb604236fd8795
   languageName: node
   linkType: hard
 
@@ -2740,9 +2740,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mittwald/ext-bridge@npm:0.2.0-alpha.505, @mittwald/ext-bridge@npm:^0.2.0-alpha.505":
-  version: 0.2.0-alpha.505
-  resolution: "@mittwald/ext-bridge@npm:0.2.0-alpha.505"
+"@mittwald/ext-bridge@npm:0.2.0-alpha.515, @mittwald/ext-bridge@npm:^0.2.0-alpha.515":
+  version: 0.2.0-alpha.515
+  resolution: "@mittwald/ext-bridge@npm:0.2.0-alpha.515"
   dependencies:
     "@mittwald/react-use-promise": "npm:^3.0.4"
     axios: "npm:^1.12.2"
@@ -2757,17 +2757,17 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10c0/b5b100b271841573cae0389253e862bb3cd7c42fb560b271f5fbdc37f74b5a35db18e8fd8b11a2b49ebba5bf185a8846136410ec4d568afa7a94c46b366e5e35
+  checksum: 10c0/47d71e04d22c7c8c426802b8cc5074a5101051f1da91de00ad61052b9d3131ead4daebe473ba0152f997bb2b6bc90c7b3f225d88082b5b998e50751de54b5fdd
   languageName: node
   linkType: hard
 
-"@mittwald/flow-react-components@npm:0.2.0-alpha.505":
-  version: 0.2.0-alpha.505
-  resolution: "@mittwald/flow-react-components@npm:0.2.0-alpha.505"
+"@mittwald/flow-react-components@npm:0.2.0-alpha.515":
+  version: 0.2.0-alpha.515
+  resolution: "@mittwald/flow-react-components@npm:0.2.0-alpha.515"
   dependencies:
     "@internationalized/string-compiler": "npm:^3.2.6"
     "@mittwald/password-tools-js": "npm:3.0.0-alpha.18"
-    "@mittwald/react-tunnel": "npm:0.2.0-alpha.505"
+    "@mittwald/react-tunnel": "npm:0.2.0-alpha.515"
     "@mittwald/react-use-promise": "npm:^3.0.4"
     "@react-aria/form": "npm:^3.1.1"
     "@react-aria/live-announcer": "npm:^3.4.4"
@@ -2819,13 +2819,13 @@ __metadata:
       optional: true
     react-hook-form:
       optional: true
-  checksum: 10c0/516ea9351a00d9c998da26d21b891994b7e13a7b51e3eaeea16686fde7aa58e1a6bddb81d55611aca41b97e4c4847db1deddd417138ba7384acbfb994ae4d35a
+  checksum: 10c0/7652db03ecacfabf14ef2812ccf0a5aae996ccf0006b3a508671311e0063c52991a9b08f8ae6b8d2630a2e58162a85f5f464282520eeba4b2db8c8569ef9c672
   languageName: node
   linkType: hard
 
-"@mittwald/flow-remote-core@npm:0.2.0-alpha.505":
-  version: 0.2.0-alpha.505
-  resolution: "@mittwald/flow-remote-core@npm:0.2.0-alpha.505"
+"@mittwald/flow-remote-core@npm:0.2.0-alpha.515":
+  version: 0.2.0-alpha.515
+  resolution: "@mittwald/flow-remote-core@npm:0.2.0-alpha.515"
   dependencies:
     "@internationalized/date": "npm:^3.9.0"
     "@lit-labs/ssr-dom-shim": "npm:^1.4.0"
@@ -2840,30 +2840,30 @@ __metadata:
   peerDependenciesMeta:
     "@mittwald/ext-bridge":
       optional: true
-  checksum: 10c0/1ee0815a073486c8d943836bcbdb0ffabc564e8adeb87667c6dcce32f5caf700a451571d449d84effe788aeb0d89de20dd7de01bcb34d94076aac7ab50d422d9
+  checksum: 10c0/7544369c91342628d97e19926e9b43d1bbd6907931629423443c6f2f99ad2c7b59183752ed19ddcbeb619c0ec0918a3b7286cc60684f2441db5ab0167046369c
   languageName: node
   linkType: hard
 
-"@mittwald/flow-remote-elements@npm:0.2.0-alpha.505":
-  version: 0.2.0-alpha.505
-  resolution: "@mittwald/flow-remote-elements@npm:0.2.0-alpha.505"
+"@mittwald/flow-remote-elements@npm:0.2.0-alpha.515":
+  version: 0.2.0-alpha.515
+  resolution: "@mittwald/flow-remote-elements@npm:0.2.0-alpha.515"
   dependencies:
-    "@mittwald/flow-remote-core": "npm:0.2.0-alpha.505"
+    "@mittwald/flow-remote-core": "npm:0.2.0-alpha.515"
     remeda: "npm:^2.32.0"
     type-fest: "npm:^4.41.0"
   peerDependencies:
     "@mittwald/flow-react-components": "*"
-  checksum: 10c0/0ac367bead08a841e21ccb59e9c7555d4b9cdc196a76f170192599e48e39486063cc13bd040829d130e9c5ed79af0fb8e330079155300ba9b43e7a9240b9c78e
+  checksum: 10c0/256f8aa7034bedd96604e5a509b24616d674a4ec2b396529130cb22665328af6c5f77d6d9d86adb240c128d4883cf3ccf04f2479ed57ee17eb021dfd6a82804e
   languageName: node
   linkType: hard
 
-"@mittwald/flow-remote-react-components@npm:^0.2.0-alpha.505":
-  version: 0.2.0-alpha.505
-  resolution: "@mittwald/flow-remote-react-components@npm:0.2.0-alpha.505"
+"@mittwald/flow-remote-react-components@npm:^0.2.0-alpha.515":
+  version: 0.2.0-alpha.515
+  resolution: "@mittwald/flow-remote-react-components@npm:0.2.0-alpha.515"
   dependencies:
-    "@mittwald/flow-react-components": "npm:0.2.0-alpha.505"
-    "@mittwald/flow-remote-core": "npm:0.2.0-alpha.505"
-    "@mittwald/flow-remote-elements": "npm:0.2.0-alpha.505"
+    "@mittwald/flow-react-components": "npm:0.2.0-alpha.515"
+    "@mittwald/flow-remote-core": "npm:0.2.0-alpha.515"
+    "@mittwald/flow-remote-elements": "npm:0.2.0-alpha.515"
     "@mittwald/remote-dom-react": "npm:1.2.2-mittwald.10"
     "@testing-library/jest-dom": "npm:6.6.3"
     "@types/react": "npm:^19.1.13"
@@ -2880,17 +2880,17 @@ __metadata:
       optional: true
     react-hook-form:
       optional: true
-  checksum: 10c0/4a21497cbc12b437dd5d82d0e5e55ba7be1cab7c2adfa066ca26da378a50dfffb7be1e8771295b8bf2cd26de3a3480162dea84a6741cf94badf97783fa79ff6a
+  checksum: 10c0/542e7f29fe9800d57d830288610e650d78d43993d53355c28510f478c1d16c5fc210a27bd0b332cb29ed11d3d099dda0e4afe1623ddf8e3b41dff396a8f0bd3a
   languageName: node
   linkType: hard
 
-"@mittwald/flow-remote-react-renderer@npm:^0.2.0-alpha.505":
-  version: 0.2.0-alpha.505
-  resolution: "@mittwald/flow-remote-react-renderer@npm:0.2.0-alpha.505"
+"@mittwald/flow-remote-react-renderer@npm:^0.2.0-alpha.515":
+  version: 0.2.0-alpha.515
+  resolution: "@mittwald/flow-remote-react-renderer@npm:0.2.0-alpha.515"
   dependencies:
-    "@mittwald/ext-bridge": "npm:0.2.0-alpha.505"
-    "@mittwald/flow-remote-core": "npm:0.2.0-alpha.505"
-    "@mittwald/flow-remote-elements": "npm:0.2.0-alpha.505"
+    "@mittwald/ext-bridge": "npm:0.2.0-alpha.515"
+    "@mittwald/flow-remote-core": "npm:0.2.0-alpha.515"
+    "@mittwald/flow-remote-elements": "npm:0.2.0-alpha.515"
     "@mittwald/react-use-promise": "npm:^3.0.4"
     "@mittwald/remote-dom-react": "npm:1.2.2-mittwald.10"
     "@types/react": "npm:^19.1.13"
@@ -2905,19 +2905,19 @@ __metadata:
   peerDependenciesMeta:
     react-hook-form:
       optional: true
-  checksum: 10c0/6c1493719ef43d59bdf65936e7813a9f719e70f2335d0a5e993a79c722e20eca3e8fec3e9c41d2f3ad47740666f2f4c0c0d40ed9bba3b8a0ff20b21a078207f0
+  checksum: 10c0/bc37d59b750f995d71b507679703576ddc6c3adb8a7a333dddf010079924b764b1a65f6069af456291577994072358e5db08e3391fc5775ed3b74b4cc145e1bb
   languageName: node
   linkType: hard
 
-"@mittwald/mstudio-ext-react-components@npm:^0.2.0-alpha.505":
-  version: 0.2.0-alpha.505
-  resolution: "@mittwald/mstudio-ext-react-components@npm:0.2.0-alpha.505"
+"@mittwald/mstudio-ext-react-components@npm:^0.2.0-alpha.515":
+  version: 0.2.0-alpha.515
+  resolution: "@mittwald/mstudio-ext-react-components@npm:0.2.0-alpha.515"
   dependencies:
     "@types/react": "npm:^19.1.13"
   peerDependencies:
     "@mittwald/flow-remote-react-components": "*"
     react: ^19
-  checksum: 10c0/76a13372f27cf5c4a4daa2aff3ddf9607ad36a760466b7dbb75ce6fdd7775395783138c9c2d7d5632dbb1148644f0c9906a1145c2ca945cf90ff32dbcf206580
+  checksum: 10c0/7e3f4d93e1df8e509f024f306cc33cb8b7a70e3ef322f01b4f5f2a9aa03fc064e177cb959efdc825a2fb8bc690ff7adad8d93637b7fdf4a278ef32b559cc6078
   languageName: node
   linkType: hard
 
@@ -2946,16 +2946,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mittwald/react-tunnel@npm:0.2.0-alpha.505":
-  version: 0.2.0-alpha.505
-  resolution: "@mittwald/react-tunnel@npm:0.2.0-alpha.505"
+"@mittwald/react-tunnel@npm:0.2.0-alpha.515":
+  version: 0.2.0-alpha.515
+  resolution: "@mittwald/react-tunnel@npm:0.2.0-alpha.515"
   dependencies:
     mobx: "npm:^6.13.7"
     mobx-react-lite: "npm:^4.1.0"
   peerDependencies:
     react: ^19
     react-dom: ^19
-  checksum: 10c0/8afd9b05d043dcf565f631f6a698445e443641ac85dc735629696c4bfafd4207ada8c64e299fc1805bd2719f7ed3574f7af5e52f365b4b114694dae42c6e5278
+  checksum: 10c0/7db5c54dd916ff9111b06adeae83d9d2999b88cd45c64700afe3ea1317496d5014afb2b74365e313785252e94ff4f1f08b04101fc9da67c16909fc77dd400882
   languageName: node
   linkType: hard
 
@@ -3215,9 +3215,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx/devkit@npm:21.6.3":
-  version: 21.6.3
-  resolution: "@nx/devkit@npm:21.6.3"
+"@nx/devkit@npm:21.6.4":
+  version: 21.6.4
+  resolution: "@nx/devkit@npm:21.6.4"
   dependencies:
     ejs: "npm:^3.1.7"
     enquirer: "npm:~2.3.6"
@@ -3228,16 +3228,16 @@ __metadata:
     yargs-parser: "npm:21.1.1"
   peerDependencies:
     nx: ">= 20 <= 22"
-  checksum: 10c0/490ea5a35389a5c331cb51ae268a14471c1a026b37c9a941b7226f03d7d719fccad66d07045e0a2a04699645a3ddd1227d964d54552bcb9d58a6268c3e832ca0
+  checksum: 10c0/50ffb17f0edf3dcba5e518da396d84ae085c70fc0d6b94f5eb104a5adfea63f057e12511a3f29aeb59f76998dc9e591df8eb7886e24ea1f0cf425bc3bd72fd9e
   languageName: node
   linkType: hard
 
-"@nx/eslint@npm:^21.6.3":
-  version: 21.6.3
-  resolution: "@nx/eslint@npm:21.6.3"
+"@nx/eslint@npm:^21.6.4":
+  version: 21.6.4
+  resolution: "@nx/eslint@npm:21.6.4"
   dependencies:
-    "@nx/devkit": "npm:21.6.3"
-    "@nx/js": "npm:21.6.3"
+    "@nx/devkit": "npm:21.6.4"
+    "@nx/js": "npm:21.6.4"
     semver: "npm:^7.5.3"
     tslib: "npm:^2.3.0"
     typescript: "npm:~5.9.2"
@@ -3247,13 +3247,13 @@ __metadata:
   peerDependenciesMeta:
     "@zkochan/js-yaml":
       optional: true
-  checksum: 10c0/4ece18ff5a25eab1db0f3ea1f13e474b77eb94a7a24218cb355faba1fe722721f0efb9012ad19fb890fefa8527f0e1b99da297e45b0e599439430ffd5f6691d8
+  checksum: 10c0/2f82da190b7c1e49fe536b466fa4a17197c33f6b1ed85f04ae74c11b944b8b82a9bb967ab83d29ae0cbe3fb9cdde62897619b6372863445f5ebbda75a5aba15c
   languageName: node
   linkType: hard
 
-"@nx/js@npm:21.6.3":
-  version: 21.6.3
-  resolution: "@nx/js@npm:21.6.3"
+"@nx/js@npm:21.6.4":
+  version: 21.6.4
+  resolution: "@nx/js@npm:21.6.4"
   dependencies:
     "@babel/core": "npm:^7.23.2"
     "@babel/plugin-proposal-decorators": "npm:^7.22.7"
@@ -3262,8 +3262,8 @@ __metadata:
     "@babel/preset-env": "npm:^7.23.2"
     "@babel/preset-typescript": "npm:^7.22.5"
     "@babel/runtime": "npm:^7.22.6"
-    "@nx/devkit": "npm:21.6.3"
-    "@nx/workspace": "npm:21.6.3"
+    "@nx/devkit": "npm:21.6.4"
+    "@nx/workspace": "npm:21.6.4"
     "@zkochan/js-yaml": "npm:0.0.7"
     babel-plugin-const-enum: "npm:^1.0.1"
     babel-plugin-macros: "npm:^3.1.0"
@@ -3289,86 +3289,86 @@ __metadata:
   peerDependenciesMeta:
     verdaccio:
       optional: true
-  checksum: 10c0/49b5872c0ebffbf440cf381f3b8c052ad32ee732ec0fac0dcc7347173a694979f63d22e66120d05c8c39b807a9a42adc9517697ccb9d63ec8f2268ca0875120b
+  checksum: 10c0/266400b066df8358631b7655642efd6c16548881d42c3ab6a552fa90c0a7adf8a13d4d4b277bab24d6022289234ed15a33151beea50840cd3cb60fc71a318221
   languageName: node
   linkType: hard
 
-"@nx/nx-darwin-arm64@npm:21.6.3":
-  version: 21.6.3
-  resolution: "@nx/nx-darwin-arm64@npm:21.6.3"
+"@nx/nx-darwin-arm64@npm:21.6.4":
+  version: 21.6.4
+  resolution: "@nx/nx-darwin-arm64@npm:21.6.4"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@nx/nx-darwin-x64@npm:21.6.3":
-  version: 21.6.3
-  resolution: "@nx/nx-darwin-x64@npm:21.6.3"
+"@nx/nx-darwin-x64@npm:21.6.4":
+  version: 21.6.4
+  resolution: "@nx/nx-darwin-x64@npm:21.6.4"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@nx/nx-freebsd-x64@npm:21.6.3":
-  version: 21.6.3
-  resolution: "@nx/nx-freebsd-x64@npm:21.6.3"
+"@nx/nx-freebsd-x64@npm:21.6.4":
+  version: 21.6.4
+  resolution: "@nx/nx-freebsd-x64@npm:21.6.4"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"@nx/nx-linux-arm-gnueabihf@npm:21.6.3":
-  version: 21.6.3
-  resolution: "@nx/nx-linux-arm-gnueabihf@npm:21.6.3"
+"@nx/nx-linux-arm-gnueabihf@npm:21.6.4":
+  version: 21.6.4
+  resolution: "@nx/nx-linux-arm-gnueabihf@npm:21.6.4"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@nx/nx-linux-arm64-gnu@npm:21.6.3":
-  version: 21.6.3
-  resolution: "@nx/nx-linux-arm64-gnu@npm:21.6.3"
+"@nx/nx-linux-arm64-gnu@npm:21.6.4":
+  version: 21.6.4
+  resolution: "@nx/nx-linux-arm64-gnu@npm:21.6.4"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@nx/nx-linux-arm64-musl@npm:21.6.3":
-  version: 21.6.3
-  resolution: "@nx/nx-linux-arm64-musl@npm:21.6.3"
+"@nx/nx-linux-arm64-musl@npm:21.6.4":
+  version: 21.6.4
+  resolution: "@nx/nx-linux-arm64-musl@npm:21.6.4"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@nx/nx-linux-x64-gnu@npm:21.6.3":
-  version: 21.6.3
-  resolution: "@nx/nx-linux-x64-gnu@npm:21.6.3"
+"@nx/nx-linux-x64-gnu@npm:21.6.4":
+  version: 21.6.4
+  resolution: "@nx/nx-linux-x64-gnu@npm:21.6.4"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@nx/nx-linux-x64-musl@npm:21.6.3":
-  version: 21.6.3
-  resolution: "@nx/nx-linux-x64-musl@npm:21.6.3"
+"@nx/nx-linux-x64-musl@npm:21.6.4":
+  version: 21.6.4
+  resolution: "@nx/nx-linux-x64-musl@npm:21.6.4"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@nx/nx-win32-arm64-msvc@npm:21.6.3":
-  version: 21.6.3
-  resolution: "@nx/nx-win32-arm64-msvc@npm:21.6.3"
+"@nx/nx-win32-arm64-msvc@npm:21.6.4":
+  version: 21.6.4
+  resolution: "@nx/nx-win32-arm64-msvc@npm:21.6.4"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@nx/nx-win32-x64-msvc@npm:21.6.3":
-  version: 21.6.3
-  resolution: "@nx/nx-win32-x64-msvc@npm:21.6.3"
+"@nx/nx-win32-x64-msvc@npm:21.6.4":
+  version: 21.6.4
+  resolution: "@nx/nx-win32-x64-msvc@npm:21.6.4"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@nx/vite@npm:^21.6.3":
-  version: 21.6.3
-  resolution: "@nx/vite@npm:21.6.3"
+"@nx/vite@npm:^21.6.4":
+  version: 21.6.4
+  resolution: "@nx/vite@npm:21.6.4"
   dependencies:
-    "@nx/devkit": "npm:21.6.3"
-    "@nx/js": "npm:21.6.3"
+    "@nx/devkit": "npm:21.6.4"
+    "@nx/js": "npm:21.6.4"
     "@phenomnomnominal/tsquery": "npm:~5.0.1"
     ajv: "npm:^8.0.0"
     enquirer: "npm:~2.3.6"
@@ -3379,38 +3379,38 @@ __metadata:
   peerDependencies:
     vite: ^5.0.0 || ^6.0.0 || ^7.0.0
     vitest: ^1.3.1 || ^2.0.0 || ^3.0.0
-  checksum: 10c0/c7246c4d9a39080d5cd2eaee09a8ad4996f8520b48084a4ca7bd0bdef9690d1c5290cde431b27d1bc1e0720dc331ef8057be203e61866b38921215d046d8ddaa
+  checksum: 10c0/e2af50dd2e0a03b4ad1cf38418a01b8c3113687fd2f81ecf8f5591de7ea3beeb3b7a354dffd9b523e70e055e3276255d78d4aad9dc22049545a8224471efca74
   languageName: node
   linkType: hard
 
-"@nx/web@npm:^21.6.3":
-  version: 21.6.3
-  resolution: "@nx/web@npm:21.6.3"
+"@nx/web@npm:^21.6.4":
+  version: 21.6.4
+  resolution: "@nx/web@npm:21.6.4"
   dependencies:
-    "@nx/devkit": "npm:21.6.3"
-    "@nx/js": "npm:21.6.3"
+    "@nx/devkit": "npm:21.6.4"
+    "@nx/js": "npm:21.6.4"
     detect-port: "npm:^1.5.1"
     http-server: "npm:^14.1.0"
     picocolors: "npm:^1.1.0"
     tslib: "npm:^2.3.0"
-  checksum: 10c0/52730a4c51e467dcb2a1da63a206eaddab07cf85772e7a2a5b9789b03b2cb0d4257de5214936551f0e39e741fd77f5c22feefcb610872e1af1f9aba25139737b
+  checksum: 10c0/8e16e473053958f6cbc0c779a1d14ffb274c0119d435b49856988953f921fc0b010fcb582d7f31abc35f8b1b0fe55e1da17e57e9fb06c87d944fdd2a9143b0dc
   languageName: node
   linkType: hard
 
-"@nx/workspace@npm:21.6.3":
-  version: 21.6.3
-  resolution: "@nx/workspace@npm:21.6.3"
+"@nx/workspace@npm:21.6.4":
+  version: 21.6.4
+  resolution: "@nx/workspace@npm:21.6.4"
   dependencies:
-    "@nx/devkit": "npm:21.6.3"
+    "@nx/devkit": "npm:21.6.4"
     "@zkochan/js-yaml": "npm:0.0.7"
     chalk: "npm:^4.1.0"
     enquirer: "npm:~2.3.6"
-    nx: "npm:21.6.3"
+    nx: "npm:21.6.4"
     picomatch: "npm:4.0.2"
     semver: "npm:^7.6.3"
     tslib: "npm:^2.3.0"
     yargs-parser: "npm:21.1.1"
-  checksum: 10c0/9bd2301f49f3a98d6769a41ffebb67e615bb4bf09155864ee7f4bcd78287ab0df9e3fc66613f1b5a3f0f9fc22bb2fd01087230c605d3a62b015d811dbc999178
+  checksum: 10c0/9e7f9b910695b1d837b277e4e7a0848ea4926f35cc69b42d7de91f262a5bc9c036ae7d9bddd4732c7ccfcce647fb0f32d2c837f6416b38556840acf51620cdea
   languageName: node
   linkType: hard
 
@@ -7936,21 +7936,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/directive-functions-plugin@npm:1.132.42":
-  version: 1.132.42
-  resolution: "@tanstack/directive-functions-plugin@npm:1.132.42"
+"@tanstack/directive-functions-plugin@npm:1.132.51":
+  version: 1.132.51
+  resolution: "@tanstack/directive-functions-plugin@npm:1.132.51"
   dependencies:
     "@babel/code-frame": "npm:7.27.1"
     "@babel/core": "npm:^7.27.7"
     "@babel/traverse": "npm:^7.27.7"
     "@babel/types": "npm:^7.27.7"
-    "@tanstack/router-utils": "npm:1.132.31"
+    "@tanstack/router-utils": "npm:1.132.51"
     babel-dead-code-elimination: "npm:^1.0.10"
     pathe: "npm:^2.0.3"
     tiny-invariant: "npm:^1.3.3"
   peerDependencies:
     vite: ">=6.0.0 || >=7.0.0"
-  checksum: 10c0/24a65ceb7f56f3774e6b269defafe5d77ec963555351b9c840d6863446526a2e461982aa254346d10a676dd8eb4dc8db11b6a0876b621abd6b4498410c107bb2
+  checksum: 10c0/af8d0d56247c12fd33dca515d0d918aca1746d6941d12fc378fa2b74700292ca8d99eec00856e845528aece6a3ac9d8471d3430b9a953010267c0552002daff1
   languageName: node
   linkType: hard
 
@@ -8028,23 +8028,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-start@npm:^1.132.48":
-  version: 1.132.48
-  resolution: "@tanstack/react-start@npm:1.132.48"
+"@tanstack/react-start@npm:^1.132.51":
+  version: 1.132.51
+  resolution: "@tanstack/react-start@npm:1.132.51"
   dependencies:
     "@tanstack/react-router": "npm:1.132.47"
     "@tanstack/react-start-client": "npm:1.132.48"
     "@tanstack/react-start-server": "npm:1.132.48"
-    "@tanstack/router-utils": "npm:^1.132.31"
+    "@tanstack/router-utils": "npm:^1.132.51"
     "@tanstack/start-client-core": "npm:1.132.48"
-    "@tanstack/start-plugin-core": "npm:1.132.48"
+    "@tanstack/start-plugin-core": "npm:1.132.51"
     "@tanstack/start-server-core": "npm:1.132.48"
     pathe: "npm:^2.0.3"
   peerDependencies:
     react: ">=18.0.0 || >=19.0.0"
     react-dom: ">=18.0.0 || >=19.0.0"
     vite: ">=7.0.0"
-  checksum: 10c0/f0b8720ed2a2212fe5c1b9e2d320c973b11ab32ff71c4148ac5f6306e31b8c5b9f8cb894c48bc2fba457c5944e9a1bc20c967fc707c3a165493fdc538e3c0758
+  checksum: 10c0/85ada8d2c4130e67c4a0a6057db97211c36bb724c1315b5382db972eaadd8613b059d5502563a8b39fdbc337fb1929b204c1d067037046a5c510c83a2af377cc
   languageName: node
   linkType: hard
 
@@ -8088,25 +8088,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/router-generator@npm:1.132.47":
-  version: 1.132.47
-  resolution: "@tanstack/router-generator@npm:1.132.47"
+"@tanstack/router-generator@npm:1.132.51":
+  version: 1.132.51
+  resolution: "@tanstack/router-generator@npm:1.132.51"
   dependencies:
     "@tanstack/router-core": "npm:1.132.47"
-    "@tanstack/router-utils": "npm:1.132.31"
+    "@tanstack/router-utils": "npm:1.132.51"
     "@tanstack/virtual-file-routes": "npm:1.132.31"
     prettier: "npm:^3.5.0"
     recast: "npm:^0.23.11"
     source-map: "npm:^0.7.4"
     tsx: "npm:^4.19.2"
     zod: "npm:^3.24.2"
-  checksum: 10c0/258905b60b89e23320e4cb15cad49fd6d4a67be315f274629c517bacc14c42eae90677a85207cc0fc042d9fd07cd5811a352b2d237df1e0e4829f3dba1676d58
+  checksum: 10c0/a45004c037b63d67a4bf1dd6306e8ea740af10cafc6de1b4fa843e71f964fdc78cd2907e3ff7a88669241a63b96e38127864167c88355f46b60390e3e61de063
   languageName: node
   linkType: hard
 
-"@tanstack/router-plugin@npm:1.132.47, @tanstack/router-plugin@npm:^1.132.47":
-  version: 1.132.47
-  resolution: "@tanstack/router-plugin@npm:1.132.47"
+"@tanstack/router-plugin@npm:1.132.51, @tanstack/router-plugin@npm:^1.132.51":
+  version: 1.132.51
+  resolution: "@tanstack/router-plugin@npm:1.132.51"
   dependencies:
     "@babel/core": "npm:^7.27.7"
     "@babel/plugin-syntax-jsx": "npm:^7.27.1"
@@ -8115,8 +8115,8 @@ __metadata:
     "@babel/traverse": "npm:^7.27.7"
     "@babel/types": "npm:^7.27.7"
     "@tanstack/router-core": "npm:1.132.47"
-    "@tanstack/router-generator": "npm:1.132.47"
-    "@tanstack/router-utils": "npm:1.132.31"
+    "@tanstack/router-generator": "npm:1.132.51"
+    "@tanstack/router-utils": "npm:1.132.51"
     "@tanstack/virtual-file-routes": "npm:1.132.31"
     babel-dead-code-elimination: "npm:^1.0.10"
     chokidar: "npm:^3.6.0"
@@ -8139,13 +8139,13 @@ __metadata:
       optional: true
     webpack:
       optional: true
-  checksum: 10c0/d96d814153c8583fcb155d45685993497c8fc44a3f45dbee89045b52a87d93a30857457a9a8b13f04fbca00f4dc46d783023dae5f870e0cb4027c995441db611
+  checksum: 10c0/deef39fde0ca8dd419646be18dc2fd13497d07616e81d35592d59692f7f262d87f89ef0387e51628956a513d58c62542488034cc8e20096e67efc103e57917de
   languageName: node
   linkType: hard
 
-"@tanstack/router-utils@npm:1.132.31, @tanstack/router-utils@npm:^1.132.31":
-  version: 1.132.31
-  resolution: "@tanstack/router-utils@npm:1.132.31"
+"@tanstack/router-utils@npm:1.132.51, @tanstack/router-utils@npm:^1.132.51":
+  version: 1.132.51
+  resolution: "@tanstack/router-utils@npm:1.132.51"
   dependencies:
     "@babel/core": "npm:^7.27.4"
     "@babel/generator": "npm:^7.27.5"
@@ -8153,15 +8153,15 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.27.1"
     ansis: "npm:^4.1.0"
     diff: "npm:^8.0.2"
-    fast-glob: "npm:^3.3.3"
     pathe: "npm:^2.0.3"
-  checksum: 10c0/0a6e25a4a5205a1deeb6356aa3fcda90eba72796dfdf87e10ac7369a17dd215838ee336deac7c8157aa6b36efaaed6dacc4c53b2ce64a5dec74bdbb5bf293a8c
+    tinyglobby: "npm:^0.2.15"
+  checksum: 10c0/38a780d682c37a271820deb3eeade5e54f99290ec565ee438d5c2a1efdf6a2a7b033234fc2dfda11c186b60ab77bdde815138f281a32bb7afb2d89af6ef01ba7
   languageName: node
   linkType: hard
 
-"@tanstack/server-functions-plugin@npm:1.132.42":
-  version: 1.132.42
-  resolution: "@tanstack/server-functions-plugin@npm:1.132.42"
+"@tanstack/server-functions-plugin@npm:1.132.51":
+  version: 1.132.51
+  resolution: "@tanstack/server-functions-plugin@npm:1.132.51"
   dependencies:
     "@babel/code-frame": "npm:7.27.1"
     "@babel/core": "npm:^7.27.7"
@@ -8170,10 +8170,10 @@ __metadata:
     "@babel/template": "npm:^7.27.2"
     "@babel/traverse": "npm:^7.27.7"
     "@babel/types": "npm:^7.27.7"
-    "@tanstack/directive-functions-plugin": "npm:1.132.42"
+    "@tanstack/directive-functions-plugin": "npm:1.132.51"
     babel-dead-code-elimination: "npm:^1.0.9"
     tiny-invariant: "npm:^1.3.3"
-  checksum: 10c0/fa9a7cb54168d72272e7f45a9343be07f2f7aee16e1ea9a4516e68b103b8bf347686cf07dfcd58f91afe47208016a163fc02ee6743b6d09ec99bc2fc2f68475f
+  checksum: 10c0/47b40ee751da2fb6e4cd19468e5cc9af19c4c67647855cf0f9c102f64044c65e7bd1016094d2db9f7ac7264de35d50772aa73f5eadfe32a6d077b1fa0fd51c00
   languageName: node
   linkType: hard
 
@@ -8190,19 +8190,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/start-plugin-core@npm:1.132.48":
-  version: 1.132.48
-  resolution: "@tanstack/start-plugin-core@npm:1.132.48"
+"@tanstack/start-plugin-core@npm:1.132.51":
+  version: 1.132.51
+  resolution: "@tanstack/start-plugin-core@npm:1.132.51"
   dependencies:
     "@babel/code-frame": "npm:7.26.2"
     "@babel/core": "npm:^7.26.8"
     "@babel/types": "npm:^7.26.8"
     "@rolldown/pluginutils": "npm:1.0.0-beta.40"
     "@tanstack/router-core": "npm:1.132.47"
-    "@tanstack/router-generator": "npm:1.132.47"
-    "@tanstack/router-plugin": "npm:1.132.47"
-    "@tanstack/router-utils": "npm:1.132.31"
-    "@tanstack/server-functions-plugin": "npm:1.132.42"
+    "@tanstack/router-generator": "npm:1.132.51"
+    "@tanstack/router-plugin": "npm:1.132.51"
+    "@tanstack/router-utils": "npm:1.132.51"
+    "@tanstack/server-functions-plugin": "npm:1.132.51"
+    "@tanstack/start-client-core": "npm:1.132.48"
     "@tanstack/start-server-core": "npm:1.132.48"
     babel-dead-code-elimination: "npm:^1.0.9"
     cheerio: "npm:^1.0.0"
@@ -8216,7 +8217,7 @@ __metadata:
     zod: "npm:^3.24.2"
   peerDependencies:
     vite: ">=7.0.0"
-  checksum: 10c0/c6f0ac448dbcc44e18c6c5727be065e320978fcc6989822425a9b390c0b58883118736b8f94df6a290ffb3900b5864b1dcf91334a3ee6d07d8c02cf07e78820e
+  checksum: 10c0/e4f5a363d865a570daa49065e4645120e94339bff30352579c6dd6aa013b3973af4b3633c327331f996e4bc3c33bcc32f0365fe1cf1fd3dfad1b2f2ac43a1e54
   languageName: node
   linkType: hard
 
@@ -8306,9 +8307,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typegoose/typegoose@npm:^12.19.0":
-  version: 12.19.0
-  resolution: "@typegoose/typegoose@npm:12.19.0"
+"@typegoose/typegoose@npm:^12.20.0":
+  version: 12.20.0
+  resolution: "@typegoose/typegoose@npm:12.20.0"
   dependencies:
     lodash: "npm:^4.17.20"
     loglevel: "npm:^1.9.2"
@@ -8316,8 +8317,8 @@ __metadata:
     semver: "npm:^7.7.2"
     tslib: "npm:^2.8.1"
   peerDependencies:
-    mongoose: ~8.18.0
-  checksum: 10c0/46051579088a0bd18fc432ed65a20aee1862eec4b62d9887eaa8254b38aa3e93996a92bc26b2d0c54d687ed6ad92c6b01133b808c5d510a769fd463f5c8fd5b9
+    mongoose: ~8.19.1
+  checksum: 10c0/8be3cf5baad51627c84e8f10ad72c8fa6ab5d53763f3b7ba8e1f43af66c0091ffc28115fd9ad297d1b0302496f43fd86dc19a32350356776a3df11f822af9b0c
   languageName: node
   linkType: hard
 
@@ -9649,7 +9650,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.12.2, axios@npm:^1.8.3":
+"axios@npm:^1.12.0, axios@npm:^1.12.2":
   version: 1.12.2
   resolution: "axios@npm:1.12.2"
   dependencies:
@@ -9773,12 +9774,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-react-compiler@npm:^19.1.0-rc.3":
-  version: 19.1.0-rc.3
-  resolution: "babel-plugin-react-compiler@npm:19.1.0-rc.3"
+"babel-plugin-react-compiler@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "babel-plugin-react-compiler@npm:1.0.0"
   dependencies:
     "@babel/types": "npm:^7.26.0"
-  checksum: 10c0/6811500cf81a309f104ec1de3fa9336932a1105e3c0e747b81a1d12e80c2cd4f531f7c42ec4441f96527ee20e19342af58d958241061d47a02b0d8bee66fbe35
+  checksum: 10c0/9406267ada8d7dbdfe8906b40ecadb816a5f4cee2922bee23f7729293b369624ee135b5a9b0f263851c263c9787522ac5d97016c9a2b82d1668300e42b18aff8
   languageName: node
   linkType: hard
 
@@ -12132,17 +12133,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-hooks@npm:^6.1.1":
-  version: 6.1.1
-  resolution: "eslint-plugin-react-hooks@npm:6.1.1"
+"eslint-plugin-react-hooks@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "eslint-plugin-react-hooks@npm:7.0.0"
   dependencies:
     "@babel/core": "npm:^7.24.4"
     "@babel/parser": "npm:^7.24.4"
+    hermes-parser: "npm:^0.25.1"
     zod: "npm:^3.22.4 || ^4.0.0"
     zod-validation-error: "npm:^3.0.3 || ^4.0.0"
   peerDependencies:
     eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
-  checksum: 10c0/579be053bc89c995a6c03996f9ee3f6bac88946b4b1c8b891b42f981e7c05a9c5de46324bbd2a33199855c0a602820c0e3eeb7f840730301b77a9ba3dc7a0ae2
+  checksum: 10c0/911c9efdd9b102ce2eabac247dff8c217ecb8d6972aaf3b7eecfb1cfc293d4d902766355993ff7a37a33c0abde3e76971f43bc1c8ff36d6c123310e5680d0423
   languageName: node
   linkType: hard
 
@@ -12470,7 +12472,7 @@ __metadata:
   resolution: "extension-a11y-checker-storage@workspace:packages/storage"
   dependencies:
     "@eslint/eslintrc": "npm:^3.3.1"
-    "@typegoose/typegoose": "npm:^12.19.0"
+    "@typegoose/typegoose": "npm:^12.20.0"
     "@types/node": "npm:^24.7.0"
     cron-parser: "npm:^5.4.0"
     eslint: "npm:^9.37.0"
@@ -12485,26 +12487,26 @@ __metadata:
   resolution: "extension-a11y-checker-web2@workspace:packages/web2"
   dependencies:
     "@eslint/js": "npm:^9.37.0"
-    "@mittwald/api-client": "npm:^4.234.0"
-    "@mittwald/ext-bridge": "npm:^0.2.0-alpha.505"
-    "@mittwald/flow-remote-react-components": "npm:^0.2.0-alpha.505"
-    "@mittwald/flow-remote-react-renderer": "npm:^0.2.0-alpha.505"
-    "@mittwald/mstudio-ext-react-components": "npm:^0.2.0-alpha.505"
+    "@mittwald/api-client": "npm:^4.237.0"
+    "@mittwald/ext-bridge": "npm:^0.2.0-alpha.515"
+    "@mittwald/flow-remote-react-components": "npm:^0.2.0-alpha.515"
+    "@mittwald/flow-remote-react-renderer": "npm:^0.2.0-alpha.515"
+    "@mittwald/mstudio-ext-react-components": "npm:^0.2.0-alpha.515"
     "@tabler/icons-react": "npm:^3.35.0"
     "@tanstack/react-query": "npm:^5.90.2"
     "@tanstack/react-router": "npm:^1.132.47"
-    "@tanstack/react-start": "npm:^1.132.48"
-    "@tanstack/router-plugin": "npm:^1.132.47"
+    "@tanstack/react-start": "npm:^1.132.51"
+    "@tanstack/router-plugin": "npm:^1.132.51"
     "@tanstack/zod-adapter": "npm:^1.132.47"
     "@types/react": "npm:^19.2.2"
     "@types/react-dom": "npm:^19.2.1"
     "@vitejs/plugin-react": "npm:^5.0.4"
     "@weissaufschwarz/mitthooks": "npm:^0.2.2"
-    babel-plugin-react-compiler: "npm:^19.1.0-rc.3"
+    babel-plugin-react-compiler: "npm:^1.0.0"
     class-transform: "npm:^0.7.1"
     cronstrue: "npm:^3.3.0"
     eslint: "npm:^9.37.0"
-    eslint-plugin-react-hooks: "npm:^6.1.1"
+    eslint-plugin-react-hooks: "npm:^7.0.0"
     eslint-plugin-react-refresh: "npm:^0.4.23"
     extension-a11y-checker-storage: "workspace:^"
     globals: "npm:^16.4.0"
@@ -12527,11 +12529,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "extension-a11y-checker@workspace:."
   dependencies:
-    "@nx/eslint": "npm:^21.6.3"
-    "@nx/vite": "npm:^21.6.3"
-    "@nx/web": "npm:^21.6.3"
+    "@nx/eslint": "npm:^21.6.4"
+    "@nx/vite": "npm:^21.6.4"
+    "@nx/web": "npm:^21.6.4"
     "@vitest/ui": "npm:^3.2.4"
-    nx: "npm:^21.6.3"
+    nx: "npm:^21.6.4"
     prettier: "npm:^3.6.2"
     typescript: "npm:^5.9.3"
     vite: "npm:^7.1.9"
@@ -13503,6 +13505,22 @@ __metadata:
   version: 5.0.0
   resolution: "help-me@npm:5.0.0"
   checksum: 10c0/054c0e2e9ae2231c85ab5e04f75109b9d068ffcc54e58fb22079822a5ace8ff3d02c66fd45379c902ad5ab825e5d2e1451fcc2f7eab1eb49e7d488133ba4cacb
+  languageName: node
+  linkType: hard
+
+"hermes-estree@npm:0.25.1":
+  version: 0.25.1
+  resolution: "hermes-estree@npm:0.25.1"
+  checksum: 10c0/48be3b2fa37a0cbc77a112a89096fa212f25d06de92781b163d67853d210a8a5c3784fac23d7d48335058f7ed283115c87b4332c2a2abaaccc76d0ead1a282ac
+  languageName: node
+  linkType: hard
+
+"hermes-parser@npm:^0.25.1":
+  version: 0.25.1
+  resolution: "hermes-parser@npm:0.25.1"
+  dependencies:
+    hermes-estree: "npm:0.25.1"
+  checksum: 10c0/3abaa4c6f1bcc25273f267297a89a4904963ea29af19b8e4f6eabe04f1c2c7e9abd7bfc4730ddb1d58f2ea04b6fee74053d8bddb5656ec6ebf6c79cc8d14202c
   languageName: node
   linkType: hard
 
@@ -16415,25 +16433,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nx@npm:21.6.3, nx@npm:^21.6.3":
-  version: 21.6.3
-  resolution: "nx@npm:21.6.3"
+"nx@npm:21.6.4, nx@npm:^21.6.4":
+  version: 21.6.4
+  resolution: "nx@npm:21.6.4"
   dependencies:
     "@napi-rs/wasm-runtime": "npm:0.2.4"
-    "@nx/nx-darwin-arm64": "npm:21.6.3"
-    "@nx/nx-darwin-x64": "npm:21.6.3"
-    "@nx/nx-freebsd-x64": "npm:21.6.3"
-    "@nx/nx-linux-arm-gnueabihf": "npm:21.6.3"
-    "@nx/nx-linux-arm64-gnu": "npm:21.6.3"
-    "@nx/nx-linux-arm64-musl": "npm:21.6.3"
-    "@nx/nx-linux-x64-gnu": "npm:21.6.3"
-    "@nx/nx-linux-x64-musl": "npm:21.6.3"
-    "@nx/nx-win32-arm64-msvc": "npm:21.6.3"
-    "@nx/nx-win32-x64-msvc": "npm:21.6.3"
+    "@nx/nx-darwin-arm64": "npm:21.6.4"
+    "@nx/nx-darwin-x64": "npm:21.6.4"
+    "@nx/nx-freebsd-x64": "npm:21.6.4"
+    "@nx/nx-linux-arm-gnueabihf": "npm:21.6.4"
+    "@nx/nx-linux-arm64-gnu": "npm:21.6.4"
+    "@nx/nx-linux-arm64-musl": "npm:21.6.4"
+    "@nx/nx-linux-x64-gnu": "npm:21.6.4"
+    "@nx/nx-linux-x64-musl": "npm:21.6.4"
+    "@nx/nx-win32-arm64-msvc": "npm:21.6.4"
+    "@nx/nx-win32-x64-msvc": "npm:21.6.4"
     "@yarnpkg/lockfile": "npm:^1.1.0"
     "@yarnpkg/parsers": "npm:3.0.2"
     "@zkochan/js-yaml": "npm:0.0.7"
-    axios: "npm:^1.8.3"
+    axios: "npm:^1.12.0"
     chalk: "npm:^4.1.0"
     cli-cursor: "npm:3.1.0"
     cli-spinners: "npm:2.6.1"
@@ -16496,7 +16514,7 @@ __metadata:
   bin:
     nx: bin/nx.js
     nx-cloud: bin/nx-cloud.js
-  checksum: 10c0/ed82e3b472b4ca2710cc87e07a03ff3a6980176d03ab612c23e9c0f0de5c83159d2a1c04d3ab38e888587197a75f1387d891e17fee64b489f32bec7de4b2ce2a
+  checksum: 10c0/296003d01671367c55602f50ff80407e4b121cccea09e9d4e9a606ca75f80181c63d777439e081609a8fde3d44b32e559134ecbca2b5d3ed100b829d8fc09c6d
   languageName: node
   linkType: hard
 

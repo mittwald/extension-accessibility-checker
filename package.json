@@ -21,11 +21,11 @@
     "compile": "yarn build"
   },
   "devDependencies": {
-    "@nx/eslint": "^21.6.3",
-    "@nx/vite": "^21.6.3",
-    "@nx/web": "^21.6.3",
+    "@nx/eslint": "^21.6.4",
+    "@nx/vite": "^21.6.4",
+    "@nx/web": "^21.6.4",
     "@vitest/ui": "^3.2.4",
-    "nx": "^21.6.3",
+    "nx": "^21.6.4",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3",
     "vite": "^7.1.9",
