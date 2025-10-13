@@ -27,7 +27,7 @@ export const getProfiles = createServerFn()
     }
 
     const profiles = data.map((profileDoc) => {
-      const profileObject = profileDoc.toObject();
+      const profileObject = profileDoc.toJSON();
       return {
         ...profileObject,
         issueSummary: profileDoc.lastScan?.getIssueSummary(),
