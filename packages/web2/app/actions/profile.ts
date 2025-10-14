@@ -16,6 +16,7 @@ import {
   profileIdAuthorizeMiddleware,
 } from "./middleware.js";
 import { scheduleScan, validateCron } from "./commons.js";
+import { isDocument } from "@typegoose/typegoose";
 
 export const getProfiles = createServerFn()
   .middleware([dbMiddleware, authenticateMiddleware])
@@ -28,9 +29,14 @@ export const getProfiles = createServerFn()
 
     const profiles = data.map((profileDoc) => {
       const profileObject = profileDoc.toJSON();
+
+      const issueSummary = isDocument(profileDoc.lastScan)
+        ? profileDoc.lastScan.getIssueSummary()
+        : undefined;
+
       return {
         ...profileObject,
-        issueSummary: profileDoc.lastScan?.getIssueSummary(),
+        issueSummary,
       } as unknown as ScanProfile;
     });
     return profiles;
@@ -53,12 +59,10 @@ export const getProfile = createServerFn({
         ...profile?.toJSON(),
         issueSummary: lastScan?.getIssueSummary(),
       } as unknown as ScanProfile,
-      lastScan: serializeObjectWithIds(lastScan?.toJSON()) as unknown as
-        | Scan
-        | undefined,
+      lastScan: serializeObjectWithIds(lastScan?.toJSON()) as unknown as Scan,
       lastSuccessfulScan: serializeObjectWithIds(
         lastSuccessfulScan?.toJSON(),
-      ) as unknown as Scan | undefined,
+      ) as unknown as Scan,
     };
   });
 

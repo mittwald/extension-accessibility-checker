@@ -82,7 +82,7 @@ export class ScanProfile {
     match: { completedAt: { $exists: true } },
     options: { sort: { completedAt: -1 } },
   })
-  public lastScan: Scan | null = null;
+  public lastScan: Ref<Scan>;
 
   @prop({
     ref: () => "Scan",
@@ -92,7 +92,7 @@ export class ScanProfile {
     match: { status: { $in: ["queued", "running"] } },
     options: { sort: { executionScheduledFor: 1 } },
   })
-  public nextScan: Scan | null = null;
+  public nextScan: Ref<Scan>;
 
   public static async delete(
     this: ReturnModelType<typeof ScanProfile>,
