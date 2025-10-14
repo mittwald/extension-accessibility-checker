@@ -7,7 +7,7 @@ import {
 } from "@mittwald/flow-remote-react-components";
 import { EditIntervalModal } from "../../../modals/EditIntervalModal.tsx";
 import { FC } from "react";
-import { ScanProfile } from "../../../../../api/types.ts";
+import { ScanProfile } from "~/api/types.ts";
 
 export interface Props {
   profile: ScanProfile;

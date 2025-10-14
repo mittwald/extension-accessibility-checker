@@ -17,9 +17,9 @@ import {
   CronInterval,
   getIntervalValueFromCronSyntax,
 } from "../CronFields/lib.js";
-import { ScanProfile } from "../../../api/types.js";
+import { ScanProfile } from "~/api/types";
 import { CronFields } from "../CronFields/CronFields.js";
-import { updateProfileCron } from "../../../actions/profile.js";
+import { updateProfileCron } from "~/actions/profile";
 import { useRouter } from "@tanstack/react-router";
 
 interface Props {

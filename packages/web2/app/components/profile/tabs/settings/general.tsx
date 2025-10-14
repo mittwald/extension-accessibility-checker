@@ -10,14 +10,14 @@ import {
   ModalTrigger,
   Section,
 } from "@mittwald/flow-remote-react-components";
-import { Route } from "../../../../routes/profiles.$profileId.tsx";
+import { Route } from "~/routes/profiles.$profileId.tsx";
 import { EditGeneralsModal } from "../../modals/editGenerals.tsx";
 import { WcagStandardContextualHelp } from "../../wcagStandardContextualHelp.js";
 import { SaveResourcesBanner } from "./components/saveResourcesBanner.tsx";
-import { hasDailyCronInterval } from "../../../../lib/hasDailyCronInterval.ts";
+import { hasDailyCronInterval } from "~/lib/hasDailyCronInterval.ts";
 
 export const GeneralSettings = () => {
-  const { profile } = Route.useLoaderData();
+  const { profile } = Route.useLoaderData()!;
 
   return (
     <Section>

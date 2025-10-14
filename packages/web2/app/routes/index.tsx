@@ -2,9 +2,9 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { z } from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
-import { getProfiles } from "../actions/profile.ts";
+import { getProfiles } from "~/actions/profile";
 import { useEffect } from "react";
-import { ProfilesRoot } from "../components/profilesRoot.js";
+import { ProfilesRoot } from "~/components/profilesRoot";
 
 const QueryParams = z.object({
   contextId: z.string().optional(),
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
     }
 
     console.log(window.location.href);
-    const { contextId } = ctx.location.search;
+    const { contextId } = ctx.location.search as { contextId: string };
 
     return getProfiles({ data: contextId });
   },
