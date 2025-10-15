@@ -1,6 +1,6 @@
-import { ScanProfile } from "../../../api/types.ts";
+import { ScanProfile } from "~/api/types.ts";
 import { Section } from "@mittwald/flow-remote-react-components";
-import { CurrentScan } from "../currentScan.tsx";
+import { CurrentScan } from "~/components/profile/currentScan.tsx";
 import { PathResultsTable } from "./overview/pathResultsTable.tsx";
 import { IssueSummary } from "./overview/issueSummary.tsx";
 import { A11yScore } from "./overview/a11yScore.tsx";

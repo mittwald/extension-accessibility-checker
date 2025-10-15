@@ -1,6 +1,6 @@
 import { NotFoundRouteComponent } from "@tanstack/react-router";
-import { RootDocument } from "~/components/rootDocument.tsx";
-import { NotFound } from "~/components/notFound.tsx";
+import { RootDocument } from "./rootDocument.tsx";
+import { NotFound } from "./notFound.tsx";
 
 export const NotFoundRoot: NotFoundRouteComponent = (props) => {
   return (

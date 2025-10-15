@@ -1,4 +1,4 @@
-import { logger } from "../logger.js";
+import { logger } from "~/logger.js";
 import { isNotFound } from "@tanstack/react-router";
 import { json } from "@tanstack/react-start";
 import {

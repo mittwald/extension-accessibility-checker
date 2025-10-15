@@ -1,5 +1,5 @@
-import { ScanProfile } from "../../api/types.ts";
-import { useGoToProfile } from "../../hooks/useGoTo.tsx";
+import { ScanProfile } from "~/api/types.ts";
+import { useGoToProfile } from "~/hooks/useGoTo.tsx";
 import { useRouter } from "@tanstack/react-router";
 import {
   ContextMenu,
@@ -10,11 +10,11 @@ import {
   MenuItem,
   useOverlayController,
 } from "@mittwald/flow-remote-react-components";
-import { startScan } from "../../actions/scan.ts";
+import { startScan } from "~/actions/scan.ts";
 import { IconWorldSearch } from "@tabler/icons-react";
-import { RenameProfileModal } from "../profile/modals/renameProfileModal.tsx";
-import { DeleteConfirmationModal } from "../profile/modals/deleteConfirmation.tsx";
-import { isRunningOrPending } from "../profile/helpers.ts";
+import { RenameProfileModal } from "~/components/profile/modals/renameProfileModal.tsx";
+import { DeleteConfirmationModal } from "~/components/profile/modals/deleteConfirmation.tsx";
+import { isRunningOrPending } from "~/components/profile/helpers.ts";
 
 export function ProfileListContextMenu({ profile }: { profile: ScanProfile }) {
   const goToProfile = useGoToProfile();

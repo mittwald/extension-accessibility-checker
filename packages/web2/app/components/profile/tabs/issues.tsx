@@ -18,10 +18,10 @@ import {
   groupIssuesByGuidelineAndTechnique,
 } from "./issues/helpers.ts";
 import { IssueGroupView } from "./issues/components/issueGroup.tsx";
-import { CurrentScan } from "../currentScan.tsx";
+import { CurrentScan } from "~/components/profile/currentScan.tsx";
 import { useState } from "react";
-import { NoIssues } from "../noIssues.tsx";
-import wcagLinks from "../../../wcagLinks.json";
+import { NoIssues } from "~/components/profile/noIssues.tsx";
+import wcagLinks from "~/wcagLinks.json";
 
 interface IssuesProps {
   scan: Scan;

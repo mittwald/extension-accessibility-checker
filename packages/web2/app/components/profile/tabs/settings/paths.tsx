@@ -14,7 +14,7 @@ import {
   Text,
 } from "@mittwald/flow-remote-react-components";
 import { Route } from "~/routes/profiles.$profileId.tsx";
-import { EditPathsModal } from "../../modals/editPaths.tsx";
+import { EditPathsModal } from "~/components/profile/modals/editPaths.tsx";
 import { Page } from "~/api/types.ts";
 
 export const PathSettings = () => {

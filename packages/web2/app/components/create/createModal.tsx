@@ -19,7 +19,7 @@ import { PathsList } from "./components/pathsList.tsx";
 import { Domain } from "./components/domain.tsx";
 import { createProfile } from "~/actions/profile.ts";
 import { Route } from "~/routes";
-import { useGoToProfile } from "../../hooks/useGoTo.js";
+import { useGoToProfile } from "~/hooks/useGoTo.js";
 import { DomainSelect } from "./components/DomainSelect.js";
 import { useState } from "react";
 

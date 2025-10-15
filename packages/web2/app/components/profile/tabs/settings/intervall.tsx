@@ -12,12 +12,12 @@ import {
   ContextualHelp,
   Text,
 } from "@mittwald/flow-remote-react-components";
-import { Route } from "../../../../routes/profiles.$profileId.tsx";
-import { isRunningOrPending } from "../../helpers.ts";
+import { Route } from "~/routes/profiles.$profileId.tsx";
+import { isRunningOrPending } from "~/components/profile/helpers.ts";
 import { useRouter } from "@tanstack/react-router";
-import { startScan } from "../../../../actions/scan.ts";
-import { EditIntervalModal } from "../../modals/EditIntervalModal.js";
-import { CronText } from "../../CronFields/CronText.js";
+import { startScan } from "~/actions/scan.ts";
+import { EditIntervalModal } from "~/components/profile/modals/EditIntervalModal.js";
+import { CronText } from "~/components/profile/CronFields/CronText.js";
 
 export const IntarvallSettings = () => {
   const { profile } = Route.useLoaderData()!;

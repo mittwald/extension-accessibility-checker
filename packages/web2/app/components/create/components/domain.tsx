@@ -5,7 +5,7 @@ import {
   TextField,
 } from "@mittwald/flow-remote-react-components";
 import { Field } from "@mittwald/flow-remote-react-components/react-hook-form";
-import { extractDomainFromUrl } from "../helpers.ts";
+import { extractDomainFromUrl } from "~/components/create/helpers.ts";
 import { UseFormReturn } from "react-hook-form";
 
 interface DomainFormValues {

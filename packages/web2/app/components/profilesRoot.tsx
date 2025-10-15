@@ -6,7 +6,7 @@ import { EducationCards } from "./list/educationCards.js";
 import { ProfilesList } from "./list/profilesList.js";
 import { NoProfiles } from "./list/noProfiles.js";
 import { ScanProfile } from "~/api/types";
-import { FeedbackBox } from "~/components/list/feedbackBox";
+import { FeedbackBox } from './list/feedbackBox';
 
 export const ProfilesRoot = ({
   profiles,

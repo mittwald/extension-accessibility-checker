@@ -5,7 +5,7 @@ import {
   Heading,
   ModalTrigger,
 } from "@mittwald/flow-remote-react-components";
-import { EditIntervalModal } from "../../../modals/EditIntervalModal.tsx";
+import { EditIntervalModal } from "~/components/profile/modals/EditIntervalModal.tsx";
 import { FC } from "react";
 import { ScanProfile } from "~/api/types.ts";
 

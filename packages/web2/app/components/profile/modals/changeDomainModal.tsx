@@ -14,7 +14,7 @@ import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { updateProfileDomain } from "~/actions/profile";
 import { useRouter } from "@tanstack/react-router";
 import { startScan } from "~/actions/scan";
-import { Domain } from "../../create/components/domain.js";
+import { Domain } from "~/components/create/components/domain.js";
 
 interface FormValues {
   domain: string;

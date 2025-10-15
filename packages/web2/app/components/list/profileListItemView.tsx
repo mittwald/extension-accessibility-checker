@@ -1,5 +1,5 @@
-import { ScanProfile } from "../../api/types.ts";
-import { isPending, isRunning } from "../profile/helpers.ts";
+import { ScanProfile } from "~/api/types.ts";
+import { isPending, isRunning } from "~/components/profile/helpers.ts";
 import {
   AlertBadge,
   Avatar,

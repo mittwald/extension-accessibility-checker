@@ -5,7 +5,7 @@ import {
   ScanProfileModel,
   serializeObjectWithIds,
 } from "extension-a11y-checker-storage";
-import { Scan, ScanProfile } from "../api/types.ts";
+import { Scan, ScanProfile } from "~/api/types.ts";
 import { ObjectId } from "mongodb";
 import { notFound } from "@tanstack/react-router";
 import {

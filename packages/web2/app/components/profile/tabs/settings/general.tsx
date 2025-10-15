@@ -11,8 +11,8 @@ import {
   Section,
 } from "@mittwald/flow-remote-react-components";
 import { Route } from "~/routes/profiles.$profileId.tsx";
-import { EditGeneralsModal } from "../../modals/editGenerals.tsx";
-import { WcagStandardContextualHelp } from "../../wcagStandardContextualHelp.js";
+import { EditGeneralsModal } from "~/components/profile/modals/editGenerals.tsx";
+import { WcagStandardContextualHelp } from "~/components/profile/wcagStandardContextualHelp.js";
 import { SaveResourcesBanner } from "./components/saveResourcesBanner.tsx";
 import { hasDailyCronInterval } from "~/lib/hasDailyCronInterval.ts";
 

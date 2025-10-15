@@ -8,7 +8,7 @@ import {
   Text,
 } from "@mittwald/flow-remote-react-components";
 import { useServerFn } from "@tanstack/react-start";
-import { getDomains as getDomainsServerFn } from "../../../actions/domain.js";
+import { getDomains as getDomainsServerFn } from "~/actions/domain.js";
 import { useQuery } from "@tanstack/react-query";
 import { Field } from "@mittwald/flow-remote-react-components/react-hook-form";
 
