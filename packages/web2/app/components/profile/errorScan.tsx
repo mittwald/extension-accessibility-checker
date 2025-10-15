@@ -166,6 +166,33 @@ const getErrorTexts = (error: string): ErrorTexts | undefined => {
     };
   }
 
+  if (error.includes("Navigation timeout")) {
+    return {
+      headline: "Domain nicht erreichbar",
+      description: (
+        <>
+          Der Scan wurde abgebrochen, da die Website nicht innerhalb der
+          vorgesehenen Ladezeit reagiert hat. Bitte überprüfe die Adresse und
+          starte den Scan erneut.
+        </>
+      ),
+      showEditDomain: false,
+    };
+  }
+
+  if (error.includes("exited with code 1")) {
+    return {
+      headline: "Scn fehlgeschlagen",
+      description: (
+        <>
+          Der Scan wurde abgebrochen, da der Prozess unerwartet beendet wurde.
+          Bitte überprüfe die eingegebene Adresse und starte den Scan erneut.
+        </>
+      ),
+      showEditDomain: true,
+    };
+  }
+
   return undefined;
 };
 
