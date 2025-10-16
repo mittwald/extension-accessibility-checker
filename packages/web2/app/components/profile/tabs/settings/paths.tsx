@@ -59,7 +59,7 @@ export const PathSettings = () => {
               <strong>Gesamtbewertung</strong>
             </TableCell>
             <TableCell>
-              <strong>Ø {profile.issueSummary?.score}</strong>
+              <strong>Ø&nbsp;{profile.issueSummary?.score}</strong>
             </TableCell>
           </TableFooterRow>
         </TableBody>
