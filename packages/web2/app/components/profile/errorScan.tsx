@@ -182,7 +182,7 @@ const getErrorTexts = (error: string): ErrorTexts | undefined => {
 
   if (error.includes("exited with code 1")) {
     return {
-      headline: "Scn fehlgeschlagen",
+      headline: "Scan fehlgeschlagen",
       description: (
         <>
           Der Scan wurde abgebrochen, da der Prozess unerwartet beendet wurde.
