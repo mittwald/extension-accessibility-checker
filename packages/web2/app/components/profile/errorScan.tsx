@@ -91,7 +91,7 @@ const getErrorTexts = (error: string): ErrorTexts | undefined => {
           und starte den Scan erneut.
         </>
       ),
-      showEditDomain: false,
+      showEditDomain: true,
     };
   }
 
@@ -176,7 +176,7 @@ const getErrorTexts = (error: string): ErrorTexts | undefined => {
           starte den Scan erneut.
         </>
       ),
-      showEditDomain: false,
+      showEditDomain: true,
     };
   }
 
