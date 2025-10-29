@@ -26,16 +26,16 @@
     "format:check": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --check"
   },
   "dependencies": {
-    "@typegoose/typegoose": "^12.11.0",
-    "cron-parser": "^4.9.0",
-    "mongodb": "^6.12.0",
-    "mongoose": "^8.10.0"
+    "@typegoose/typegoose": "^12.20.0",
+    "cron-parser": "^5.4.0",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.19.1"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@types/node": "^20",
-    "eslint": "^9",
-    "typescript": "^5"
+    "@eslint/eslintrc": "^3.3.1",
+    "@types/node": "^24.7.2",
+    "eslint": "^9.37.0",
+    "typescript": "^5.9.3"
   },
   "packageManager": "yarn@4.6.0"
 }

@@ -12,7 +12,7 @@ import {
   Separator,
   Text,
 } from "@mittwald/flow-remote-react-components";
-import { Scan } from "../../../api/types.ts";
+import { Scan } from "~/api/types.ts";
 import {
   getIssueMeta,
   groupIssuesByGuidelineAndTechnique,

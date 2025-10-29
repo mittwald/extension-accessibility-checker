@@ -1,4 +1,4 @@
-import { ScanProfile } from "../../../../api/types.ts";
+import { ScanProfile } from "~/api/types.ts";
 import {
   Heading,
   Icon,

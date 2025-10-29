@@ -1,19 +1,17 @@
-import { createRouter as createTanStackRouter } from "@tanstack/react-router";
+import { createRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
-import { NotFoundRoot } from "./components/notFoundRoot.js";
+import { NotFound } from "~/components/notFound.tsx";
 
-export function createRouter() {
-  const router = createTanStackRouter({
+export function getRouter() {
+  return createRouter({
     routeTree,
     scrollRestoration: true,
-    defaultNotFoundComponent: NotFoundRoot,
+    defaultNotFoundComponent: NotFound,
   });
-
-  return router;
 }
 
 declare module "@tanstack/react-router" {
   interface Register {
-    router: ReturnType<typeof createRouter>;
+    router: ReturnType<typeof getRouter>;
   }
 }

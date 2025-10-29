@@ -1,6 +1,6 @@
 import { useRouter } from "@tanstack/react-router";
-import { ScanProfile } from "../api/types.ts";
-import { Route } from "../routes/index.tsx";
+import { ScanProfile } from "~/api/types";
+import { Route } from "~/routes";
 import { useConfig } from "@mittwald/ext-bridge/react";
 
 export const useGoToProfile = () => {

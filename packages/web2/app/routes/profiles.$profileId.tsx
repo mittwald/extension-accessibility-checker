@@ -1,9 +1,9 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { isRunningOrPending } from "../components/profile/helpers.ts";
-import { getProfile } from "../actions/profile.ts";
-import { useAutoRefresh } from "../hooks/useAutoRefresh.tsx";
+import { isRunningOrPending } from "~/components/profile/helpers";
+import { getProfile } from "~/actions/profile";
+import { useAutoRefresh } from "~/hooks/useAutoRefresh";
 import { useEffect } from "react";
-import { ProfileRoot } from "../components/profileRoot.tsx";
+import { ProfileRoot } from "~/components/profileRoot";
 
 export const Route = createFileRoute("/profiles/$profileId")({
   component: RouteComponent,
