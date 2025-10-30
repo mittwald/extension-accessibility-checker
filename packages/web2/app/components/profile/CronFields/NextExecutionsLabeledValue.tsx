@@ -2,6 +2,8 @@ import {
   Label,
   LabeledValue,
   Text,
+  Align,
+  IconDate,
 } from "@mittwald/flow-remote-react-components";
 import type { FC } from "react";
 import React, { useMemo } from "react";
@@ -23,11 +25,15 @@ export const NextExecutionsLabeledValue: FC<Props> = (props) => {
   const nextExecutions = executions.map((date) => {
     return (
       <React.Fragment key={date.toISOString()}>
-        {date.toLocaleString("de-DE", {
-          dateStyle: "short",
-          timeStyle: "short",
-        })}
-        <br />
+        <Align>
+          <IconDate size="m" />
+          <Text>
+            {date.toLocaleString("de-DE", {
+              dateStyle: "short",
+              timeStyle: "short",
+            })}
+          </Text>
+        </Align>
       </React.Fragment>
     );
   });
@@ -35,7 +41,7 @@ export const NextExecutionsLabeledValue: FC<Props> = (props) => {
   return (
     <LabeledValue>
       <Label>Nächste Ausführungen</Label>
-      <Text>{nextExecutions}</Text>
+      {nextExecutions}
     </LabeledValue>
   );
 };
