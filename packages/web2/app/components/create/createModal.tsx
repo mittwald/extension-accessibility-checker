@@ -54,7 +54,7 @@ export const CreateModal = () => {
 
   return (
     <Modal offCanvas>
-      <Heading slot="title">Profil anlegen</Heading>
+      <Heading slot="title">Scanprofil anlegen</Heading>
       <Form form={form} onSubmit={onSubmit}>
         <Content>
           <Section>
