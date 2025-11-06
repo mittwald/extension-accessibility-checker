@@ -18,6 +18,8 @@ import { useRouter } from "@tanstack/react-router";
 import { startScan } from "../../../../actions/scan.ts";
 import { EditIntervalModal } from "../../modals/EditIntervalModal.js";
 import { CronText } from "../../CronFields/CronText.js";
+import { SaveResourcesBanner } from "./components/saveResourcesBanner.tsx";
+import { hasDailyCronInterval } from "../../../../lib/hasDailyCronInterval.ts";
 
 export const IntarvallSettings = () => {
   const { profile } = Route.useLoaderData();
@@ -47,6 +49,9 @@ export const IntarvallSettings = () => {
           Scan starten
         </Button>
       </Header>
+      {hasDailyCronInterval(profile) && (
+        <SaveResourcesBanner profile={profile} />
+      )}
       <ColumnLayout>
         {profile.cronSchedule ? (
           <>
