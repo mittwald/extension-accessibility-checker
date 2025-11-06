@@ -1,15 +1,18 @@
 import { UseFormReturn, useWatch } from "react-hook-form";
 import { getPathsFromMenu } from "../../../actions/domain.js";
-import { Action, Button, InlineCode, Text } from "@mittwald/flow-remote-react-components";
+import {
+  Action,
+  Button,
+  InlineCode,
+  Text,
+} from "@mittwald/flow-remote-react-components";
 import { extractPathFromUrl } from "../helpers.js";
 import { useState } from "react";
 
-export const GeneratePathsAction = (props: {
-  form: UseFormReturn;
-}) => {
+export const GeneratePathsAction = (props: { form: UseFormReturn }) => {
   const { form } = props;
   const [isFetching, setFetching] = useState(false);
-  const [generatedPaths, setGeneratedPaths] = useState<string[]>([])
+  const [generatedPaths, setGeneratedPaths] = useState<string[]>([]);
 
   const paths = useWatch({ control: form.control, name: "paths" });
   const domain = useWatch({ control: form.control, name: "domain" });
@@ -42,17 +45,17 @@ export const GeneratePathsAction = (props: {
   async function generatePaths() {
     setFetching(true);
     try {
-      const sitemap = await getPathsFromMenu({ data: domain ?? "" })
-      if(sitemap) {
+      const sitemap = await getPathsFromMenu({ data: domain ?? "" });
+      if (sitemap) {
         const values = form.getValues("paths");
-        generatedPaths.forEach(generatedPath => {
+        generatedPaths.forEach((generatedPath) => {
           values.delete(generatedPath);
-        })
+        });
         form.setValue("paths", values);
         sitemap.forEach((path: string) => {
           addPathToFormValues(extractPathFromUrl(path));
         });
-        setGeneratedPaths(sitemap)
+        setGeneratedPaths(sitemap);
       }
     } finally {
       setFetching(false);
@@ -66,7 +69,7 @@ export const GeneratePathsAction = (props: {
   return (
     <Action
       onAction={() => {
-        generatePaths()
+        generatePaths();
       }}
     >
       <Button isPending={isFetching} color="accent">

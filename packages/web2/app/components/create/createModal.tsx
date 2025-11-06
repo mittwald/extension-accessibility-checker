@@ -24,7 +24,7 @@ import { useState } from "react";
 import { Domain } from "./components/domain.tsx";
 import { GeneratePathsAction } from "./components/generatePaths.tsx";
 
-const defaultDomainInputTab = "mstudio"
+const defaultDomainInputTab = "mstudio";
 
 export const CreateModal = () => {
   const goToProfile = useGoToProfile();
