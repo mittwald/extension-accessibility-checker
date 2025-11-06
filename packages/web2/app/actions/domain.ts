@@ -7,6 +7,7 @@ import { XMLParser } from "fast-xml-parser";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { CheerioAPI, AcceptedElems } from "cheerio";
+import { AnyNode } from "domhandler";
 
 export const getDomains = createServerFn({
   method: "GET",
@@ -53,7 +54,7 @@ export const getPaths = createServerFn({
     }
   });
 
-function extractLinks($: CheerioAPI, el: AcceptedElems<any>) {
+function extractLinks($: CheerioAPI, el: AcceptedElems<AnyNode>) {
   return $(el)
     .find("a")
     .map((_, a) => {
@@ -81,7 +82,7 @@ export const getPathsFromMenu = createServerFn({
       const response = await axios.get("https://" + domain);
       const $ = cheerio.load(response.data);
 
-      let navLinks: string[] = [];
+      const navLinks: string[] = [];
 
       // === STRATEGY 1: <nav> elements ===
       $("nav").each((_, nav) => {
@@ -106,7 +107,7 @@ export const getPathsFromMenu = createServerFn({
       }
 
       return navLinks;
-    } catch (error) {
+    } catch {
       return null;
     }
   });
