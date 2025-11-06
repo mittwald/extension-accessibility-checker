@@ -14,7 +14,6 @@ import {
 } from "@mittwald/flow-remote-react-components";
 import { FormValues } from "../types.ts";
 import { extractPathFromUrl, prependPathWithSlash } from "../helpers.ts";
-import { GeneratePaths } from "./generatePaths.js";
 
 type PathFormValues = Pick<FormValues, "paths">;
 
@@ -64,7 +63,7 @@ export const PathsList = ({
 
   const PathList = typedList<string>();
   const pathsList = (
-    <PathList.List aria-label="Pfade">
+    <PathList.List aria-label="Pfade" batchSize={10}>
       <PathList.StaticData data={Array.from(paths)} />
 
       <PathList.Item textValue={(p) => p.toString()}>
@@ -127,7 +126,6 @@ export const PathsList = ({
         </Button>
       </Align>
       {pathsList}
-      <GeneratePaths form={form} onAdd={addPathToFormValues} />
     </>
   );
 };

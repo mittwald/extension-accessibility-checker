@@ -1,36 +1,76 @@
 import { UseFormReturn, useWatch } from "react-hook-form";
-import { useQuery } from "@tanstack/react-query";
-import { getPaths, getPathsFromMenu } from "../../../actions/domain.js";
-import { Action, Button } from "@mittwald/flow-remote-react-components";
+import { getPathsFromMenu } from "../../../actions/domain.js";
+import { Action, Button, InlineCode, Text } from "@mittwald/flow-remote-react-components";
 import { extractPathFromUrl } from "../helpers.js";
+import { useState } from "react";
 
-export const GeneratePaths = (props: {
+export const GeneratePathsAction = (props: {
   form: UseFormReturn;
-  onAdd: (value: string) => void;
 }) => {
-  const { form, onAdd } = props;
+  const { form } = props;
+  const [isFetching, setFetching] = useState(false);
+  const [generatedPaths, setGeneratedPaths] = useState<string[]>([])
+
+  const paths = useWatch({ control: form.control, name: "paths" });
   const domain = useWatch({ control: form.control, name: "domain" });
 
-  const { data: sitemap, isLoading } = useQuery({
-    queryKey: ["sitemap", domain],
-    queryFn: () => getPathsFromMenu({ data: domain ?? "" }),
-    enabled: !!domain,
-  });
+  const isValidPath = (path: string) => {
+    const p = path;
+    if (!p.startsWith("/")) {
+      return (
+        <Text>
+          Muss mit <InlineCode>/</InlineCode> beginnen.
+        </Text>
+      );
+    }
+    if (paths.has(p)) {
+      return "Pfad ist bereits hinzugefügt.";
+    }
+    return true;
+  };
 
-  if (!domain || !sitemap) {
+  const addPathToFormValues = (value: string) => {
+    if (isValidPath(value) !== true) {
+      return;
+    }
+
+    const values = form.getValues("paths");
+    values.add(value);
+    form.setValue("paths", values);
+  };
+
+  async function generatePaths() {
+    setFetching(true);
+    try {
+      const sitemap = await getPathsFromMenu({ data: domain ?? "" })
+      if(sitemap) {
+        const values = form.getValues("paths");
+        generatedPaths.forEach(generatedPath => {
+          values.delete(generatedPath);
+        })
+        form.setValue("paths", values);
+        sitemap.forEach((path: string) => {
+          addPathToFormValues(extractPathFromUrl(path));
+        });
+        setGeneratedPaths(sitemap)
+      }
+    } finally {
+      setFetching(false);
+    }
+  }
+
+  if (!domain) {
     return null;
   }
 
   return (
     <Action
       onAction={() => {
-        sitemap?.forEach((path: string) => {
-          onAdd(extractPathFromUrl(path));
-        });
+        generatePaths()
       }}
     >
-      <Button isDisabled={isLoading}>
-        {isLoading ? "Lädt..." : "Generieren"}
+      <Button isPending={isFetching} color="accent">
+        Autom. erkennen
       </Button>
     </Action>
   );
