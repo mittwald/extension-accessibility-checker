@@ -25,6 +25,7 @@ export const PathResultsTable = () => {
         <TableColumn>Warnungen</TableColumn>
         <TableColumn>Score</TableColumn>
       </TableHeader>
+
       <TableBody>
         {lastScan.pages.map((p) => {
           const url = new URL(p.url);
@@ -41,6 +42,7 @@ export const PathResultsTable = () => {
             </TableRow>
           );
         })}
+
         <TableFooterRow>
           <TableCell>
             <strong>Gesamtbewertung</strong>
@@ -49,7 +51,7 @@ export const PathResultsTable = () => {
           <TableCell></TableCell>
           <TableCell></TableCell>
           <TableCell>
-            <strong>Ø {profile.issueSummary?.score}</strong>
+            <strong>Ø&nbsp;{profile.issueSummary?.score}</strong>
           </TableCell>
         </TableFooterRow>
       </TableBody>

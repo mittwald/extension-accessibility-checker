@@ -21,7 +21,15 @@ export const getProfiles = createServerFn()
     if (data === null) {
       throw notFound();
     }
-    return data as unknown as ScanProfile[] | null;
+
+    const profiles = data.map((profileDoc) => {
+      const profileObject = profileDoc.toObject();
+      return {
+        ...profileObject,
+        issueSummary: profileDoc.lastScan?.getIssueSummary(),
+      } as unknown as ScanProfile;
+    });
+    return profiles;
   });
 
 export const getProfile = createServerFn({
@@ -41,6 +49,7 @@ export const getProfile = createServerFn({
         ...profile?.toObject(),
         issueSummary: lastScan?.getIssueSummary(),
       } as unknown as ScanProfile,
+
       lastScan: lastScan as unknown as Scan | undefined,
       lastSuccessfulScan: lastSuccessfulScan as unknown as Scan | undefined,
     };
@@ -115,7 +124,7 @@ export const updateProfileDomain = createServerFn({ method: "POST" })
       domain: z
         .string()
         .regex(
-          /^(((?!-))(xn--|_)?[a-z0-9-]{0,61}[a-z0-9]{1,1}\.)*(xn--)?([a-z0-9][a-z0-9\-]{0,60}|[a-z0-9-]{1,30}\.[a-z]{2,})$/,
+          /^(((?!-))(xn--|_)?[a-z0-9-]{0,61}[a-z0-9]{1,1}\.)*(xn--)?([a-z0-9][a-z0-9-]{0,60}|[a-z0-9-]{1,30}\.[a-z]{2,})$/,
           "Not a valid domain name.",
         ),
     }),
