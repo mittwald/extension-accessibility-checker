@@ -1,10 +1,12 @@
 import {
   Action,
   ActionGroup,
+  Alert,
   Button,
   Content,
   Header,
   Heading,
+  InlineCode,
   Label,
   Modal,
   Section,
@@ -22,7 +24,10 @@ import { useGoToProfile } from "../../hooks/useGoTo.js";
 import { DomainSelect } from "./components/DomainSelect.js";
 import { useState } from "react";
 import { Domain } from "./components/domain.tsx";
-import { GeneratePathsAction } from "./components/generatePaths.tsx";
+import {
+  GenerateError,
+  GeneratePathsAction,
+} from "./components/generatePaths.tsx";
 
 const defaultDomainInputTab = "mstudio";
 
@@ -30,6 +35,9 @@ export const CreateModal = () => {
   const goToProfile = useGoToProfile();
   const { contextId } = Route.useSearch();
   const [domainInputTab, setDomainInputTab] = useState(defaultDomainInputTab);
+  const [generateError, setGenerateError] = useState<GenerateError | null>(
+    null,
+  );
 
   const form = useForm<FormValues>({
     defaultValues: {
@@ -78,8 +86,25 @@ export const CreateModal = () => {
             {domainInputTab === "custom" && <Domain form={form} />}
             <Header>
               <Heading>Unterseiten hinzufügen</Heading>
-              <GeneratePathsAction form={form} />
+              <GeneratePathsAction
+                form={form}
+                onError={setGenerateError}
+                onSuccess={() => setGenerateError(null)}
+              />
             </Header>
+            {generateError && (
+              <Alert status="danger">
+                <Heading>Unterseiten nicht automatisch erkannt</Heading>
+                <Content>
+                  <Text>
+                    Die Unterseiten für{" "}
+                    <InlineCode>{generateError.domain}</InlineCode> konnten
+                    nicht automatisch erkannt werden. Überprüfe die Eingabe
+                    und versuche es erneut.
+                  </Text>
+                </Content>
+              </Alert>
+            )}
             <Text>
               Füge Unterseiten hinzu, um mit einem Scanprofil mehrere Bereiche
               deiner Website im Blick zu behalten.

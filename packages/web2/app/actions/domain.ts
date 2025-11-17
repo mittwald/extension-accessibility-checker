@@ -8,6 +8,7 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import { CheerioAPI, AcceptedElems } from "cheerio";
 import { AnyNode } from "domhandler";
+import { setResponseStatus } from "@tanstack/react-start/server";
 
 export const getDomains = createServerFn({
   method: "GET",
@@ -32,8 +33,6 @@ export const getPaths = createServerFn({
       const text = await response.text();
       const parser = new XMLParser();
       const xml = parser.parse(text);
-
-      console.log(xml.urlset.url);
 
       const countPathSegments = (url: string): number => {
         const path = extractPathFromUrl(url);
@@ -107,7 +106,10 @@ export const getPathsFromMenu = createServerFn({
       }
 
       return navLinks;
-    } catch {
-      return null;
+    } catch (error: unknown) {
+      setResponseStatus(412);
+      if (error instanceof Error) {
+        throw new Error(error?.message ?? "Error reading sitemap");
+      }
     }
   });
