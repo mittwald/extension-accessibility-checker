@@ -1,22 +1,18 @@
 import { UseFormReturn, useWatch } from "react-hook-form";
 import { getPathsFromMenu } from "../../../actions/domain.js";
-import {
-  Action,
-  Button,
-} from "@mittwald/flow-remote-react-components";
+import { Action, Button } from "@mittwald/flow-remote-react-components";
 import { extractPathFromUrl } from "../helpers.js";
-import { FC,
-useState } from "react";
+import { FC, useState } from "react";
 
 export interface GenerateError {
   error: Error;
-  domain: string
+  domain: string;
 }
 
 interface Props {
-  form: UseFormReturn
-  onError: (error: GenerateError) => void
-  onSuccess: () => void
+  form: UseFormReturn;
+  onError: (error: GenerateError) => void;
+  onSuccess: () => void;
 }
 
 export const GeneratePathsAction: FC<Props> = (props) => {
@@ -33,25 +29,30 @@ export const GeneratePathsAction: FC<Props> = (props) => {
       });
       const sitemap = await getPathsFromMenu({ data: domain ?? "" });
       if (sitemap) {
-        form.setValue("paths", new Set([...Array.from(values), ...sitemap.map(path => extractPathFromUrl(path))]));
+        form.setValue(
+          "paths",
+          new Set([
+            ...Array.from(values),
+            ...sitemap.map((path) => extractPathFromUrl(path)),
+          ]),
+        );
         setGeneratedPaths(sitemap);
       }
-      onSuccess()
+      onSuccess();
     } catch (error) {
-      if(error instanceof Error) {
+      setGeneratedPaths([]);
+      if (error instanceof Error) {
         onError({
           error,
           domain,
-        })
+        });
       }
-      throw error
+      throw error;
     }
   }
 
   return (
-    <Action
-      onAction={generatePaths}
-    >
+    <Action onAction={generatePaths}>
       <Button isDisabled={Boolean(!domain)} color="accent">
         Autom. erkennen
       </Button>

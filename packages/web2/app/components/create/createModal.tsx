@@ -99,8 +99,8 @@ export const CreateModal = () => {
                   <Text>
                     Die Unterseiten für{" "}
                     <InlineCode>{generateError.domain}</InlineCode> konnten
-                    nicht automatisch erkannt werden. Überprüfe die Eingabe
-                    und versuche es erneut.
+                    nicht automatisch erkannt werden. Überprüfe die Eingabe und
+                    versuche es erneut.
                   </Text>
                 </Content>
               </Alert>

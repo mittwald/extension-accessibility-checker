@@ -6,7 +6,7 @@ import { extractPathFromUrl } from "../components/create/helpers.js";
 import { XMLParser } from "fast-xml-parser";
 import axios from "axios";
 import * as cheerio from "cheerio";
-import { CheerioAPI, AcceptedElems } from "cheerio";
+import { BasicAcceptedElems, CheerioAPI } from "cheerio";
 import { AnyNode } from "domhandler";
 import { setResponseStatus } from "@tanstack/react-start/server";
 
@@ -53,7 +53,7 @@ export const getPaths = createServerFn({
     }
   });
 
-function extractLinks($: CheerioAPI, el: AcceptedElems<AnyNode>) {
+function extractLinks($: CheerioAPI, el: BasicAcceptedElems<AnyNode>) {
   return $(el)
     .find("a")
     .map((_, a) => {
