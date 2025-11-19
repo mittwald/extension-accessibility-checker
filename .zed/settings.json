@@ -6,31 +6,24 @@
   "languages": {
     "JavaScript": {
       "format_on_save": "on",
-      "formatter": [
-        {
-          "code_action": "source.fixAll.eslint"
-        },
-        {
-          "external": {
-            "command": "yarn",
-             "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"]
-           }
-        }
-      ]
+      "formatter": ["prettier"],
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
     },
     "TypeScript": {
       "format_on_save": "on",
-      "formatter": [
-        {
-          "code_action": "source.fixAll.eslint"
-        },
-        {
-          "external": {
-            "command": "yarn",
-            "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"]
-           }
-        }
-      ]
+      "formatter": ["prettier"],
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "TSX": {
+      "format_on_save": "on",
+      "formatter": ["prettier"],
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
     }
   }
 }
