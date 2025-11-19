@@ -18,14 +18,20 @@ interface Props {
 
 export const DomainSelect: React.FC<Props> = () => {
   const getDomains = useServerFn(getDomainsServerFn);
-  const domainsQuery = useQuery({
+  const { isError: hasError, isLoading, data: domains} = useQuery({
     queryKey: ["domains"],
     queryFn: () => getDomains(),
     throwOnError: false,
     retry: 1,
   });
-  const hasError = domainsQuery.isError;
-  const isLoading = domainsQuery.isLoading;
+
+  if (isLoading) {
+    return (
+      <ComboBox isDisabled placeholder="Laden ..." isRequired>
+        <Label>Domain</Label>
+      </ComboBox>
+    );
+  }
 
   if (hasError) {
     return (
@@ -39,8 +45,6 @@ export const DomainSelect: React.FC<Props> = () => {
     );
   }
 
-  const domains = domainsQuery.data;
-
   return (
     <Field
       name="domain"
@@ -48,10 +52,7 @@ export const DomainSelect: React.FC<Props> = () => {
         required: "Die Domain ist erforderlich.",
       }}
     >
-      <ComboBox
-        isDisabled={isLoading}
-        placeholder={isLoading ? "Laden ..." : undefined}
-      >
+      <ComboBox>
         <Label>Domain</Label>
         {domains?.map((domain) => (
           <Option
