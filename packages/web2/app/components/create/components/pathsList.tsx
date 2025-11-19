@@ -13,7 +13,10 @@ import {
   typedList,
 } from "@mittwald/flow-remote-react-components";
 import { FormValues } from "~/components/create/types.ts";
-import { extractPathFromUrl, prependPathWithSlash } from "~/components/create/helpers.ts";
+import {
+  extractPathFromUrl,
+  prependPathWithSlash,
+} from "~/components/create/helpers.ts";
 
 type PathFormValues = Pick<FormValues, "paths">;
 

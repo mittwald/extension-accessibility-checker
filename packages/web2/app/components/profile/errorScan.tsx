@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import { Scan, ScanProfile } from "~/api/types.js";
 import { DefaultErrorView } from "./errorScans/defaultErrorView.js";
 import { ErrorViewWithEditDomain } from "./errorScans/ErrorViewWithEditDomain.js";
-import { ErrorViewWithoutEditDomain } from './errorScans/ErrorViewWithoutEditDomain';
+import { ErrorViewWithoutEditDomain } from "./errorScans/ErrorViewWithoutEditDomain";
 
 interface ErrorTexts {
   headline: string;

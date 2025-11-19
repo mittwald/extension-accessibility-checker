@@ -10,7 +10,7 @@ import { RenameProfileModal } from "./modals/renameProfileModal.tsx";
 import { startScan } from "~/actions/scan.ts";
 import { IconWorldSearch } from "@tabler/icons-react";
 import { useRouter } from "@tanstack/react-router";
-import { DeleteConfirmationModal } from './modals/deleteConfirmation';
+import { DeleteConfirmationModal } from "./modals/deleteConfirmation";
 import { isRunningOrPending } from "./helpers.ts";
 import { useGoToRoot } from "~/hooks/useGoTo";
 import { Actions } from "@mittwald/mstudio-ext-react-components";

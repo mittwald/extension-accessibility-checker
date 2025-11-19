@@ -1,11 +1,7 @@
 import { Issue as APIIssue } from "~/api/types.ts";
 import wcagLinks from "~/wcagLinks.json";
 import techniquesLinks from "~/techniquesLinks.json";
-import {
-  Issue,
-  IssueGroup,
-  IssueMeta,
-} from './types';
+import { Issue, IssueGroup, IssueMeta } from "./types";
 
 export const getLinkForTechnique = (technique: string) => {
   switch (true) {

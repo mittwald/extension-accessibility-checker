@@ -5,7 +5,7 @@ import {
   LoadingSpinner,
   Text,
 } from "@mittwald/flow-remote-react-components";
-import { isPending, isRunning } from './helpers';
+import { isPending, isRunning } from "./helpers";
 
 const RunningScan = () => {
   return (
