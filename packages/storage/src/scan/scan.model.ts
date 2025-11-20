@@ -3,7 +3,7 @@ import { isDocument } from "@typegoose/typegoose";
 import { index, modelOptions, prop } from "@typegoose/typegoose";
 import { ObjectId } from "mongodb";
 import { ScanProfile } from "../scanProfile/scanProfile.model.js";
-import { getModel, serializeObjectWithIds } from "../lib/mongoose.js";
+import { getModel, serializeObjectWithIds, Serialize } from "../lib/mongoose.js";
 
 @modelOptions({
   schemaOptions: {
@@ -265,6 +265,10 @@ export class Scan {
     );
     summary.score = Math.round(summary.score / this.pages.length);
     return summary;
+  }
+
+  public toSerializable(this: DocumentType<Scan>): Serialize<Scan> {
+    return serializeObjectWithIds(this.toObject());
   }
 }
 

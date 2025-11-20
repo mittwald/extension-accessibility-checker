@@ -3,7 +3,7 @@ import { modelOptions, prop } from "@typegoose/typegoose";
 import { CronExpressionParser } from "cron-parser";
 import { ObjectId } from "mongodb";
 import { Context, ContextModel } from "../context/context.model.js";
-import { getModel, serializeObjectWithIds } from "../lib/mongoose.js";
+import { getModel, serializeObjectWithIds, Serialize } from "../lib/mongoose.js";
 import { ReturnModelType } from "@typegoose/typegoose/lib/types";
 import { Scan, ScanModel } from "../scan/scan.model.js";
 
@@ -124,6 +124,10 @@ export class ScanProfile {
     return CronExpressionParser.parse(this.cronSchedule.expression)
       .next()
       .toDate();
+  }
+
+  public toSerializable(this: DocumentType<ScanProfile>): Serialize<ScanProfile> {
+    return serializeObjectWithIds(this.toObject());
   }
 }
 

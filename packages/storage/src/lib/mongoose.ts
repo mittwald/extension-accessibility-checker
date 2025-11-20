@@ -1,4 +1,5 @@
-import mongoose, { ObjectId } from "mongoose";
+import mongoose, { ObjectId as MongooseObjectId } from "mongoose";
+import { ObjectId as MongodbObjectId } from "mongodb";
 import type {
   AnyParamConstructor,
   ReturnModelType,
@@ -15,15 +16,25 @@ export function getModel<U extends AnyParamConstructor<any>>(
   );
 }
 
-export type Serialize<T> = T extends ObjectId
+export type Serialize<T> = T extends { toHexString(): string }
   ? string
+  : T extends Date
+  ? T
   : T extends (infer U)[]
-    ? Serialize<U>[]
-    : T extends object
-      ? { [K in keyof T]: Serialize<T[K]> }
-      : T;
+  ? Serialize<U>[]
+  : T extends object
+  ? {
+    [K in keyof T as T[K] extends Function
+    ? never
+    : K extends `\$${string}`
+    ? never
+    : K extends "toSerializable" | "db" | "baseModelName" | "errors" | "schema" | "collection"
+    ? never
+    : K]: Serialize<T[K]>;
+  }
+  : T;
 
-function isObjectId(value: unknown): value is ObjectId {
+function isObjectId(value: unknown): value is MongooseObjectId | MongodbObjectId {
   return (
     !!value &&
     typeof value === "object" &&
@@ -44,6 +55,8 @@ export function serializeObjectWithIds<T>(obj: T): Serialize<T> {
 
   if (isObjectId(obj)) return obj.toString() as Serialize<T>;
 
+  if (obj instanceof Date) return obj as Serialize<T>;
+
   if (Array.isArray(obj)) {
     return (obj as unknown[]).map(serializeObjectWithIds) as Serialize<T>;
   }
@@ -56,6 +69,10 @@ export function serializeObjectWithIds<T>(obj: T): Serialize<T> {
       );
     }
     return result as Serialize<T>;
+  }
+
+  if (typeof obj === "object" && (obj as any).toJSON instanceof Function) {
+    return serializeObjectWithIds((obj as any).toJSON());
   }
 
   return obj as Serialize<T>;

@@ -3,9 +3,9 @@ import { z } from "zod";
 import {
   ScanModel,
   ScanProfileModel,
-  serializeObjectWithIds,
 } from "extension-a11y-checker-storage";
-import { Scan, ScanProfile } from "~/api/types.ts";
+import { isDocument } from "@typegoose/typegoose";
+import { ScanProfile } from "~/api/types.ts";
 import { ObjectId } from "mongodb";
 import { notFound } from "@tanstack/react-router";
 import {
@@ -16,7 +16,6 @@ import {
   profileIdAuthorizeMiddleware,
 } from "./middleware.js";
 import { scheduleScan, validateCron } from "./commons.js";
-import { isDocument } from "@typegoose/typegoose";
 
 export const getProfiles = createServerFn()
   .middleware([dbMiddleware, authenticateMiddleware])
@@ -28,15 +27,11 @@ export const getProfiles = createServerFn()
     }
 
     const profiles = data.map((profileDoc) => {
-      const profileObject = profileDoc.toJSON();
-
-      const issueSummary = isDocument(profileDoc.lastScan)
-        ? profileDoc.lastScan.getIssueSummary()
-        : undefined;
-
+      const lastScan = isDocument(profileDoc.lastScan) ? profileDoc.lastScan : undefined;
       return {
-        ...profileObject,
-        issueSummary,
+        ...profileDoc.toSerializable(),
+        lastScan: lastScan?.toSerializable(),
+        issueSummary: lastScan?.getIssueSummary(),
       } as unknown as ScanProfile;
     });
     return profiles;
@@ -56,13 +51,12 @@ export const getProfile = createServerFn({
 
     return {
       profile: {
-        ...profile?.toJSON(),
+        ...profile?.toSerializable(),
+        lastScan: lastScan?.toSerializable(),
         issueSummary: lastScan?.getIssueSummary(),
       } as unknown as ScanProfile,
-      lastScan: serializeObjectWithIds(lastScan?.toJSON()) as unknown as Scan,
-      lastSuccessfulScan: serializeObjectWithIds(
-        lastSuccessfulScan?.toJSON(),
-      ) as unknown as Scan,
+      lastScan: lastScan?.toSerializable(),
+      lastSuccessfulScan: lastSuccessfulScan?.toSerializable(),
     };
   });
 
@@ -83,7 +77,7 @@ export const createProfile = createServerFn({ method: "POST" })
       ...data,
     });
     await scheduleScan(profile._id.toString(), true);
-    return profile.toJSON() as unknown as ScanProfile;
+    return profile.toSerializable();
   });
 
 export const updateProfilePaths = createServerFn({ method: "POST" })
@@ -99,11 +93,13 @@ export const updateProfilePaths = createServerFn({ method: "POST" })
       { _id: profileId },
       { $set: { paths } },
       { new: true },
-    );
+    )
+      .populate("nextScan")
+      .populate({ path: "lastScan", select: "-issues" });
     if (!profile) {
       throw notFound({ data: "Profile not found" });
     }
-    return profile.toJSON() as unknown as ScanProfile;
+    return profile.toSerializable();
   });
 
 export const updateProfileName = createServerFn({ method: "POST" })
@@ -119,11 +115,13 @@ export const updateProfileName = createServerFn({ method: "POST" })
       { _id: profileId },
       { $set: { name } },
       { new: true },
-    );
+    )
+      .populate("nextScan")
+      .populate({ path: "lastScan", select: "-issues" });
     if (!profile) {
       throw notFound({ data: "Profile not found" });
     }
-    return profile.toJSON() as unknown as ScanProfile;
+    return profile.toSerializable();
   });
 
 export const updateProfileDomain = createServerFn({ method: "POST" })
@@ -146,7 +144,9 @@ export const updateProfileDomain = createServerFn({ method: "POST" })
       { _id: profileId },
       { $set: { domain, ...additionalUpdates } },
       { new: true },
-    );
+    )
+      .populate("nextScan")
+      .populate({ path: "lastScan", select: "-issues" });
     if (!profile) {
       throw notFound({ data: "Profile not found" });
     }
@@ -156,7 +156,7 @@ export const updateProfileDomain = createServerFn({ method: "POST" })
       await nextScan.regeneratePageUrls();
     }
 
-    return profile.toJSON() as unknown as ScanProfile;
+    return profile.toSerializable();
   });
 
 export const updateProfileCron = createServerFn({ method: "POST" })
@@ -185,7 +185,9 @@ export const updateProfileCron = createServerFn({ method: "POST" })
         $unset: cronDeleteSet ?? {},
       },
       { new: true },
-    );
+    )
+      .populate("nextScan")
+      .populate({ path: "lastScan", select: "-issues" });
     if (!profile) {
       throw notFound({ data: "Profile not found" });
     }
@@ -193,7 +195,7 @@ export const updateProfileCron = createServerFn({ method: "POST" })
     await ScanModel.deleteScheduledForProfile(profile);
     await ScanModel.scheduleNextForProfile(profile);
 
-    return profile.toJSON() as unknown as ScanProfile;
+    return profile.toSerializable();
   });
 
 export const updateProfileSettings = createServerFn({ method: "POST" })
@@ -238,11 +240,13 @@ export const updateProfileSettings = createServerFn({ method: "POST" })
           $unset: { cronSchedule: cronExpression ? undefined : 1 },
         },
         { new: true },
-      );
+      )
+        .populate("nextScan")
+        .populate({ path: "lastScan", select: "-issues" });
       if (!profile) {
         throw notFound({ data: "Profile not found" });
       }
-      return profile.toJSON() as unknown as ScanProfile;
+      return profile.toSerializable() as ScanProfile;
     },
   );
 
