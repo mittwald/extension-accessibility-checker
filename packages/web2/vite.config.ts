@@ -17,6 +17,9 @@ export default defineConfig({
   plugins: [
     tsconfigPaths(),
     tanstackStart({
+      spa: {
+        enabled: true,
+      },
       srcDirectory: "./app",
     }),
     viteReact({
