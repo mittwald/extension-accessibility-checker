@@ -77,7 +77,7 @@ export const createProfile = createServerFn({ method: "POST" })
       ...data,
     });
     await scheduleScan(profile._id.toString(), true);
-    return profile.toSerializable();
+    return profile.toSerializable() as ScanProfile;
   });
 
 export const updateProfilePaths = createServerFn({ method: "POST" })
