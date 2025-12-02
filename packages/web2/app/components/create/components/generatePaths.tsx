@@ -27,16 +27,16 @@ export const GeneratePathsAction: FC<Props> = (props) => {
       generatedPaths.forEach((generatedPath) => {
         values.delete(generatedPath);
       });
-      const sitemap = await getPathsFromMenu({ data: domain ?? "" });
-      if (sitemap) {
+      const pathsFromMenu = await getPathsFromMenu({ data: domain ?? "" });
+      if (pathsFromMenu) {
         form.setValue(
           "paths",
           new Set([
             ...Array.from(values),
-            ...sitemap.map((path) => extractPathFromUrl(path)),
+            ...pathsFromMenu.map((path) => extractPathFromUrl(path)),
           ]),
         );
-        setGeneratedPaths(sitemap);
+        setGeneratedPaths(pathsFromMenu);
       }
       onSuccess();
     } catch (error) {

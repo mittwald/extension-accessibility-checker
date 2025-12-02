@@ -21,7 +21,7 @@ export const getDomains = createServerFn({
     return domains.data;
   });
 
-export const getPaths = createServerFn({
+export const getPathsFromSitemap = createServerFn({
   method: "GET",
 })
   .validator(z.string())
@@ -109,7 +109,7 @@ export const getPathsFromMenu = createServerFn({
     } catch (error: unknown) {
       setResponseStatus(412);
       if (error instanceof Error) {
-        throw new Error(error?.message ?? "Error reading sitemap");
+        throw new Error(error?.message ?? "Error reading paths from menu");
       }
     }
   });
