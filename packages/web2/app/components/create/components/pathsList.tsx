@@ -32,27 +32,23 @@ export const PathsList = ({
 
   const paths = form.watch("paths");
 
-  useWatch({
-    control: form.control,
-    name: "paths",
-  });
-
-  const isValidInputValue = () => {
-    if (!pathInputValue.startsWith("/")) {
+  const isValidPath = (path?: string) => {
+    const p = path ?? pathInputValue;
+    if (!p.startsWith("/")) {
       return (
         <Text>
           Muss mit <InlineCode>/</InlineCode> beginnen.
         </Text>
       );
     }
-    if (paths.includes(pathInputValue)) {
+    if (paths.has(p)) {
       return "Pfad ist bereits hinzugefügt.";
     }
     return true;
   };
 
-  function addPathToFormValues(value: string) {
-    if (isValidInputValue() !== true) {
+  const addPathToFormValues = (value: string) => {
+    if (isValidPath(value) !== true) {
       return;
     }
 
@@ -60,7 +56,7 @@ export const PathsList = ({
     values.push(value);
     form.setValue("paths", values);
     setTouched(false);
-  }
+  };
 
   const removePathFromFormValues = (value: string) => {
     const values = form.getValues("paths");
@@ -72,7 +68,7 @@ export const PathsList = ({
 
   const PathList = typedList<string>();
   const pathsList = (
-    <PathList.List aria-label="Pfade">
+    <PathList.List aria-label="Pfade" batchSize={10}>
       <PathList.StaticData data={Array.from(paths)} />
 
       <PathList.Item textValue={(p) => p.toString()}>
@@ -101,7 +97,7 @@ export const PathsList = ({
       <Align>
         <TextField
           autoFocus={autoFocus}
-          isInvalid={touched && isValidInputValue() !== true}
+          isInvalid={touched && isValidPath() !== true}
           value={pathInputValue}
           onChange={(value) => {
             setPathInputValue(value);
@@ -122,13 +118,13 @@ export const PathsList = ({
           }}
         >
           <Label>Pfad</Label>
-          {touched && isValidInputValue() !== true && (
-            <FieldError>{isValidInputValue()}</FieldError>
+          {touched && isValidPath() !== true && (
+            <FieldError>{isValidPath()}</FieldError>
           )}
         </TextField>
         <Button
           color="primary"
-          isDisabled={isValidInputValue() !== true}
+          isDisabled={isValidPath() !== true}
           onPress={() => addPathToFormValues(pathInputValue)}
         >
           Hinzufügen

@@ -1,10 +1,12 @@
 import {
   Action,
   ActionGroup,
+  Alert,
   Button,
   Content,
   Header,
   Heading,
+  InlineCode,
   Label,
   Modal,
   Section,
@@ -12,26 +14,35 @@ import {
   SegmentedControl,
   Text,
 } from "@mittwald/flow-remote-react-components";
-import { useForm, UseFormReturn } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { FormValues } from "./types.ts";
 import { PathsList } from "./components/pathsList.tsx";
-import { Domain } from "./components/domain.tsx";
-import { createProfile } from "~/actions/profile.ts";
-import { Route } from "~/routes";
-import { useGoToProfile } from "~/hooks/useGoTo.js";
+import { createProfile } from "../../actions/profile.ts";
+import { Route } from "../../routes/index.js";
+import { useGoToProfile } from "../../hooks/useGoTo.js";
 import { DomainSelect } from "./components/DomainSelect.js";
 import { useState } from "react";
+import { Domain } from "./components/domain.tsx";
+import {
+  GenerateError,
+  GeneratePathsAction,
+} from "./components/generatePaths.tsx";
+
+const defaultDomainInputTab = "mstudio";
 
 export const CreateModal = () => {
   const goToProfile = useGoToProfile();
   const { contextId } = Route.useSearch();
-  const [showCustomDomain, setShowCustomDomain] = useState(false);
+  const [domainInputTab, setDomainInputTab] = useState(defaultDomainInputTab);
+  const [generateError, setGenerateError] = useState<GenerateError | null>(
+    null,
+  );
 
   const form = useForm<FormValues>({
     defaultValues: {
       domain: "",
-      paths: ["/"],
+      paths: new Set(["/"]),
     },
   });
 
@@ -63,32 +74,42 @@ export const CreateModal = () => {
               individuelle Domain ein.
             </Text>
             <SegmentedControl
-              defaultValue="mstudio"
-              onChange={() => setShowCustomDomain((value) => !value)}
+              value={domainInputTab}
+              defaultValue={defaultDomainInputTab}
+              onChange={setDomainInputTab}
             >
               <Label>Domain-Art</Label>
               <Segment value="mstudio">mStudio Domain</Segment>
               <Segment value="custom">Individuelle Eingabe</Segment>
             </SegmentedControl>
-            {!showCustomDomain && <DomainSelect />}
-            {showCustomDomain && (
-              <Domain
-                form={
-                  form as unknown as UseFormReturn<Pick<FormValues, "domain">>
-                }
-              />
-            )}
+            {domainInputTab === "mstudio" && <DomainSelect />}
+            {domainInputTab === "custom" && <Domain form={form} />}
             <Header>
               <Heading>Unterseiten hinzufügen</Heading>
-              <Text>
-                Füge Unterseiten hinzu, um mit einem Scanprofil mehrere Bereiche
-                deiner Website im Blick zu behalten.
-              </Text>
+              <GeneratePathsAction
+                form={form}
+                onError={setGenerateError}
+                onSuccess={() => setGenerateError(null)}
+              />
             </Header>
-            <PathsList
-              form={form as unknown as UseFormReturn<Pick<FormValues, "paths">>}
-              autoFocus={!!form.getValues("domain")}
-            />
+            {generateError && (
+              <Alert status="danger">
+                <Heading>Unterseiten nicht automatisch erkannt</Heading>
+                <Content>
+                  <Text>
+                    Die Unterseiten für{" "}
+                    <InlineCode>{generateError.domain}</InlineCode> konnten
+                    nicht automatisch erkannt werden. Überprüfe die eingegebene
+                    Domain und versuche es erneut.
+                  </Text>
+                </Content>
+              </Alert>
+            )}
+            <Text>
+              Füge Unterseiten hinzu, um mit einem Scanprofil mehrere Bereiche
+              deiner Website im Blick zu behalten.
+            </Text>
+            <PathsList form={form} autoFocus={!!form.getValues("domain")} />
           </Section>
         </Content>
         <ActionGroup>
