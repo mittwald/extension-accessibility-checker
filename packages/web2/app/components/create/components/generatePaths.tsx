@@ -15,6 +15,7 @@ interface Props {
   onSuccess: () => void;
 }
 
+
 export const GeneratePathsAction: FC<Props> = (props) => {
   const { form, onError, onSuccess } = props;
   const [generatedPaths, setGeneratedPaths] = useState<string[]>([]);

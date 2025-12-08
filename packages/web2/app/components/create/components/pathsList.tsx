@@ -56,18 +56,13 @@ export const PathsList = ({
     }
 
     const values = form.getValues("paths");
-    values.add(value);
-    form.setValue("paths", values);
+    form.setValue("paths", new Set([...values, value]));
     setTouched(false);
   };
 
   const removePathFromFormValues = (value: string) => {
     const values = form.getValues("paths");
-    values.delete(value)
-    form.setValue(
-      "paths",
-      values,
-    );
+    form.setValue("paths", new Set([...values].filter(path => path !== value)));
   };
 
   const PathList = typedList<string>();
