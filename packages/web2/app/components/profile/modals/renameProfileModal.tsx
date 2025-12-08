@@ -16,6 +16,7 @@ import {
 import {
   Field,
   Form,
+  SubmitButton,
 } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { updateProfileName } from "~/actions/profile";
 import { useRouter } from "@tanstack/react-router";
@@ -65,9 +66,9 @@ export const RenameProfileModal = ({
         </Content>
         <ActionGroup>
           <Action closeOverlay="Modal">
-            <Button color="accent" type="submit">
+            <SubmitButton>
               Speichern
-            </Button>
+            </SubmitButton>
             <Button slot="abort" color="secondary" variant="soft">
               Abbrechen
             </Button>

@@ -15,7 +15,7 @@ import {
   Text,
 } from "@mittwald/flow-remote-react-components";
 import { useForm } from "react-hook-form";
-import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
+import { Form, SubmitButton } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { FormValues } from "./types.ts";
 import { PathsList } from "./components/pathsList.tsx";
 import { createProfile } from "../../actions/profile.ts";
@@ -122,9 +122,9 @@ export const CreateModal = () => {
               Abbrechen
             </Button>
           </Action>
-          <Button color="accent" type="submit">
+          <SubmitButton>
             Scan starten
-          </Button>
+          </SubmitButton>
         </ActionGroup>
       </Form>
     </Modal>

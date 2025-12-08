@@ -10,7 +10,7 @@ import {
   Text,
   useOverlayController,
 } from "@mittwald/flow-remote-react-components";
-import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
+import { Form, SubmitButton } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { useForm, type UseFormReturn } from "react-hook-form";
 import { Time } from "@internationalized/date";
 import {
@@ -89,9 +89,9 @@ export const EditIntervalModal: FC<Props> = (props) => {
         </Content>
 
         <ActionGroup>
-          <Button color="accent" type="submit">
+          <SubmitButton>
             Speichern
-          </Button>
+          </SubmitButton>
           <Action closeOverlay="Modal">
             <Button color="secondary" slot="abort" variant="soft">
               Abbrechen

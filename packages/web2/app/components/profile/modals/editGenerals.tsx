@@ -18,6 +18,7 @@ import {
 import { useForm } from "react-hook-form";
 import {
   Form,
+  SubmitButton,
   typedField,
 } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { useRouter } from "@tanstack/react-router";
@@ -115,9 +116,9 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
           </Section>
         </Content>
         <ActionGroup>
-          <Button color="accent" type="submit">
+          <SubmitButton>
             Speichern
-          </Button>
+          </SubmitButton>
           <Action closeOverlay="Modal">
             <Button
               color="secondary"
