@@ -41,6 +41,7 @@ export const GeneratePathsAction: FC<Props> = (props) => {
       onSuccess();
     } catch (error) {
       setGeneratedPaths([]);
+      form.setValue("paths", new Set("/"))
       if (error instanceof Error) {
         onError({
           error,

@@ -5549,7 +5549,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^5.90.10":
+"@tanstack/react-query@npm:^5.90.12":
   version: 5.90.12
   resolution: "@tanstack/react-query@npm:5.90.12"
   dependencies:
@@ -5560,7 +5560,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-router@npm:1.140.0, @tanstack/react-router@npm:^1.136.18":
+"@tanstack/react-router@npm:1.140.0, @tanstack/react-router@npm:^1.140.0":
   version: 1.140.0
   resolution: "@tanstack/react-router@npm:1.140.0"
   dependencies:
@@ -5609,7 +5609,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-start@npm:^1.137.0":
+"@tanstack/react-start@npm:^1.140.0":
   version: 1.140.0
   resolution: "@tanstack/react-start@npm:1.140.0"
   dependencies:
@@ -5685,7 +5685,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/router-plugin@npm:1.140.0, @tanstack/router-plugin@npm:^1.136.18":
+"@tanstack/router-plugin@npm:1.140.0, @tanstack/router-plugin@npm:^1.140.0":
   version: 1.140.0
   resolution: "@tanstack/router-plugin@npm:1.140.0"
   dependencies:
@@ -5847,7 +5847,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/zod-adapter@npm:^1.136.18":
+"@tanstack/zod-adapter@npm:^1.140.0":
   version: 1.140.0
   resolution: "@tanstack/zod-adapter@npm:1.140.0"
   peerDependencies:
@@ -7792,7 +7792,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cheerio@npm:^1.0.0":
+"cheerio@npm:^1.0.0, cheerio@npm:^1.1.2":
   version: 1.1.2
   resolution: "cheerio@npm:1.1.2"
   dependencies:
@@ -9894,16 +9894,17 @@ __metadata:
     "@mittwald/flow-remote-react-renderer": "npm:^0.2.0-alpha.561"
     "@mittwald/mstudio-ext-react-components": "npm:^0.2.0-alpha.561"
     "@tabler/icons-react": "npm:^3.35.0"
-    "@tanstack/react-query": "npm:^5.90.10"
-    "@tanstack/react-router": "npm:^1.136.18"
-    "@tanstack/react-start": "npm:^1.137.0"
-    "@tanstack/router-plugin": "npm:^1.136.18"
-    "@tanstack/zod-adapter": "npm:^1.136.18"
+    "@tanstack/react-query": "npm:^5.90.12"
+    "@tanstack/react-router": "npm:^1.140.0"
+    "@tanstack/react-start": "npm:^1.140.0"
+    "@tanstack/router-plugin": "npm:^1.140.0"
+    "@tanstack/zod-adapter": "npm:^1.140.0"
     "@types/react": "npm:^19.2.6"
     "@types/react-dom": "npm:^19.2.3"
     "@vitejs/plugin-react": "npm:^5.1.1"
     "@weissaufschwarz/mitthooks": "npm:^0.2.5"
     babel-plugin-react-compiler: "npm:^1.0.0"
+    cheerio: "npm:^1.1.2"
     class-transform: "npm:^0.7.1"
     cronstrue: "npm:^3.9.0"
     eslint: "npm:^9.39.1"
@@ -9917,6 +9918,7 @@ __metadata:
     eslint-plugin-react-refresh: "npm:^0.4.24"
     eslint-plugin-workspaces: "npm:^0.11.0"
     extension-a11y-checker-storage: "workspace:^"
+    fast-xml-parser: "npm:^5.3.2"
     globals: "npm:^16.5.0"
     json-schema-to-zod: "npm:^2.7.0"
     pino: "npm:^10.1.0"
@@ -10034,6 +10036,17 @@ __metadata:
   version: 3.1.0
   resolution: "fast-uri@npm:3.1.0"
   checksum: 10c0/44364adca566f70f40d1e9b772c923138d47efeac2ae9732a872baafd77061f26b097ba2f68f0892885ad177becd065520412b8ffeec34b16c99433c5b9e2de7
+  languageName: node
+  linkType: hard
+
+"fast-xml-parser@npm:^5.3.2":
+  version: 5.3.2
+  resolution: "fast-xml-parser@npm:5.3.2"
+  dependencies:
+    strnum: "npm:^2.1.0"
+  bin:
+    fxparser: src/cli/cli.js
+  checksum: 10c0/1b9e8adcd215c0771854a95557b409c980e793387e61938d1881ae0d456ee762b755d32912a66dda273d37f0447a59d1bfef9d3aba2e41553e049592e27a0ce7
   languageName: node
   linkType: hard
 
@@ -16234,6 +16247,13 @@ __metadata:
   dependencies:
     js-tokens: "npm:^9.0.1"
   checksum: 10c0/50918f669915d9ad0fe4b7599902b735f853f2201c97791ead00104a654259c0c61bc2bc8fa3db05109339b61f4cf09e47b94ecc874ffbd0e013965223893af8
+  languageName: node
+  linkType: hard
+
+"strnum@npm:^2.1.0":
+  version: 2.1.1
+  resolution: "strnum@npm:2.1.1"
+  checksum: 10c0/1f9bd1f9b4c68333f25c2b1f498ea529189f060cd50aa59f1876139c994d817056de3ce57c12c970f80568d75df2289725e218bd9e3cdf73cd1a876c9c102733
   languageName: node
   linkType: hard
 

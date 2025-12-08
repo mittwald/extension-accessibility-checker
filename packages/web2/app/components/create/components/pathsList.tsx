@@ -30,7 +30,10 @@ export const PathsList = ({
   const [pathInputValue, setPathInputValue] = useState("/");
   const [touched, setTouched] = useState(false);
 
-  const paths = form.watch("paths");
+  const paths = useWatch({
+    control: form.control,
+    name: 'paths',
+  });
 
   const isValidPath = (path?: string) => {
     const p = path ?? pathInputValue;
@@ -53,16 +56,17 @@ export const PathsList = ({
     }
 
     const values = form.getValues("paths");
-    values.push(value);
+    values.add(value);
     form.setValue("paths", values);
     setTouched(false);
   };
 
   const removePathFromFormValues = (value: string) => {
     const values = form.getValues("paths");
+    values.delete(value)
     form.setValue(
       "paths",
-      values.filter((v) => v != value),
+      values,
     );
   };
 
