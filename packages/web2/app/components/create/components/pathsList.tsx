@@ -32,7 +32,7 @@ export const PathsList = ({
 
   const paths = useWatch({
     control: form.control,
-    name: 'paths',
+    name: "paths",
   });
 
   const isValidPath = (path?: string) => {
@@ -62,7 +62,10 @@ export const PathsList = ({
 
   const removePathFromFormValues = (value: string) => {
     const values = form.getValues("paths");
-    form.setValue("paths", new Set([...values].filter(path => path !== value)));
+    form.setValue(
+      "paths",
+      new Set([...values].filter((path) => path !== value)),
+    );
   };
 
   const PathList = typedList<string>();

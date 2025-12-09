@@ -10,7 +10,10 @@ import {
   OverlayController,
   Section,
 } from "@mittwald/flow-remote-react-components";
-import { Form, SubmitButton } from "@mittwald/flow-remote-react-components/react-hook-form";
+import {
+  Form,
+  SubmitButton,
+} from "@mittwald/flow-remote-react-components/react-hook-form";
 import { updateProfileDomain } from "~/actions/profile";
 import { useRouter } from "@tanstack/react-router";
 import { startScan } from "~/actions/scan";
@@ -64,9 +67,7 @@ export const ChangeDomainModal = ({
         </Content>
         <ActionGroup>
           <Action closeOverlay="Modal">
-            <SubmitButton>
-              Speichern
-            </SubmitButton>
+            <SubmitButton>Speichern</SubmitButton>
             <Button slot="abort" color="secondary" variant="soft">
               Abbrechen
             </Button>

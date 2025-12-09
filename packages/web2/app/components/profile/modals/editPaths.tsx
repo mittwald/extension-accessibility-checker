@@ -9,7 +9,10 @@ import {
   Text,
 } from "@mittwald/flow-remote-react-components";
 import { ScanProfile } from "~/api/types";
-import { Form, SubmitButton } from "@mittwald/flow-remote-react-components/react-hook-form";
+import {
+  Form,
+  SubmitButton,
+} from "@mittwald/flow-remote-react-components/react-hook-form";
 import { FormValues } from "~/components/create/types";
 import { useForm } from "react-hook-form";
 import { PathsList } from "~/components/create/components/pathsList";
@@ -57,9 +60,7 @@ export const EditPathsModal = ({ profile }: { profile: ScanProfile }) => {
             >
               Abbrechen
             </Button>
-            <SubmitButton>
-              Speichern
-            </SubmitButton>
+            <SubmitButton>Speichern</SubmitButton>
           </Action>
         </ActionGroup>
       </Form>

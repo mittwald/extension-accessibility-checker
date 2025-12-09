@@ -1,9 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import {
-  ScanModel,
-  ScanProfileModel,
-} from "extension-a11y-checker-storage";
+import { ScanModel, ScanProfileModel } from "extension-a11y-checker-storage";
 import { isDocument } from "@typegoose/typegoose";
 import { ScanProfile } from "~/api/types.ts";
 import { ObjectId } from "mongodb";
@@ -27,7 +24,9 @@ export const getProfiles = createServerFn()
     }
 
     const profiles = data.map((profileDoc) => {
-      const lastScan = isDocument(profileDoc.lastScan) ? profileDoc.lastScan : undefined;
+      const lastScan = isDocument(profileDoc.lastScan)
+        ? profileDoc.lastScan
+        : undefined;
       return {
         ...profileDoc.toSerializable(),
         lastScan: lastScan?.toSerializable(),

@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { authenticateMiddleware } from "./middleware.js";
 import { assertStatus, MittwaldAPIV2Client } from "@mittwald/api-client";
 import { z } from "zod";
-import { extractPathFromUrl } from "../components/create/helpers.js";
+import { extractPathFromUrl } from "~/components/create/helpers.js";
 import { XMLParser } from "fast-xml-parser";
 import axios from "axios";
 import * as cheerio from "cheerio";

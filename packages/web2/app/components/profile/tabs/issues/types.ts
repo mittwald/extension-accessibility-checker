@@ -17,8 +17,10 @@ export interface IssueGroup {
   issues: Issue[];
 }
 
-export interface Issue
-  extends Pick<ApiIssue, "description" | "errorCode" | "severity"> {
+export interface Issue extends Pick<
+  ApiIssue,
+  "description" | "errorCode" | "severity"
+> {
   key: string;
   count: number;
   description: string;

@@ -66,9 +66,7 @@ export const RenameProfileModal = ({
         </Content>
         <ActionGroup>
           <Action closeOverlay="Modal">
-            <SubmitButton>
-              Speichern
-            </SubmitButton>
+            <SubmitButton>Speichern</SubmitButton>
             <Button slot="abort" color="secondary" variant="soft">
               Abbrechen
             </Button>
