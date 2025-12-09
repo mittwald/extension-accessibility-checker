@@ -1,4 +1,4 @@
-import { Scan } from "../../api/types.ts";
+import { Scan } from "~/api/types";
 
 export const isRunning = (scan: Scan) => {
   return scan.status === "running";

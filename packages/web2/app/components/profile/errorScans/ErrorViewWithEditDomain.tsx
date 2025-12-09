@@ -11,7 +11,7 @@ import {
   useOverlayController,
 } from "@mittwald/flow-remote-react-components";
 import { RestartScanButton } from "./restartScanButton.js";
-import { ChangeDomainModal } from "../modals/changeDomainModal.js";
+import { ChangeDomainModal } from "~/components/profile/modals/changeDomainModal.js";
 
 export const ErrorViewWithEditDomain: FC<DetailedErrorProps> = ({
   profile,

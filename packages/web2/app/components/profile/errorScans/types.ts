@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { ScanProfile } from "../../../api/types.js";
+import { ScanProfile } from "~/api/types.js";
 
 export interface BaseProps {
   profile: ScanProfile;

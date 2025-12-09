@@ -1,4 +1,4 @@
-import { ScanProfile } from "../../../api/types.ts";
+import { ScanProfile } from "~/api/types";
 import { useForm } from "react-hook-form";
 import {
   Action,
@@ -10,11 +10,14 @@ import {
   OverlayController,
   Section,
 } from "@mittwald/flow-remote-react-components";
-import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
-import { updateProfileDomain } from "../../../actions/profile.ts";
+import {
+  Form,
+  SubmitButton,
+} from "@mittwald/flow-remote-react-components/react-hook-form";
+import { updateProfileDomain } from "~/actions/profile";
 import { useRouter } from "@tanstack/react-router";
-import { startScan } from "../../../actions/scan.js";
-import { Domain } from "../../create/components/domain.js";
+import { startScan } from "~/actions/scan";
+import { Domain } from "~/components/create/components/domain.js";
 
 interface FormValues {
   domain: string;
@@ -64,9 +67,7 @@ export const ChangeDomainModal = ({
         </Content>
         <ActionGroup>
           <Action closeOverlay="Modal">
-            <Button color="accent" type="submit">
-              Speichern
-            </Button>
+            <SubmitButton>Speichern</SubmitButton>
             <Button slot="abort" color="secondary" variant="soft">
               Abbrechen
             </Button>

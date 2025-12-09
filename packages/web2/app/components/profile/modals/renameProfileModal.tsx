@@ -1,4 +1,4 @@
-import { ScanProfile } from "../../../api/types.ts";
+import { ScanProfile } from "~/api/types";
 import { useForm } from "react-hook-form";
 import {
   Action,
@@ -16,8 +16,9 @@ import {
 import {
   Field,
   Form,
+  SubmitButton,
 } from "@mittwald/flow-remote-react-components/react-hook-form";
-import { updateProfileName } from "../../../actions/profile.ts";
+import { updateProfileName } from "~/actions/profile";
 import { useRouter } from "@tanstack/react-router";
 
 interface FormValues {
@@ -65,9 +66,7 @@ export const RenameProfileModal = ({
         </Content>
         <ActionGroup>
           <Action closeOverlay="Modal">
-            <Button color="accent" type="submit">
-              Speichern
-            </Button>
+            <SubmitButton>Speichern</SubmitButton>
             <Button slot="abort" color="secondary" variant="soft">
               Abbrechen
             </Button>

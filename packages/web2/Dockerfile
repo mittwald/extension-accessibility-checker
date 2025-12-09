@@ -11,7 +11,7 @@ COPY packages/storage ./packages/storage
 RUN corepack enable && yarn install
 
 ENV NX_DAEMON=false
-RUN yarn nx run web2:build
+RUN yarn nx run build extension-a11y-checker-web2
 
 FROM node:22-slim
 

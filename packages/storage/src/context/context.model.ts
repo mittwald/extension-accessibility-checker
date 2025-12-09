@@ -1,12 +1,16 @@
 import { prop, modelOptions } from "@typegoose/typegoose";
-import { ObjectId } from "mongoose";
-import { getModel } from "../lib/mongoose.js";
+import { getModel, serializeObjectWithIds } from "../lib/mongoose.js";
 import { ReturnModelType } from "@typegoose/typegoose/lib/types";
 import { ScanProfileModel } from "../scanProfile/scanProfile.model.js";
-import { ScanModel } from "../scan/scan.model.js";
 
 @modelOptions({
-  schemaOptions: { versionKey: false, collection: "contexts" },
+  schemaOptions: {
+    versionKey: false,
+    collection: "contexts",
+    toJSON: {
+      transform: (doc, ret) => serializeObjectWithIds(ret),
+    },
+  },
   options: { automaticName: false },
 })
 export class Context {
@@ -29,7 +33,7 @@ export class Context {
     this: ReturnModelType<typeof Context>,
     contextId: string,
   ) {
-    return this.updateOne(
+    return this.findOneAndUpdate(
       { _id: contextId },
       {
         $setOnInsert: { _id: contextId },

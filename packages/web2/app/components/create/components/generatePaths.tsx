@@ -1,7 +1,7 @@
 import { UseFormReturn, useWatch } from "react-hook-form";
-import { getPathsFromMenu } from "../../../actions/domain.js";
+import { getPathsFromMenu } from "~/actions/domain.js";
 import { Action, Button } from "@mittwald/flow-remote-react-components";
-import { extractPathFromUrl } from "../helpers.js";
+import { extractPathFromUrl } from "~/components/create/helpers.js";
 import { FC, useState } from "react";
 
 export interface GenerateError {
@@ -41,6 +41,7 @@ export const GeneratePathsAction: FC<Props> = (props) => {
       onSuccess();
     } catch (error) {
       setGeneratedPaths([]);
+      form.setValue("paths", new Set("/"));
       if (error instanceof Error) {
         onError({
           error,

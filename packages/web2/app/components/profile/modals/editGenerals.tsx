@@ -1,4 +1,4 @@
-import { ScanProfile } from "../../../api/types.ts";
+import { ScanProfile } from "~/api/types";
 import {
   Action,
   ActionGroup,
@@ -18,12 +18,13 @@ import {
 import { useForm } from "react-hook-form";
 import {
   Form,
+  SubmitButton,
   typedField,
 } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { useRouter } from "@tanstack/react-router";
-import { updateProfileSettings } from "../../../actions/profile.ts";
-import { WcagStandardContextualHelp } from "../wcagStandardContextualHelp.tsx";
-import { CriteriaContextualHelp } from "../criteriaContextualHelp.tsx";
+import { updateProfileSettings } from "~/actions/profile";
+import { WcagStandardContextualHelp } from "~/components/profile/wcagStandardContextualHelp";
+import { CriteriaContextualHelp } from "~/components/profile/criteriaContextualHelp";
 
 interface FormValues {
   cronExpression?: string;
@@ -75,6 +76,7 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
       <Form form={form} onSubmit={onSubmit}>
         <Content>
           <Section>
+            {/* eslint-disable-next-line react-hooks/static-components -- intended use of Flow Components */}
             <Field
               name={"standard"}
               rules={{
@@ -95,6 +97,7 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
               </SegmentedControl>
             </Field>
 
+            {/* eslint-disable-next-line react-hooks/static-components -- intended use of Flow Components */}
             <Field name="includedCriteria">
               <CheckboxGroup>
                 <Label>
@@ -113,9 +116,7 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
           </Section>
         </Content>
         <ActionGroup>
-          <Button color="accent" type="submit">
-            Speichern
-          </Button>
+          <SubmitButton>Speichern</SubmitButton>
           <Action closeOverlay="Modal">
             <Button
               color="secondary"

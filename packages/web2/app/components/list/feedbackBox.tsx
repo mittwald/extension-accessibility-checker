@@ -9,7 +9,7 @@ import {
   Text,
   LayoutCard,
 } from "@mittwald/flow-remote-react-components";
-import martinImage from "../../feedback-person.webp?inline";
+import martinImage from "~/feedback-person.webp?inline";
 
 export const FeedbackBox = () => {
   return (

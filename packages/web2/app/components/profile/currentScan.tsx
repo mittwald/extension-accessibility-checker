@@ -1,11 +1,11 @@
-import { Route } from "../../routes/profiles.$profileId.tsx";
+import { Route } from "~/routes/profiles.$profileId.tsx";
 import {
   Alert,
   Align,
   LoadingSpinner,
   Text,
 } from "@mittwald/flow-remote-react-components";
-import { isPending, isRunning } from "./helpers.ts";
+import { isPending, isRunning } from "./helpers";
 
 const RunningScan = () => {
   return (
@@ -32,7 +32,7 @@ const PendingScan = () => {
 export const CurrentScan = () => {
   const {
     profile: { nextScan },
-  } = Route.useLoaderData();
+  } = Route.useLoaderData()!;
 
   if (!nextScan) {
     return null;

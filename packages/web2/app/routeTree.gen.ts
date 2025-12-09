@@ -8,104 +8,174 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProfilesProfileIdRouteImport } from './routes/profiles.$profileId'
+import { Route as ApiWebhooksSecretRotatedRouteImport } from './routes/api/webhooks/secret-rotated'
+import { Route as ApiWebhooksInstanceUpdatedRouteImport } from './routes/api/webhooks/instance-updated'
+import { Route as ApiWebhooksInstanceRemovedRouteImport } from './routes/api/webhooks/instance-removed'
+import { Route as ApiWebhooksExtensionAddedRouteImport } from './routes/api/webhooks/extension-added'
 
-import { Route as rootRoute } from "./routes/__root"
-import { Route as IndexImport } from "./routes/index"
-import { Route as ProfilesProfileIdImport } from "./routes/profiles.$profileId"
-
-// Create/Update Routes
-
-const IndexRoute = IndexImport.update({
-  id: "/",
-  path: "/",
-  getParentRoute: () => rootRoute,
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const ProfilesProfileIdRoute = ProfilesProfileIdImport.update({
-  id: "/profiles/$profileId",
-  path: "/profiles/$profileId",
-  getParentRoute: () => rootRoute,
+const ProfilesProfileIdRoute = ProfilesProfileIdRouteImport.update({
+  id: '/profiles/$profileId',
+  path: '/profiles/$profileId',
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module "@tanstack/react-router" {
-  interface FileRoutesByPath {
-    "/": {
-      id: "/"
-      path: "/"
-      fullPath: "/"
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    "/profiles/$profileId": {
-      id: "/profiles/$profileId"
-      path: "/profiles/$profileId"
-      fullPath: "/profiles/$profileId"
-      preLoaderRoute: typeof ProfilesProfileIdImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
+const ApiWebhooksSecretRotatedRoute =
+  ApiWebhooksSecretRotatedRouteImport.update({
+    id: '/api/webhooks/secret-rotated',
+    path: '/api/webhooks/secret-rotated',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiWebhooksInstanceUpdatedRoute =
+  ApiWebhooksInstanceUpdatedRouteImport.update({
+    id: '/api/webhooks/instance-updated',
+    path: '/api/webhooks/instance-updated',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiWebhooksInstanceRemovedRoute =
+  ApiWebhooksInstanceRemovedRouteImport.update({
+    id: '/api/webhooks/instance-removed',
+    path: '/api/webhooks/instance-removed',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiWebhooksExtensionAddedRoute =
+  ApiWebhooksExtensionAddedRouteImport.update({
+    id: '/api/webhooks/extension-added',
+    path: '/api/webhooks/extension-added',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute
-  "/profiles/$profileId": typeof ProfilesProfileIdRoute
+  '/': typeof IndexRoute
+  '/profiles/$profileId': typeof ProfilesProfileIdRoute
+  '/api/webhooks/extension-added': typeof ApiWebhooksExtensionAddedRoute
+  '/api/webhooks/instance-removed': typeof ApiWebhooksInstanceRemovedRoute
+  '/api/webhooks/instance-updated': typeof ApiWebhooksInstanceUpdatedRoute
+  '/api/webhooks/secret-rotated': typeof ApiWebhooksSecretRotatedRoute
 }
-
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute
-  "/profiles/$profileId": typeof ProfilesProfileIdRoute
+  '/': typeof IndexRoute
+  '/profiles/$profileId': typeof ProfilesProfileIdRoute
+  '/api/webhooks/extension-added': typeof ApiWebhooksExtensionAddedRoute
+  '/api/webhooks/instance-removed': typeof ApiWebhooksInstanceRemovedRoute
+  '/api/webhooks/instance-updated': typeof ApiWebhooksInstanceUpdatedRoute
+  '/api/webhooks/secret-rotated': typeof ApiWebhooksSecretRotatedRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  "/": typeof IndexRoute
-  "/profiles/$profileId": typeof ProfilesProfileIdRoute
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/profiles/$profileId': typeof ProfilesProfileIdRoute
+  '/api/webhooks/extension-added': typeof ApiWebhooksExtensionAddedRoute
+  '/api/webhooks/instance-removed': typeof ApiWebhooksInstanceRemovedRoute
+  '/api/webhooks/instance-updated': typeof ApiWebhooksInstanceUpdatedRoute
+  '/api/webhooks/secret-rotated': typeof ApiWebhooksSecretRotatedRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/profiles/$profileId"
+  fullPaths:
+    | '/'
+    | '/profiles/$profileId'
+    | '/api/webhooks/extension-added'
+    | '/api/webhooks/instance-removed'
+    | '/api/webhooks/instance-updated'
+    | '/api/webhooks/secret-rotated'
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/profiles/$profileId"
-  id: "__root__" | "/" | "/profiles/$profileId"
+  to:
+    | '/'
+    | '/profiles/$profileId'
+    | '/api/webhooks/extension-added'
+    | '/api/webhooks/instance-removed'
+    | '/api/webhooks/instance-updated'
+    | '/api/webhooks/secret-rotated'
+  id:
+    | '__root__'
+    | '/'
+    | '/profiles/$profileId'
+    | '/api/webhooks/extension-added'
+    | '/api/webhooks/instance-removed'
+    | '/api/webhooks/instance-updated'
+    | '/api/webhooks/secret-rotated'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ProfilesProfileIdRoute: typeof ProfilesProfileIdRoute
+  ApiWebhooksExtensionAddedRoute: typeof ApiWebhooksExtensionAddedRoute
+  ApiWebhooksInstanceRemovedRoute: typeof ApiWebhooksInstanceRemovedRoute
+  ApiWebhooksInstanceUpdatedRoute: typeof ApiWebhooksInstanceUpdatedRoute
+  ApiWebhooksSecretRotatedRoute: typeof ApiWebhooksSecretRotatedRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profiles/$profileId': {
+      id: '/profiles/$profileId'
+      path: '/profiles/$profileId'
+      fullPath: '/profiles/$profileId'
+      preLoaderRoute: typeof ProfilesProfileIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/webhooks/secret-rotated': {
+      id: '/api/webhooks/secret-rotated'
+      path: '/api/webhooks/secret-rotated'
+      fullPath: '/api/webhooks/secret-rotated'
+      preLoaderRoute: typeof ApiWebhooksSecretRotatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/webhooks/instance-updated': {
+      id: '/api/webhooks/instance-updated'
+      path: '/api/webhooks/instance-updated'
+      fullPath: '/api/webhooks/instance-updated'
+      preLoaderRoute: typeof ApiWebhooksInstanceUpdatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/webhooks/instance-removed': {
+      id: '/api/webhooks/instance-removed'
+      path: '/api/webhooks/instance-removed'
+      fullPath: '/api/webhooks/instance-removed'
+      preLoaderRoute: typeof ApiWebhooksInstanceRemovedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/webhooks/extension-added': {
+      id: '/api/webhooks/extension-added'
+      path: '/api/webhooks/extension-added'
+      fullPath: '/api/webhooks/extension-added'
+      preLoaderRoute: typeof ApiWebhooksExtensionAddedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ProfilesProfileIdRoute: ProfilesProfileIdRoute,
+  ApiWebhooksExtensionAddedRoute: ApiWebhooksExtensionAddedRoute,
+  ApiWebhooksInstanceRemovedRoute: ApiWebhooksInstanceRemovedRoute,
+  ApiWebhooksInstanceUpdatedRoute: ApiWebhooksInstanceUpdatedRoute,
+  ApiWebhooksSecretRotatedRoute: ApiWebhooksSecretRotatedRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/profiles/$profileId"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/profiles/$profileId": {
-      "filePath": "profiles.$profileId.tsx"
-    }
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
   }
 }
-ROUTE_MANIFEST_END */

@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { authenticateMiddleware } from "./middleware.js";
 import { assertStatus, MittwaldAPIV2Client } from "@mittwald/api-client";
 import { z } from "zod";
-import { extractPathFromUrl } from "../components/create/helpers.js";
+import { extractPathFromUrl } from "~/components/create/helpers.js";
 import { XMLParser } from "fast-xml-parser";
 import axios from "axios";
 import * as cheerio from "cheerio";
@@ -24,7 +24,7 @@ export const getDomains = createServerFn({
 export const getPathsFromSitemap = createServerFn({
   method: "GET",
 })
-  .validator(z.string())
+  .inputValidator(z.string())
   .handler(async ({ data: domain }) => {
     if (!domain) return null;
     try {
@@ -74,7 +74,7 @@ function resolveUrl(relative: string) {
 export const getPathsFromMenu = createServerFn({
   method: "GET",
 })
-  .validator(z.string())
+  .inputValidator(z.string())
   .handler(async ({ data: domain }) => {
     if (!domain) return null;
     try {

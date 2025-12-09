@@ -1,4 +1,3 @@
-import { MongoClient } from "mongodb";
 import mongoose, { Mongoose } from "mongoose";
 
 declare global {

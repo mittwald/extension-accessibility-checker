@@ -1,4 +1,4 @@
-import { ScanProfile } from "../../api/types.ts";
+import { ScanProfile } from "~/api/types.ts";
 import {
   Icon,
   IconDelete,
@@ -7,12 +7,12 @@ import {
   useOverlayController,
 } from "@mittwald/flow-remote-react-components";
 import { RenameProfileModal } from "./modals/renameProfileModal.tsx";
-import { startScan } from "../../actions/scan.ts";
+import { startScan } from "~/actions/scan.ts";
 import { IconWorldSearch } from "@tabler/icons-react";
 import { useRouter } from "@tanstack/react-router";
-import { DeleteConfirmationModal } from "./modals/deleteConfirmation.tsx";
+import { DeleteConfirmationModal } from "./modals/deleteConfirmation";
 import { isRunningOrPending } from "./helpers.ts";
-import { useGoToRoot } from "../../hooks/useGoTo.js";
+import { useGoToRoot } from "~/hooks/useGoTo";
 import { Actions } from "@mittwald/mstudio-ext-react-components";
 
 export function ProfileActions({ profile }: { profile: ScanProfile }) {

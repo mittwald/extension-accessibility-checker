@@ -8,7 +8,7 @@ import {
   Text,
 } from "@mittwald/flow-remote-react-components";
 import { IconAccessible } from "@tabler/icons-react";
-import { CreateModal } from "../create/createModal.tsx";
+import { CreateModal } from "~/components/create/createModal.tsx";
 
 export const NoProfiles = () => {
   return (

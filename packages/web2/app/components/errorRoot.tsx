@@ -1,5 +1,5 @@
 import { ErrorRouteComponent } from "@tanstack/react-router";
-import { RootDocument } from "./rootDocument.tsx";
+import { RootDocument } from "./rootDocument";
 
 export const ErrorRoot: ErrorRouteComponent = ({ error, info }) => {
   return (

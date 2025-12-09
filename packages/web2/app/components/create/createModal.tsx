@@ -15,12 +15,15 @@ import {
   Text,
 } from "@mittwald/flow-remote-react-components";
 import { useForm } from "react-hook-form";
-import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
+import {
+  Form,
+  SubmitButton,
+} from "@mittwald/flow-remote-react-components/react-hook-form";
 import { FormValues } from "./types.ts";
 import { PathsList } from "./components/pathsList.tsx";
-import { createProfile } from "../../actions/profile.ts";
-import { Route } from "../../routes/index.js";
-import { useGoToProfile } from "../../hooks/useGoTo.js";
+import { createProfile } from "~/actions/profile.ts";
+import { Route } from "~/routes/index.js";
+import { useGoToProfile } from "~/hooks/useGoTo.js";
 import { DomainSelect } from "./components/DomainSelect.js";
 import { useState } from "react";
 import { Domain } from "./components/domain.tsx";
@@ -122,9 +125,7 @@ export const CreateModal = () => {
               Abbrechen
             </Button>
           </Action>
-          <Button color="accent" type="submit">
-            Scan starten
-          </Button>
+          <SubmitButton>Scan starten</SubmitButton>
         </ActionGroup>
       </Form>
     </Modal>

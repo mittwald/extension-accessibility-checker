@@ -1,4 +1,4 @@
-import { UseFormReturn } from "react-hook-form";
+import { UseFormReturn, useWatch } from "react-hook-form";
 import { useState } from "react";
 import {
   Align,
@@ -12,8 +12,11 @@ import {
   TextField,
   typedList,
 } from "@mittwald/flow-remote-react-components";
-import { FormValues } from "../types.ts";
-import { extractPathFromUrl, prependPathWithSlash } from "../helpers.ts";
+import { FormValues } from "~/components/create/types.ts";
+import {
+  extractPathFromUrl,
+  prependPathWithSlash,
+} from "~/components/create/helpers.ts";
 
 type PathFormValues = Pick<FormValues, "paths">;
 
@@ -27,7 +30,10 @@ export const PathsList = ({
   const [pathInputValue, setPathInputValue] = useState("/");
   const [touched, setTouched] = useState(false);
 
-  const paths = form.watch("paths");
+  const paths = useWatch({
+    control: form.control,
+    name: "paths",
+  });
 
   const isValidPath = (path?: string) => {
     const p = path ?? pathInputValue;
@@ -50,15 +56,16 @@ export const PathsList = ({
     }
 
     const values = form.getValues("paths");
-    values.add(value);
-    form.setValue("paths", values);
+    form.setValue("paths", new Set([...values, value]));
     setTouched(false);
   };
 
   const removePathFromFormValues = (value: string) => {
     const values = form.getValues("paths");
-    values.delete(value.toString());
-    form.setValue("paths", values);
+    form.setValue(
+      "paths",
+      new Set([...values].filter((path) => path !== value)),
+    );
   };
 
   const PathList = typedList<string>();

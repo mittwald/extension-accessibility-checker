@@ -10,12 +10,12 @@ import {
   ModalTrigger,
   Section,
 } from "@mittwald/flow-remote-react-components";
-import { Route } from "../../../../routes/profiles.$profileId.tsx";
-import { EditGeneralsModal } from "../../modals/editGenerals.tsx";
-import { WcagStandardContextualHelp } from "../../wcagStandardContextualHelp.js";
+import { Route } from "~/routes/profiles.$profileId.tsx";
+import { EditGeneralsModal } from "~/components/profile/modals/editGenerals.tsx";
+import { WcagStandardContextualHelp } from "~/components/profile/wcagStandardContextualHelp.js";
 
 export const GeneralSettings = () => {
-  const { profile } = Route.useLoaderData();
+  const { profile } = Route.useLoaderData()!;
 
   return (
     <Section>

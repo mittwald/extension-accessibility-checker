@@ -1,14 +1,14 @@
-import { ScanProfile } from "../../api/types.ts";
+import { ScanProfile } from "~/api/types.ts";
 import {
   ActionGroup,
   Flex,
   Text,
   typedList,
 } from "@mittwald/flow-remote-react-components";
-import { isRunningOrPending } from "../profile/helpers.ts";
-import { useAutoRefresh } from "../../hooks/useAutoRefresh.tsx";
-import { useGoToProfile } from "../../hooks/useGoTo.tsx";
-import { CreateProfileButton } from "../create/createProfileButton.tsx";
+import { isRunningOrPending } from "~/components/profile/helpers.ts";
+import { useAutoRefresh } from "~/hooks/useAutoRefresh.tsx";
+import { useGoToProfile } from "~/hooks/useGoTo.tsx";
+import { CreateProfileButton } from "~/components/create/createProfileButton.tsx";
 import { ProfileListItemView } from "./profileListItemView.tsx";
 
 export const ProfilesList = ({ profiles }: { profiles: ScanProfile[] }) => {

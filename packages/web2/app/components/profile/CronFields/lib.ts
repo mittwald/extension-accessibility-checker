@@ -1,7 +1,7 @@
 import { Time } from "@internationalized/date";
 import cronstrue from "cronstrue";
 import "cronstrue/locales/de";
-import parser from "cron-parser";
+import { CronExpressionParser } from "cron-parser";
 
 // todo: get actual language
 export const getCronText = (cronSyntax: string) => {
@@ -154,7 +154,7 @@ export const isSmallIntervall = (schedule: string) => {
     return false;
   }
   try {
-    const interval = parser.parseExpression(schedule);
+    const interval = CronExpressionParser.parse(schedule);
     const firstDate = interval.next();
     const secondDate = interval.next();
     const hoursDiff =
@@ -170,7 +170,7 @@ export const isSmallIntervall = (schedule: string) => {
 
 export const getExecutions = (cron: string) => {
   try {
-    const interval = parser.parseExpression(cron);
+    const interval = CronExpressionParser.parse(cron);
 
     const executions: Date[] = [];
 

@@ -1,6 +1,6 @@
-import wcagLinks from "../../../../wcagLinks.json";
-import techniquesLinks from "../../../../techniquesLinks.json";
-import { Issue as ApiIssue } from "../../../../api/types.ts";
+import wcagLinks from "~/wcagLinks.json";
+import techniquesLinks from "~/techniquesLinks.json";
+import { Issue as ApiIssue } from "~/api/types.ts";
 
 export interface IssueMeta {
   wcagLevel: string;
@@ -17,8 +17,10 @@ export interface IssueGroup {
   issues: Issue[];
 }
 
-export interface Issue
-  extends Pick<ApiIssue, "description" | "errorCode" | "severity"> {
+export interface Issue extends Pick<
+  ApiIssue,
+  "description" | "errorCode" | "severity"
+> {
   key: string;
   count: number;
   description: string;
