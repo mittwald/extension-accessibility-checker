@@ -20,6 +20,7 @@
     "@mittwald/flow-remote-react-components": "^0.2.0-alpha.584",
     "@mittwald/flow-remote-react-renderer": "^0.2.0-alpha.584",
     "@mittwald/mstudio-ext-react-components": "0.2.0-alpha.584",
+    "@react-pdf/renderer": "^4.3.1",
     "@tabler/icons-react": "^3.29.0",
     "@tanstack/react-query": "^5.84.1",
     "@tanstack/react-router": "1.116.0",

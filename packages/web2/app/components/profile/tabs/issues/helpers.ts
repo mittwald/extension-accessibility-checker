@@ -30,7 +30,7 @@ export const getLinkForTechnique = (technique: string) => {
   }
 };
 
-export const getIssueMeta = (issue: APIIssue): IssueMeta => {
+export const getIssueMeta = (issue: Pick<APIIssue, "errorCode">): IssueMeta => {
   const [wcagLevel, principle, guideline, criterion, techniques, ...rest] =
     issue.errorCode.split(".");
   return {
@@ -59,7 +59,7 @@ export const groupIssuesByGuidelineAndTechnique = (
   // Group issues by errorCode and selector
   for (const issue of issues) {
     const meta = getIssueMeta(issue);
-    const groupKey = `${meta.guideline}`;
+    const groupKey = `${meta.principle}`;
     const issueKey = `${meta.criterion}.${meta.techniques.join(",")}`;
 
     if (!groupedByCode[groupKey]) {

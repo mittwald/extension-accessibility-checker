@@ -1,6 +1,11 @@
 {
+  "1": {
+    "label": "Wahrnehmbar (Perceivable)",
+    "description": "Inhalte müssen für alle wahrnehmbar sein. Dieses Prinzip adressiert visuelle, auditive und sensorische Zugänglichkeit."
+  },
   "1.1": {
-    "label": "Text Alternatives",
+    "label": "Textalternativen (Text Alternatives)",
+    "description": "Ohne passende Alternativen zu Bildern oder Icons entgehen Nutzern wichtige Informationen. Menschen, die Screenreader verwenden, bekommen Inhalte nicht vermittelt und können Funktionen nicht verstehen.",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/text-alternatives",
     "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#text-alternatives"
   },
@@ -11,7 +16,8 @@
     "wcagLevel": "A"
   },
   "1.2": {
-    "label": "Time-based Media",
+    "label": "Zeitbasierte Medien (Time-based Media)",
+    "description": "Wenn Videos oder Audios keine Untertitel oder Beschreibungen haben, bleiben Inhalte für gehörlose oder blinde Personen teilweise oder vollständig unzugänglich. Sie können der Handlung oder gesprochenen Informationen nicht folgen.",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/time-based-media",
     "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#time-based-media"
   },
@@ -70,7 +76,8 @@
     "wcagLevel": "AAA"
   },
   "1.3": {
-    "label": "Adaptable",
+    "label": "Anpassbarkeit (Adaptable)",
+    "description": "Nicht anpassbare Inhalte erschweren es manchen Nutzern, Informationen korrekt zu erfassen. Assistive Technologien können Inhalte nicht zuverlässig interpretieren und Betroffene verlieren leicht den Überblick.",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/adaptable",
     "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#adaptable"
   },
@@ -111,7 +118,8 @@
     "wcagLevel": "AAA"
   },
   "1.4": {
-    "label": "Distinguishable",
+    "label": "Unterscheidbarkeit (Distinguishable)",
+    "description": "Fehlt ausreichender Kontrast oder eine klare visuelle Hervorhebung, können Menschen mit eingeschränktem Sehvermögen Text, Schaltflächen oder Hinweise kaum erkennen. Inhalte verschwimmen und wichtige Elemente gehen unter.",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/distinguishable",
     "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#distinguishable"
   },
@@ -193,8 +201,13 @@
     "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#content-on-hover-or-focus",
     "wcagLevel": "AA"
   },
+  "2": {
+    "label": "Bedienbar (Operable)",
+    "description": "Interface-Komponenten und Navigation müssen bedienbar sein. Dies umfasst Tastarturzugriff, Fokusmanagement, Navigation, Eingabemethoden."
+  },
   "2.1": {
-    "label": "Keyboard Accessible",
+    "label": "Tastaturzugriff (Keyboard Accessible)",
+    "description": "User, die keine Maus verwenden können, bleiben hängen, weil sie nicht alle Funktionen per Tastatur erreichen. Sie können Formulare oder Menüs nicht bedienen und verlassen im schlimmsten Fall die Seite.",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard-accessible",
     "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#keyboard-accessible"
   },
@@ -223,7 +236,8 @@
     "wcagLevel": "AA"
   },
   "2.2": {
-    "label": "Enough Time",
+    "label": "Genug Zeit (Enough Time)",
+    "description": "Benutzer benötigen ausreichend Zeit, um Inhalte zu lesen und zu nutzen.",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/enough-time",
     "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#enough-time"
   },
@@ -422,8 +436,12 @@
     "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#target-size-minimum",
     "wcagLevel": "AA"
   },
+  "3": {
+    "label": "Verständlich (Understandable)",
+    "description": "Text muss lesbar sein, Navigation muss vorhersehbar sein, und Nutzer müssen Hilfe bei Eingabefehlern erhalten."
+  },
   "3.1": {
-    "label": "Readable",
+    "label": "Lesbar (Readable)",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/readable",
     "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#readable"
   },
@@ -557,8 +575,12 @@
     "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#accessible-authentication-enhanced",
     "wcagLevel": "AAA"
   },
+  "4": {
+    "label": "Robust (Robust)",
+    "description": "Code muss valide und mit Hilfstechnologien kompatible sein. Dies ist die technische Grundlage für barrierefreiheit."
+  },
   "4.1": {
-    "label": "Compatible",
+    "label": "Kompatibel (Compatible)",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/compatible",
     "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#compatible"
   },

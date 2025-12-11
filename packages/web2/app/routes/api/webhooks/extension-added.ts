@@ -1,9 +1,9 @@
 import { json } from "@tanstack/react-start";
 import { createAPIFileRoute } from "@tanstack/react-start/api";
-import schema from "./schemas/extensionAdded.js";
+import schema from "../../../lib/webhooks/schemas/extensionAdded.js";
 import { ContextModel } from "extension-a11y-checker-storage";
-import { assertContextType } from "./_helpers.js";
-import { assertValidSignature } from "./_verifySignature.js";
+import { assertContextType } from "../../../lib/webhooks/helpers.js";
+import { assertValidSignature } from "../../../lib/webhooks/verifySignature.js";
 import { logger } from "../../../logger.js";
 import {
   assertValidationSuccess,

@@ -9,7 +9,7 @@ import {
 
 export function IssueSummary({ profile }: { profile: ScanProfile }) {
   return (
-    <ColumnLayout m={[2, 2]}>
+    <ColumnLayout m={[2, 2, 2]}>
       <AccentBox color="neutral">
         <Flex direction="column" gap="s" align="center" text-align="center">
           <BigNumber>
@@ -34,6 +34,17 @@ export function IssueSummary({ profile }: { profile: ScanProfile }) {
           </BigNumber>
           <Text align="center" wrap="balance">
             Punkte, die überprüft und bei Bedarf verbessert werden sollten
+          </Text>
+        </Flex>
+      </AccentBox>
+      <AccentBox color="neutral">
+        <Flex direction="column" gap="xs" align="center">
+          <BigNumber>
+            <Text>{profile.issueSummary?.notices}</Text>
+            <Text>Hinweise</Text>
+          </BigNumber>
+          <Text align="center" wrap="balance">
+            Empfehlungen, die über WCAG-Konformität hinausgehen
           </Text>
         </Flex>
       </AccentBox>
