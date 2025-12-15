@@ -1,4 +1,3 @@
-
 import { View, Text, StyleSheet, ViewProps } from '@react-pdf/renderer';
 
 export interface TableColumn<T> {
@@ -12,7 +11,7 @@ export interface TableColumn<T> {
 interface TableProps<T> {
   columns: TableColumn<T>[];
   data: T[];
-  footerData?: { label: string; value: string };
+  footerData?: T;
   style?: ViewProps['style'];
 }
 
@@ -23,42 +22,73 @@ const styles = StyleSheet.create({
   tableContainer: {
     width: '100%',
     flexDirection: 'column',
+    position: 'relative',
+  },
+  tableOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  frameBorder: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderLeftWidth: 1,
+    borderLeftColor: borderColor,
+    borderRightWidth: 1,
+    borderRightColor: borderColor,
+    borderBottomWidth: 1,
+    borderBottomColor: borderColor,
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4,
+    borderTopWidth: 1,
+    borderTopColor: borderColor,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+  },
+  cornerMask: {
+    position: 'absolute',
+    bottom: 0,
+    width: 6,
+    height: 6,
+    backgroundColor: '#FFFFFF',
+  },
+  maskLeft: {
+    left: 0,
+  },
+  maskRight: {
+    right: 0,
   },
   row: {
     flexDirection: 'row',
     alignItems: 'stretch',
-    minHeight: 34,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderLeftColor: borderColor,
-    borderRightColor: borderColor,
   },
   headerRow: {
-    borderTopWidth: 1,
-    borderTopColor: borderColor,
-    borderBottomWidth: 2,
-    borderBottomColor: borderColor,
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
+    borderBottomWidth: 1,
+    borderBottomColor: borderColor,
+    backgroundColor: '#F8F8F8',
   },
   bodyRow: {
     borderBottomWidth: 1,
     borderBottomColor: borderColor,
   },
   footerRow: {
-    borderTopWidth: 2,
-    borderTopColor: borderColor,
-    borderBottomWidth: 1,
-    borderBottomColor: borderColor,
-    borderBottomLeftRadius: 4,
-    borderBottomRightRadius: 4,
+    backgroundColor: '#F8F8F8',
+    flexDirection: 'row',
+    alignItems: 'stretch',
   },
   cell: {
     paddingVertical: 8,
     paddingHorizontal: 4,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   text: {
     fontFamily: 'Inter',
@@ -87,6 +117,7 @@ const PdfTable = <T extends Record<string, unknown>>({
 }: TableProps<T>) => {
   return (
     <View style={{ ...styles.tableContainer, ...style }}>
+      {/* Content Layer (Rows) */}
       <View style={[styles.row, styles.headerRow]} fixed>
         {columns.map((col, i) => (
           <View
@@ -108,10 +139,12 @@ const PdfTable = <T extends Record<string, unknown>>({
           </View>
         ))}
       </View>
+
       {data.map((row, i) => {
-        const bg = i % 2 === 0 ? '#F8F8F8' : '#FFFFFF';
-        const isLastRow = i === data.length - 1;
-        const borderBottomWidth = isLastRow && !footerData ? 1 : 1;
+        const bg = i % 2 === 0 ? undefined : '#F8F8F8';
+        const isLastDataRow = i === data.length - 1;
+        const isVisuallyLast = isLastDataRow && !footerData;
+        const borderBottomWidth = isVisuallyLast ? 0 : 1;
 
         return (
           <View
@@ -151,18 +184,41 @@ const PdfTable = <T extends Record<string, unknown>>({
           </View>
         );
       })}
+
       {footerData && (
-        <View style={[styles.row, styles.footerRow]} wrap={false}>
-          <View style={[styles.cell, { flexGrow: 1, paddingLeft: 8 }]}>
-            <Text style={[styles.text, styles.textBold]}>{footerData.label}</Text>
-          </View>
-          <View style={[styles.cell, { width: 100, alignItems: 'flex-end', paddingRight: 8 }]}>
-            <Text style={[styles.text, styles.textBold, { textAlign: 'right' }]}>
-              {footerData.value}
-            </Text>
-          </View>
+        <View style={[styles.footerRow]} wrap={false}>
+          {columns.map((col, j) => (
+            <View
+              key={j}
+              style={[
+                styles.cell,
+                {
+                  width: col.width,
+                  flexGrow: col.isFlex ? 1 : 0,
+                  flexShrink: col.isFlex ? 1 : 0,
+                  flexBasis: col.isFlex ? 0 : 'auto',
+                  alignItems: mapAlign(col.align),
+                },
+              ]}
+            >
+              <Text
+                style={[styles.text, styles.textBold, { textAlign: col.align || 'left' }]}
+              >
+                {String(footerData[col.accessor] ?? '')}
+              </Text>
+            </View>
+          ))}
         </View>
       )}
+
+      {/* Overlay Layer (Frame + Masks) - Renders on TOP */}
+      <View style={styles.tableOverlay} fixed>
+        {/* Masks first (hide content corners) */}
+        <View style={[styles.cornerMask, styles.maskLeft]} />
+        <View style={[styles.cornerMask, styles.maskRight]} />
+        {/* Frame Border on top */}
+        <View style={styles.frameBorder} />
+      </View>
     </View>
   );
 };

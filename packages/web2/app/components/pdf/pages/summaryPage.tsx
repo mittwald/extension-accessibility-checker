@@ -35,17 +35,13 @@ const SummaryPage: FC<SummaryPageProps> = ({ issueGroups }) => {
     const totalNotice = summaryData.reduce((sum, row) => sum + row.notice, 0);
     const totalAll = summaryData.reduce((sum, row) => sum + row.total, 0);
 
-    const tableData = [
-        ...summaryData,
-        {
-            principle: 'Gesamt',
-            error: totalError,
-            warning: totalWarning,
-            notice: totalNotice,
-            total: totalAll,
-            isTotal: true
-        }
-    ];
+    const footerData = {
+        c1: 'Gesamt',
+        c2: totalError,
+        c3: totalWarning,
+        c4: totalNotice,
+        c5: totalAll
+    };
 
     type MappedTableRow = {
         c1: string;
@@ -73,13 +69,14 @@ const SummaryPage: FC<SummaryPageProps> = ({ issueGroups }) => {
             </View>
 
             <PdfTable
-                data={tableData.map(row => ({
+                data={summaryData.map(row => ({
                     c1: row.principle,
                     c2: row.error,
                     c3: row.warning,
                     c4: row.notice,
                     c5: row.total,
                 }))}
+                footerData={footerData}
                 columns={columns}
             />
         </Page>

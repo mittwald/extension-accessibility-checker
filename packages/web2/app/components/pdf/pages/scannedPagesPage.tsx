@@ -47,8 +47,11 @@ const PdfScannedPagesPage: React.FC<PdfScannedPagesPageProps> = ({ profile }) =>
         columns={tableColumns}
         data={tableData}
         footerData={{
-          label: 'Gesamtbewertung',
-          value: `Ø ${profile.issueSummary?.score}`
+          path: 'Gesamtbewertung',
+          errors: '',
+          warnings: '',
+          notices: '',
+          score: `Ø ${profile.issueSummary?.score ?? 0}`
         }}
       />
       <PdfFooter />
