@@ -16,98 +16,26 @@ interface Props {
   profile: ScanProfileWithSuccessfulScan;
 }
 
+Font.registerEmojiSource({
+  format: "png",
+  url: "https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/",
+});
+
+Font.register({
+  family: "Inter",
+  fonts: [
+    {
+      src: "https://fonts.bunny.net/inter/files/inter-latin-400-normal.woff",
+      fontWeight: 400,
+    },
+    {
+      src: "https://fonts.bunny.net/inter/files/inter-latin-600-normal.woff",
+      fontWeight: 600,
+    },
+  ],
+});
+
 export const PdfExportDocument: FC<Props> = ({ profile }) => {
-  Font.registerEmojiSource({
-    format: "png",
-    url: "https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/",
-    withVariationSelectors: true,
-  });
-  Font.register({
-    family: "Inter",
-    fonts: [
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-100-normal.woff",
-        fontWeight: 100,
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-200-normal.woff",
-        fontWeight: 200,
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-300-normal.woff",
-        fontWeight: 300,
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-400-normal.woff",
-        fontWeight: 400,
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-500-normal.woff",
-        fontWeight: 500,
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-600-normal.woff",
-        fontWeight: 600,
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-700-normal.woff",
-        fontWeight: 700,
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-800-normal.woff",
-        fontWeight: 800,
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-900-normal.woff",
-        fontWeight: 900,
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-100-italic.woff",
-        fontWeight: 100,
-        fontStyle: "italic",
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-200-italic.woff",
-        fontWeight: 200,
-        fontStyle: "italic",
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-300-italic.woff",
-        fontWeight: 300,
-        fontStyle: "italic",
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-400-italic.woff",
-        fontWeight: 400,
-        fontStyle: "italic",
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-500-italic.woff",
-        fontWeight: 500,
-        fontStyle: "italic",
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-600-italic.woff",
-        fontWeight: 600,
-        fontStyle: "italic",
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-700-italic.woff",
-        fontWeight: 700,
-        fontStyle: "italic",
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-800-italic.woff",
-        fontWeight: 800,
-        fontStyle: "italic",
-      },
-      {
-        src: "https://fonts.bunny.net/inter/files/inter-latin-900-italic.woff",
-        fontWeight: 900,
-        fontStyle: "italic",
-      },
-    ],
-  });
   const preparedIssues = (profile.lastSuccessfulScan?.issues ?? [])
     .filter((issue) => {
       const meta = getIssueMeta(issue);

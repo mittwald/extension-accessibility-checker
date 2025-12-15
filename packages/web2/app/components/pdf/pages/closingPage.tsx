@@ -21,8 +21,7 @@ const styles = StyleSheet.create({
 });
 
 const ClosingPage: FC<ClosingPageProps> = ({ profile }) => {
-    // Format dates
-    const createdDate = new Date().toLocaleDateString('de-DE'); // Current date for report creation
+    const createdDate = new Date().toLocaleDateString('de-DE');
     const scanDate = profile.lastSuccessfulScan?.createdAt
         ? new Date(profile.lastSuccessfulScan.createdAt).toLocaleDateString('de-DE')
         : 'N/A';

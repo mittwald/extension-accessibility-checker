@@ -1,7 +1,9 @@
 {
   "1": {
     "label": "Wahrnehmbar (Perceivable)",
-    "description": "Inhalte müssen für alle wahrnehmbar sein. Dieses Prinzip adressiert visuelle, auditive und sensorische Zugänglichkeit."
+    "description": "Inhalte müssen für alle wahrnehmbar sein. Dieses Prinzip adressiert visuelle, auditive und sensorische Zugänglichkeit.",
+    "understanding": "",
+    "howToMeet": ""
   },
   "1.1": {
     "label": "Textalternativen (Text Alternatives)",
@@ -203,8 +205,10 @@
   },
   "2": {
     "label": "Bedienbar (Operable)",
-    "description": "Interface-Komponenten und Navigation müssen bedienbar sein. Dies umfasst Tastarturzugriff, Fokusmanagement, Navigation, Eingabemethoden."
-  },
+    "description": "Interface-Komponenten und Navigation müssen bedienbar sein. Dies umfasst Tastarturzugriff, Fokusmanagement, Navigation, Eingabemethoden.",
+    "understanding": "",
+    "howToMeet": ""
+ },
   "2.1": {
     "label": "Tastaturzugriff (Keyboard Accessible)",
     "description": "User, die keine Maus verwenden können, bleiben hängen, weil sie nicht alle Funktionen per Tastatur erreichen. Sie können Formulare oder Menüs nicht bedienen und verlassen im schlimmsten Fall die Seite.",
@@ -438,7 +442,9 @@
   },
   "3": {
     "label": "Verständlich (Understandable)",
-    "description": "Text muss lesbar sein, Navigation muss vorhersehbar sein, und Nutzer müssen Hilfe bei Eingabefehlern erhalten."
+    "description": "Text muss lesbar sein, Navigation muss vorhersehbar sein, und Nutzer müssen Hilfe bei Eingabefehlern erhalten.",
+    "understanding": "",
+    "howToMeet": ""
   },
   "3.1": {
     "label": "Lesbar (Readable)",
@@ -577,7 +583,9 @@
   },
   "4": {
     "label": "Robust (Robust)",
-    "description": "Code muss valide und mit Hilfstechnologien kompatible sein. Dies ist die technische Grundlage für barrierefreiheit."
+    "description": "Code muss valide und mit Hilfstechnologien kompatible sein. Dies ist die technische Grundlage für barrierefreiheit.",
+    "understanding": "",
+    "howToMeet": ""
   },
   "4.1": {
     "label": "Kompatibel (Compatible)",
