@@ -18,11 +18,12 @@ export const PathResultsTable = () => {
 
   return (
     <Table>
-      <TableHeader>
+      <TableHeader >
         <TableColumn>Titel</TableColumn>
         <TableColumn>Pfad</TableColumn>
         <TableColumn>Fehler</TableColumn>
         <TableColumn>Warnungen</TableColumn>
+        <TableColumn>Hinweise</TableColumn>
         <TableColumn>Score</TableColumn>
       </TableHeader>
 
@@ -38,6 +39,7 @@ export const PathResultsTable = () => {
               </TableCell>
               <TableCell>{p.issues?.errors ?? "–"}</TableCell>
               <TableCell>{p.issues?.warnings ?? "–"}</TableCell>
+              <TableCell>{p.issues?.notices ?? "–"}</TableCell>
               <TableCell>{p.score ?? "–"}</TableCell>
             </TableRow>
           );
@@ -47,6 +49,7 @@ export const PathResultsTable = () => {
           <TableCell>
             <strong>Gesamtbewertung</strong>
           </TableCell>
+          <TableCell></TableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>

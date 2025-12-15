@@ -70,16 +70,18 @@ const styles = StyleSheet.create({
   headerRow: {
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
     borderBottomColor: borderColor,
-    backgroundColor: '#F8F8F8',
+    backgroundColor: '#FFFFFF',
   },
   bodyRow: {
     borderBottomWidth: 1,
     borderBottomColor: borderColor,
   },
   footerRow: {
-    backgroundColor: '#F8F8F8',
+    backgroundColor: '#FFFFFF',
+    borderTopWidth: 2,
+    borderTopColor: borderColor,
     flexDirection: 'row',
     alignItems: 'stretch',
   },
@@ -141,7 +143,7 @@ const PdfTable = <T extends Record<string, unknown>>({
       </View>
 
       {data.map((row, i) => {
-        const bg = i % 2 === 0 ? undefined : '#F8F8F8';
+        const bg = i % 2 === 0 ? '#F8F8F8' : undefined;
         const isLastDataRow = i === data.length - 1;
         const isVisuallyLast = isLastDataRow && !footerData;
         const borderBottomWidth = isVisuallyLast ? 0 : 1;
