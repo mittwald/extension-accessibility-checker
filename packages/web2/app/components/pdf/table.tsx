@@ -1,36 +1,36 @@
-import { View, Text, StyleSheet, ViewProps } from '@react-pdf/renderer';
-import { theme } from './theme';
+import { View, Text, StyleSheet, ViewProps } from "@react-pdf/renderer";
+import { theme } from "./theme";
 
 export interface TableColumn<T> {
   header: string;
   accessor: keyof T;
   width?: number | string;
   isFlex?: boolean;
-  align?: 'left' | 'center' | 'right';
+  align?: "left" | "center" | "right";
 }
 
 interface TableProps<T> {
   columns: TableColumn<T>[];
   data: T[];
   footerData?: T;
-  style?: ViewProps['style'];
+  style?: ViewProps["style"];
 }
 
 const styles = StyleSheet.create({
   tableContainer: {
-    width: '100%',
-    flexDirection: 'column',
-    position: 'relative',
+    width: "100%",
+    flexDirection: "column",
+    position: "relative",
   },
   tableOverlay: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
   },
   frameBorder: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: theme.borderRadius.default,
   },
   cornerMask: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     width: 6,
     height: 6,
@@ -62,8 +62,8 @@ const styles = StyleSheet.create({
     right: 0,
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'stretch',
+    flexDirection: "row",
+    alignItems: "stretch",
   },
   headerRow: {
     borderTopLeftRadius: theme.borderRadius.default,
@@ -80,18 +80,18 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.background,
     borderTopWidth: 2,
     borderTopColor: theme.colors.border,
-    flexDirection: 'row',
-    alignItems: 'stretch',
+    flexDirection: "row",
+    alignItems: "stretch",
   },
   cell: {
     paddingVertical: theme.spacing.s,
     paddingHorizontal: theme.spacing.xs,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
   },
   text: {
-    fontFamily: 'Inter',
+    fontFamily: "Inter",
     fontSize: theme.fontSize.default,
     lineHeight: 1.5,
     color: theme.colors.text,
@@ -102,12 +102,12 @@ const styles = StyleSheet.create({
 });
 
 const mapAlign = (align?: string) => {
-  if (align === 'center') return 'center';
-  if (align === 'right') return 'flex-end';
-  return 'flex-start';
+  if (align === "center") return "center";
+  if (align === "right") return "flex-end";
+  return "flex-start";
 };
 
-const forceBreak = (word: string) => word.split('');
+const forceBreak = (word: string) => word.split("");
 
 const PdfTable = <T extends Record<string, unknown>>({
   columns,
@@ -127,14 +127,21 @@ const PdfTable = <T extends Record<string, unknown>>({
                 width: col.width,
                 flexGrow: col.isFlex ? 1 : 0,
                 flexShrink: col.isFlex ? 1 : 0,
-                flexBasis: col.isFlex ? 0 : 'auto',
+                flexBasis: col.isFlex ? 0 : "auto",
                 alignItems: mapAlign(col.align),
                 paddingLeft: i === 0 ? theme.spacing.m : theme.spacing.xs, // First column padding 16px
-                paddingRight: i === columns.length - 1 ? theme.spacing.m : theme.spacing.xs, // Last column padding
+                paddingRight:
+                  i === columns.length - 1 ? theme.spacing.m : theme.spacing.xs, // Last column padding
               },
             ]}
           >
-            <Text style={[styles.text, styles.textBold, { textAlign: col.align || 'left' }]}>
+            <Text
+              style={[
+                styles.text,
+                styles.textBold,
+                { textAlign: col.align || "left" },
+              ]}
+            >
               {col.header}
             </Text>
           </View>
@@ -169,18 +176,21 @@ const PdfTable = <T extends Record<string, unknown>>({
                     width: col.width,
                     flexGrow: col.isFlex ? 1 : 0,
                     flexShrink: col.isFlex ? 1 : 0,
-                    flexBasis: col.isFlex ? 0 : 'auto',
+                    flexBasis: col.isFlex ? 0 : "auto",
                     alignItems: mapAlign(col.align),
                     paddingLeft: j === 0 ? theme.spacing.m : theme.spacing.xs, // First column padding
-                    paddingRight: j === columns.length - 1 ? theme.spacing.m : theme.spacing.xs, // Last column padding
+                    paddingRight:
+                      j === columns.length - 1
+                        ? theme.spacing.m
+                        : theme.spacing.xs, // Last column padding
                   },
                 ]}
               >
                 <Text
-                  style={[styles.text, { textAlign: col.align || 'left' }]}
+                  style={[styles.text, { textAlign: col.align || "left" }]}
                   hyphenationCallback={col.isFlex ? forceBreak : undefined}
                 >
-                  {String(row[col.accessor] ?? '')}
+                  {String(row[col.accessor] ?? "")}
                 </Text>
               </View>
             ))}
@@ -199,17 +209,24 @@ const PdfTable = <T extends Record<string, unknown>>({
                   width: col.width,
                   flexGrow: col.isFlex ? 1 : 0,
                   flexShrink: col.isFlex ? 1 : 0,
-                  flexBasis: col.isFlex ? 0 : 'auto',
+                  flexBasis: col.isFlex ? 0 : "auto",
                   alignItems: mapAlign(col.align),
                   paddingLeft: j === 0 ? theme.spacing.m : theme.spacing.xs,
-                  paddingRight: j === columns.length - 1 ? theme.spacing.m : theme.spacing.xs,
+                  paddingRight:
+                    j === columns.length - 1
+                      ? theme.spacing.m
+                      : theme.spacing.xs,
                 },
               ]}
             >
               <Text
-                style={[styles.text, styles.textBold, { textAlign: col.align || 'left' }]}
+                style={[
+                  styles.text,
+                  styles.textBold,
+                  { textAlign: col.align || "left" },
+                ]}
               >
-                {String(footerData[col.accessor] ?? '')}
+                {String(footerData[col.accessor] ?? "")}
               </Text>
             </View>
           ))}

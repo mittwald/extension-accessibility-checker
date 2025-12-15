@@ -18,7 +18,7 @@ export const PathResultsTable = () => {
 
   return (
     <Table>
-      <TableHeader >
+      <TableHeader>
         <TableColumn>Titel</TableColumn>
         <TableColumn>Pfad</TableColumn>
         <TableColumn>Fehler</TableColumn>

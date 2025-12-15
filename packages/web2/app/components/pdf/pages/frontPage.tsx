@@ -14,10 +14,7 @@ const PdfFrontPage: React.FC<PdfFrontPageProps> = ({ profile }) => {
     <Page size="A4" style={styles.page}>
       <View style={styles.frontPage}>
         <View style={styles.frontPageContent}>
-          <PdfIconAccessible
-            size={64}
-            style={{ marginBottom: 4 }}
-          />
+          <PdfIconAccessible size={64} style={{ marginBottom: 4 }} />
           <View style={styles.frontPageInner}>
             <PdfH1 style={{ marginBottom: 6 }}>Barrierefreiheits-Report</PdfH1>
             <View style={{ flexDirection: "column", alignItems: "center" }}>

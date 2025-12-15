@@ -208,7 +208,7 @@
     "description": "Interface-Komponenten und Navigation müssen bedienbar sein. Dies umfasst Tastarturzugriff, Fokusmanagement, Navigation, Eingabemethoden.",
     "understanding": "",
     "howToMeet": ""
- },
+  },
   "2.1": {
     "label": "Tastaturzugriff (Keyboard Accessible)",
     "description": "User, die keine Maus verwenden können, bleiben hängen, weil sie nicht alle Funktionen per Tastatur erreichen. Sie können Formulare oder Menüs nicht bedienen und verlassen im schlimmsten Fall die Seite.",

@@ -5,25 +5,25 @@ import { theme } from "./theme";
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: "100%",
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
     marginBottom: theme.spacing.xs,
   },
   barContainer: {
     height: 16,
     backgroundColor: theme.colors.backgroundSecondary,
     borderRadius: theme.borderRadius.default,
-    overflow: 'hidden',
+    overflow: "hidden",
     borderWidth: 1,
     borderColor: theme.colors.border,
-    borderStyle: 'solid'
+    borderStyle: "solid",
   },
   fill: {
-    height: '100%',
+    height: "100%",
   },
 });
 
@@ -34,8 +34,8 @@ interface PdfProgressbarProps {
   max?: number;
   displayType?: "val-max" | "percentage";
   unit?: string;
-  color?: string
-  style?: ViewProps['style']
+  color?: string;
+  style?: ViewProps["style"];
 }
 
 const PdfProgressbar: React.FC<PdfProgressbarProps> = ({
@@ -69,7 +69,12 @@ const PdfProgressbar: React.FC<PdfProgressbarProps> = ({
       </View>
 
       <View style={styles.barContainer}>
-        <View style={[styles.fill, { width: `${percentage}%`, backgroundColor: color }]} />
+        <View
+          style={[
+            styles.fill,
+            { width: `${percentage}%`, backgroundColor: color },
+          ]}
+        />
       </View>
     </View>
   );

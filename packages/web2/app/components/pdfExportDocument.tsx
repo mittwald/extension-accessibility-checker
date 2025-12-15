@@ -4,7 +4,10 @@ import { ScanProfileWithSuccessfulScan } from "../api/types";
 import PdfFrontPage from "./pdf/pages/frontPage";
 import PdfResultOverviewPage from "./pdf/pages/resultOverviewPage";
 import PdfScannedPagesPage from "./pdf/pages/scannedPagesPage";
-import { getIssueMeta, groupIssuesByGuidelineAndTechnique } from "./profile/tabs/issues/helpers";
+import {
+  getIssueMeta,
+  groupIssuesByGuidelineAndTechnique,
+} from "./profile/tabs/issues/helpers";
 import wcagLinks from "../wcagLinks.json";
 import IssueDetailsPage from "./pdf/pages/issueDetailsPage";
 import SummaryPage from "./pdf/pages/summaryPage";
@@ -40,10 +43,7 @@ export const PdfExportDocument: FC<Props> = ({ profile }) => {
     .filter((issue) => {
       const meta = getIssueMeta(issue);
       const wcagData = wcagLinks[meta.criterion];
-      return (
-        !wcagData ||
-        !("wcagLevel" in wcagData) || true
-      );
+      return !wcagData || !("wcagLevel" in wcagData) || true;
     })
     .sort((a, b) => {
       const order = {
@@ -61,7 +61,11 @@ export const PdfExportDocument: FC<Props> = ({ profile }) => {
       <PdfFrontPage profile={profile} />
       <PdfResultOverviewPage profile={profile} />
       <PdfScannedPagesPage profile={profile} />
-      {issueGroups.sort((a, b) => a.groupKey.localeCompare(b.groupKey)).map((group, index) => <IssueDetailsPage key={index} group={group} index={index} />)}
+      {issueGroups
+        .sort((a, b) => a.groupKey.localeCompare(b.groupKey))
+        .map((group, index) => (
+          <IssueDetailsPage key={index} group={group} index={index} />
+        ))}
       <SummaryPage issueGroups={issueGroups} />
       <BenefitsPage />
       <MethodologyPage />

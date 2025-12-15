@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet } from '@react-pdf/renderer';
-import { theme } from './theme';
+import { View, Text, StyleSheet } from "@react-pdf/renderer";
+import { theme } from "./theme";
 
 interface StatCardProps {
   value: string | number;
@@ -9,10 +9,10 @@ interface StatCardProps {
 
 const styles = StyleSheet.create({
   accentBox: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
     padding: theme.spacing.m,
     gap: theme.spacing.s,
 
@@ -24,33 +24,33 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   bigNumberWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     gap: theme.spacing.xs,
   },
   valueText: {
-    fontFamily: 'Inter',
+    fontFamily: "Inter",
     fontWeight: theme.fontWeight.bold,
     fontSize: 24,
     lineHeight: 1.5,
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.colors.text,
   },
   labelText: {
-    fontFamily: 'Inter',
+    fontFamily: "Inter",
     fontWeight: theme.fontWeight.bold,
     fontSize: theme.fontSize.default,
     lineHeight: 1.5,
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.colors.text,
   },
   descriptionText: {
-    fontFamily: 'Inter',
+    fontFamily: "Inter",
     fontWeight: theme.fontWeight.regular,
     fontSize: theme.fontSize.default,
     lineHeight: 1.5,
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.colors.text,
   },
 });
@@ -62,9 +62,7 @@ const StatCard = ({ value, label, description }: StatCardProps) => {
         <Text style={styles.valueText}>{value}</Text>
         <Text style={styles.labelText}>{label}</Text>
       </View>
-      <Text style={styles.descriptionText}>
-        {description}
-      </Text>
+      <Text style={styles.descriptionText}>{description}</Text>
     </View>
   );
 };

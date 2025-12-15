@@ -12,7 +12,9 @@ interface PdfResultOverviewPageProps {
   profile: ScanProfileWithSuccessfulScan;
 }
 
-const PdfResultOverviewPage: React.FC<PdfResultOverviewPageProps> = ({ profile }) => {
+const PdfResultOverviewPage: React.FC<PdfResultOverviewPageProps> = ({
+  profile,
+}) => {
   const color = (value: number | undefined) => {
     if (value === undefined) {
       return undefined;
@@ -36,13 +38,32 @@ const PdfResultOverviewPage: React.FC<PdfResultOverviewPageProps> = ({ profile }
         auf dem Konformitätsniveau <PdfTextBold>AAA</PdfTextBold>. Er bietet
         einen schnellen Überblick über Optimierungspotenziale.
       </PdfText>
-      <PdfProgressbar color={color(profile.issueSummary?.score ?? 0)} label="Barrierefreiheitsscore" value={profile.issueSummary?.score ?? 0} />
-      <View style={{ flexDirection: 'row', gap: theme.spacing.m }}>
-        <StatCard value={profile.issueSummary?.errors ?? 0} label="Fehler" description="Kritische Fehler, die mit höchster Priorität behoben werden sollten." />
-        <StatCard value={profile.issueSummary?.warnings ?? 0} label="Warnungen" description="Punkte, die überprüft und bei Bedarf verbessert werden sollten." />
-        <StatCard value={profile.issueSummary?.notices ?? 0} label="Hinweise" description="Empfehlungen, über WCAG-Konformatität hinaus." />
+      <PdfProgressbar
+        color={color(profile.issueSummary?.score ?? 0)}
+        label="Barrierefreiheitsscore"
+        value={profile.issueSummary?.score ?? 0}
+      />
+      <View style={{ flexDirection: "row", gap: theme.spacing.m }}>
+        <StatCard
+          value={profile.issueSummary?.errors ?? 0}
+          label="Fehler"
+          description="Kritische Fehler, die mit höchster Priorität behoben werden sollten."
+        />
+        <StatCard
+          value={profile.issueSummary?.warnings ?? 0}
+          label="Warnungen"
+          description="Punkte, die überprüft und bei Bedarf verbessert werden sollten."
+        />
+        <StatCard
+          value={profile.issueSummary?.notices ?? 0}
+          label="Hinweise"
+          description="Empfehlungen, über WCAG-Konformatität hinaus."
+        />
       </View>
-      <PdfAlert title="Hinweis" description="Der Barrierefreiheitsscore liefert einen ersten Hinweis über den Stand der Barrierefreiheit. Einzelne Fehler oder Warnungen können die Nutzung weithin beeinträchtigen und müssen geprüft und behboben werden."></PdfAlert>
+      <PdfAlert
+        title="Hinweis"
+        description="Der Barrierefreiheitsscore liefert einen ersten Hinweis über den Stand der Barrierefreiheit. Einzelne Fehler oder Warnungen können die Nutzung weithin beeinträchtigen und müssen geprüft und behboben werden."
+      ></PdfAlert>
       <PdfFooter />
     </Page>
   );

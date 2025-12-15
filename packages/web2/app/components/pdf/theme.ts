@@ -42,7 +42,7 @@ export const theme = {
   },
   lineHeight: {
     default: 1.5,
-  }
+  },
 };
 
 export const styles = StyleSheet.create({
@@ -150,12 +150,12 @@ export const styles = StyleSheet.create({
     borderRadius: theme.borderRadius.default,
   },
   footerContainer: {
-    width: '100%',
-    marginTop: 'auto',
+    width: "100%",
+    marginTop: "auto",
     borderTopWidth: 1,
     borderTopColor: theme.colors.border,
     paddingTop: 10,
-    alignItems: 'center',
+    alignItems: "center",
     gap: 8,
   },
 });
