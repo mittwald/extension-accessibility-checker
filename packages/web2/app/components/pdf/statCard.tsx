@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet } from '@react-pdf/renderer';
+import { theme } from './theme';
 
 interface StatCardProps {
   value: string | number;
@@ -12,45 +13,45 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 16,
-    gap: 8,
+    padding: theme.spacing.m,
+    gap: theme.spacing.s,
 
     width: 161,
     height: 172,
 
-    backgroundColor: '#F8F8F8',
-    borderRadius: 4,
+    backgroundColor: theme.colors.backgroundSecondary,
+    borderRadius: theme.borderRadius.default,
     flexGrow: 1,
   },
   bigNumberWrapper: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: 4,
+    gap: theme.spacing.xs,
   },
   valueText: {
     fontFamily: 'Inter',
-    fontWeight: 700,
+    fontWeight: theme.fontWeight.bold,
     fontSize: 24,
     lineHeight: 1.5,
     textAlign: 'center',
-    color: '#222222',
+    color: theme.colors.text,
   },
   labelText: {
     fontFamily: 'Inter',
-    fontWeight: 700,
-    fontSize: 12,
+    fontWeight: theme.fontWeight.bold,
+    fontSize: theme.fontSize.default,
     lineHeight: 1.5,
     textAlign: 'center',
-    color: '#222222',
+    color: theme.colors.text,
   },
   descriptionText: {
     fontFamily: 'Inter',
-    fontWeight: 400,
-    fontSize: 12,
+    fontWeight: theme.fontWeight.regular,
+    fontSize: theme.fontSize.default,
     lineHeight: 1.5,
     textAlign: 'center',
-    color: '#222222',
+    color: theme.colors.text,
   },
 });
 

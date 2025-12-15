@@ -1,25 +1,26 @@
 import { View, Text, StyleSheet } from '@react-pdf/renderer';
+import { theme } from './theme';
 
 const styles = StyleSheet.create({
   footerContainer: {
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 8,
+    paddingTop: theme.spacing.s,
     borderTopWidth: 0,
     marginTop: 'auto',
   },
   linkText: {
     fontFamily: 'Inter',
-    fontSize: 8,
+    fontSize: theme.fontSize.small,
     lineHeight: 1.5,
-    color: '#222222',
+    color: theme.colors.text,
     flexGrow: 1,
   },
   pageNumber: {
     fontFamily: 'Inter',
-    fontSize: 8,
-    color: '#222222',
+    fontSize: theme.fontSize.small,
+    color: theme.colors.text,
   },
 });
 
@@ -28,7 +29,7 @@ const PdfFooter = () => {
     <View style={styles.footerContainer} fixed>
       <Text style={styles.linkText}>www.mittwald.de</Text>
       <Text style={styles.pageNumber}
-        render={({ pageNumber }) => `Seite ${pageNumber-1}`}
+        render={({ pageNumber }) => `Seite ${pageNumber - 1}`}
       />
     </View>
   );

@@ -3,7 +3,7 @@ import { Page, View } from '@react-pdf/renderer';
 import { PdfH3, PdfText } from '../typography';
 import PdfTable, { TableColumn } from '../table';
 import { IssueGroup } from '../../profile/tabs/issues/types';
-import { styles as themeStyles } from '../theme';
+import { styles, theme } from '../theme';
 
 interface SummaryPageProps {
     issueGroups: IssueGroup[];
@@ -60,10 +60,10 @@ const SummaryPage: FC<SummaryPageProps> = ({ issueGroups }) => {
     ];
 
     return (
-        <Page size="A4" style={themeStyles.page}>
-            <View style={{ marginBottom: 20 }}>
-                <PdfH3 style={{ color: '#002A7B' }}>Zusammenfassung nach Prinzipien</PdfH3>
-                <PdfText style={{ marginTop: 8 }}>
+        <Page size="A4" style={styles.page}>
+            <View style={{ marginBottom: theme.spacing.m }}>
+                <PdfH3>Zusammenfassung nach Prinzipien</PdfH3>
+                <PdfText style={{ marginTop: theme.spacing.s }}>
                     Hier folgt eine Zusammenfassung der Barrierefreiheitsprobleme, die während des Scans gefunden wurden. Die Probleme sind nach den vier WCAG-Prinzipien gruppiert.
                 </PdfText>
             </View>

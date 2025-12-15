@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, ViewProps } from '@react-pdf/renderer';
+import { theme } from './theme';
 
 export interface TableColumn<T> {
   header: string;
@@ -14,9 +15,6 @@ interface TableProps<T> {
   footerData?: T;
   style?: ViewProps['style'];
 }
-
-const borderColor = '#909090';
-const textColor = '#222222';
 
 const styles = StyleSheet.create({
   tableContainer: {
@@ -38,24 +36,24 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     borderLeftWidth: 1,
-    borderLeftColor: borderColor,
+    borderLeftColor: theme.colors.border,
     borderRightWidth: 1,
-    borderRightColor: borderColor,
+    borderRightColor: theme.colors.border,
     borderBottomWidth: 1,
-    borderBottomColor: borderColor,
-    borderBottomLeftRadius: 4,
-    borderBottomRightRadius: 4,
+    borderBottomColor: theme.colors.border,
+    borderBottomLeftRadius: theme.borderRadius.default,
+    borderBottomRightRadius: theme.borderRadius.default,
     borderTopWidth: 1,
-    borderTopColor: borderColor,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
+    borderTopColor: theme.colors.border,
+    borderTopLeftRadius: theme.borderRadius.default,
+    borderTopRightRadius: theme.borderRadius.default,
   },
   cornerMask: {
     position: 'absolute',
     bottom: 0,
     width: 6,
     height: 6,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: theme.colors.background,
   },
   maskLeft: {
     left: 0,
@@ -68,38 +66,38 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
   },
   headerRow: {
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
+    borderTopLeftRadius: theme.borderRadius.default,
+    borderTopRightRadius: theme.borderRadius.default,
     borderBottomWidth: 2,
-    borderBottomColor: borderColor,
-    backgroundColor: '#FFFFFF',
+    borderBottomColor: theme.colors.border,
+    backgroundColor: theme.colors.background,
   },
   bodyRow: {
     borderBottomWidth: 1,
-    borderBottomColor: borderColor,
+    borderBottomColor: theme.colors.border,
   },
   footerRow: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: theme.colors.background,
     borderTopWidth: 2,
-    borderTopColor: borderColor,
+    borderTopColor: theme.colors.border,
     flexDirection: 'row',
     alignItems: 'stretch',
   },
   cell: {
-    paddingVertical: 8,
-    paddingHorizontal: 4,
+    paddingVertical: theme.spacing.s,
+    paddingHorizontal: theme.spacing.xs,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
   },
   text: {
     fontFamily: 'Inter',
-    fontSize: 10,
-    lineHeight: 1.2,
-    color: textColor,
+    fontSize: theme.fontSize.default,
+    lineHeight: 1.5,
+    color: theme.colors.text,
   },
   textBold: {
-    fontWeight: 700,
+    fontWeight: theme.fontWeight.bold,
   },
 });
 
@@ -119,7 +117,6 @@ const PdfTable = <T extends Record<string, unknown>>({
 }: TableProps<T>) => {
   return (
     <View style={{ ...styles.tableContainer, ...style }}>
-      {/* Content Layer (Rows) */}
       <View style={[styles.row, styles.headerRow]} fixed>
         {columns.map((col, i) => (
           <View
@@ -132,6 +129,8 @@ const PdfTable = <T extends Record<string, unknown>>({
                 flexShrink: col.isFlex ? 1 : 0,
                 flexBasis: col.isFlex ? 0 : 'auto',
                 alignItems: mapAlign(col.align),
+                paddingLeft: i === 0 ? theme.spacing.m : theme.spacing.xs, // First column padding 16px
+                paddingRight: i === columns.length - 1 ? theme.spacing.m : theme.spacing.xs, // Last column padding
               },
             ]}
           >
@@ -143,7 +142,7 @@ const PdfTable = <T extends Record<string, unknown>>({
       </View>
 
       {data.map((row, i) => {
-        const bg = i % 2 === 0 ? '#F8F8F8' : undefined;
+        const bg = i % 2 === 0 ? theme.colors.backgroundSecondary : undefined;
         const isLastDataRow = i === data.length - 1;
         const isVisuallyLast = isLastDataRow && !footerData;
         const borderBottomWidth = isVisuallyLast ? 0 : 1;
@@ -172,6 +171,8 @@ const PdfTable = <T extends Record<string, unknown>>({
                     flexShrink: col.isFlex ? 1 : 0,
                     flexBasis: col.isFlex ? 0 : 'auto',
                     alignItems: mapAlign(col.align),
+                    paddingLeft: j === 0 ? theme.spacing.m : theme.spacing.xs, // First column padding
+                    paddingRight: j === columns.length - 1 ? theme.spacing.m : theme.spacing.xs, // Last column padding
                   },
                 ]}
               >
@@ -200,6 +201,8 @@ const PdfTable = <T extends Record<string, unknown>>({
                   flexShrink: col.isFlex ? 1 : 0,
                   flexBasis: col.isFlex ? 0 : 'auto',
                   alignItems: mapAlign(col.align),
+                  paddingLeft: j === 0 ? theme.spacing.m : theme.spacing.xs,
+                  paddingRight: j === columns.length - 1 ? theme.spacing.m : theme.spacing.xs,
                 },
               ]}
             >
@@ -212,13 +215,9 @@ const PdfTable = <T extends Record<string, unknown>>({
           ))}
         </View>
       )}
-
-      {/* Overlay Layer (Frame + Masks) - Renders on TOP */}
       <View style={styles.tableOverlay} fixed>
-        {/* Masks first (hide content corners) */}
         <View style={[styles.cornerMask, styles.maskLeft]} />
         <View style={[styles.cornerMask, styles.maskRight]} />
-        {/* Frame Border on top */}
         <View style={styles.frameBorder} />
       </View>
     </View>

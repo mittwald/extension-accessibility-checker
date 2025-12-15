@@ -3,7 +3,7 @@ import { ScanProfileWithSuccessfulScan } from "../../../api/types";
 import { Page, View } from "@react-pdf/renderer";
 import { PdfIconAccessible, PdfIconMittwald } from "../icons";
 import { PdfH1, PdfText, PdfTextBold } from "../typography";
-import { styles, theme } from "../theme";
+import { styles } from "../theme";
 
 interface PdfFrontPageProps {
   profile: ScanProfileWithSuccessfulScan;
@@ -13,26 +13,12 @@ const PdfFrontPage: React.FC<PdfFrontPageProps> = ({ profile }) => {
   return (
     <Page size="A4" style={styles.page}>
       <View style={styles.frontPage}>
-        <View
-          style={{
-            padding: 16,
-            flexDirection: "column",
-            alignItems: "center",
-            height: "100%",
-          }}
-        >
+        <View style={styles.frontPageContent}>
           <PdfIconAccessible
-            size={theme.page.front.iconSize}
+            size={64}
             style={{ marginBottom: 4 }}
           />
-          <View
-            style={{
-              padding: 16,
-              flexDirection: "column",
-              alignItems: "center",
-              flexGrow: 1,
-            }}
-          >
+          <View style={styles.frontPageInner}>
             <PdfH1 style={{ marginBottom: 6 }}>Barrierefreiheits-Report</PdfH1>
             <View style={{ flexDirection: "column", alignItems: "center" }}>
               <PdfText style={{ marginBottom: 18 }}>
@@ -54,13 +40,7 @@ const PdfFrontPage: React.FC<PdfFrontPageProps> = ({ profile }) => {
             </View>
           </View>
         </View>
-        <View
-          style={{
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "flex-end",
-          }}
-        >
+        <View style={styles.frontPageFooter}>
           <PdfIconMittwald size={30} />
         </View>
       </View>

@@ -2,7 +2,7 @@ import * as React from "react";
 import { ScanProfileWithSuccessfulScan } from "../../../api/types";
 import { Page } from "@react-pdf/renderer";
 import { PdfH3, PdfText, PdfTextBold } from "../typography";
-import { styles as themeStyles } from "../theme";
+import { styles, theme } from "../theme";
 import PdfTable, { TableColumn } from "../table";
 import PdfFooter from "../footer";
 
@@ -36,7 +36,7 @@ const PdfScannedPagesPage: React.FC<PdfScannedPagesPageProps> = ({ profile }) =>
   })) ?? [];
 
   return (
-    <Page size="A4" style={{ ...themeStyles.page, gap: 16 }}>
+    <Page size="A4" style={{ ...styles.page, gap: theme.spacing.m }}>
       <PdfH3>Geprüfte Seiten</PdfH3>
 
       <PdfText>

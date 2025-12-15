@@ -1,6 +1,7 @@
 import { StyleSheet, View, ViewProps } from "@react-pdf/renderer";
 import * as React from "react";
 import { PdfText, PdfTextBold } from "./typography";
+import { theme } from "./theme";
 
 const styles = StyleSheet.create({
   container: {
@@ -10,14 +11,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
-    marginBottom: 4,
+    marginBottom: theme.spacing.xs,
   },
   barContainer: {
     height: 16,
-    backgroundColor: '#E5E7EB',
-    borderRadius: 4,
+    backgroundColor: theme.colors.backgroundSecondary,
+    borderRadius: theme.borderRadius.default,
     overflow: 'hidden',
-    border: '1px solid #909090'
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    borderStyle: 'solid'
   },
   fill: {
     height: '100%',
@@ -42,7 +45,7 @@ const PdfProgressbar: React.FC<PdfProgressbarProps> = ({
   max = 100,
   displayType,
   unit = "",
-  color = "#F56800",
+  color = theme.colors.warning,
   style,
 }) => {
   const safeMax = max === min ? min + 1 : max;

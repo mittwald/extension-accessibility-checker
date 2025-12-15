@@ -1,4 +1,4 @@
-import { styles } from '../theme';
+import { styles, theme } from '../theme';
 import { Page, View } from '@react-pdf/renderer';
 import { PdfH3, PdfH4, PdfText, PdfTextBold } from '../typography';
 import { Issue, IssueGroup } from '../../profile/tabs/issues/types';
@@ -43,18 +43,18 @@ const IssueGroupOverview: FC<IssueGroupOverviewProps> = ({ group }) => {
   const principleDescription = principleData && 'description' in principleData ? (principleData as { description: string }).description : undefined;
 
   return (
-    <View style={{ marginTop: 20 }}>
-      <PdfH3 style={{ color: '#002A7B', marginBottom: 8 }}>{group.groupKey}. {group.label}</PdfH3>
+    <View style={{ marginTop: theme.spacing.m }}>
+      <PdfH3 style={{ marginBottom: theme.spacing.s }}>{group.groupKey}. {group.label}</PdfH3>
       {principleDescription && (
-        <PdfText style={{ marginBottom: 20 }}>{principleDescription} <PdfTextBold>{group.issues.reduce((total, issue) => {return total + issue.count; }, 0)} Probleme idenitifiziert</PdfTextBold></PdfText>
+        <PdfText style={{ marginBottom: theme.spacing.m }}>{principleDescription} <PdfTextBold>{group.issues.reduce((total, issue) => { return total + issue.count; }, 0)} Probleme idenitifiziert</PdfTextBold></PdfText>
       )}
 
       {guidelineGroups.map((guidelineGroup) => (
-        <View key={guidelineGroup.key} style={{ marginBottom: 24 }} wrap={false}>
-          <PdfH4 style={{ color: '#002A7B', marginBottom: 8 }}>{guidelineGroup.key} {guidelineGroup.label}</PdfH4>
+        <View key={guidelineGroup.key} style={{ marginBottom: theme.spacing.l }} wrap={false}>
+          <PdfH4 style={{ marginBottom: theme.spacing.s }}>{guidelineGroup.key} {guidelineGroup.label}</PdfH4>
 
           {guidelineGroup.description && (
-            <PdfText style={{ marginBottom: 12 }}>
+            <PdfText style={{ marginBottom: theme.spacing.m }}>
               <ValidatedPdfTextBold>Auswirkungen: </ValidatedPdfTextBold>
               {guidelineGroup.description}
             </PdfText>
@@ -68,7 +68,7 @@ const IssueGroupOverview: FC<IssueGroupOverviewProps> = ({ group }) => {
 }
 
 const ValidatedPdfTextBold: FC<{ children: React.ReactNode }> = ({ children }) => (
-  <PdfText style={{ fontWeight: 'bold', fontFamily: 'Inter' }}>{children}</PdfText>
+  <PdfText style={{ fontWeight: theme.fontWeight.bold, fontFamily: 'Inter' }}>{children}</PdfText>
 );
 
 
@@ -116,7 +116,7 @@ const IssueTable: FC<{ issues: Issue[] }> = ({ issues }) => {
         { header: 'WCAG-Kriterium', accessor: 'col1', isFlex: true },
         { header: 'Typ', accessor: 'col2', width: 60 },
         { header: 'Level', accessor: 'col3', width: 50, align: 'center' },
-        { header: 'Anzahl', accessor: 'col4', width: 50, align: 'center' },
+        { header: 'Anzahl', accessor: 'col4', width: 70, align: 'center' },
       ]}
     />
   );
@@ -131,7 +131,7 @@ const IssueDetailsPage: FC<IssueDetailsPageProps> = ({ group, index }) => {
   return (
     <Page size="A4" style={styles.page}>
       {index == 0 && (
-        <View style={{ marginBottom: 20 }}>
+        <View style={{ marginBottom: theme.spacing.m }}>
           <PdfH3>Detaillierte Ergebnisse</PdfH3>
           <PdfText>Die folgende detaillierte Analyse schlüsselt alle Barrierefreiheitsprobleme nach den vier WCAG-Prinzipien auf. Für jedes Erfolgskriterium gibt es Informationen zum Fehlertyp, dem Konformitätslevel und der Häufigkeit.</PdfText>
         </View>

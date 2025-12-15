@@ -1,5 +1,6 @@
 import { Svg, Path, SVGProps } from "@react-pdf/renderer";
 import { FC } from "react";
+import { theme } from "./theme";
 
 interface IconProps {
   size?: number;
@@ -9,7 +10,7 @@ interface IconProps {
 
 export const PdfIconAccessible: FC<IconProps> = ({
   size = 64,
-  color = "#002A7B",
+  color = theme.colors.heading,
   style,
 }) => (
   <Svg width={size} height={size} viewBox="0 0 64 64" style={style}>
@@ -23,7 +24,7 @@ export const PdfIconAccessible: FC<IconProps> = ({
 
 export const PdfIconMittwald: FC<IconProps> = ({
   size = 64,
-  color = "#002A7B",
+  color = theme.colors.heading,
   style,
 }) => (
   <Svg width={size} height={size} viewBox="0 0 29 20" style={style}>
