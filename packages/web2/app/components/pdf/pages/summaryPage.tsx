@@ -35,28 +35,28 @@ const SummaryPage: FC<SummaryPageProps> = ({ issueGroups }) => {
   const totalNotice = summaryData.reduce((sum, row) => sum + row.notice, 0);
   const totalAll = summaryData.reduce((sum, row) => sum + row.total, 0);
 
-  const footerData = {
-    c1: "Gesamt",
-    c2: totalError,
-    c3: totalWarning,
-    c4: totalNotice,
-    c5: totalAll,
+  type MappedTableRow = {
+    principle: string;
+    error: number;
+    warning: number;
+    notice: number;
+    total: number;
   };
 
-  type MappedTableRow = {
-    c1: string;
-    c2: number;
-    c3: number;
-    c4: number;
-    c5: number;
+  const footerData: MappedTableRow = {
+    principle: "Gesamt",
+    error: totalError,
+    warning: totalWarning,
+    notice: totalNotice,
+    total: totalAll,
   };
 
   const columns: TableColumn<MappedTableRow>[] = [
-    { header: "Prinzip", accessor: "c1", isFlex: true },
-    { header: "Fehler", accessor: "c2", width: 60, align: "center" },
-    { header: "Warnungen", accessor: "c3", width: 80, align: "center" },
-    { header: "Hinweise", accessor: "c4", width: 70, align: "center" },
-    { header: "Gesamt", accessor: "c5", width: 60, align: "center" },
+    { header: "Prinzip", accessor: "principle", isFlex: true },
+    { header: "Fehler", accessor: "error", width: 60, align: "center" },
+    { header: "Warnungen", accessor: "warning", width: 80, align: "center" },
+    { header: "Hinweise", accessor: "notice", width: 70, align: "center" },
+    { header: "Gesamt", accessor: "total", width: 60, align: "center" },
   ];
 
   return (
@@ -72,11 +72,11 @@ const SummaryPage: FC<SummaryPageProps> = ({ issueGroups }) => {
 
       <PdfTable
         data={summaryData.map((row) => ({
-          c1: row.principle,
-          c2: row.error,
-          c3: row.warning,
-          c4: row.notice,
-          c5: row.total,
+          principle: row.principle,
+          error: row.error,
+          warning: row.warning,
+          notice: row.notice,
+          total: row.total,
         }))}
         footerData={footerData}
         columns={columns}

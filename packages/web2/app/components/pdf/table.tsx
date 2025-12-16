@@ -129,9 +129,9 @@ const PdfTable = <T extends Record<string, unknown>>({
                 flexShrink: col.isFlex ? 1 : 0,
                 flexBasis: col.isFlex ? 0 : "auto",
                 alignItems: mapAlign(col.align),
-                paddingLeft: i === 0 ? theme.spacing.m : theme.spacing.xs, // First column padding 16px
+                paddingLeft: i === 0 ? theme.spacing.m : theme.spacing.xs,
                 paddingRight:
-                  i === columns.length - 1 ? theme.spacing.m : theme.spacing.xs, // Last column padding
+                  i === columns.length - 1 ? theme.spacing.m : theme.spacing.xs,
               },
             ]}
           >
@@ -178,11 +178,11 @@ const PdfTable = <T extends Record<string, unknown>>({
                     flexShrink: col.isFlex ? 1 : 0,
                     flexBasis: col.isFlex ? 0 : "auto",
                     alignItems: mapAlign(col.align),
-                    paddingLeft: j === 0 ? theme.spacing.m : theme.spacing.xs, // First column padding
+                    paddingLeft: j === 0 ? theme.spacing.m : theme.spacing.xs,
                     paddingRight:
                       j === columns.length - 1
                         ? theme.spacing.m
-                        : theme.spacing.xs, // Last column padding
+                        : theme.spacing.xs,
                   },
                 ]}
               >

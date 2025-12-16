@@ -30,6 +30,14 @@ export const PdfSmall: FC<PropsWithChildren & PropsWithStyle & TextProps> = ({
   </Text>
 );
 
+export const PdfSmallBold: FC<
+  PropsWithChildren & PropsWithStyle & TextProps
+> = ({ children, style, ...props }) => (
+  <Text style={{ ...styles.textSmallBold, ...style }} {...props}>
+    {children}
+  </Text>
+);
+
 export const PdfLink: FC<
   PropsWithChildren & PropsWithStyle & { src: string }
 > = ({ children, style, src, ...props }) => (
@@ -45,6 +53,14 @@ export const PdfLink: FC<
   >
     {children}
   </Link>
+);
+
+export const PdfLargeHeading: FC<
+  PropsWithChildren & PropsWithStyle & TextProps
+> = ({ children, style, ...props }) => (
+  <Text style={{ ...styles.largeHeading, ...style }} {...props}>
+    {children}
+  </Text>
 );
 
 export const PdfH1: FC<PropsWithChildren & PropsWithStyle & TextProps> = ({

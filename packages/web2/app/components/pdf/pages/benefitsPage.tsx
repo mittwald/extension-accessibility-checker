@@ -10,7 +10,6 @@ const BenefitsPage: FC = () => {
       <View style={{ marginBottom: theme.spacing.m }}>
         <PdfH3>Vorteile eines barrierefreien Webauftritts</PdfH3>
       </View>
-
       <PdfFooter />
     </Page>
   );

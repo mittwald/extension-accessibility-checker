@@ -53,6 +53,10 @@ const IssueGroupOverview: FC<IssueGroupOverviewProps> = ({ group }) => {
       ? (principleData as { description: string }).description
       : undefined;
 
+  const totalIssuesInGroup = group.issues.reduce((total, issue) => {
+    return total + issue.count;
+  }, 0);
+
   return (
     <View style={{ marginTop: theme.spacing.m }}>
       <PdfH3 style={{ marginBottom: theme.spacing.s }}>
@@ -62,10 +66,7 @@ const IssueGroupOverview: FC<IssueGroupOverviewProps> = ({ group }) => {
         <PdfText style={{ marginBottom: theme.spacing.m }}>
           {principleDescription}{" "}
           <PdfTextBold>
-            {group.issues.reduce((total, issue) => {
-              return total + issue.count;
-            }, 0)}{" "}
-            Probleme idenitifiziert
+            {totalIssuesInGroup} Probleme idenitifiziert
           </PdfTextBold>
         </PdfText>
       )}
@@ -147,21 +148,21 @@ const IssueTable: FC<{ issues: Issue[] }> = ({ issues }) => {
 
   const tableData = Object.values(criterionGroups)
     .map((g) => ({
-      col1: `${g.criterion} ${g.label}`,
-      col2: g.type,
-      col3: g.level,
-      col4: g.count,
+      criteria: `${g.criterion} ${g.label}`,
+      type: g.type,
+      level: g.level,
+      count: g.count,
     }))
-    .sort((a, b) => a.col1.localeCompare(b.col1));
+    .sort((a, b) => a.criteria.localeCompare(b.criteria));
 
   return (
     <PdfTable
       data={tableData}
       columns={[
-        { header: "WCAG-Kriterium", accessor: "col1", isFlex: true },
-        { header: "Typ", accessor: "col2", width: 60 },
-        { header: "Level", accessor: "col3", width: 50, align: "center" },
-        { header: "Anzahl", accessor: "col4", width: 70, align: "center" },
+        { header: "WCAG-Kriterium", accessor: "criteria", isFlex: true },
+        { header: "Typ", accessor: "type", width: 60 },
+        { header: "Level", accessor: "level", width: 50, align: "center" },
+        { header: "Anzahl", accessor: "count", width: 70, align: "center" },
       ]}
     />
   );

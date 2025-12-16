@@ -27,6 +27,7 @@ export const theme = {
     pagePadding: 40,
   },
   fontSize: {
+    largeHeading: 32,
     h1: 18,
     h2: 16,
     h3: 14,
@@ -75,6 +76,20 @@ export const styles = StyleSheet.create({
     color: theme.colors.text,
     lineHeight: theme.lineHeight.default,
     fontWeight: theme.fontWeight.regular,
+  },
+  textSmallBold: {
+    fontFamily: "Inter",
+    fontSize: theme.fontSize.small,
+    color: theme.colors.text,
+    lineHeight: theme.lineHeight.default,
+    fontWeight: theme.fontWeight.bold,
+  },
+  largeHeading: {
+    fontFamily: "Inter",
+    fontSize: theme.fontSize.largeHeading,
+    color: theme.colors.heading,
+    fontWeight: theme.fontWeight.bold,
+    lineHeight: theme.lineHeight.default,
   },
   h1: {
     fontFamily: "Inter",
