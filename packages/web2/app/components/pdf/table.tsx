@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, ViewProps, Svg, Path } from "@react-pdf/renderer";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ViewProps,
+  Svg,
+  Path,
+} from "@react-pdf/renderer";
 import { theme } from "./theme";
 
 export interface TableColumn<T> {
@@ -233,7 +240,10 @@ const PdfTable = <T extends Record<string, unknown>>({
             height: 3,
           }}
         >
-          <Path d="M 0 3 L 0 0 A 3 3 0 0 1 3 3 L 0 3" fill={theme.colors.background} />
+          <Path
+            d="M 0 3 L 0 0 A 3 3 0 0 1 3 3 L 0 3"
+            fill={theme.colors.background}
+          />
         </Svg>
         <Svg
           viewBox="0 0 3 3"
@@ -245,7 +255,10 @@ const PdfTable = <T extends Record<string, unknown>>({
             height: 3,
           }}
         >
-          <Path d="M 3 3 L 0 3 A 3 3 0 0 1 3 0 L 3 3" fill={theme.colors.background} />
+          <Path
+            d="M 3 3 L 0 3 A 3 3 0 0 1 3 0 L 3 3"
+            fill={theme.colors.background}
+          />
         </Svg>
         <View style={styles.frameBorder} />
       </View>
@@ -254,4 +267,3 @@ const PdfTable = <T extends Record<string, unknown>>({
 };
 
 export default PdfTable;
-

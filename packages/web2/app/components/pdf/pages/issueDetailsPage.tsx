@@ -61,7 +61,9 @@ const IssueGroupOverview: FC<IssueGroupOverviewProps> = ({ group }) => {
   return (
     <PdfSection marginTop>
       <PdfSectionHeader>
-        <PdfH3>{group.groupKey}. {group.label}</PdfH3>
+        <PdfH3>
+          {group.groupKey}. {group.label}
+        </PdfH3>
       </PdfSectionHeader>
       {principleDescription && (
         <PdfText style={{ marginBottom: theme.spacing.m }}>
@@ -73,13 +75,11 @@ const IssueGroupOverview: FC<IssueGroupOverviewProps> = ({ group }) => {
       )}
 
       {guidelineGroups.map((guidelineGroup) => (
-        <PdfSection
-          key={guidelineGroup.key}
-          wrap={false}
-          marginTop
-        >
+        <PdfSection key={guidelineGroup.key} wrap={false} marginTop>
           <PdfSectionHeader>
-            <PdfH4>{guidelineGroup.key}. {guidelineGroup.label}</PdfH4>
+            <PdfH4>
+              {guidelineGroup.key}. {guidelineGroup.label}
+            </PdfH4>
           </PdfSectionHeader>
           {guidelineGroup.description && (
             <PdfText style={{ marginBottom: theme.spacing.m }}>

@@ -14,19 +14,19 @@ import SummaryPage from "./pdf/pages/summaryPage";
 import BenefitsPage from "./pdf/pages/benefitsPage";
 import ClosingPage from "./pdf/pages/closingPage";
 import MethodologyPage from "./pdf/pages/methodologyPage";
-import InterRegular from '../../assets/fonts/Inter-Regular.ttf';
-import InterBold from '../../assets/fonts/Inter-Bold.ttf';
-import BlueHeart from './assets/emojis/2764.png';
+import InterRegular from "../../assets/fonts/Inter-Regular.ttf";
+import InterBold from "../../assets/fonts/Inter-Bold.ttf";
+import BlueHeart from "./assets/emojis/2764.png";
 
 interface Props {
   profile: ScanProfileWithSuccessfulScan;
 }
 
 Font.registerEmojiSource({
-  format: 'png',
+  format: "png",
   builder: (codePoint: string): string => {
     // saved to disk to avoid unnecesarry network calls since it is always needed
-    if (codePoint === '1f499') {
+    if (codePoint === "1f499") {
       return BlueHeart;
     }
 
@@ -35,7 +35,7 @@ Font.registerEmojiSource({
 });
 
 Font.register({
-  family: 'Inter',
+  family: "Inter",
   fonts: [
     { src: InterRegular, fontWeight: 400 },
     { src: InterBold, fontWeight: 700 },

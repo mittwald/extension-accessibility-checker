@@ -132,6 +132,7 @@ export const styles = StyleSheet.create({
   section: {
     flexDirection: "column",
     width: "100%",
+    marginBottom: theme.spacing.sectionToSectionSpacing,
   },
   sectionMarginTop: {
     marginTop: theme.spacing.sectionToSectionSpacing,

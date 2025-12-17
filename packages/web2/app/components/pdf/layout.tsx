@@ -8,7 +8,6 @@ export interface PdfBaseProps extends PropsWithStyle {
 }
 
 interface PdfSectionProps extends PdfBaseProps {
-  withSeparator?: boolean;
   marginTop?: boolean;
   wrap?: boolean;
 }
@@ -16,21 +15,18 @@ interface PdfSectionProps extends PdfBaseProps {
 export const PdfSection = ({
   children,
   style,
-  withSeparator,
-  marginTop,
   wrap = true,
   debug,
 }: PdfSectionProps) => {
   const containerStyles = {
     ...styles.section,
-    ...withSeparator && styles.separator,
-    ...(!withSeparator && marginTop && styles.sectionMarginTop),
     ...style,
   };
 
   return (
-    <View style={containerStyles} wrap={wrap} debug={debug}>
-      {Children.map(children, (child, index) => {
+    <>
+      <View style={containerStyles} wrap={wrap} debug={debug}>
+        {Children.map(children, (child, index) => {
           if (!isValidElement(child)) {
             return child;
           }
@@ -43,14 +39,20 @@ export const PdfSection = ({
           if (index === Children.count(children) - 1) {
             return child;
           }
-          return cloneElement(child, { style: { ...child.props.style, marginBottom: theme.spacing.m } });
-      })}
-    </View>
+          return cloneElement(child, {
+            style: {
+              ...(child.props as PropsWithStyle).style,
+              marginBottom: theme.spacing.m,
+            },
+          });
+        })}
+      </View>
+    </>
   );
 };
 
 export const PdfSectionHeader = ({ children, style, debug }: PdfBaseProps) => (
-  <View style={{...styles.sectionHeader, ...style}} debug={debug}>
+  <View style={{ ...styles.sectionHeader, ...style }} debug={debug}>
     {children}
   </View>
 );

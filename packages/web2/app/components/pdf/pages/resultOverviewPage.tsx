@@ -38,9 +38,9 @@ const PdfResultOverviewPage: React.FC<PdfResultOverviewPageProps> = ({
           Dieser Report zeigt den Stand der Barrierefreiheit der Domain{" "}
           <PdfTextBold>{profile.domain}</PdfTextBold> zum{" "}
           <PdfTextBold>{new Date().toLocaleDateString("de-DE")}</PdfTextBold>.
-          Grundlage dafür sind die Web Content Accessibility Guidelines (WCAG) 2.1
-          auf dem Konformitätsniveau <PdfTextBold>AAA</PdfTextBold>. Er bietet
-          einen schnellen Überblick über Optimierungspotenziale.
+          Grundlage dafür sind die Web Content Accessibility Guidelines (WCAG)
+          2.1 auf dem Konformitätsniveau <PdfTextBold>AAA</PdfTextBold>. Er
+          bietet einen schnellen Überblick über Optimierungspotenziale.
         </PdfText>
         <PdfProgressbar
           color={color(profile.issueSummary?.score ?? 0)}

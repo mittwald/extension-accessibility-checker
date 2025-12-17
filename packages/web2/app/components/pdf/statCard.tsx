@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
 
 const PdfStatCard = ({ value, label, description, style }: StatCardProps) => {
   return (
-    <View style={{...styles.accentBox, ...style}}>
+    <View style={{ ...styles.accentBox, ...style }}>
       <View style={styles.bigNumberWrapper}>
         <Text style={styles.valueText}>{value}</Text>
         <Text style={styles.labelText}>{label}</Text>
