@@ -5,7 +5,7 @@ import PdfFooter from "../footer";
 import { PdfSectionHeader } from "../layout";
 import { PdfH2 } from "../typography";
 
-const BenefitsPage: FC = () => {
+const PdfBenefitsPage: FC = () => {
   return (
     <Page size="A4" style={styles.page}>
       <PdfSectionHeader>
@@ -16,4 +16,4 @@ const BenefitsPage: FC = () => {
   );
 };
 
-export default BenefitsPage;
+export default PdfBenefitsPage;

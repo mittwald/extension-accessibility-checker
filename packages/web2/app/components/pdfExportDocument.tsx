@@ -9,37 +9,47 @@ import {
   groupIssuesByGuidelineAndTechnique,
 } from "./profile/tabs/issues/helpers";
 import wcagLinks from "../wcagLinks.json";
-import IssueDetailsPage from "./pdf/pages/issueDetailsPage";
-import SummaryPage from "./pdf/pages/summaryPage";
-import BenefitsPage from "./pdf/pages/benefitsPage";
-import ClosingPage from "./pdf/pages/closingPage";
-import MethodologyPage from "./pdf/pages/methodologyPage";
-import InterRegular from "../../assets/fonts/Inter-Regular.ttf";
-import InterBold from "../../assets/fonts/Inter-Bold.ttf";
-import BlueHeart from "./assets/emojis/2764.png";
+import PdfIssueDetailsPage from "./pdf/pages/issueDetailsPage";
+import PdfSummaryPage from "./pdf/pages/summaryPage";
+import PdfBenefitsPage from "./pdf/pages/benefitsPage";
+import PdfClosingPage from "./pdf/pages/closingPage";
+import PdfMethodologyPage from "./pdf/pages/methodologyPage";
+import path from "node:path";
 
 interface Props {
   profile: ScanProfileWithSuccessfulScan;
 }
+
+Font.register({
+  family: "Inter",
+  fonts: [
+    {
+      src: path.resolve(
+        import.meta.dirname,
+        "../../assets/fonts/Inter-Regular.ttf",
+      ),
+      fontWeight: 400,
+    },
+    {
+      src: path.resolve(
+        import.meta.dirname,
+        "../../assets/fonts/Inter-Bold.ttf",
+      ),
+      fontWeight: 700,
+    },
+  ],
+});
 
 Font.registerEmojiSource({
   format: "png",
   builder: (codePoint: string): string => {
     // saved to disk to avoid unnecesarry network calls since it is always needed
     if (codePoint === "1f499") {
-      return BlueHeart;
+      return path.resolve(import.meta.dirname, "../../assets/emojis/1f499.png");
     }
 
-    return `https://cdn.jsdelivr.net/npm/emoji-datasource-apple@16.0.0/img/apple/64/${codePoint}.png`;
+    return `https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/${codePoint}.png`;
   },
-});
-
-Font.register({
-  family: "Inter",
-  fonts: [
-    { src: InterRegular, fontWeight: 400 },
-    { src: InterBold, fontWeight: 700 },
-  ],
 });
 
 export const PdfExportDocument: FC<Props> = ({ profile }) => {
@@ -68,12 +78,12 @@ export const PdfExportDocument: FC<Props> = ({ profile }) => {
       {issueGroups
         .sort((a, b) => a.groupKey.localeCompare(b.groupKey))
         .map((group, index) => (
-          <IssueDetailsPage key={index} group={group} index={index} />
+          <PdfIssueDetailsPage key={index} group={group} index={index} />
         ))}
-      <SummaryPage issueGroups={issueGroups} />
-      <BenefitsPage />
-      <MethodologyPage />
-      <ClosingPage profile={profile} />
+      <PdfSummaryPage issueGroups={issueGroups} />
+      <PdfBenefitsPage />
+      <PdfMethodologyPage />
+      <PdfClosingPage profile={profile} />
     </Document>
   );
 };

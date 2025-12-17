@@ -4,7 +4,7 @@ import { PdfH3 } from "../typography";
 import { styles, theme } from "../theme";
 import PdfFooter from "../footer";
 
-const MethodologyPage: FC = () => {
+const PdfMethodologyPage: FC = () => {
   return (
     <Page size="A4" style={styles.page}>
       <View style={{ marginBottom: theme.spacing.m }}>
@@ -16,4 +16,4 @@ const MethodologyPage: FC = () => {
   );
 };
 
-export default MethodologyPage;
+export default PdfMethodologyPage;

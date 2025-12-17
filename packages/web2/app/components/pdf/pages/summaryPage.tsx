@@ -5,11 +5,11 @@ import PdfTable, { TableColumn } from "../table";
 import { IssueGroup } from "../../profile/tabs/issues/types";
 import { styles, theme } from "../theme";
 
-interface SummaryPageProps {
+interface PdfSummaryPageProps {
   issueGroups: IssueGroup[];
 }
 
-const SummaryPage: FC<SummaryPageProps> = ({ issueGroups }) => {
+const PdfSummaryPage: FC<PdfSummaryPageProps> = ({ issueGroups }) => {
   const summaryData = issueGroups.map((group) => {
     let errorCount = 0;
     let warningCount = 0;
@@ -85,4 +85,4 @@ const SummaryPage: FC<SummaryPageProps> = ({ issueGroups }) => {
   );
 };
 
-export default SummaryPage;
+export default PdfSummaryPage;

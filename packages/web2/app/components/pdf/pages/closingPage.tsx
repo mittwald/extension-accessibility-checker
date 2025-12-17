@@ -4,11 +4,11 @@ import { styles } from "../theme";
 import { ScanProfileWithSuccessfulScan } from "../../../api/types";
 import { PdfSmall, PdfSmallBold } from "../typography";
 
-interface ClosingPageProps {
+interface PdfClosingPageProps {
   profile: ScanProfileWithSuccessfulScan;
 }
 
-const ClosingPage: FC<ClosingPageProps> = ({ profile }) => {
+const PdfClosingPage: FC<PdfClosingPageProps> = ({ profile }) => {
   const createdDate = new Date().toLocaleDateString("de-DE");
   const scanDate = profile.lastSuccessfulScan?.createdAt
     ? new Date(profile.lastSuccessfulScan.createdAt).toLocaleDateString("de-DE")
@@ -33,4 +33,4 @@ const ClosingPage: FC<ClosingPageProps> = ({ profile }) => {
   );
 };
 
-export default ClosingPage;
+export default PdfClosingPage;

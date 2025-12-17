@@ -42,11 +42,11 @@ const groupIssuesByGuideline = (issues: Issue[]) => {
     .sort((a, b) => a.key.localeCompare(b.key));
 };
 
-interface IssueGroupOverviewProps {
+interface PdfIssueGroupOverviewProps {
   group: IssueGroup;
 }
 
-const IssueGroupOverview: FC<IssueGroupOverviewProps> = ({ group }) => {
+const PdfIssueGroupOverview: FC<PdfIssueGroupOverviewProps> = ({ group }) => {
   const guidelineGroups = groupIssuesByGuideline(group.issues);
   const principleData = wcagLinks[group.groupKey as keyof typeof wcagLinks];
   const principleDescription =
@@ -83,18 +83,18 @@ const IssueGroupOverview: FC<IssueGroupOverviewProps> = ({ group }) => {
           </PdfSectionHeader>
           {guidelineGroup.description && (
             <PdfText style={{ marginBottom: theme.spacing.m }}>
-              <ValidatedPdfTextBold>Auswirkungen: </ValidatedPdfTextBold>
+              <PdfValidatedPdfTextBold>Auswirkungen: </PdfValidatedPdfTextBold>
               {guidelineGroup.description}
             </PdfText>
           )}
-          <IssueTable issues={guidelineGroup.issues} />
+          <PdfIssueTable issues={guidelineGroup.issues} />
         </PdfSection>
       ))}
     </PdfSection>
   );
 };
 
-const ValidatedPdfTextBold: FC<{ children: React.ReactNode }> = ({
+const PdfValidatedPdfTextBold: FC<{ children: React.ReactNode }> = ({
   children,
 }) => (
   <PdfText style={{ fontWeight: theme.fontWeight.bold, fontFamily: "Inter" }}>
@@ -102,7 +102,7 @@ const ValidatedPdfTextBold: FC<{ children: React.ReactNode }> = ({
   </PdfText>
 );
 
-const IssueTable: FC<{ issues: Issue[] }> = ({ issues }) => {
+const PdfIssueTable: FC<{ issues: Issue[] }> = ({ issues }) => {
   const criterionGroups: Record<
     string,
     {
@@ -167,12 +167,15 @@ const IssueTable: FC<{ issues: Issue[] }> = ({ issues }) => {
   );
 };
 
-interface IssueDetailsPageProps {
+interface PdfIssueDetailsPageProps {
   group: IssueGroup;
   index: number;
 }
 
-const IssueDetailsPage: FC<IssueDetailsPageProps> = ({ group, index }) => {
+const PdfIssueDetailsPage: FC<PdfIssueDetailsPageProps> = ({
+  group,
+  index,
+}) => {
   return (
     <Page size="A4" style={styles.page}>
       {index == 0 && (
@@ -188,10 +191,10 @@ const IssueDetailsPage: FC<IssueDetailsPageProps> = ({ group, index }) => {
           </PdfText>
         </PdfSection>
       )}
-      <IssueGroupOverview group={group} />
+      <PdfIssueGroupOverview group={group} />
       <PdfFooter />
     </Page>
   );
 };
 
-export default IssueDetailsPage;
+export default PdfIssueDetailsPage;

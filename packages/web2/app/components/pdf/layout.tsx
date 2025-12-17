@@ -39,7 +39,7 @@ export const PdfSection = ({
           if (index === Children.count(children) - 1) {
             return child;
           }
-          return cloneElement(child, {
+          return cloneElement(child as React.ReactElement<PropsWithStyle>, {
             style: {
               ...(child.props as PropsWithStyle).style,
               marginBottom: theme.spacing.m,
