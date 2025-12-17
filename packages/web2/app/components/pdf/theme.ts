@@ -105,6 +105,20 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeight.bold,
     lineHeight: theme.lineHeight.default,
   },
+  h3: {
+    fontFamily: "Inter",
+    fontSize: theme.fontSize.h3,
+    color: theme.colors.heading,
+    fontWeight: theme.fontWeight.bold,
+    lineHeight: theme.lineHeight.default,
+  },
+  h4: {
+    fontFamily: "Inter",
+    fontSize: theme.fontSize.default,
+    color: theme.colors.heading,
+    fontWeight: theme.fontWeight.bold,
+    lineHeight: theme.lineHeight.default,
+  },
   row: {
     flexDirection: "row",
     alignItems: "center",

@@ -16,9 +16,6 @@ const styles = StyleSheet.create({
     padding: theme.spacing.m,
     gap: theme.spacing.s,
 
-    width: 161,
-    height: 172,
-
     backgroundColor: theme.colors.backgroundSecondary,
     borderRadius: theme.borderRadius.default,
     flexGrow: 1,

@@ -88,10 +88,7 @@ export const PdfH3: FC<PropsWithChildren & PropsWithStyle & TextProps> = ({
   style,
   ...props
 }) => (
-  <Text
-    style={{ ...styles.h2, fontSize: theme.fontSize.h3, ...style }}
-    {...props}
-  >
+  <Text style={{ ...styles.h3, ...style }} {...props}>
     {children}
   </Text>
 );
@@ -101,10 +98,7 @@ export const PdfH4: FC<PropsWithChildren & PropsWithStyle & TextProps> = ({
   style,
   ...props
 }) => (
-  <Text
-    style={{ ...styles.h2, fontSize: theme.fontSize.default, ...style }}
-    {...props}
-  >
+  <Text style={{ ...styles.h4, ...style }} {...props}>
     {children}
   </Text>
 );

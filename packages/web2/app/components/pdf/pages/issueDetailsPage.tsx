@@ -1,12 +1,13 @@
 import { styles, theme } from "../theme";
-import { Page, View } from "@react-pdf/renderer";
-import { PdfH3, PdfH4, PdfText, PdfTextBold } from "../typography";
+import { Page } from "@react-pdf/renderer";
+import { PdfText, PdfTextBold } from "../typography";
 import { Issue, IssueGroup } from "../../profile/tabs/issues/types";
 import wcagLinks from "../../../wcagLinks.json";
 import { getIssueMeta } from "../../profile/tabs/issues/helpers";
 import { FC } from "react";
 import PdfTable from "../table";
 import PdfFooter from "../footer";
+import { PdfSection } from "../layout";
 
 const groupIssuesByGuideline = (issues: Issue[]) => {
   const groups: Record<
@@ -58,10 +59,7 @@ const IssueGroupOverview: FC<IssueGroupOverviewProps> = ({ group }) => {
   }, 0);
 
   return (
-    <View style={{ marginTop: theme.spacing.m }}>
-      <PdfH3 style={{ marginBottom: theme.spacing.s }}>
-        {group.groupKey}. {group.label}
-      </PdfH3>
+    <PdfSection headingLevel={3} heading={`${group.groupKey}. ${group.label}`}>
       {principleDescription && (
         <PdfText style={{ marginBottom: theme.spacing.m }}>
           {principleDescription}{" "}
@@ -72,26 +70,22 @@ const IssueGroupOverview: FC<IssueGroupOverviewProps> = ({ group }) => {
       )}
 
       {guidelineGroups.map((guidelineGroup) => (
-        <View
+        <PdfSection
+          headingLevel={4}
+          heading={`${guidelineGroup.key}. ${guidelineGroup.label}`}
           key={guidelineGroup.key}
-          style={{ marginBottom: theme.spacing.l }}
           wrap={false}
         >
-          <PdfH4 style={{ marginBottom: theme.spacing.s }}>
-            {guidelineGroup.key} {guidelineGroup.label}
-          </PdfH4>
-
           {guidelineGroup.description && (
             <PdfText style={{ marginBottom: theme.spacing.m }}>
               <ValidatedPdfTextBold>Auswirkungen: </ValidatedPdfTextBold>
               {guidelineGroup.description}
             </PdfText>
           )}
-
           <IssueTable issues={guidelineGroup.issues} />
-        </View>
+        </PdfSection>
       ))}
-    </View>
+    </PdfSection>
   );
 };
 
@@ -177,15 +171,14 @@ const IssueDetailsPage: FC<IssueDetailsPageProps> = ({ group, index }) => {
   return (
     <Page size="A4" style={styles.page}>
       {index == 0 && (
-        <View style={{ marginBottom: theme.spacing.m }}>
-          <PdfH3>Detaillierte Ergebnisse</PdfH3>
+        <PdfSection heading="Detaillierte Ergebnisse">
           <PdfText>
             Die folgende detaillierte Analyse schlüsselt alle
             Barrierefreiheitsprobleme nach den vier WCAG-Prinzipien auf. Für
             jedes Erfolgskriterium gibt es Informationen zum Fehlertyp, dem
             Konformitätslevel und der Häufigkeit.
           </PdfText>
-        </View>
+        </PdfSection>
       )}
       <IssueGroupOverview group={group} />
       <PdfFooter />

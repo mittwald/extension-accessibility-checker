@@ -15,8 +15,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "flex-start",
-    width: 515,
-    minHeight: 115,
     borderTopWidth: 1,
     borderRightWidth: 1,
     borderBottomWidth: 1,
@@ -39,7 +37,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     padding: theme.spacing.m,
     gap: theme.spacing.m,
-    width: 507,
     flexGrow: 1,
   },
   content: {
@@ -47,7 +44,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "flex-start",
     gap: theme.spacing.s,
-    width: 475,
     flexGrow: 1,
   },
   headingRow: {
@@ -55,7 +51,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: theme.spacing.xs,
-    width: 95,
     height: 21,
     flexGrow: 0,
   },
@@ -80,7 +75,6 @@ const styles = StyleSheet.create({
     fontSize: theme.fontSize.default,
     lineHeight: 1.5,
     color: theme.colors.text,
-    width: 475,
   },
 });
 

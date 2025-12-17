@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: 6,
     height: 6,
+    // TODO: fix white corners on dark shade row
     backgroundColor: theme.colors.background,
   },
   maskLeft: {
