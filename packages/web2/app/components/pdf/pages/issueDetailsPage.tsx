@@ -1,13 +1,13 @@
 import { styles, theme } from "../theme";
 import { Page } from "@react-pdf/renderer";
-import { PdfText, PdfTextBold } from "../typography";
+import { PdfH2, PdfH3, PdfH4, PdfText, PdfTextBold } from "../typography";
 import { Issue, IssueGroup } from "../../profile/tabs/issues/types";
 import wcagLinks from "../../../wcagLinks.json";
 import { getIssueMeta } from "../../profile/tabs/issues/helpers";
 import { FC } from "react";
 import PdfTable from "../table";
 import PdfFooter from "../footer";
-import { PdfSection } from "../layout";
+import { PdfSection, PdfSectionHeader } from "../layout";
 
 const groupIssuesByGuideline = (issues: Issue[]) => {
   const groups: Record<
@@ -59,7 +59,10 @@ const IssueGroupOverview: FC<IssueGroupOverviewProps> = ({ group }) => {
   }, 0);
 
   return (
-    <PdfSection headingLevel={3} heading={`${group.groupKey}. ${group.label}`}>
+    <PdfSection marginTop>
+      <PdfSectionHeader>
+        <PdfH3>{group.groupKey}. {group.label}</PdfH3>
+      </PdfSectionHeader>
       {principleDescription && (
         <PdfText style={{ marginBottom: theme.spacing.m }}>
           {principleDescription}{" "}
@@ -71,11 +74,13 @@ const IssueGroupOverview: FC<IssueGroupOverviewProps> = ({ group }) => {
 
       {guidelineGroups.map((guidelineGroup) => (
         <PdfSection
-          headingLevel={4}
-          heading={`${guidelineGroup.key}. ${guidelineGroup.label}`}
           key={guidelineGroup.key}
           wrap={false}
+          marginTop
         >
+          <PdfSectionHeader>
+            <PdfH4>{guidelineGroup.key}. {guidelineGroup.label}</PdfH4>
+          </PdfSectionHeader>
           {guidelineGroup.description && (
             <PdfText style={{ marginBottom: theme.spacing.m }}>
               <ValidatedPdfTextBold>Auswirkungen: </ValidatedPdfTextBold>
@@ -171,7 +176,10 @@ const IssueDetailsPage: FC<IssueDetailsPageProps> = ({ group, index }) => {
   return (
     <Page size="A4" style={styles.page}>
       {index == 0 && (
-        <PdfSection heading="Detaillierte Ergebnisse">
+        <PdfSection marginTop>
+          <PdfSectionHeader>
+            <PdfH2>Detaillierte Ergebnisse</PdfH2>
+          </PdfSectionHeader>
           <PdfText>
             Die folgende detaillierte Analyse schlüsselt alle
             Barrierefreiheitsprobleme nach den vier WCAG-Prinzipien auf. Für

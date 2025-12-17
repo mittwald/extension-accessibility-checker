@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
-import { theme } from "./theme";
+import { PropsWithStyle, theme } from "./theme";
 
-interface StatCardProps {
+interface StatCardProps extends PropsWithStyle {
   value: string | number;
   label: string;
   description: string;
@@ -52,9 +52,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const StatCard = ({ value, label, description }: StatCardProps) => {
+const PdfStatCard = ({ value, label, description, style }: StatCardProps) => {
   return (
-    <View style={styles.accentBox}>
+    <View style={{...styles.accentBox, ...style}}>
       <View style={styles.bigNumberWrapper}>
         <Text style={styles.valueText}>{value}</Text>
         <Text style={styles.labelText}>{label}</Text>
@@ -64,4 +64,4 @@ const StatCard = ({ value, label, description }: StatCardProps) => {
   );
 };
 
-export default StatCard;
+export default PdfStatCard;

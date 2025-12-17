@@ -4,9 +4,10 @@ import { Page, View } from "@react-pdf/renderer";
 import { PdfH2, PdfText, PdfTextBold } from "../typography";
 import { styles, theme } from "../theme";
 import PdfProgressbar from "../progressBar";
-import StatCard from "../statCard";
+import PdfStatCard from "../statCard";
 import PdfAlert from "../alert";
 import PdfFooter from "../footer";
+import { PdfSection, PdfSectionHeader } from "../layout";
 
 interface PdfResultOverviewPageProps {
   profile: ScanProfileWithSuccessfulScan;
@@ -29,41 +30,48 @@ const PdfResultOverviewPage: React.FC<PdfResultOverviewPageProps> = ({
   };
   return (
     <Page size="A4" style={{ ...styles.page, gap: theme.spacing.m }}>
-      <PdfH2>Scanergebnis</PdfH2>
-      <PdfText>
-        Dieser Report zeigt den Stand der Barrierefreiheit der Domain
-        <PdfTextBold>{profile.domain}</PdfTextBold> zum{" "}
-        <PdfTextBold>{new Date().toLocaleDateString("de-DE")}</PdfTextBold>.
-        Grundlage dafür sind die Web Content Accessibility Guidelines (WCAG) 2.1
-        auf dem Konformitätsniveau <PdfTextBold>AAA</PdfTextBold>. Er bietet
-        einen schnellen Überblick über Optimierungspotenziale.
-      </PdfText>
-      <PdfProgressbar
-        color={color(profile.issueSummary?.score ?? 0)}
-        label="Barrierefreiheitsscore"
-        value={profile.issueSummary?.score ?? 0}
-      />
-      <View style={{ flexDirection: "row", gap: theme.spacing.m }}>
-        <StatCard
-          value={profile.issueSummary?.errors ?? 0}
-          label="Fehler"
-          description="Kritische Fehler, die mit höchster Priorität behoben werden sollten."
+      <PdfSection>
+        <PdfSectionHeader>
+          <PdfH2>Scanergebnis</PdfH2>
+        </PdfSectionHeader>
+        <PdfText>
+          Dieser Report zeigt den Stand der Barrierefreiheit der Domain{" "}
+          <PdfTextBold>{profile.domain}</PdfTextBold> zum{" "}
+          <PdfTextBold>{new Date().toLocaleDateString("de-DE")}</PdfTextBold>.
+          Grundlage dafür sind die Web Content Accessibility Guidelines (WCAG) 2.1
+          auf dem Konformitätsniveau <PdfTextBold>AAA</PdfTextBold>. Er bietet
+          einen schnellen Überblick über Optimierungspotenziale.
+        </PdfText>
+        <PdfProgressbar
+          color={color(profile.issueSummary?.score ?? 0)}
+          label="Barrierefreiheitsscore"
+          value={profile.issueSummary?.score ?? 0}
         />
-        <StatCard
-          value={profile.issueSummary?.warnings ?? 0}
-          label="Warnungen"
-          description="Punkte, die überprüft und bei Bedarf verbessert werden sollten."
-        />
-        <StatCard
-          value={profile.issueSummary?.notices ?? 0}
-          label="Hinweise"
-          description="Empfehlungen, über WCAG-Konformatität hinaus."
-        />
-      </View>
-      <PdfAlert
-        title="Hinweis"
-        description="Der Barrierefreiheitsscore liefert einen ersten Hinweis über den Stand der Barrierefreiheit. Einzelne Fehler oder Warnungen können die Nutzung weithin beeinträchtigen und müssen geprüft und behboben werden."
-      ></PdfAlert>
+        <View style={{ flexDirection: "row", gap: theme.spacing.m }}>
+          <PdfStatCard
+            value={profile.issueSummary?.errors ?? 0}
+            label="Fehler"
+            description="Kritische Fehler, die mit höchster Priorität behoben werden sollten."
+            style={{ width: "calc(100% / 3)" }}
+          />
+          <PdfStatCard
+            value={profile.issueSummary?.warnings ?? 0}
+            label="Warnungen"
+            description="Punkte, die überprüft und bei Bedarf verbessert werden sollten."
+            style={{ width: "calc(100% / 3)" }}
+          />
+          <PdfStatCard
+            value={profile.issueSummary?.notices ?? 0}
+            label="Hinweise"
+            description="Empfehlungen, über WCAG-Konformatität hinaus."
+            style={{ width: "calc(100% / 3)" }}
+          />
+        </View>
+        <PdfAlert
+          title="Hinweis"
+          description="Der Barrierefreiheitsscore liefert einen ersten Hinweis über den Stand der Barrierefreiheit. Einzelne Fehler oder Warnungen können die Nutzung weithin beeinträchtigen und müssen geprüft und behboben werden."
+        ></PdfAlert>
+      </PdfSection>
       <PdfFooter />
     </Page>
   );

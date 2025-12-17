@@ -14,6 +14,7 @@ export const theme = {
     success: "#00825B",
     info: "#0054F5",
     danger: "#E1244C",
+    separator: "#909090",
     warning: "#F56800",
     warningDark: "#C25200",
   },
@@ -25,6 +26,8 @@ export const theme = {
     xl: 32,
     xxl: 40,
     pagePadding: 40,
+    sectionSpacing: 16,
+    sectionToSectionSpacing: 24,
   },
   fontSize: {
     largeHeading: 32,
@@ -128,9 +131,17 @@ export const styles = StyleSheet.create({
   },
   section: {
     flexDirection: "column",
-    gap: theme.spacing.m,
     width: "100%",
-    marginBottom: theme.spacing.m,
+  },
+  sectionMarginTop: {
+    marginTop: theme.spacing.sectionToSectionSpacing,
+  },
+  separator: {
+    marginTop: theme.spacing.sectionToSectionSpacing,
+    paddingTop: theme.spacing.sectionToSectionSpacing,
+    borderTopWidth: 1,
+    borderTopStyle: "solid",
+    borderTopColor: theme.colors.separator,
   },
   sectionHeader: {
     flexDirection: "row",

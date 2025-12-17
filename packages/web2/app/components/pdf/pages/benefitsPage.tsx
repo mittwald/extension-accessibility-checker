@@ -2,12 +2,15 @@ import { FC } from "react";
 import { Page } from "@react-pdf/renderer";
 import { styles } from "../theme";
 import PdfFooter from "../footer";
-import { PdfSection } from "../layout";
+import { PdfSectionHeader } from "../layout";
+import { PdfH2 } from "../typography";
 
 const BenefitsPage: FC = () => {
   return (
     <Page size="A4" style={styles.page}>
-      <PdfSection heading="Vorteile eines barrierefreien Webauftritts" />
+      <PdfSectionHeader>
+        <PdfH2>Vorteile eines barrierefreien Webauftritts</PdfH2>
+      </PdfSectionHeader>
       <PdfFooter />
     </Page>
   );
