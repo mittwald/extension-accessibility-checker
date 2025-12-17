@@ -14,27 +14,31 @@ import SummaryPage from "./pdf/pages/summaryPage";
 import BenefitsPage from "./pdf/pages/benefitsPage";
 import ClosingPage from "./pdf/pages/closingPage";
 import MethodologyPage from "./pdf/pages/methodologyPage";
+import InterRegular from '../../assets/fonts/Inter-Regular.ttf';
+import InterBold from '../../assets/fonts/Inter-Bold.ttf';
+import BlueHeart from './assets/emojis/2764.png';
 
 interface Props {
   profile: ScanProfileWithSuccessfulScan;
 }
 
 Font.registerEmojiSource({
-  format: "png",
-  url: "https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/",
+  format: 'png',
+  builder: (codePoint: string): string => {
+    // saved to disk to avoid unnecesarry network calls since it is always needed
+    if (codePoint === '1f499') {
+      return BlueHeart;
+    }
+
+    return `https://cdn.jsdelivr.net/npm/emoji-datasource-apple@16.0.0/img/apple/64/${codePoint}.png`;
+  },
 });
 
 Font.register({
-  family: "Inter",
+  family: 'Inter',
   fonts: [
-    {
-      src: "https://fonts.bunny.net/inter/files/inter-latin-400-normal.woff",
-      fontWeight: 400,
-    },
-    {
-      src: "https://fonts.bunny.net/inter/files/inter-latin-600-normal.woff",
-      fontWeight: 600,
-    },
+    { src: InterRegular, fontWeight: 400 },
+    { src: InterBold, fontWeight: 700 },
   ],
 });
 
