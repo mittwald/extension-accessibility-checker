@@ -227,40 +227,47 @@ const PdfTable = <T extends Record<string, unknown>>({
         </View>
       )}
       <View style={styles.tableOverlay} fixed>
-        {/*
-          found no other way to create rounded corners with page break support
-        */}
-        <Svg
-          viewBox="0 0 3 3"
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            width: 3,
-            height: 3,
-          }}
-        >
-          <Path
-            d="M 0 3 L 0 0 A 3 3 0 0 1 3 3 L 0 3"
-            fill={theme.colors.background}
-          />
-        </Svg>
-        <Svg
-          viewBox="0 0 3 3"
-          style={{
-            position: "absolute",
-            bottom: 0,
-            right: 0,
-            width: 3,
-            height: 3,
-          }}
-        >
-          <Path
-            d="M 3 3 L 0 3 A 3 3 0 0 1 3 0 L 3 3"
-            fill={theme.colors.background}
-          />
-        </Svg>
         <View style={styles.frameBorder} />
+        <Svg
+          viewBox="0 0 6 6"
+          style={{
+            position: "absolute",
+            bottom: -1,
+            left: -1,
+            width: 6,
+            height: 6,
+          }}
+        >
+          <Path
+            d="M 0 6 L 0 0.9 L 1.2 1 A 3.8 3.8 0 0 0 5 4.8 L 5 6 Z"
+            fill={theme.colors.background}
+          />
+          <Path
+            d="M 1 0.5 L 1 1 A 4 4 0 0 0 5 5 L 5 4 A 3 3 0 0 1 2 1 L 2 0.5 Z"
+            fill={theme.colors.border}
+            stroke="none"
+          />
+        </Svg>
+        <Svg
+          viewBox="0 0 6 6"
+          style={{
+            position: "absolute",
+            bottom: -1,
+            right: -1,
+            width: 6,
+            height: 6,
+          }}
+        >
+          <Path
+            d="M 6 6 L 1 6 L 1 4.8 A 3.8 3.8 0 0 0 4.8 1 L 5 0.9 L 5 6 Z"
+            fill={theme.colors.background}
+          />
+          <Path
+            d="M 1 5 A 4 4 0 0 0 5 1 L 5 0.5 L 4 0.5 L 4 1 A 3 3 0 0 1 1 4 Z"
+            fill={theme.colors.border}
+            stroke="none"
+          />
+        </Svg>
       </View>
     </View>
   );
