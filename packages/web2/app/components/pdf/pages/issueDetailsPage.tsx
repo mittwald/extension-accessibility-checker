@@ -15,7 +15,7 @@ const groupIssuesByGuideline = (issues: Issue[]) => {
     { label: string; description?: string; issues: Issue[] }
   > = {};
 
-  issues.forEach((issue) => {
+  for (const issue of issues) {
     const meta = getIssueMeta(issue);
     const guidelineKey = meta.guideline as keyof typeof wcagLinks;
     const guidelineData = wcagLinks[guidelineKey];
@@ -32,7 +32,7 @@ const groupIssuesByGuideline = (issues: Issue[]) => {
       };
     }
     groups[guidelineKey].issues.push(issue);
-  });
+  }
 
   return Object.entries(groups)
     .map(([key, data]) => ({
@@ -69,38 +69,20 @@ const PdfIssueGroupOverview: FC<PdfIssueGroupOverviewProps> = ({ group }) => {
         <PdfText style={{ marginBottom: theme.spacing.m }}>
           {principleDescription}{" "}
           <PdfTextBold>
-            {totalIssuesInGroup} Probleme idenitifiziert
+            {totalIssuesInGroup} {totalIssuesInGroup === 1 ? "Problem" : "Probleme"} identifiziert.
           </PdfTextBold>
         </PdfText>
       )}
 
       {guidelineGroups.map((guidelineGroup) => (
-        <PdfSection key={guidelineGroup.key} wrap={false} marginTop>
-          <PdfSectionHeader>
-            <PdfH4>
-              {guidelineGroup.key}. {guidelineGroup.label}
-            </PdfH4>
-          </PdfSectionHeader>
-          {guidelineGroup.description && (
-            <PdfText style={{ marginBottom: theme.spacing.m }}>
-              <PdfValidatedPdfTextBold>Auswirkungen: </PdfValidatedPdfTextBold>
-              {guidelineGroup.description}
-            </PdfText>
-          )}
-          <PdfIssueTable issues={guidelineGroup.issues} />
-        </PdfSection>
+        <PdfGuidelineGroup
+          key={guidelineGroup.key}
+          guidelineGroup={guidelineGroup}
+        />
       ))}
     </PdfSection>
   );
 };
-
-const PdfValidatedPdfTextBold: FC<{ children: React.ReactNode }> = ({
-  children,
-}) => (
-  <PdfText style={{ fontWeight: theme.fontWeight.bold, fontFamily: "Inter" }}>
-    {children}
-  </PdfText>
-);
 
 const PdfIssueTable: FC<{ issues: Issue[] }> = ({ issues }) => {
   const criterionGroups: Record<
@@ -114,7 +96,7 @@ const PdfIssueTable: FC<{ issues: Issue[] }> = ({ issues }) => {
     }
   > = {};
 
-  issues.forEach((issue) => {
+  for (const issue of issues) {
     const meta = getIssueMeta(issue);
     const criterionKey = meta.criterion as keyof typeof wcagLinks;
     const criterionData = wcagLinks[criterionKey];
@@ -124,26 +106,27 @@ const PdfIssueTable: FC<{ issues: Issue[] }> = ({ issues }) => {
         criterionData && "wcagLevel" in criterionData
           ? (criterionData as { wcagLevel: string }).wcagLevel
           : "N/A";
+
+      let type = "Hinweis";
+      switch (issue.severity) {
+        case "error":
+          type = "Fehler";
+          break;
+        case "warning":
+          type = "Warnung";
+          break;
+      }
+
       criterionGroups[criterionKey] = {
         criterion: criterionKey,
         label: criterionData?.label || criterionKey,
-        type:
-          issue.severity === "error"
-            ? "Fehler"
-            : issue.severity === "warning"
-              ? "Hinweis"
-              : "Hinweis",
+        type,
         level: level,
         count: 0,
       };
-      if (issue.severity === "error")
-        criterionGroups[criterionKey].type = "Fehler";
-      else if (issue.severity === "warning")
-        criterionGroups[criterionKey].type = "Warnung";
-      else criterionGroups[criterionKey].type = "Hinweis";
     }
     criterionGroups[criterionKey].count += issue.count;
-  });
+  }
 
   const tableData = Object.values(criterionGroups)
     .map((g) => ({
@@ -166,6 +149,32 @@ const PdfIssueTable: FC<{ issues: Issue[] }> = ({ issues }) => {
     />
   );
 };
+
+interface PdfGuidelineGroupProps {
+  guidelineGroup: {
+    key: string;
+    label: string;
+    description?: string;
+    issues: Issue[];
+  };
+}
+
+const PdfGuidelineGroup: FC<PdfGuidelineGroupProps> = ({ guidelineGroup }) => (
+  <PdfSection wrap={false} marginTop>
+    <PdfSectionHeader>
+      <PdfH4>
+        {guidelineGroup.key}. {guidelineGroup.label}
+      </PdfH4>
+    </PdfSectionHeader>
+    {guidelineGroup.description && (
+      <PdfText style={{ marginBottom: theme.spacing.m }}>
+        <PdfTextBold>Auswirkungen: </PdfTextBold>
+        {guidelineGroup.description}
+      </PdfText>
+    )}
+    <PdfIssueTable issues={guidelineGroup.issues} />
+  </PdfSection>
+);
 
 interface PdfIssueDetailsPageProps {
   group: IssueGroup;

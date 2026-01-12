@@ -1,8 +1,5 @@
-import { getSessionToken } from "@mittwald/ext-bridge/browser";
 import { ScanProfile } from "../../../../api/types.ts";
 import {
-  Action,
-  Button,
   Header,
   Heading,
   Label,
@@ -10,6 +7,7 @@ import {
   Section,
   Text,
 } from "@mittwald/flow-remote-react-components";
+import { PdfDownloadButton } from "./pdfDownloadButton";
 
 export function A11yScore({ profile }: { profile: ScanProfile }) {
   const color = (value: number | undefined) => {
@@ -25,41 +23,11 @@ export function A11yScore({ profile }: { profile: ScanProfile }) {
     return "success";
   };
 
-  const handleDownload = async () => {
-    const token = await getSessionToken();
-    const response = await fetch(`/api/pdf-export/${profile._id}`, {
-      method: "GET",
-      headers: {
-        "x-session-token": token,
-      },
-    });
-
-    if (!response.ok) {
-      console.log(response);
-      throw new Error("Failed to generate PDF");
-    }
-
-    const blob = await response.blob();
-
-    const url = window.URL.createObjectURL(blob);
-
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", `Barriere-Report.pdf`);
-    document.body.appendChild(link);
-    link.click();
-
-    link.parentNode?.removeChild(link);
-    window.URL.revokeObjectURL(url);
-  };
-
   return (
     <Section>
       <Header>
         <Heading>Scanergebnis</Heading>
-        <Action onAction={handleDownload}>
-          <Button>PDF generieren</Button>
-        </Action>
+        <PdfDownloadButton profileId={profile._id} />
       </Header>
       <Text>
         Der Barrierefreiheitsscore vermittelt einen groben Eindruck.

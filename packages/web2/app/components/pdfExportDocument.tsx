@@ -6,7 +6,7 @@ import PdfResultOverviewPage from "./pdf/pages/resultOverviewPage";
 import PdfScannedPagesPage from "./pdf/pages/scannedPagesPage";
 import {
   getIssueMeta,
-  groupIssuesByGuidelineAndTechnique,
+  groupIssuesByPrincipleAndTechnique,
 } from "./profile/tabs/issues/helpers";
 import wcagLinks from "../wcagLinks.json";
 import PdfIssueDetailsPage from "./pdf/pages/issueDetailsPage";
@@ -68,7 +68,7 @@ export const PdfExportDocument: FC<Props> = ({ profile }) => {
       return order[a.severity] - order[b.severity];
     });
 
-  const issueGroups = groupIssuesByGuidelineAndTechnique(preparedIssues ?? []);
+  const issueGroups = groupIssuesByPrincipleAndTechnique(preparedIssues ?? []);
 
   return (
     <Document>
