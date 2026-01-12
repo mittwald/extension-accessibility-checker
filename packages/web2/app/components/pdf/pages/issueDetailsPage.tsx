@@ -69,7 +69,8 @@ const PdfIssueGroupOverview: FC<PdfIssueGroupOverviewProps> = ({ group }) => {
         <PdfText style={{ marginBottom: theme.spacing.m }}>
           {principleDescription}{" "}
           <PdfTextBold>
-            {totalIssuesInGroup} {totalIssuesInGroup === 1 ? "Problem" : "Probleme"} identifiziert.
+            {totalIssuesInGroup}{" "}
+            {totalIssuesInGroup === 1 ? "Problem" : "Probleme"} identifiziert.
           </PdfTextBold>
         </PdfText>
       )}
