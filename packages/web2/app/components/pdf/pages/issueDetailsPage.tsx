@@ -8,6 +8,7 @@ import { FC } from "react";
 import PdfTable from "../table";
 import PdfFooter from "../footer";
 import { PdfSection, PdfSectionHeader } from "../layout";
+import { PdfLi, PdfUl } from "../list";
 
 const groupIssuesByGuideline = (issues: Issue[]) => {
   const groups: Record<
@@ -194,10 +195,54 @@ const PdfIssueDetailsPage: FC<PdfIssueDetailsPageProps> = ({
             <PdfH2>Detaillierte Ergebnisse</PdfH2>
           </PdfSectionHeader>
           <PdfText>
-            Die folgende detaillierte Analyse schlüsselt alle
-            Barrierefreiheitsprobleme nach den vier WCAG-Prinzipien auf. Für
-            jedes Erfolgskriterium gibt es Informationen zum Fehlertyp, dem
-            Konformitätslevel und der Häufigkeit.
+            Die detaillierte Analyse gliedert sich nach den vier{" "}
+            <PdfTextBold>
+              WCAG-Grundprinzipien: wahrnehmbar, bedienbar, verständlich und
+              robust.
+            </PdfTextBold>{" "}
+            WCAG 2.1 umfasst <PdfTextBold>13 Richtlinien</PdfTextBold> mit
+            insgesamt <PdfTextBold>78 Erfolgskriterien</PdfTextBold>, die
+            wiederum in drei Typen unterteilt werden.
+          </PdfText>
+          <PdfUl>
+            <PdfLi>
+              <PdfTextBold>Fehler</PdfTextBold> stellen eindeutig
+              identifizierbare WCAG-Verstöße dar und sollten priorisiert behoben
+              werden.
+            </PdfLi>
+            <PdfLi>
+              <PdfTextBold>Warnungen</PdfTextBold> kennzeichnen potenzielle
+              Barrieren, deren Bewertung vom Nutzungskontext abhängt und daher
+              manuell geprüft werden muss.
+            </PdfLi>
+            <PdfLi>
+              <PdfTextBold>Hinweise</PdfTextBold> betreffen WCAG-Prüfpunkte, die
+              nicht automatisiert erkannt werden können und ausschließlich einer
+              manuellen Prüfung bedürfen.
+            </PdfLi>
+          </PdfUl>
+          <PdfText>
+            Für jedes Erfolgskriterium geben die Konformitätsstufen A, AA und
+            AAA den jeweiligen Grad der Barrierefreiheit an.
+          </PdfText>
+          <PdfUl>
+            <PdfLi>
+              <PdfTextBold>A:</PdfTextBold> Mindestanforderung
+            </PdfLi>
+            <PdfLi>
+              <PdfTextBold>AA:</PdfTextBold> gilt als Standard und entspricht
+              den gesetzlichen Vorgaben z. B. dem BFSG
+            </PdfLi>
+            <PdfLi>
+              <PdfTextBold>AAA:</PdfTextBold> höchstes Niveau
+            </PdfLi>
+          </PdfUl>
+          <PdfText>
+            Das <PdfTextBold>Barrierefreiheitsstärkungsgesetz</PdfTextBold>{" "}
+            (BFSG) schreibt für betroffene Unternehmen die Einhaltung der
+            Konformitätsstufe <PdfTextBold>AA der WCAG 2.1</PdfTextBold> vor.
+            Das bedeutet, dass die Anforderungen der WCAG-Stufen A und AA
+            erfüllt sein müssen, um den gesetzlichen Vorgaben zu entsprechen.
           </PdfText>
         </PdfSection>
       )}

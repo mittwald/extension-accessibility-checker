@@ -2,7 +2,7 @@ import * as React from "react";
 import { ScanProfileWithSuccessfulScan } from "../../../api/types";
 import { Page, View } from "@react-pdf/renderer";
 import { PdfIconAccessible, PdfIconMittwald } from "../icons";
-import { PdfLargeHeading, PdfText, PdfTextBold } from "../typography";
+import { PdfH1, PdfLargeHeading, PdfText, PdfTextBold } from "../typography";
 import { styles } from "../theme";
 
 interface PdfFrontPageProps {
@@ -13,6 +13,10 @@ const PdfFrontPage: React.FC<PdfFrontPageProps> = ({ profile }) => {
   return (
     <Page size="A4" style={styles.page}>
       <View style={styles.frontPage}>
+        <PdfH1 style={{ textAlign: "center" }}>
+          Detaillierte Analyse der Prüfung auf Barrierefreiheit nach den
+          WCAG-Grundprinzipien
+        </PdfH1>
         <View style={styles.frontPageContent}>
           <PdfIconAccessible size={64} style={{ marginBottom: 4 }} />
           <View style={styles.frontPageInner}>

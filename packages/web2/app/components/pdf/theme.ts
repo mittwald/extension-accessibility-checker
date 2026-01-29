@@ -151,12 +151,13 @@ export const styles = StyleSheet.create({
     gap: theme.spacing.s,
   },
   frontPage: {
-    paddingTop: 80,
+    paddingTop: theme.spacing.xl,
     alignItems: "center",
     height: "100%",
   },
   frontPageContent: {
     padding: theme.spacing.m,
+    paddingTop: theme.spacing.xxl,
     flexDirection: "column",
     alignItems: "center",
     height: "100%",

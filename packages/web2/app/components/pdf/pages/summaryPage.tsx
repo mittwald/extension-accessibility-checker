@@ -1,15 +1,18 @@
 import { FC } from "react";
 import { Page, View } from "@react-pdf/renderer";
-import { PdfH3, PdfText } from "../typography";
+import { PdfH3, PdfText, PdfTextBold } from "../typography";
 import PdfTable, { TableColumn } from "../table";
 import { IssueGroup } from "../../profile/tabs/issues/types";
 import { styles, theme } from "../theme";
+import { ScanProfile } from "../../../api/types";
+import PdfAlert from "../alert";
 
 interface PdfSummaryPageProps {
+  profile: ScanProfile;
   issueGroups: IssueGroup[];
 }
 
-const PdfSummaryPage: FC<PdfSummaryPageProps> = ({ issueGroups }) => {
+const PdfSummaryPage: FC<PdfSummaryPageProps> = ({ profile, issueGroups }) => {
   const summaryData = issueGroups.map((group) => {
     let errorCount = 0;
     let warningCount = 0;
@@ -62,11 +65,30 @@ const PdfSummaryPage: FC<PdfSummaryPageProps> = ({ issueGroups }) => {
   return (
     <Page size="A4" style={styles.page}>
       <View style={{ marginBottom: theme.spacing.m }}>
-        <PdfH3>Zusammenfassung nach Prinzipien</PdfH3>
-        <PdfText style={{ marginTop: theme.spacing.s }}>
-          Hier folgt eine Zusammenfassung der Barrierefreiheitsprobleme, die
-          während des Scans gefunden wurden. Die Probleme sind nach den vier
-          WCAG-Prinzipien gruppiert.
+        <PdfH3>Zusammenfassung und Priorisierung</PdfH3>
+        <PdfText style={{ marginVertical: theme.spacing.s }}>
+          Im Rahmen der WCAG-Analyse der Website{" "}
+          <PdfTextBold>{profile.domain}</PdfTextBold> wurden insgesamt{" "}
+          <PdfTextBold>
+            {profile.issueSummary?.errors ?? 0} automatisch erkennbare Fehler
+          </PdfTextBold>
+          ,{" "}
+          <PdfTextBold>
+            {profile.issueSummary?.warnings ?? 0} kontextabhängige Warnungen
+          </PdfTextBold>{" "}
+          sowie{" "}
+          <PdfTextBold>
+            {profile.issueSummary?.notices ?? 0} Hinweise zur manuellen Prüfung
+          </PdfTextBold>{" "}
+          festgestellt.
+        </PdfText>
+        <PdfText>
+          Die <PdfTextBold>Fehler</PdfTextBold> stellen eindeutig
+          identifizierbare WCAG-Verstöße dar und sollten priorisiert behoben
+          werden. <PdfTextBold>Warnungen</PdfTextBold> und{" "}
+          <PdfTextBold>Hinweise</PdfTextBold> lassen sich nicht vollständig
+          automatisiert bewerten und erfordern eine manuelle Prüfung, da ihre
+          Relevanz vom jeweiligen Seiteninhalt und Nutzungsszenario abhängt.
         </PdfText>
       </View>
 
@@ -81,6 +103,17 @@ const PdfSummaryPage: FC<PdfSummaryPageProps> = ({ issueGroups }) => {
         footerData={footerData}
         columns={columns}
       />
+      <PdfText
+        style={{ marginTop: theme.spacing.m, marginBottom: theme.spacing.s }}
+      >
+        Die Zuordnung zu den{" "}
+        <PdfTextBold>WCAG-Konformitätsstufen (A, AA, AAA)</PdfTextBold> bietet
+        eine zusätzliche Entscheidungsgrundlage für die weitere Umsetzung.
+      </PdfText>
+      <PdfAlert
+        title="Hinweis"
+        description="Nicht alle Barrieren können automatisiert geprüft werden. Bestimmte Aspekte der Barrierefreiheit müssen daher immer manuell getestet werden, unabhängig vom Ergebnis der automatisierten Analyse."
+      ></PdfAlert>
     </Page>
   );
 };

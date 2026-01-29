@@ -1,13 +1,14 @@
 import * as React from "react";
 import { ScanProfileWithSuccessfulScan } from "../../../api/types";
 import { Page, View } from "@react-pdf/renderer";
-import { PdfH2, PdfText, PdfTextBold } from "../typography";
+import { PdfH2, PdfH3, PdfText, PdfTextBold } from "../typography";
 import { styles, theme } from "../theme";
 import PdfProgressbar from "../progressBar";
 import PdfStatCard from "../statCard";
 import PdfAlert from "../alert";
 import PdfFooter from "../footer";
 import { PdfSection, PdfSectionHeader } from "../layout";
+import { PdfLi, PdfUl } from "../list";
 
 interface PdfResultOverviewPageProps {
   profile: ScanProfileWithSuccessfulScan;
@@ -32,45 +33,84 @@ const PdfResultOverviewPage: React.FC<PdfResultOverviewPageProps> = ({
     <Page size="A4" style={{ ...styles.page, gap: theme.spacing.m }}>
       <PdfSection>
         <PdfSectionHeader>
-          <PdfH2>Scanergebnis</PdfH2>
+          <PdfH2>Zusammenfassung der Prüfungsergebnisse</PdfH2>
         </PdfSectionHeader>
         <PdfText>
-          Dieser Report zeigt den Stand der Barrierefreiheit der Domain{" "}
-          <PdfTextBold>{profile.domain}</PdfTextBold> zum{" "}
-          <PdfTextBold>{new Date().toLocaleDateString("de-DE")}</PdfTextBold>.
-          Grundlage dafür sind die Web Content Accessibility Guidelines (WCAG)
-          2.1 auf dem Konformitätsniveau <PdfTextBold>AAA</PdfTextBold>. Er
-          bietet einen schnellen Überblick über Optimierungspotenziale.
+          Dieser Report prüft die Website{" "}
+          <PdfTextBold>{profile.domain}</PdfTextBold> auf Barrierefreiheit nach
+          den <PdfTextBold>WCAG-Richtlinien</PdfTextBold> (Web Content
+          Accessibility Guidelines) – dem internationalen Standard für
+          barrierefreie Websites. Er zeigt den aktuellen Status zum{" "}
+          {new Date().toLocaleDateString("de-DE")}, Stärken und
+          Optimierungspotenziale der digitalen Präsenz.
         </PdfText>
         <PdfProgressbar
           color={color(profile.issueSummary?.score ?? 0)}
           label="Barrierefreiheitsscore"
           value={profile.issueSummary?.score ?? 0}
         />
+        <PdfText>
+          Der Barrierefreiheitsscore ist ein gewichteter Durchschnitt von
+          Prüfungen auf Barrierefreiheit.
+        </PdfText>
         <View style={{ flexDirection: "row", gap: theme.spacing.m }}>
           <PdfStatCard
             value={profile.issueSummary?.errors ?? 0}
             label="Fehler"
-            description="Kritische Fehler, die mit höchster Priorität behoben werden sollten."
+            description="automatisch prüfbare WCAG-Verstöße mit hoher Priorität"
             style={{ width: "calc(100% / 3)" }}
           />
           <PdfStatCard
             value={profile.issueSummary?.warnings ?? 0}
             label="Warnungen"
-            description="Punkte, die überprüft und bei Bedarf verbessert werden sollten."
+            description="potenzielle Barrieren, die manuell und kontextabhängig geprüft werden müssen"
             style={{ width: "calc(100% / 3)" }}
           />
           <PdfStatCard
             value={profile.issueSummary?.notices ?? 0}
             label="Hinweise"
-            description="Empfehlungen, über WCAG-Konformatität hinaus."
+            description="nicht automatisierbare WCAG-Prüfpunkte, manuelle Bewertung erforderlich"
             style={{ width: "calc(100% / 3)" }}
           />
         </View>
         <PdfAlert
           title="Hinweis"
-          description="Der Barrierefreiheitsscore liefert einen ersten Hinweis über den Stand der Barrierefreiheit. Einzelne Fehler oder Warnungen können die Nutzung weithin beeinträchtigen und müssen geprüft und behboben werden."
+          description="Automatische Scans sind gut – aber sie sehen nicht alles. Manuelle Tests sind für eine vollständige Konformität elementar."
         ></PdfAlert>
+        <PdfSection>
+          <PdfSectionHeader>
+            <PdfH3>Zusammenfassung der Prüfungsergebnisse</PdfH3>
+          </PdfSectionHeader>
+          <PdfUl>
+            <PdfLi>
+              <PdfTextBold>Gesetzliche Compliance:</PdfTextBold> BFSG erfüllen
+              und Risiken durch Bußgelder oder Abmahnungen vermeiden.
+            </PdfLi>
+            <PdfLi>
+              <PdfTextBold>Größere Reichweite:</PdfTextBold> Erreicht mehr
+              potenzielle Nutzende mit geringeren Abbruchraten.
+            </PdfLi>
+            <PdfLi>
+              <PdfTextBold>Bessere SEO:</PdfTextBold> Suchmaschinen bevorzugen
+              barrierefreie Seiten.
+            </PdfLi>
+            <PdfLi>
+              <PdfTextBold>Verbesserte UX:</PdfTextBold> Klare Navigation kommt
+              allen zugute.
+            </PdfLi>
+            <PdfLi>
+              <PdfTextBold>Starkes Markenbild:</PdfTextBold> Zeigt
+              gesellschaftliche Verantwortung und Professionalität.
+            </PdfLi>
+          </PdfUl>
+          <PdfText>
+            Barrierefreiheit ist ein{" "}
+            <PdfTextBold>
+              zentraler Qualitätsfaktor moderner Webauftritte
+            </PdfTextBold>
+            .
+          </PdfText>
+        </PdfSection>
       </PdfSection>
       <PdfFooter />
     </Page>

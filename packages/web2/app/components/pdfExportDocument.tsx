@@ -11,7 +11,6 @@ import {
 import wcagLinks from "../wcagLinks.json";
 import PdfIssueDetailsPage from "./pdf/pages/issueDetailsPage";
 import PdfSummaryPage from "./pdf/pages/summaryPage";
-import PdfBenefitsPage from "./pdf/pages/benefitsPage";
 import PdfClosingPage from "./pdf/pages/closingPage";
 import PdfMethodologyPage from "./pdf/pages/methodologyPage";
 import path from "node:path";
@@ -80,8 +79,7 @@ export const PdfExportDocument: FC<Props> = ({ profile }) => {
         .map((group, index) => (
           <PdfIssueDetailsPage key={index} group={group} index={index} />
         ))}
-      <PdfSummaryPage issueGroups={issueGroups} />
-      <PdfBenefitsPage />
+      <PdfSummaryPage profile={profile} issueGroups={issueGroups} />
       <PdfMethodologyPage />
       <PdfClosingPage profile={profile} />
     </Document>

@@ -40,14 +40,15 @@ const PdfScannedPagesPage: React.FC<PdfScannedPagesPageProps> = ({
 
   return (
     <Page size="A4" style={{ ...styles.page, gap: theme.spacing.m }}>
-      <PdfH3>Geprüfte Seiten</PdfH3>
+      <PdfH3>Gesamtübersicht aller gescannten Seiten</PdfH3>
 
       <PdfText>
         Insgesamt wurden{" "}
         <PdfTextBold>
-          {profile.lastSuccessfulScan?.pages.length ?? 0} Seiten und Unterseiten
+          {profile.lastSuccessfulScan?.pages.length ?? 0} Seiten
         </PdfTextBold>{" "}
-        auf Barrierefreiheit geprüft.
+        von <PdfTextBold>{profile.domain}</PdfTextBold> auf Barrierefreiheit
+        geprüft. auf Barrierefreiheit geprüft.
       </PdfText>
 
       <PdfTable

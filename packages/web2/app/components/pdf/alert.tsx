@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Alert = ({ title, description, icon, style }: AlertProps) => {
+const PdfAlert = ({ title, description, icon, style }: AlertProps) => {
   return (
     <View style={{ ...styles.container, ...style }}>
       <View style={styles.leftBorder} />
@@ -99,4 +99,4 @@ const Alert = ({ title, description, icon, style }: AlertProps) => {
   );
 };
 
-export default Alert;
+export default PdfAlert;

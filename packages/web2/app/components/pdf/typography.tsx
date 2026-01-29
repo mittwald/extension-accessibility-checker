@@ -45,8 +45,8 @@ export const PdfLink: FC<
     src={src}
     style={{
       ...styles.text,
-      color: theme.colors.link,
-      textDecoration: "none",
+      color: theme.colors.primary,
+      textDecoration: "underline",
       ...style,
     }}
     {...props}
