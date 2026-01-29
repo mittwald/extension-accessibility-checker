@@ -152,13 +152,31 @@ const PdfIssueTable: FC<{ issues: Issue[] }> = ({ issues }) => {
   );
 };
 
+interface PdfGuidelineDescriptionProps {
+  description?: string;
+}
+
+const PdfGuidelineDescription: FC<PdfGuidelineDescriptionProps> = ({
+  description,
+}) => {
+  if (!description) return null;
+  return (
+    <PdfText style={{ marginBottom: theme.spacing.m }}>
+      <PdfTextBold>Auswirkungen: </PdfTextBold>
+      {description}
+    </PdfText>
+  );
+};
+
+interface GuidelineGroup {
+  key: string;
+  label: string;
+  description?: string;
+  issues: Issue[];
+}
+
 interface PdfGuidelineGroupProps {
-  guidelineGroup: {
-    key: string;
-    label: string;
-    description?: string;
-    issues: Issue[];
-  };
+  guidelineGroup: GuidelineGroup;
 }
 
 const PdfGuidelineGroup: FC<PdfGuidelineGroupProps> = ({ guidelineGroup }) => (
@@ -168,12 +186,7 @@ const PdfGuidelineGroup: FC<PdfGuidelineGroupProps> = ({ guidelineGroup }) => (
         {guidelineGroup.key}. {guidelineGroup.label}
       </PdfH4>
     </PdfSectionHeader>
-    {guidelineGroup.description && (
-      <PdfText style={{ marginBottom: theme.spacing.m }}>
-        <PdfTextBold>Auswirkungen: </PdfTextBold>
-        {guidelineGroup.description}
-      </PdfText>
-    )}
+    <PdfGuidelineDescription description={guidelineGroup.description} />
     <PdfIssueTable issues={guidelineGroup.issues} />
   </PdfSection>
 );
