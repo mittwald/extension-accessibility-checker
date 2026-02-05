@@ -4,11 +4,38 @@ import { PdfH2, PdfH3, PdfH4, PdfText, PdfTextBold } from "../typography";
 import { Issue, IssueGroup } from "../../profile/tabs/issues/types";
 import wcagLinks from "../../../wcagLinks.json";
 import { getIssueMeta } from "../../profile/tabs/issues/helpers";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import PdfTable from "../table";
 import PdfFooter from "../footer";
 import { PdfSection, PdfSectionHeader } from "../layout";
 import { PdfLi, PdfUl } from "../list";
+
+interface TextPart {
+  type: "bold" | "text";
+  content: string;
+}
+
+const parseBoldText = (text: string): TextPart[] => {
+  const parts = text.split(/(\*\*.*?\*\*)/g);
+  return parts
+    .filter((part) => part.length > 0)
+    .map((part) => {
+      if (part.startsWith("**") && part.endsWith("**")) {
+        return { type: "bold" as const, content: part.slice(2, -2) };
+      }
+      return { type: "text" as const, content: part };
+    });
+};
+
+const renderParsedText = (parts: TextPart[]): ReactNode[] => {
+  return parts.map((part, i) =>
+    part.type === "bold" ? (
+      <PdfTextBold key={i}>{part.content}</PdfTextBold>
+    ) : (
+      part.content
+    ),
+  );
+};
 
 const groupIssuesByGuideline = (issues: Issue[]) => {
   const groups: Record<
@@ -68,11 +95,15 @@ const PdfIssueGroupOverview: FC<PdfIssueGroupOverviewProps> = ({ group }) => {
       </PdfSectionHeader>
       {principleDescription && (
         <PdfText style={{ marginBottom: theme.spacing.m }}>
-          {principleDescription}{" "}
+          {renderParsedText(parseBoldText(principleDescription))} Insgesamt
+          wurden{" "}
           <PdfTextBold>
             {totalIssuesInGroup}{" "}
-            {totalIssuesInGroup === 1 ? "Problem" : "Probleme"} identifiziert.
-          </PdfTextBold>
+            {totalIssuesInGroup === 1 ? "Problem" : "Probleme"}
+          </PdfTextBold>{" "}
+          im Bereich{" "}
+          {(principleData as { topic?: string })?.topic || group.label}{" "}
+          identifiziert.
         </PdfText>
       )}
 
@@ -160,10 +191,11 @@ const PdfGuidelineDescription: FC<PdfGuidelineDescriptionProps> = ({
   description,
 }) => {
   if (!description) return null;
+  const parsedParts = parseBoldText(description);
   return (
     <PdfText style={{ marginBottom: theme.spacing.m }}>
       <PdfTextBold>Auswirkungen: </PdfTextBold>
-      {description}
+      {renderParsedText(parsedParts)}
     </PdfText>
   );
 };

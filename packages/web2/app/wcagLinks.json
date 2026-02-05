@@ -1,7 +1,8 @@
 {
   "1": {
-    "label": "Wahrnehmbar (Perceivable)",
-    "description": "Inhalte müssen für alle wahrnehmbar sein. Dieses Prinzip adressiert visuelle, auditive und sensorische Zugänglichkeit.",
+    "label": "Wahrnehmbar",
+    "topic": "Wahrnehmbarkeit",
+    "description": "Inhalte müssen für alle Nutzenden **wahrnehmbar** sein. Dieses Prinzip betrifft die visuelle, auditive und sensorische Zugänglichkeit.",
     "understanding": "",
     "howToMeet": ""
   },
@@ -204,8 +205,9 @@
     "wcagLevel": "AA"
   },
   "2": {
-    "label": "Bedienbar (Operable)",
-    "description": "Interface-Komponenten und Navigation müssen bedienbar sein. Dies umfasst Tastarturzugriff, Fokusmanagement, Navigation, Eingabemethoden.",
+    "label": "Bedienbar",
+    "topic": "Bedienbarkeit",
+    "description": "Interface-Komponenten und Navigation müssen **bedienbar** sein. Dies umfasst Tastarturzugriff, Fokusmanagement, Navigation, Eingabemethoden.",
     "understanding": "",
     "howToMeet": ""
   },
@@ -441,8 +443,9 @@
     "wcagLevel": "AA"
   },
   "3": {
-    "label": "Verständlich (Understandable)",
-    "description": "Text muss lesbar sein, Navigation muss vorhersehbar sein, und Nutzer müssen Hilfe bei Eingabefehlern erhalten.",
+    "label": "Verständlich",
+    "topic": "Verständlichkeit",
+    "description": "Inhalte und Benutzeroberflächen müssen für alle Nutzenden **verständlich** sein. Dieses Prinzip umfasst klare Sprache, vorhersehbares Verhalten von Bedienelementen sowie verständliche Rückmeldungen bei Eingaben.",
     "understanding": "",
     "howToMeet": ""
   },
@@ -582,8 +585,9 @@
     "wcagLevel": "AAA"
   },
   "4": {
-    "label": "Robust (Robust)",
-    "description": "Code muss valide und mit Hilfstechnologien kompatible sein. Dies ist die technische Grundlage für barrierefreiheit.",
+    "label": "Robust",
+    "topic": "Robustheit",
+    "description": "Inhalte müssen **robust** genug sein, um von Browsern, Endgeräten und assistiven Technologien zuverlässig interpretiert zu werden. Dieses Prinzip betrifft vor allem die technische Umsetzung und die semantisch korrekte Struktur des Codes.",
     "understanding": "",
     "howToMeet": ""
   },
