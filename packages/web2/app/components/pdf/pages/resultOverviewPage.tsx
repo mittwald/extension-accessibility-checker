@@ -30,7 +30,7 @@ const PdfResultOverviewPage: React.FC<PdfResultOverviewPageProps> = ({
     return theme.colors.success;
   };
   return (
-    <Page size="A4" style={{ ...styles.page, gap: theme.spacing.m }}>
+    <Page size="A4" style={{ ...styles.page, gap: theme.spacing.m }} bookmark={{ title: "Zusammenfassung der Prüfungsergebnisse", fit: true }}>
       <PdfSection>
         <PdfSectionHeader>
           <PdfH2>Zusammenfassung der Prüfungsergebnisse</PdfH2>

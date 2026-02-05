@@ -63,7 +63,7 @@ const PdfSummaryPage: FC<PdfSummaryPageProps> = ({ profile, issueGroups }) => {
   ];
 
   return (
-    <Page size="A4" style={styles.page}>
+    <Page size="A4" style={styles.page} bookmark={{ title: "Zusammenfassung und Priorisierung", fit: true }}>
       <View style={{ marginBottom: theme.spacing.m }}>
         <PdfH3>Zusammenfassung und Priorisierung</PdfH3>
         <PdfText style={{ marginVertical: theme.spacing.s }}>

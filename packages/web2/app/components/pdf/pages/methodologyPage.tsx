@@ -8,12 +8,13 @@ import { PdfLi, PdfUl } from "../list";
 
 const PdfMethodologyPage: FC = () => {
   return (
-    <Page size="A4" style={styles.page}>
+    <Page size="A4" style={styles.page} bookmark={{ title: "Methodik & Hinweise", fit: true }}>
       <View style={{ marginBottom: theme.spacing.m }}>
         <PdfH3>Methodik & Hinweise</PdfH3>
       </View>
-      <PdfSection>
-        <PdfH4>Was ist das BFSG?</PdfH4>
+      <View bookmark={{ title: "Was ist das BFSG?", fit: true }}>
+        <PdfSection>
+          <PdfH4>Was ist das BFSG?</PdfH4>
         <PdfText>
           Das <PdfTextBold>Barrierefreiheitsstärkungsgesetz (BFSG)</PdfTextBold>{" "}
           regelt die <PdfTextBold>digitale Barrierefreiheit</PdfTextBold> für
@@ -21,9 +22,11 @@ const PdfMethodologyPage: FC = () => {
           EU-Richtlinie um und gilt{" "}
           <PdfTextBold>seit dem 28. Juni 2025</PdfTextBold>.
         </PdfText>
-      </PdfSection>
-      <PdfSection>
-        <PdfH4>Für wen gilt das BFSG?</PdfH4>
+        </PdfSection>
+      </View>
+      <View bookmark={{ title: "Für wen gilt das BFSG?", fit: true }}>
+        <PdfSection>
+          <PdfH4>Für wen gilt das BFSG?</PdfH4>
         <PdfText>
           Das Barrierefreiheitsstärkungsgesetz (BFSG) gilt für Unternehmen, die
           <PdfTextBold>
@@ -42,9 +45,11 @@ const PdfMethodologyPage: FC = () => {
           </PdfLink>
           .
         </PdfText>
-      </PdfSection>
-      <PdfSection>
-        <PdfH4>Warum ist Barrierefreiheit über das BFSG hinaus wichtig?</PdfH4>
+        </PdfSection>
+      </View>
+      <View bookmark={{ title: "Warum ist Barrierefreiheit über das BFSG hinaus wichtig?", fit: true }}>
+        <PdfSection>
+          <PdfH4>Warum ist Barrierefreiheit über das BFSG hinaus wichtig?</PdfH4>
         <PdfText>
           Barrierefreiheit verbessert nicht nur die rechtliche Konformität,
           sondern vor allem die{" "}
@@ -82,9 +87,11 @@ const PdfMethodologyPage: FC = () => {
           </PdfLink>
           .
         </PdfText>
-      </PdfSection>
-      <PdfSection>
-        <PdfH4>Was passiert bei Verstößen gegen das BFSG?</PdfH4>
+        </PdfSection>
+      </View>
+      <View bookmark={{ title: "Was passiert bei Verstößen gegen das BFSG?", fit: true }}>
+        <PdfSection>
+          <PdfH4>Was passiert bei Verstößen gegen das BFSG?</PdfH4>
         <PdfText>
           Werden die Anforderungen des BFSG nicht erfüllt, stellt dies gemäß{" "}
           <PdfTextBold>§ 37 Abs. 1 Nr. 8 BFSG</PdfTextBold> eine{" "}
@@ -99,9 +106,11 @@ const PdfMethodologyPage: FC = () => {
           <PdfTextBold>DSGVO</PdfTextBold> oder zu den{" "}
           <PdfTextBold>Google Fonts</PdfTextBold>.
         </PdfText>
-      </PdfSection>
-      <PdfSection>
-        <PdfH4>Hinweis zur Barrierefreiheitserklärung</PdfH4>
+        </PdfSection>
+      </View>
+      <View bookmark={{ title: "Hinweis zur Barrierefreiheitserklärung", fit: true }}>
+        <PdfSection>
+          <PdfH4>Hinweis zur Barrierefreiheitserklärung</PdfH4>
         <PdfText>
           betroffenen Websites ist zusätzlich eine{" "}
           <PdfTextBold>Barrierefreiheitserklärung</PdfTextBold>
@@ -112,7 +121,8 @@ const PdfMethodologyPage: FC = () => {
           bekannte Einschränkungen sowie Kontaktmöglichkeiten zur Rückmeldung
           von Barrieren.
         </PdfText>
-      </PdfSection>
+        </PdfSection>
+      </View>
 
       <PdfFooter />
     </Page>

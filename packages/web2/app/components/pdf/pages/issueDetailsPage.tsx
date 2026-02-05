@@ -1,5 +1,5 @@
 import { styles, theme } from "../theme";
-import { Page } from "@react-pdf/renderer";
+import { Page, View } from "@react-pdf/renderer";
 import { PdfH2, PdfH3, PdfH4, PdfText, PdfTextBold } from "../typography";
 import { Issue, IssueGroup } from "../../profile/tabs/issues/types";
 import wcagLinks from "../../../wcagLinks.json";
@@ -212,15 +212,17 @@ interface PdfGuidelineGroupProps {
 }
 
 const PdfGuidelineGroup: FC<PdfGuidelineGroupProps> = ({ guidelineGroup }) => (
-  <PdfSection wrap={false} marginTop>
-    <PdfSectionHeader>
-      <PdfH4>
-        {guidelineGroup.key}. {guidelineGroup.label}
-      </PdfH4>
-    </PdfSectionHeader>
-    <PdfGuidelineDescription description={guidelineGroup.description} />
-    <PdfIssueTable issues={guidelineGroup.issues} />
-  </PdfSection>
+  <View bookmark={{ title: `${guidelineGroup.key}. ${guidelineGroup.label}`, fit: true }}>
+    <PdfSection wrap={false} marginTop>
+      <PdfSectionHeader>
+        <PdfH4>
+          {guidelineGroup.key}. {guidelineGroup.label}
+        </PdfH4>
+      </PdfSectionHeader>
+      <PdfGuidelineDescription description={guidelineGroup.description} />
+      <PdfIssueTable issues={guidelineGroup.issues} />
+    </PdfSection>
+  </View>
 );
 
 interface PdfIssueDetailsPageProps {
@@ -233,7 +235,7 @@ const PdfIssueDetailsPage: FC<PdfIssueDetailsPageProps> = ({
   index,
 }) => {
   return (
-    <Page size="A4" style={styles.page}>
+    <Page size="A4" style={styles.page} bookmark={{ title: `${group.groupKey}. ${group.label}`, fit: true }}>
       {index == 0 && (
         <PdfSection marginTop>
           <PdfSectionHeader>
