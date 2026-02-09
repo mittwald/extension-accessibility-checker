@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ScanProfileWithSuccessfulScan } from "../../../api/types";
-import { Page, View } from "@react-pdf/renderer";
+import { Page } from "@react-pdf/renderer";
 import { PdfH3, PdfText, PdfTextBold } from "../typography";
 import { styles, theme } from "../theme";
 import PdfTable, { TableColumn } from "../table";
@@ -39,7 +39,11 @@ const PdfScannedPagesPage: React.FC<PdfScannedPagesPageProps> = ({
     })) ?? [];
 
   return (
-    <Page size="A4" style={{ ...styles.page, gap: theme.spacing.m }} bookmark={{ title: "Gesamtübersicht aller gescannten Seiten", fit: true }}>
+    <Page
+      size="A4"
+      style={{ ...styles.page, gap: theme.spacing.m }}
+      bookmark={{ title: "Gesamtübersicht aller gescannten Seiten", fit: true }}
+    >
       <PdfH3>Gesamtübersicht aller gescannten Seiten</PdfH3>
 
       <PdfText>

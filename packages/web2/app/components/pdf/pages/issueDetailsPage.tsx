@@ -212,7 +212,12 @@ interface PdfGuidelineGroupProps {
 }
 
 const PdfGuidelineGroup: FC<PdfGuidelineGroupProps> = ({ guidelineGroup }) => (
-  <View bookmark={{ title: `${guidelineGroup.key}. ${guidelineGroup.label}`, fit: true }}>
+  <View
+    bookmark={{
+      title: `${guidelineGroup.key}. ${guidelineGroup.label}`,
+      fit: true,
+    }}
+  >
     <PdfSection wrap={false} marginTop>
       <PdfSectionHeader>
         <PdfH4>
@@ -235,7 +240,11 @@ const PdfIssueDetailsPage: FC<PdfIssueDetailsPageProps> = ({
   index,
 }) => {
   return (
-    <Page size="A4" style={styles.page} bookmark={{ title: `${group.groupKey}. ${group.label}`, fit: true }}>
+    <Page
+      size="A4"
+      style={styles.page}
+      bookmark={{ title: `${group.groupKey}. ${group.label}`, fit: true }}
+    >
       {index == 0 && (
         <PdfSection marginTop>
           <PdfSectionHeader>
