@@ -1,4 +1,6 @@
 import { FC } from "react";
+import hyphenDe from "hyphen/de";
+const { hyphenateSync: hyphenateDE } = hyphenDe;
 import { Document, Font } from "@react-pdf/renderer";
 import { ScanProfileWithSuccessfulScan } from "../api/types";
 import PdfFrontPage from "./pdf/pages/frontPage";
@@ -49,6 +51,13 @@ Font.registerEmojiSource({
 
     return `https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/${codePoint}.png`;
   },
+});
+
+Font.registerHyphenationCallback((word) => {
+  if (word.length > 5) {
+    return hyphenateDE(word).split("\u00AD");
+  }
+  return [word];
 });
 
 export const PdfExportDocument: FC<Props> = ({ profile }) => {

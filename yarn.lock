@@ -7288,6 +7288,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/hyphen@npm:^1":
+  version: 1.14.0
+  resolution: "@types/hyphen@npm:1.14.0"
+  checksum: 10c0/a832dea8651fb96b2c89c6996ed09a8e4afac2530b8c5a3357faa912fd0e474db0bfc6d7312d2dba7bdefa0d17ad0462648f579e99fbf200b0720a07cba1071c
+  languageName: node
+  linkType: hard
+
 "@types/invariant@npm:^2.2.37":
   version: 2.2.37
   resolution: "@types/invariant@npm:2.2.37"
@@ -11623,6 +11630,7 @@ __metadata:
     "@tanstack/react-start": "npm:1.116.0"
     "@tanstack/router-plugin": "npm:^1.99.8"
     "@tanstack/zod-adapter": "npm:1.116.0"
+    "@types/hyphen": "npm:^1"
     "@types/react": "npm:^19.0.8"
     "@types/react-dom": "npm:^19.0.3"
     "@vitejs/plugin-react": "npm:^4.3.4"
@@ -11638,6 +11646,7 @@ __metadata:
     extension-a11y-checker-storage: "workspace:*"
     fast-xml-parser: "npm:^5.2.5"
     globals: "npm:^15.14.0"
+    hyphen: "npm:^1.14.1"
     json-schema-to-zod: "npm:^2.6.0"
     pino: "npm:^9.6.0"
     pino-pretty: "npm:^13.0.0"
@@ -12938,6 +12947,13 @@ __metadata:
   version: 5.0.0
   resolution: "human-signals@npm:5.0.0"
   checksum: 10c0/5a9359073fe17a8b58e5a085e9a39a950366d9f00217c4ff5878bd312e09d80f460536ea6a3f260b5943a01fe55c158d1cea3fc7bee3d0520aeef04f6d915c82
+  languageName: node
+  linkType: hard
+
+"hyphen@npm:^1.14.1":
+  version: 1.14.1
+  resolution: "hyphen@npm:1.14.1"
+  checksum: 10c0/347af725468eeb79fb7c2a42a494fd8cbf6d34d560bb6b2d49e777194dfceffa1d31b91e43d6fdec0ae3ab100b6fe6524656d51214e901389828a2e1d91657fb
   languageName: node
   linkType: hard
 
