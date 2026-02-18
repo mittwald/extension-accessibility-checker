@@ -10,12 +10,14 @@ export interface PdfBaseProps extends PropsWithStyle {
 interface PdfSectionProps extends PdfBaseProps {
   marginTop?: boolean;
   wrap?: boolean;
+  break?: boolean;
 }
 
 export const PdfSection = ({
   children,
   style,
   wrap = true,
+  break: pageBreak = false,
   debug,
 }: PdfSectionProps) => {
   const containerStyles = {
@@ -25,7 +27,7 @@ export const PdfSection = ({
 
   return (
     <>
-      <View style={containerStyles} wrap={wrap} debug={debug}>
+      <View style={containerStyles} wrap={wrap} break={pageBreak} debug={debug}>
         {Children.map(children, (child, index) => {
           if (!isValidElement(child)) {
             return child;

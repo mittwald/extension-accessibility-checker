@@ -11,10 +11,13 @@ const PdfMethodologyPage: FC = () => {
     <Page
       size="A4"
       style={styles.page}
-      bookmark={{ title: "Methodik & Hinweise", fit: true }}
+      bookmark={{
+        title: "Das Barrierefreiheitsstärkungsgesetz (BFSG)",
+        fit: true,
+      }}
     >
       <View style={{ marginBottom: theme.spacing.m }}>
-        <PdfH3>Methodik & Hinweise</PdfH3>
+        <PdfH3>Das Barrierefreiheitsstärkungsgesetz (BFSG)</PdfH3>
       </View>
       <View bookmark={{ title: "Was ist das BFSG?", fit: true }}>
         <PdfSection>
@@ -120,7 +123,7 @@ const PdfMethodologyPage: FC = () => {
             werden. Weitaus schlimmer könnten Abmahnungen von Mitbewerbern oder
             sogenannten „Abmahnvereinen“ sein. Die Erfahrungen der letzten Jahre
             zeigen, dass gerade Verstöße gegen Informations- und
-            Gestaltungspflichten häufig für
+            Gestaltungspflichten häufig für{" "}
             <PdfTextBold>Massenabmahnungen</PdfTextBold> herangezogen werden –
             vergleichbar mit den Abmahnwellen rund um die{" "}
             <PdfTextBold>DSGVO</PdfTextBold> oder zu den{" "}
@@ -138,13 +141,20 @@ const PdfMethodologyPage: FC = () => {
           <PdfH4>Hinweis zur Barrierefreiheitserklärung</PdfH4>
           <PdfText>
             Für viele der vom BFSG Betroffenen Websites ist zusätzlich eine{" "}
-            <PdfTextBold>Barrierefreiheitserklärung</PdfTextBold>
-            erforderlich. Diese muss gut sichtbar platziert sein, etwa{" "}
+            <PdfTextBold>Barrierefreiheitserklärung</PdfTextBold> erforderlich.
+            Diese muss gut sichtbar platziert sein, etwa{" "}
             <PdfTextBold>im Footer in Nähe des Impressums</PdfTextBold>, oder an
             einer ähnlich zentral auffindbaren Stelle auf jeder Seite. Sie
             informiert Nutzende transparent über den Stand der Barrierefreiheit,
             bekannte Einschränkungen sowie Kontaktmöglichkeiten zur Rückmeldung
             von Barrieren.
+          </PdfText>
+          <PdfText>
+            Eine entsprechende Barrierefreiheitserklärung kann mit dem{" "}
+            <PdfLink src="https://www.mittwald.de/mstudio/extensions/barriere-erklaerung">
+              Generator von mittwald
+            </PdfLink>{" "}
+            erstellt und bereitgestellt werden.
           </PdfText>
         </PdfSection>
       </View>

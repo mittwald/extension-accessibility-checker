@@ -38,6 +38,8 @@ const PdfScannedPagesPage: React.FC<PdfScannedPagesPageProps> = ({
       score: page.score ?? 0,
     })) ?? [];
 
+  const pagesCount = profile.lastSuccessfulScan?.pages.length ?? 0;
+
   return (
     <Page
       size="A4"
@@ -49,10 +51,10 @@ const PdfScannedPagesPage: React.FC<PdfScannedPagesPageProps> = ({
       <PdfText>
         Insgesamt wurden{" "}
         <PdfTextBold>
-          {profile.lastSuccessfulScan?.pages.length ?? 0} Seiten
+          {pagesCount} {pagesCount == 1 ? "Seite" : "Seiten"}
         </PdfTextBold>{" "}
         von <PdfTextBold>{profile.domain}</PdfTextBold> auf Barrierefreiheit
-        geprüft. auf Barrierefreiheit geprüft.
+        geprüft.
       </PdfText>
 
       <PdfTable

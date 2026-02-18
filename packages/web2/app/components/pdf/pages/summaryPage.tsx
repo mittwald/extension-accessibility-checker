@@ -6,6 +6,7 @@ import { IssueGroup } from "../../profile/tabs/issues/types";
 import { styles, theme } from "../theme";
 import { ScanProfile } from "../../../api/types";
 import PdfAlert from "../alert";
+import PdfFooter from "../footer";
 
 interface PdfSummaryPageProps {
   profile: ScanProfile;
@@ -118,6 +119,7 @@ const PdfSummaryPage: FC<PdfSummaryPageProps> = ({ profile, issueGroups }) => {
         title="Hinweis"
         description="Nicht alle Barrieren können automatisiert geprüft werden. Bestimmte Aspekte der Barrierefreiheit müssen daher immer manuell getestet werden, unabhängig vom Ergebnis der automatisierten Analyse."
       ></PdfAlert>
+      <PdfFooter />
     </Page>
   );
 };

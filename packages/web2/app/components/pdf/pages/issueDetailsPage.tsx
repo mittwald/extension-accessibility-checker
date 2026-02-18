@@ -1,4 +1,5 @@
 import { styles, theme } from "../theme";
+import { PdfIconInfoCircle } from "../icons";
 import { Page, View } from "@react-pdf/renderer";
 import { PdfH2, PdfH3, PdfH4, PdfText, PdfTextBold } from "../typography";
 import { Issue, IssueGroup } from "../../profile/tabs/issues/types";
@@ -40,7 +41,13 @@ const renderParsedText = (parts: TextPart[]): ReactNode[] => {
 const groupIssuesByGuideline = (issues: Issue[]) => {
   const groups: Record<
     string,
-    { label: string; description?: string; issues: Issue[] }
+    {
+      label: string;
+      description?: string;
+      shortDescription?: string;
+      example?: string;
+      issues: Issue[];
+    }
   > = {};
 
   for (const issue of issues) {
@@ -53,9 +60,20 @@ const groupIssuesByGuideline = (issues: Issue[]) => {
         guidelineData && "description" in guidelineData
           ? (guidelineData as { description: string }).description
           : undefined;
+      const shortDesc =
+        guidelineData && "shortDescription" in guidelineData
+          ? (guidelineData as { shortDescription: string }).shortDescription
+          : undefined;
+      const example =
+        guidelineData && "example" in guidelineData
+          ? (guidelineData as { example: string }).example
+          : undefined;
+
       groups[guidelineKey] = {
         label: guidelineData?.label || guidelineKey,
         description: desc,
+        shortDescription: shortDesc,
+        example: example,
         issues: [],
       };
     }
@@ -185,18 +203,50 @@ const PdfIssueTable: FC<{ issues: Issue[] }> = ({ issues }) => {
 
 interface PdfGuidelineDescriptionProps {
   description?: string;
+  example?: string;
 }
 
 const PdfGuidelineDescription: FC<PdfGuidelineDescriptionProps> = ({
   description,
+  example,
 }) => {
-  if (!description) return null;
-  const parsedParts = parseBoldText(description);
+  if (!description && !example) return null;
+  const parsedParts = description ? parseBoldText(description) : [];
+  const parsedExample = example ? parseBoldText(example) : [];
+
   return (
-    <PdfText style={{ marginBottom: theme.spacing.m }}>
-      <PdfTextBold>Auswirkungen: </PdfTextBold>
-      {renderParsedText(parsedParts)}
-    </PdfText>
+    <View style={{ marginTop: theme.spacing.m }}>
+      {description && (
+        <View style={{ marginBottom: theme.spacing.m }}>
+          {/* Label is now its own block element */}
+          <PdfTextBold style={{ marginBottom: 2 }}>
+            Beispielhafte Auswirkungen:
+          </PdfTextBold>
+
+          {/* Description text starts on a new line */}
+          <PdfText>{renderParsedText(parsedParts)}</PdfText>
+        </View>
+      )}
+
+      {example && (
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "flex-start",
+          }}
+        >
+          <PdfIconInfoCircle
+            size={12}
+            color={theme.colors.text}
+            style={{ marginRight: 4, marginTop: 1.5 }}
+          />
+          <PdfText>
+            <PdfTextBold>Beispiel:</PdfTextBold>{" "}
+            {renderParsedText(parsedExample)}
+          </PdfText>
+        </View>
+      )}
+    </View>
   );
 };
 
@@ -204,6 +254,8 @@ interface GuidelineGroup {
   key: string;
   label: string;
   description?: string;
+  shortDescription?: string;
+  example?: string;
   issues: Issue[];
 }
 
@@ -224,8 +276,16 @@ const PdfGuidelineGroup: FC<PdfGuidelineGroupProps> = ({ guidelineGroup }) => (
           {guidelineGroup.key}. {guidelineGroup.label}
         </PdfH4>
       </PdfSectionHeader>
-      <PdfGuidelineDescription description={guidelineGroup.description} />
+      {guidelineGroup.shortDescription && (
+        <PdfText style={{ marginBottom: theme.spacing.m }}>
+          {guidelineGroup.shortDescription}
+        </PdfText>
+      )}
       <PdfIssueTable issues={guidelineGroup.issues} />
+      <PdfGuidelineDescription
+        description={guidelineGroup.description}
+        example={guidelineGroup.example}
+      />
     </PdfSection>
   </View>
 );
@@ -246,61 +306,64 @@ const PdfIssueDetailsPage: FC<PdfIssueDetailsPageProps> = ({
       bookmark={{ title: `${group.groupKey}. ${group.label}`, fit: true }}
     >
       {index == 0 && (
-        <PdfSection marginTop>
-          <PdfSectionHeader>
-            <PdfH2>Detaillierte Ergebnisse</PdfH2>
-          </PdfSectionHeader>
-          <PdfText>
-            Die detaillierte Analyse gliedert sich nach den vier{" "}
-            <PdfTextBold>
-              WCAG-Grundprinzipien: wahrnehmbar, bedienbar, verständlich und
-              robust.
-            </PdfTextBold>{" "}
-            WCAG 2.1 umfasst <PdfTextBold>13 Richtlinien</PdfTextBold> mit
-            insgesamt <PdfTextBold>78 Erfolgskriterien</PdfTextBold>, die
-            wiederum in drei Typen unterteilt werden.
-          </PdfText>
-          <PdfUl>
-            <PdfLi>
-              <PdfTextBold>Fehler</PdfTextBold> stellen eindeutig
-              identifizierbare WCAG-Verstöße dar und sollten priorisiert behoben
-              werden.
-            </PdfLi>
-            <PdfLi>
-              <PdfTextBold>Warnungen</PdfTextBold> kennzeichnen potenzielle
-              Barrieren, deren Bewertung vom Nutzungskontext abhängt und daher
-              manuell geprüft werden muss.
-            </PdfLi>
-            <PdfLi>
-              <PdfTextBold>Hinweise</PdfTextBold> betreffen WCAG-Prüfpunkte, die
-              nicht automatisiert erkannt werden können und ausschließlich einer
-              manuellen Prüfung bedürfen.
-            </PdfLi>
-          </PdfUl>
-          <PdfText>
-            Für jedes Erfolgskriterium geben die Konformitätsstufen A, AA und
-            AAA den jeweiligen Grad der Barrierefreiheit an.
-          </PdfText>
-          <PdfUl>
-            <PdfLi>
-              <PdfTextBold>A:</PdfTextBold> Mindestanforderung
-            </PdfLi>
-            <PdfLi>
-              <PdfTextBold>AA:</PdfTextBold> gilt als Standard und entspricht
-              den gesetzlichen Vorgaben z. B. dem BFSG
-            </PdfLi>
-            <PdfLi>
-              <PdfTextBold>AAA:</PdfTextBold> höchstes Niveau
-            </PdfLi>
-          </PdfUl>
-          <PdfText>
-            Das <PdfTextBold>Barrierefreiheitsstärkungsgesetz</PdfTextBold>{" "}
-            (BFSG) schreibt für betroffene Unternehmen die Einhaltung der
-            Konformitätsstufe <PdfTextBold>AA der WCAG 2.1</PdfTextBold> vor.
-            Das bedeutet, dass die Anforderungen der WCAG-Stufen A und AA
-            erfüllt sein müssen, um den gesetzlichen Vorgaben zu entsprechen.
-          </PdfText>
-        </PdfSection>
+        <>
+          <PdfSection marginTop>
+            <PdfSectionHeader>
+              <PdfH2>Detaillierte Ergebnisse</PdfH2>
+            </PdfSectionHeader>
+            <PdfText>
+              Die detaillierte Analyse gliedert sich nach den vier{" "}
+              <PdfTextBold>
+                WCAG-Grundprinzipien: wahrnehmbar, bedienbar, verständlich und
+                robust.
+              </PdfTextBold>{" "}
+              WCAG 2.1 umfasst <PdfTextBold>13 Richtlinien</PdfTextBold> mit
+              insgesamt <PdfTextBold>78 Erfolgskriterien</PdfTextBold>, die
+              wiederum in drei Typen unterteilt werden.
+            </PdfText>
+            <PdfUl>
+              <PdfLi>
+                <PdfTextBold>Fehler</PdfTextBold> stellen eindeutig
+                identifizierbare WCAG-Verstöße dar und sollten priorisiert
+                behoben werden.
+              </PdfLi>
+              <PdfLi>
+                <PdfTextBold>Warnungen</PdfTextBold> kennzeichnen potenzielle
+                Barrieren, deren Bewertung vom Nutzungskontext abhängt und daher
+                manuell geprüft werden muss.
+              </PdfLi>
+              <PdfLi>
+                <PdfTextBold>Hinweise</PdfTextBold> betreffen WCAG-Prüfpunkte,
+                die nicht automatisiert erkannt werden können und ausschließlich
+                einer manuellen Prüfung bedürfen.
+              </PdfLi>
+            </PdfUl>
+            <PdfText>
+              Für jedes Erfolgskriterium geben die Konformitätsstufen A, AA und
+              AAA den jeweiligen Grad der Barrierefreiheit an.
+            </PdfText>
+            <PdfUl>
+              <PdfLi>
+                <PdfTextBold>A:</PdfTextBold> Mindestanforderung
+              </PdfLi>
+              <PdfLi>
+                <PdfTextBold>AA:</PdfTextBold> gilt als Standard und entspricht
+                den gesetzlichen Vorgaben z. B. dem BFSG
+              </PdfLi>
+              <PdfLi>
+                <PdfTextBold>AAA:</PdfTextBold> höchstes Niveau
+              </PdfLi>
+            </PdfUl>
+            <PdfText>
+              Das <PdfTextBold>Barrierefreiheitsstärkungsgesetz</PdfTextBold>{" "}
+              (BFSG) schreibt für betroffene Unternehmen die Einhaltung der
+              Konformitätsstufe <PdfTextBold>AA der WCAG 2.1</PdfTextBold> vor.
+              Das bedeutet, dass die Anforderungen der WCAG-Stufen A und AA
+              erfüllt sein müssen, um den gesetzlichen Vorgaben zu entsprechen.
+            </PdfText>
+          </PdfSection>
+          <View break />
+        </>
       )}
       <PdfIssueGroupOverview group={group} />
       <PdfFooter />
