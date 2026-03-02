@@ -59,7 +59,7 @@ const PdfSummaryPage: FC<PdfSummaryPageProps> = ({ profile, issueGroups }) => {
     { header: "Prinzip", accessor: "principle", isFlex: true },
     { header: "Fehler", accessor: "error", width: 60, align: "center" },
     { header: "Warnungen", accessor: "warning", width: 80, align: "center" },
-    { header: "Hinweise", accessor: "notice", width: 70, align: "center" },
+    { header: "Hinweise*", accessor: "notice", width: 70, align: "center" },
     { header: "Gesamt", accessor: "total", width: 60, align: "center" },
   ];
 
@@ -108,6 +108,8 @@ const PdfSummaryPage: FC<PdfSummaryPageProps> = ({ profile, issueGroups }) => {
         footerData={footerData}
         columns={columns}
       />
+      <PdfText style={{ marginTop: theme.spacing.s }}>* Hinweise werden nur erfasst und im Report ausgegeben, wenn sie zuvor im Scanprofil des Barriere-Checkers aktiviert wurden.</PdfText>
+
       <PdfText
         style={{ marginTop: theme.spacing.m, marginBottom: theme.spacing.s }}
       >

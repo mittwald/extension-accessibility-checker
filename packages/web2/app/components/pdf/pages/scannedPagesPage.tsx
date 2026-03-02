@@ -25,7 +25,7 @@ const PdfScannedPagesPage: React.FC<PdfScannedPagesPageProps> = ({
     { header: "Pfade", accessor: "path", isFlex: true, align: "left" },
     { header: "Fehler", accessor: "errors", width: 50, align: "center" },
     { header: "Warnungen", accessor: "warnings", width: 80, align: "center" },
-    { header: "Hinweise", accessor: "notices", width: 70, align: "center" },
+    { header: "Hinweise*", accessor: "notices", width: 70, align: "center" },
     { header: "Score", accessor: "score", width: 50, align: "center" },
   ];
 
@@ -68,6 +68,7 @@ const PdfScannedPagesPage: React.FC<PdfScannedPagesPageProps> = ({
           score: `Ø ${profile.issueSummary?.score ?? 0}`,
         }}
       />
+      <PdfText style={{ marginTop: theme.spacing.s }}>* Hinweise werden nur erfasst und im Report ausgegeben, wenn sie zuvor im Scanprofil des Barriere-Checkers aktiviert wurden.</PdfText>
       <PdfFooter />
     </Page>
   );

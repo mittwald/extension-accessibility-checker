@@ -72,11 +72,12 @@ const PdfResultOverviewPage: React.FC<PdfResultOverviewPageProps> = ({
           />
           <PdfStatCard
             value={profile.issueSummary?.notices ?? 0}
-            label="Hinweise"
+            label="Hinweise*"
             description="nicht automatisierbare WCAG-Prüfpunkte, manuelle Bewertung erforderlich"
             style={{ width: "calc(100% / 3)" }}
           />
         </View>
+        <PdfText>* Hinweise werden nur erfasst und im Report ausgegeben, wenn sie zuvor im Scanprofil des Barriere-Checkers aktiviert wurden.</PdfText>
         <PdfAlert
           title="Hinweis"
           description="Automatische Scans sind gut – aber sie sehen nicht alles. Manuelle Tests sind für eine vollständige Konformität elementar."

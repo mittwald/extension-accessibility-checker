@@ -34,7 +34,7 @@ const PdfClosingPage: FC<PdfClosingPageProps> = ({ profile }) => {
         </PdfSmall>
         <PdfSmall>
           Dieser Report wurde automatisiert aus den Daten des Barriere-Checkers
-          von <PdfLink src="https://mittwald.de">mittwald</PdfLink> generiert.
+          von <PdfLink src="https://mittwald.de" style={{ fontSize: theme.fontSize.small }}>mittwald</PdfLink> generiert.
         </PdfSmall>
         <PdfSmall style={{ textAlign: "center" }}>
           Disclaimer / Rechtlicher Hinweis: Dieses Dokument dient lediglich der

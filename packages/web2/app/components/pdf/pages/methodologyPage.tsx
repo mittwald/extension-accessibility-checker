@@ -37,10 +37,11 @@ const PdfMethodologyPage: FC = () => {
           <PdfH4>Für wen gilt das BFSG?</PdfH4>
           <PdfText>
             Das Barrierefreiheitsstärkungsgesetz (BFSG) gilt für Unternehmen,
-            die
+            die{" "}
             <PdfTextBold>
-              digitale Produkte oder Dienstleistungen an Endverbraucher (B2C){" "}
+              digitale Produkte oder Dienstleistungen an Endverbraucher (B2C)
             </PdfTextBold>
+            {" "}
             anbieten, zum Beispiel <PdfTextBold>Online-Shops</PdfTextBold>, Apps
             oder Webprojekte mit geschäftlichen Funktionen wie Terminbuchungen
             oder Gutscheinbestellungen. Ausgenommen sind{" "}
@@ -95,7 +96,7 @@ const PdfMethodologyPage: FC = () => {
           </PdfUl>
           <PdfText>
             Barrierefreiheit ist damit nicht nur ein Compliance-Thema, sondern
-            ein
+            ein{" "}
             <PdfTextBold>
               wesentlicher Qualitätsfaktor moderner Webentwicklung
             </PdfTextBold>
@@ -118,7 +119,7 @@ const PdfMethodologyPage: FC = () => {
           <PdfText>
             Werden die Anforderungen des BFSG nicht erfüllt, stellt dies gemäß{" "}
             <PdfTextBold>§ 37 Abs. 1 Nr. 8 BFSG</PdfTextBold> eine{" "}
-            <PdfTextBold>Ordnungswidrigkeit</PdfTextBold> dar und kann mit einem
+            <PdfTextBold>Ordnungswidrigkeit</PdfTextBold> dar und kann mit einem{" "}
             <PdfTextBold>Bußgeld von bis zu 100.000 €</PdfTextBold> geahndet
             werden. Weitaus schlimmer könnten Abmahnungen von Mitbewerbern oder
             sogenannten „Abmahnvereinen“ sein. Die Erfahrungen der letzten Jahre
