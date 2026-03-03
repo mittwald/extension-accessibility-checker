@@ -103,6 +103,9 @@ const PdfIssueGroupOverview: FC<PdfIssueGroupOverviewProps> = ({ group }) => {
   const totalIssuesInGroup = group.issues.reduce((total, issue) => {
     return total + issue.count;
   }, 0);
+  const principleTopic =
+    (principleData as { topic?: string })?.topic || group.label;
+  const problemLabel = totalIssuesInGroup === 1 ? "Problem" : "Probleme";
 
   return (
     <PdfSection marginTop>
@@ -115,13 +118,8 @@ const PdfIssueGroupOverview: FC<PdfIssueGroupOverviewProps> = ({ group }) => {
         <PdfText style={{ marginBottom: theme.spacing.m }}>
           {renderParsedText(parseBoldText(principleDescription))} Insgesamt
           wurden{" "}
-          <PdfTextBold>
-            {totalIssuesInGroup}{" "}
-            {totalIssuesInGroup === 1 ? "Problem" : "Probleme"}
-          </PdfTextBold>{" "}
-          im Bereich{" "}
-          {(principleData as { topic?: string })?.topic || group.label}{" "}
-          identifiziert.
+          <PdfTextBold>{`${totalIssuesInGroup} ${problemLabel}`}</PdfTextBold>{" "}
+          im Bereich {principleTopic} identifiziert.
         </PdfText>
       )}
 

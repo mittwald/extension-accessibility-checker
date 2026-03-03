@@ -60,7 +60,7 @@ const PdfSummaryPage: FC<PdfSummaryPageProps> = ({ profile, issueGroups }) => {
     { header: "Fehler", accessor: "error", width: 60, align: "center" },
     { header: "Warnungen", accessor: "warning", width: 80, align: "center" },
     { header: "Hinweise*", accessor: "notice", width: 70, align: "center" },
-    { header: "Gesamt", accessor: "total", width: 60, align: "center" },
+    { header: "Gesamt", accessor: "total", width: 70, align: "center" },
   ];
 
   return (
@@ -87,14 +87,6 @@ const PdfSummaryPage: FC<PdfSummaryPageProps> = ({ profile, issueGroups }) => {
           </PdfTextBold>{" "}
           festgestellt.
         </PdfText>
-        <PdfText>
-          Die <PdfTextBold>Fehler</PdfTextBold> stellen eindeutig
-          identifizierbare WCAG-Verstöße dar und sollten priorisiert behoben
-          werden. <PdfTextBold>Warnungen</PdfTextBold> und{" "}
-          <PdfTextBold>Hinweise</PdfTextBold> lassen sich nicht vollständig
-          automatisiert bewerten und erfordern eine manuelle Prüfung, da ihre
-          Relevanz vom jeweiligen Seiteninhalt und Nutzungsszenario abhängt.
-        </PdfText>
       </View>
 
       <PdfTable
@@ -108,7 +100,18 @@ const PdfSummaryPage: FC<PdfSummaryPageProps> = ({ profile, issueGroups }) => {
         footerData={footerData}
         columns={columns}
       />
-      <PdfText style={{ marginTop: theme.spacing.s }}>* Hinweise werden nur erfasst und im Report ausgegeben, wenn sie zuvor im Scanprofil des Barriere-Checkers aktiviert wurden.</PdfText>
+      <PdfText style={{ marginTop: theme.spacing.s }}>
+        * Hinweise werden nur erfasst und im Report ausgegeben, wenn sie zuvor
+        im Scanprofil des Barriere-Checkers aktiviert wurden.
+      </PdfText>
+      <PdfText>
+        Die <PdfTextBold>Fehler</PdfTextBold> stellen eindeutig identifizierbare
+        WCAG-Verstöße dar und sollten priorisiert behoben werden.{" "}
+        <PdfTextBold>Warnungen</PdfTextBold> und{" "}
+        <PdfTextBold>Hinweise</PdfTextBold> lassen sich nicht vollständig
+        automatisiert bewerten und erfordern eine manuelle Prüfung, da ihre
+        Relevanz vom jeweiligen Seiteninhalt und Nutzungsszenario abhängt.
+      </PdfText>
 
       <PdfText
         style={{ marginTop: theme.spacing.m, marginBottom: theme.spacing.s }}
@@ -119,7 +122,14 @@ const PdfSummaryPage: FC<PdfSummaryPageProps> = ({ profile, issueGroups }) => {
       </PdfText>
       <PdfAlert
         title="Hinweis"
-        description="Nicht alle Barrieren können automatisiert geprüft werden. Bestimmte Aspekte der Barrierefreiheit müssen daher immer manuell getestet werden, unabhängig vom Ergebnis der automatisierten Analyse."
+        description={
+          <>
+            Nicht alle Barrieren können automatisiert geprüft werden. Bestimmte
+            Aspekte der Barrierefreiheit müssen daher immer{" "}
+            <PdfTextBold>manuell getestet</PdfTextBold> werden, unabhängig vom
+            Ergebnis der automatisierten Analyse.
+          </>
+        }
       ></PdfAlert>
       <PdfFooter />
     </Page>

@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 
     backgroundColor: theme.colors.backgroundSecondary,
     borderRadius: theme.borderRadius.default,
-    flexGrow: 1,
+    width: "100%",
   },
   bigNumberWrapper: {
     display: "flex",

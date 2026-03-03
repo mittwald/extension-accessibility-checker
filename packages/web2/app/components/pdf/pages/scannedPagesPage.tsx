@@ -49,7 +49,7 @@ const PdfScannedPagesPage: React.FC<PdfScannedPagesPageProps> = ({
       <PdfH3>Gesamtübersicht aller gescannten Seiten</PdfH3>
 
       <PdfText>
-        Insgesamt wurden{" "}
+        Insgesamt {pagesCount == 1 ? "wurde" : "wurden"}{" "}
         <PdfTextBold>
           {pagesCount} {pagesCount == 1 ? "Seite" : "Seiten"}
         </PdfTextBold>{" "}
@@ -68,7 +68,10 @@ const PdfScannedPagesPage: React.FC<PdfScannedPagesPageProps> = ({
           score: `Ø ${profile.issueSummary?.score ?? 0}`,
         }}
       />
-      <PdfText style={{ marginTop: theme.spacing.s }}>* Hinweise werden nur erfasst und im Report ausgegeben, wenn sie zuvor im Scanprofil des Barriere-Checkers aktiviert wurden.</PdfText>
+      <PdfText style={{ marginTop: theme.spacing.s }}>
+        * Hinweise werden nur erfasst und im Report ausgegeben, wenn sie zuvor
+        im Scanprofil des Barriere-Checkers aktiviert wurden.
+      </PdfText>
       <PdfFooter />
     </Page>
   );

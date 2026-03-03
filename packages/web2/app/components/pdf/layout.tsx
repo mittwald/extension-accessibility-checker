@@ -5,6 +5,7 @@ import { styles, PropsWithStyle, theme } from "./theme";
 export interface PdfBaseProps extends PropsWithStyle {
   children?: ReactNode;
   debug?: boolean;
+  minPresenceAhead?: number;
 }
 
 interface PdfSectionProps extends PdfBaseProps {
@@ -53,8 +54,17 @@ export const PdfSection = ({
   );
 };
 
-export const PdfSectionHeader = ({ children, style, debug }: PdfBaseProps) => (
-  <View style={{ ...styles.sectionHeader, ...style }} debug={debug}>
+export const PdfSectionHeader = ({
+  children,
+  style,
+  debug,
+  minPresenceAhead = 200,
+}: PdfBaseProps) => (
+  <View
+    style={{ ...styles.sectionHeader, ...style }}
+    debug={debug}
+    minPresenceAhead={minPresenceAhead}
+  >
     {children}
   </View>
 );

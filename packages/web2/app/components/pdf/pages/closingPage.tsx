@@ -3,6 +3,7 @@ import { Page, View } from "@react-pdf/renderer";
 import { styles, theme } from "../theme";
 import { ScanProfileWithSuccessfulScan } from "../../../api/types";
 import { PdfLink, PdfSmall, PdfSmallBold } from "../typography";
+import PdfFooter from "../footer";
 
 interface PdfClosingPageProps {
   profile: ScanProfileWithSuccessfulScan;
@@ -33,8 +34,15 @@ const PdfClosingPage: FC<PdfClosingPageProps> = ({ profile }) => {
           <PdfSmallBold>Scandatum:</PdfSmallBold> {scanDate}
         </PdfSmall>
         <PdfSmall>
-          Dieser Report wurde automatisiert aus den Daten des Barriere-Checkers
-          von <PdfLink src="https://mittwald.de" style={{ fontSize: theme.fontSize.small }}>mittwald</PdfLink> generiert.
+          Dieser Report wurde automatisiert aus den Daten des Barriere-Checkers{" "}
+          von{" "}
+          <PdfLink
+            src="https://mittwald.de"
+            style={{ fontSize: theme.fontSize.small }}
+          >
+            mittwald
+          </PdfLink>{" "}
+          generiert.
         </PdfSmall>
         <PdfSmall style={{ textAlign: "center" }}>
           Disclaimer / Rechtlicher Hinweis: Dieses Dokument dient lediglich der
@@ -42,6 +50,7 @@ const PdfClosingPage: FC<PdfClosingPageProps> = ({ profile }) => {
           Haftung für die Richtigkeit aller Angaben wird nicht übernommen.
         </PdfSmall>
       </View>
+      <PdfFooter />
     </Page>
   );
 };

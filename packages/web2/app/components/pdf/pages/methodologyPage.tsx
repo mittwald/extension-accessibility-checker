@@ -40,8 +40,7 @@ const PdfMethodologyPage: FC = () => {
             die{" "}
             <PdfTextBold>
               digitale Produkte oder Dienstleistungen an Endverbraucher (B2C)
-            </PdfTextBold>
-            {" "}
+            </PdfTextBold>{" "}
             anbieten, zum Beispiel <PdfTextBold>Online-Shops</PdfTextBold>, Apps
             oder Webprojekte mit geschäftlichen Funktionen wie Terminbuchungen
             oder Gutscheinbestellungen. Ausgenommen sind{" "}
@@ -141,14 +140,14 @@ const PdfMethodologyPage: FC = () => {
         <PdfSection>
           <PdfH4>Hinweis zur Barrierefreiheitserklärung</PdfH4>
           <PdfText>
-            Für viele der vom BFSG Betroffenen Websites ist zusätzlich eine{" "}
+            Für viele der vom BFSG betroffenen Websites ist zusätzlich eine{" "}
             <PdfTextBold>Barrierefreiheitserklärung</PdfTextBold> erforderlich.
             Diese muss gut sichtbar platziert sein, etwa{" "}
-            <PdfTextBold>im Footer in Nähe des Impressums</PdfTextBold>, oder an
-            einer ähnlich zentral auffindbaren Stelle auf jeder Seite. Sie
-            informiert Nutzende transparent über den Stand der Barrierefreiheit,
-            bekannte Einschränkungen sowie Kontaktmöglichkeiten zur Rückmeldung
-            von Barrieren.
+            <PdfTextBold>im Footer in der Nähe des Impressums</PdfTextBold>,
+            oder an einer ähnlich zentral auffindbaren Stelle auf jeder Seite.
+            Sie informiert Nutzende transparent über den Stand der
+            Barrierefreiheit, bekannte Einschränkungen sowie
+            Kontaktmöglichkeiten zur Rückmeldung von Barrieren.
           </PdfText>
           <PdfText>
             Eine entsprechende Barrierefreiheitserklärung kann mit dem{" "}

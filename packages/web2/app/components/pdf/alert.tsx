@@ -5,7 +5,7 @@ import { PdfIconAlert } from "./icons";
 
 interface AlertProps {
   title: string;
-  description: string;
+  description: React.ReactNode;
   icon?: React.ReactNode;
   style?: ViewProps["style"];
 }
