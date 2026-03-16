@@ -104,7 +104,8 @@ const PdfSummaryPage: FC<PdfSummaryPageProps> = ({ profile, issueGroups }) => {
         * Hinweise werden nur erfasst und im Report ausgegeben, wenn sie zuvor
         im Scanprofil des Barriere-Checkers aktiviert wurden.
       </PdfText>
-      <PdfText>
+
+      <PdfText style={{ marginTop: theme.spacing.m }}>
         Die <PdfTextBold>Fehler</PdfTextBold> stellen eindeutig identifizierbare
         WCAG-Verstöße dar und sollten priorisiert behoben werden.{" "}
         <PdfTextBold>Warnungen</PdfTextBold> und{" "}
