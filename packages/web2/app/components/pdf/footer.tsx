@@ -30,7 +30,7 @@ const PdfFooter = () => {
       <Text style={styles.linkText}>www.mittwald.de</Text>
       <Text
         style={styles.pageNumber}
-        render={({ pageNumber }) => `Seite ${pageNumber - 1}`}
+        render={({ pageNumber }) => `Seite ${pageNumber}`}
       />
     </View>
   );
