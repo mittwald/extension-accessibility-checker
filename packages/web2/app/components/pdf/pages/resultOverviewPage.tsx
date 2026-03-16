@@ -57,28 +57,32 @@ const PdfResultOverviewPage: React.FC<PdfResultOverviewPageProps> = ({
           Der Barrierefreiheitsscore ist ein gewichteter Durchschnitt von
           Prüfungen auf Barrierefreiheit.
         </PdfText>
-        <View style={{ flexDirection: "row", marginTop: theme.spacing.s }}>
-          <View style={{ flex: 1, marginRight: theme.spacing.s }}>
-            <PdfStatCard
-              value={profile.issueSummary?.errors ?? 0}
-              label="Fehler"
-              description="automatisch prüfbare WCAG-Verstöße mit hoher Priorität"
-            />
-          </View>
-          <View style={{ flex: 1, marginRight: theme.spacing.s }}>
-            <PdfStatCard
-              value={profile.issueSummary?.warnings ?? 0}
-              label="Warnungen"
-              description="potenzielle Barrieren, die manuell und kontextabhängig geprüft werden müssen"
-            />
-          </View>
-          <View style={{ flex: 1 }}>
-            <PdfStatCard
-              value={profile.issueSummary?.notices ?? 0}
-              label="Hinweise*"
-              description="nicht automatisierbare WCAG-Prüfpunkte, manuelle Bewertung erforderlich"
-            />
-          </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "stretch",
+            gap: theme.spacing.s,
+            marginTop: theme.spacing.s,
+          }}
+        >
+          <PdfStatCard
+            style={{ flex: 1 }}
+            value={profile.issueSummary?.errors ?? 0}
+            label="Fehler"
+            description="automatisch prüfbare WCAG-Verstöße mit hoher Priorität"
+          />
+          <PdfStatCard
+            style={{ flex: 1 }}
+            value={profile.issueSummary?.warnings ?? 0}
+            label="Warnungen"
+            description="potenzielle Barrieren, die manuell und kontextabhängig geprüft werden müssen"
+          />
+          <PdfStatCard
+            style={{ flex: 1 }}
+            value={profile.issueSummary?.notices ?? 0}
+            label="Hinweise*"
+            description="nicht automatisierbare WCAG-Prüfpunkte, manuelle Bewertung erforderlich"
+          />
         </View>
         <PdfText>
           * Hinweise werden nur erfasst und im Report ausgegeben, wenn sie zuvor
