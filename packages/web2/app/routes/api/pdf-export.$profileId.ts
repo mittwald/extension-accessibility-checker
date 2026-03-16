@@ -10,32 +10,6 @@ import { ScanProfile } from "../../api/types";
 import { notFound } from "@tanstack/react-router";
 import { verify } from "@mittwald/ext-bridge/node";
 
-const getIssueSummaryForPdf = (scan?: Scan | null) => {
-  if (!scan) {
-    return undefined;
-  }
-
-  const score = scan.getIssueSummary().score;
-  const severitySummary = (scan.issues ?? []).reduce(
-    (summary, issue) => {
-      if (issue.severity === "error") {
-        summary.errors += 1;
-      } else if (issue.severity === "warning") {
-        summary.warnings += 1;
-      } else {
-        summary.notices += 1;
-      }
-      return summary;
-    },
-    { errors: 0, warnings: 0, notices: 0 },
-  );
-
-  return {
-    ...severitySummary,
-    score,
-  };
-};
-
 export const APIRoute = createAPIFileRoute("/api/pdf-export/$profileId")({
   GET: async ({ params: { profileId }, request }) => {
     try {
@@ -58,7 +32,7 @@ export const APIRoute = createAPIFileRoute("/api/pdf-export/$profileId")({
 
       const profileResult = {
         ...profile?.toObject(),
-        issueSummary: getIssueSummaryForPdf(reportScan),
+        issueSummary: reportScan?.getIssueSummary(),
         lastScan: lastScan as unknown as Scan | undefined,
         lastSuccessfulScan: lastSuccessfulScan as unknown as Scan | undefined,
       } as unknown as ScanProfile & {

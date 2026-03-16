@@ -149,8 +149,9 @@ const PdfIssueTable: FC<{ issues: Issue[] }> = ({ issues }) => {
     const meta = getIssueMeta(issue);
     const criterionKey = meta.criterion as keyof typeof wcagLinks;
     const criterionData = wcagLinks[criterionKey];
+    const criterionIdentifier = `${criterionKey}.${issue.severity}`;
 
-    if (!criterionGroups[criterionKey]) {
+    if (!criterionGroups[criterionIdentifier]) {
       const level =
         criterionData && "wcagLevel" in criterionData
           ? (criterionData as { wcagLevel: string }).wcagLevel
@@ -166,7 +167,7 @@ const PdfIssueTable: FC<{ issues: Issue[] }> = ({ issues }) => {
           break;
       }
 
-      criterionGroups[criterionKey] = {
+      criterionGroups[criterionIdentifier] = {
         criterion: criterionKey,
         label: criterionData?.label || criterionKey,
         type,
@@ -174,7 +175,7 @@ const PdfIssueTable: FC<{ issues: Issue[] }> = ({ issues }) => {
         count: 0,
       };
     }
-    criterionGroups[criterionKey].count += issue.count;
+    criterionGroups[criterionIdentifier].count += issue.count;
   }
 
   const tableData = Object.values(criterionGroups)

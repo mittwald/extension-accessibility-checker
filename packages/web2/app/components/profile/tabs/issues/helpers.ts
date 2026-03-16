@@ -61,7 +61,7 @@ const groupIssuesByCategoryAndTechnique = (
   for (const issue of issues) {
     const meta = getIssueMeta(issue);
     const groupKey = `${meta[categoryType]}`;
-    const issueKey = `${meta.criterion}.${meta.techniques.join(",")}`;
+    const issueKey = `${meta.criterion}.${meta.techniques.join(",")}.${issue.severity}`;
 
     if (!groupedByCode[groupKey]) {
       groupedByCode[groupKey] = {};
