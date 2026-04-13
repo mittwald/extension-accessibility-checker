@@ -9,6 +9,7 @@ import PdfAlert from "../alert";
 import PdfFooter from "../footer";
 import { PdfSection, PdfSectionHeader } from "../layout";
 import { PdfLi, PdfUl } from "../list";
+import PdfScannedPagesOverview from "../scannedPagesOverview";
 
 interface PdfResultOverviewPageProps {
   profile: ScanProfileWithSuccessfulScan;
@@ -29,6 +30,7 @@ const PdfResultOverviewPage: React.FC<PdfResultOverviewPageProps> = ({
     }
     return theme.colors.success;
   };
+
   return (
     <Page
       size="A4"
@@ -92,41 +94,49 @@ const PdfResultOverviewPage: React.FC<PdfResultOverviewPageProps> = ({
           title="Hinweis"
           description="Automatische Scans sind gut – aber sie sehen nicht alles. Manuelle Tests sind für eine vollständige Konformität elementar."
         ></PdfAlert>
-        <PdfSection wrap={false}>
-          <PdfSectionHeader minPresenceAhead={320}>
-            <PdfH3>Vorteile eines barrierefreien Webauftritts</PdfH3>
-          </PdfSectionHeader>
-          <PdfUl>
-            <PdfLi>
-              <PdfTextBold>Gesetzliche Compliance:</PdfTextBold> BFSG erfüllen
-              und Risiken durch Bußgelder oder Abmahnungen vermeiden.
-            </PdfLi>
-            <PdfLi>
-              <PdfTextBold>Größere Reichweite:</PdfTextBold> Erreicht mehr
-              potenzielle Nutzende mit geringeren Abbruchraten.
-            </PdfLi>
-            <PdfLi>
-              <PdfTextBold>Bessere SEO:</PdfTextBold> Suchmaschinen bevorzugen
-              barrierefreie Seiten.
-            </PdfLi>
-            <PdfLi>
-              <PdfTextBold>Verbesserte UX:</PdfTextBold> Klare Navigation kommt
-              allen zugute.
-            </PdfLi>
-            <PdfLi>
-              <PdfTextBold>Starkes Markenbild:</PdfTextBold> Zeigt
-              gesellschaftliche Verantwortung und Professionalität.
-            </PdfLi>
-          </PdfUl>
-          <PdfText>
-            Barrierefreiheit ist ein{" "}
-            <PdfTextBold>
-              zentraler Qualitätsfaktor moderner Webauftritte
-            </PdfTextBold>
-            .
-          </PdfText>
-        </PdfSection>
+        <View
+          bookmark={{
+            title: "Vorteile eines barrierefreien Webauftritts",
+            fit: true,
+          }}
+        >
+          <PdfSection wrap={false}>
+            <PdfSectionHeader minPresenceAhead={320}>
+              <PdfH3>Vorteile eines barrierefreien Webauftritts</PdfH3>
+            </PdfSectionHeader>
+            <PdfUl>
+              <PdfLi>
+                <PdfTextBold>Gesetzliche Compliance:</PdfTextBold> BFSG erfüllen
+                und Risiken durch Bußgelder oder Abmahnungen vermeiden.
+              </PdfLi>
+              <PdfLi>
+                <PdfTextBold>Größere Reichweite:</PdfTextBold> Erreicht mehr
+                potenzielle Nutzende mit geringeren Abbruchraten.
+              </PdfLi>
+              <PdfLi>
+                <PdfTextBold>Bessere SEO:</PdfTextBold> Suchmaschinen bevorzugen
+                barrierefreie Seiten.
+              </PdfLi>
+              <PdfLi>
+                <PdfTextBold>Verbesserte UX:</PdfTextBold> Klare Navigation
+                kommt allen zugute.
+              </PdfLi>
+              <PdfLi>
+                <PdfTextBold>Starkes Markenbild:</PdfTextBold> Zeigt
+                gesellschaftliche Verantwortung und Professionalität.
+              </PdfLi>
+            </PdfUl>
+            <PdfText>
+              Barrierefreiheit ist ein{" "}
+              <PdfTextBold>
+                zentraler Qualitätsfaktor moderner Webauftritte
+              </PdfTextBold>
+              .
+            </PdfText>
+          </PdfSection>
+        </View>
       </PdfSection>
+      <PdfScannedPagesOverview profile={profile} />
       <PdfFooter />
     </Page>
   );

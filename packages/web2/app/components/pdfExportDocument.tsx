@@ -5,7 +5,6 @@ import { Document, Font } from "@react-pdf/renderer";
 import { ScanProfileWithSuccessfulScan } from "../api/types";
 import PdfFrontPage from "./pdf/pages/frontPage";
 import PdfResultOverviewPage from "./pdf/pages/resultOverviewPage";
-import PdfScannedPagesPage from "./pdf/pages/scannedPagesPage";
 import {
   getIssueMeta,
   groupIssuesByPrincipleAndTechnique,
@@ -77,17 +76,15 @@ export const PdfExportDocument: FC<Props> = ({ profile }) => {
     });
 
   const issueGroups = groupIssuesByPrincipleAndTechnique(preparedIssues ?? []);
+  const sortedIssueGroups = [...issueGroups].sort((a, b) =>
+    a.groupKey.localeCompare(b.groupKey),
+  );
 
   return (
     <Document>
       <PdfFrontPage profile={profile} />
       <PdfResultOverviewPage profile={profile} />
-      <PdfScannedPagesPage profile={profile} />
-      {issueGroups
-        .sort((a, b) => a.groupKey.localeCompare(b.groupKey))
-        .map((group, index) => (
-          <PdfIssueDetailsPage key={index} group={group} index={index} />
-        ))}
+      <PdfIssueDetailsPage groups={sortedIssueGroups} />
       <PdfSummaryPage profile={profile} issueGroups={issueGroups} />
       <PdfMethodologyPage />
       <PdfClosingPage profile={profile} />

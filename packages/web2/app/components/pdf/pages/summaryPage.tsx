@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Page, View } from "@react-pdf/renderer";
-import { PdfH3, PdfText, PdfTextBold } from "../typography";
+import { PdfH2, PdfText, PdfTextBold } from "../typography";
 import PdfTable, { TableColumn } from "../table";
 import { IssueGroup } from "../../profile/tabs/issues/types";
 import { styles, theme } from "../theme";
@@ -70,7 +70,7 @@ const PdfSummaryPage: FC<PdfSummaryPageProps> = ({ profile, issueGroups }) => {
       bookmark={{ title: "Zusammenfassung und Priorisierung", fit: true }}
     >
       <View style={{ marginBottom: theme.spacing.m }}>
-        <PdfH3>Zusammenfassung und Priorisierung</PdfH3>
+        <PdfH2>Zusammenfassung und Priorisierung</PdfH2>
         <PdfText style={{ marginVertical: theme.spacing.s }}>
           Im Rahmen der WCAG-Analyse der Website{" "}
           <PdfTextBold>{profile.domain}</PdfTextBold> wurden insgesamt{" "}
