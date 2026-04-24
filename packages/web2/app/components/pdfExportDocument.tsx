@@ -14,7 +14,9 @@ import PdfIssueDetailsPage from "./pdf/pages/issueDetailsPage";
 import PdfSummaryPage from "./pdf/pages/summaryPage";
 import PdfClosingPage from "./pdf/pages/closingPage";
 import PdfMethodologyPage from "./pdf/pages/methodologyPage";
-import path from "node:path";
+import interRegularFontSrc from "../../assets/fonts/Inter-Regular.ttf?inline";
+import interBoldFontSrc from "../../assets/fonts/Inter-Bold.ttf?inline";
+import blueHeartEmojiSrc from "../../assets/emojis/1f499.png?inline";
 
 interface Props {
   profile: ScanProfileWithSuccessfulScan;
@@ -24,17 +26,11 @@ Font.register({
   family: "Inter",
   fonts: [
     {
-      src: path.resolve(
-        import.meta.dirname,
-        "../../assets/fonts/Inter-Regular.ttf",
-      ),
+      src: interRegularFontSrc,
       fontWeight: 400,
     },
     {
-      src: path.resolve(
-        import.meta.dirname,
-        "../../assets/fonts/Inter-Bold.ttf",
-      ),
+      src: interBoldFontSrc,
       fontWeight: 700,
     },
   ],
@@ -45,7 +41,7 @@ Font.registerEmojiSource({
   builder: (codePoint: string): string => {
     // saved to disk to avoid unnecesarry network calls since it is always needed
     if (codePoint === "1f499") {
-      return path.resolve(import.meta.dirname, "../../assets/emojis/1f499.png");
+      return blueHeartEmojiSrc;
     }
 
     return `https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/${codePoint}.png`;
