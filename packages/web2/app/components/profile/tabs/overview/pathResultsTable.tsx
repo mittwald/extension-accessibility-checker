@@ -1,5 +1,6 @@
 import { Route } from "../../../../routes/profiles.$profileId.tsx";
 import {
+  Section,
   Table,
   TableBody,
   TableCell,
@@ -7,6 +8,7 @@ import {
   TableFooterRow,
   TableHeader,
   TableRow,
+  Text,
 } from "@mittwald/flow-remote-react-components";
 
 export const PathResultsTable = () => {
@@ -17,44 +19,51 @@ export const PathResultsTable = () => {
   }
 
   return (
-    <Table>
-      <TableHeader>
-        <TableColumn>Titel</TableColumn>
-        <TableColumn>Pfad</TableColumn>
-        <TableColumn>Fehler</TableColumn>
-        <TableColumn>Warnungen</TableColumn>
-        <TableColumn>Score</TableColumn>
-      </TableHeader>
+    <Section>
+      <Table>
+        <TableHeader>
+          <TableColumn>Titel</TableColumn>
+          <TableColumn>Pfad</TableColumn>
+          <TableColumn>Fehler</TableColumn>
+          <TableColumn>Warnungen</TableColumn>
+          <TableColumn>Hinweise</TableColumn>
+          <TableColumn>Score</TableColumn>
+        </TableHeader>
 
-      <TableBody>
-        {lastScan.pages.map((p) => {
-          const url = new URL(p.url);
-          return (
-            <TableRow key={p.url}>
-              <TableCell>{p.title}</TableCell>
-              <TableCell>
-                {profile.domain}
-                {url.pathname}
-              </TableCell>
-              <TableCell>{p.issues?.errors ?? "–"}</TableCell>
-              <TableCell>{p.issues?.warnings ?? "–"}</TableCell>
-              <TableCell>{p.score ?? "–"}</TableCell>
-            </TableRow>
-          );
-        })}
+        <TableBody>
+          {lastScan.pages.map((p) => {
+            const url = new URL(p.url);
+            return (
+              <TableRow key={p.url}>
+                <TableCell>{p.title}</TableCell>
+                <TableCell>
+                  <Text wordBreak="break-all">
+                    {profile.domain}
+                    {url.pathname}
+                  </Text>
+                </TableCell>
+                <TableCell>{p.issues?.errors ?? "–"}</TableCell>
+                <TableCell>{p.issues?.warnings ?? "–"}</TableCell>
+                <TableCell>{p.issues?.notices ?? "–"}</TableCell>
+                <TableCell>{p.score ?? "–"}</TableCell>
+              </TableRow>
+            );
+          })}
 
-        <TableFooterRow>
-          <TableCell>
-            <strong>Gesamtbewertung</strong>
-          </TableCell>
-          <TableCell></TableCell>
-          <TableCell></TableCell>
-          <TableCell></TableCell>
-          <TableCell>
-            <strong>Ø&nbsp;{profile.issueSummary?.score}</strong>
-          </TableCell>
-        </TableFooterRow>
-      </TableBody>
-    </Table>
+          <TableFooterRow>
+            <TableCell>
+              <strong>Gesamtbewertung</strong>
+            </TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell>
+              <strong>Ø&nbsp;{profile.issueSummary?.score}</strong>
+            </TableCell>
+          </TableFooterRow>
+        </TableBody>
+      </Table>
+    </Section>
   );
 };

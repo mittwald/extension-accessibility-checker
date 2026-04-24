@@ -1,7 +1,7 @@
 import { json } from "@tanstack/react-start";
 import { createAPIFileRoute } from "@tanstack/react-start/api";
 
-import { assertValidSignature } from "./_verifySignature.js";
+import { assertValidSignature } from "../../../lib/webhooks/verifySignature.js";
 
 export const APIRoute = createAPIFileRoute("/api/webhooks/secret-rotated")({
   POST: async ({ request }) => {

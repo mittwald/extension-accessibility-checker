@@ -20,6 +20,10 @@ export interface ScanProfile {
   nextScan?: Scan;
 }
 
+export interface ScanProfileWithSuccessfulScan extends ScanProfile {
+  lastSuccessfulScan?: Scan;
+}
+
 export interface Issue {
   errorCode: string;
   severity: "error" | "warning" | "notice";

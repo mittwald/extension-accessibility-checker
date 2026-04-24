@@ -1,11 +1,13 @@
 import { ScanProfile } from "../../../../api/types.ts";
 import {
+  Header,
   Heading,
-  Icon,
-  IllustratedMessage,
+  Label,
   ProgressBar,
+  Section,
+  Text,
 } from "@mittwald/flow-remote-react-components";
-import { IconAccessible } from "@tabler/icons-react";
+import { PdfDownloadButton } from "./pdfDownloadButton";
 
 export function A11yScore({ profile }: { profile: ScanProfile }) {
   const color = (value: number | undefined) => {
@@ -22,18 +24,25 @@ export function A11yScore({ profile }: { profile: ScanProfile }) {
   };
 
   return (
-    <IllustratedMessage>
-      <Icon>
-        <IconAccessible />
-      </Icon>
-      <Heading>Dein Barrierefreiheits-Score</Heading>
+    <Section>
+      <Header>
+        <Heading>Scanergebnis</Heading>
+        <PdfDownloadButton profileId={profile._id} />
+      </Header>
+      <Text>
+        Der Barrierefreiheitsscore vermittelt einen groben Eindruck.
+        Entscheidend ist die Anzahl und Art von Fehlern, Warnungen und
+        Hinweisen, die geprüft und behoben werden müssen.
+      </Text>
       <ProgressBar
         value={profile.issueSummary?.score}
         maxValue={100}
         showMaxValue
         status={color(profile.issueSummary?.score)}
         formatOptions={{ style: "decimal" }}
-      ></ProgressBar>
-    </IllustratedMessage>
+      >
+        <Label>Barrierefreiheitsscore</Label>
+      </ProgressBar>
+    </Section>
   );
 }

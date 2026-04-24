@@ -1,8 +1,18 @@
 {
+  "1": {
+    "label": "Wahrnehmbar",
+    "topic": "Wahrnehmbarkeit",
+    "description": "Inhalte müssen für alle Nutzenden **wahrnehmbar** sein. Dieses Prinzip betrifft die visuelle, auditive und sensorische Zugänglichkeit.",
+    "understanding": "",
+    "howToMeet": ""
+  },
   "1.1": {
-    "label": "Text Alternatives",
+    "label": "Textalternativen (Text Alternatives)",
+    "description": "Screenreader können die Seite nicht vollständig vorlesen. Nutzende mit eingeschränktem Sehvermögen können Bildinhalte nicht verstehen.",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/text-alternatives",
-    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#text-alternatives"
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#text-alternatives",
+    "shortDescription": "Alle Nicht-Text-Inhalte haben Textalternativen.",
+    "example": "Ein Button nur mit Icon ohne Alt-Text ist für Screenreader unsichtbar."
   },
   "1.1.1": {
     "label": "Non-text Content",
@@ -11,9 +21,12 @@
     "wcagLevel": "A"
   },
   "1.2": {
-    "label": "Time-based Media",
+    "label": "Zeitbasierte Medien (Time-based Media)",
+    "description": "Nutzende mit Hör- oder Sehbeeinträchtigungen können Medieninhalte nicht vollständig erfassen.",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/time-based-media",
-    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#time-based-media"
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#time-based-media",
+    "shortDescription": "Videos und Audios sind transkribiert oder untertitelt.",
+    "example": "Ein Podcast ohne Transkript schließt viele Nutzende aus."
   },
   "1.2.1": {
     "label": "Audio-only and Video-only (Prerecorded)",
@@ -70,9 +83,12 @@
     "wcagLevel": "AAA"
   },
   "1.3": {
-    "label": "Adaptable",
+    "label": "Anpassbar (Adaptable)",
+    "description": "Screenreader können die Seite nicht korrekt vorlesen. Die logische Struktur geht verloren, was Navigation und Verständnis erschwert.",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/adaptable",
-    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#adaptable"
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#adaptable",
+    "shortDescription": "Inhalte müssen strukturiert und maschinenlesbar sein, nicht nur visuell.",
+    "example": "Überschriften sind lediglich fett formatiert und nicht semantisch ausgezeichnet."
   },
   "1.3.1": {
     "label": "Info and Relationships",
@@ -111,9 +127,12 @@
     "wcagLevel": "AAA"
   },
   "1.4": {
-    "label": "Distinguishable",
+    "label": "Unterscheidbar (Distinguishable)",
+    "description": "Menschen mit Farbsehschwäche, eingeschränktem Sehvermögen oder bei schlechten Lichtverhältnissen können Texte und UI-Elemente nicht ausreichend wahrnehmen.",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/distinguishable",
-    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#distinguishable"
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#distinguishable",
+    "shortDescription": "Inhalte wie Texte und Kontraste müssen visuell und akustisch gut unterscheidbar sein.",
+    "example": "Hellgrauer Text auf weißem Hintergrund ist kaum lesbar."
   },
   "1.4.1": {
     "label": "Use of Color",
@@ -193,10 +212,20 @@
     "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#content-on-hover-or-focus",
     "wcagLevel": "AA"
   },
+  "2": {
+    "label": "Bedienbar",
+    "topic": "Bedienbarkeit",
+    "description": "Inhalte und Funktionen müssen für alle Nutzenden **bedienbar** sein. Dieses Prinzip betrifft insbesondere Navigation, Tastaturbedienbarkeit sowie ausreichend Zeit und Orientierung bei der Nutzung.",
+    "understanding": "",
+    "howToMeet": ""
+  },
   "2.1": {
-    "label": "Keyboard Accessible",
+    "label": "Tastaturbedienbar (Keyboard Accessible)",
+    "description": "Nutzende ohne Maus können zentrale Funktionen nicht erreichen.",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard-accessible",
-    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#keyboard-accessible"
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#keyboard-accessible",
+    "shortDescription": "Alle Funktionen müssen per Tastatur bedienbar sein.",
+    "example": "Ein Menü lässt sich nur mit der Maus öffnen."
   },
   "2.1.1": {
     "label": "Keyboard",
@@ -223,9 +252,12 @@
     "wcagLevel": "AA"
   },
   "2.2": {
-    "label": "Enough Time",
+    "label": "Genügend Zeit (Enough Time)",
+    "description": "Personen, insbesondere Screenreader-Nutzende, können Inhalte nicht rechtzeitig wahrnehmen und geraten unter Zeitdruck.",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/enough-time",
-    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#enough-time"
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#enough-time",
+    "shortDescription": "Nutzende haben ausreichend Zeit, Inhalte zu lesen und zu bedienen.",
+    "example": "Ein Formular läuft ab, während es ausgefüllt wird."
   },
   "2.2.1": {
     "label": "Timing Adjustable",
@@ -264,9 +296,12 @@
     "wcagLevel": "AAA"
   },
   "2.3": {
-    "label": "Seizures and Physical Reactions",
+    "label": "Anfälle und physische Reaktionen vermeiden (Seizures)",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/seizures-and-physical-reactions",
-    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#seizures-and-physical-reactions"
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#seizures-and-physical-reactions",
+    "description": "Nutzende mit Lichtempfindlichkeit reagieren negativ auf flackernde Animationen und vermeiden die Seite.",
+    "shortDescription": "Inhalte lösen keine epileptischen Anfälle oder körperlichen Reaktionen aus.",
+    "example": "Stark flackernde Banner verursachen Unwohlsein."
   },
   "2.3.1": {
     "label": "Three Flashes or Below Threshold",
@@ -287,9 +322,12 @@
     "wcagLevel": "AAA"
   },
   "2.4": {
-    "label": "Navigable",
+    "label": "Navigierbar (Navigable)",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/navigable",
-    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#navigable"
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#navigable",
+    "description": "Nutzende mit Tastatur oder Screenreader können nicht effektiv navigieren. Unklar beschriebene Links führen zu Frustration.",
+    "shortDescription": "Klare Navigation und Orientierungshilfen sind vorhanden.",
+    "example": "Die Reihenfolge bei der Navigation mit der Tab-Taste folgt keiner logischen Struktur."
   },
   "2.4.1": {
     "label": "Bypass Blocks",
@@ -370,9 +408,12 @@
     "wcagLevel": "AAA"
   },
   "2.5": {
-    "label": "Input Modalities",
+    "label": "Eingabemodalitäten (Input Modalities)",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/input-modalities",
-    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#input-modalities"
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#input-modalities",
+    "description": "Unbeschriftete Schaltflächen und komplexe Gesten erschweren die Nutzung für Personen und Sprachassistenten.",
+    "shortDescription": "Einfache Bedienung ohne spezielle Gesten ist möglich.",
+    "example": "Eine Aktion funktioniert nur per Wischgeste."
   },
   "2.5.1": {
     "label": "Pointer Gestures",
@@ -422,10 +463,20 @@
     "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#target-size-minimum",
     "wcagLevel": "AA"
   },
+  "3": {
+    "label": "Verständlich",
+    "topic": "Verständlichkeit",
+    "description": "Inhalte und Benutzeroberflächen müssen für alle Nutzenden **verständlich** sein. Dieses Prinzip umfasst klare Sprache, vorhersehbares Verhalten von Bedienelementen sowie verständliche Rückmeldungen bei Eingaben.",
+    "understanding": "",
+    "howToMeet": ""
+  },
   "3.1": {
-    "label": "Readable",
+    "label": "Lesbar (Readable)",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/readable",
-    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#readable"
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#readable",
+    "description": "Menschen mit kognitiven Beeinträchtigungen oder Nicht-Muttersprachler können komplexe Texte nicht verstehen.",
+    "shortDescription": "Texte sind lesbar und verständlich.",
+    "example": "Fachbegriffe werden genutzt, ohne sie zu erklären."
   },
   "3.1.1": {
     "label": "Language of Page",
@@ -464,9 +515,12 @@
     "wcagLevel": "AAA"
   },
   "3.2": {
-    "label": "Predictable",
+    "label": "Vorhersehbar (Predictable)",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/predictable",
-    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#predictable"
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#predictable",
+    "description": "Unvorhersehbare Verhaltensweisen führen zu Desorientierung bei Menschen mit kognitiven Beeinträchtigungen sowie bei Screenreader-Nutzenden.",
+    "shortDescription": "Inhalte und Bedienelemente verhalten sich vorhersehbar und konsistent.",
+    "example": "Ein Klick öffnet unerwartet eine neue Seite."
   },
   "3.2.1": {
     "label": "On Focus",
@@ -499,9 +553,12 @@
     "wcagLevel": "AAA"
   },
   "3.3": {
-    "label": "Input Assistance",
+    "label": "Eingabehilfe (Input Assistance)",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/input-assistance",
-    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#input-assistance"
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#input-assistance",
+    "description": "Nutzende brechen Eingaben ab, weil Fehler nicht verständlich erklärt werden.",
+    "shortDescription": "Formulare geben verständliche Hinweise, Fehlermeldungen und Korrekturhilfen.",
+    "example": "Eine Fehlermeldung sagt nur „Eingabe ungültig“."
   },
   "3.3.1": {
     "label": "Error Identification",
@@ -557,10 +614,20 @@
     "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#accessible-authentication-enhanced",
     "wcagLevel": "AAA"
   },
+  "4": {
+    "label": "Robust",
+    "topic": "Robustheit",
+    "description": "Inhalte müssen **robust** genug sein, um von Browsern, Endgeräten und assistiven Technologien zuverlässig interpretiert zu werden. Dieses Prinzip betrifft vor allem die technische Umsetzung und die semantisch korrekte Struktur des Codes.",
+    "understanding": "",
+    "howToMeet": ""
+  },
   "4.1": {
-    "label": "Compatible",
+    "label": "Kompatibel (Compatible)",
     "understanding": "https://www.w3.org/WAI/WCAG22/Understanding/compatible",
-    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#compatible"
+    "howToMeet": "https://www.w3.org/WAI/WCAG22/quickref/#compatible",
+    "description": "Assistive Technologien können Inhalte aufgrund fehlender oder falscher semantischer Auszeichnung nicht korrekt interpretieren.",
+    "shortDescription": "Inhalte sind für Screenreader und assistive Technologien zuverlässig nutzbar.",
+    "example": "Ein Button wird vom Screenreader nicht als Button erkannt."
   },
   "4.1.1": {
     "label": "Parsing",
