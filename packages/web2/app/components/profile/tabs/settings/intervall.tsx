@@ -12,7 +12,7 @@ import {
   ContextualHelp,
   Text,
 } from "@mittwald/flow-remote-react-components";
-import { Route } from "../../../../routes/profiles.$profileId.tsx";
+import { useProfileData } from "../../../../hooks/useProfileData.tsx";
 import { isRunningOrPending } from "../../helpers.ts";
 import { useRouter } from "@tanstack/react-router";
 import { startScan } from "../../../../actions/scan.ts";
@@ -22,7 +22,7 @@ import { SaveResourcesBanner } from "./components/saveResourcesBanner.tsx";
 import { hasDailyCronInterval } from "../../../../lib/hasDailyCronInterval.ts";
 
 export const IntarvallSettings = () => {
-  const { profile } = Route.useLoaderData();
+  const { profile } = useProfileData();
   const nextScan = profile.nextScan;
   const router = useRouter();
 

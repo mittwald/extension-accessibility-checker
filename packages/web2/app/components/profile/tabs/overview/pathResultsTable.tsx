@@ -1,4 +1,4 @@
-import { Route } from "../../../../routes/profiles.$profileId.tsx";
+import { useProfileData } from "../../../../hooks/useProfileData.tsx";
 import {
   Section,
   Table,
@@ -12,7 +12,7 @@ import {
 } from "@mittwald/flow-remote-react-components";
 
 export const PathResultsTable = () => {
-  const { profile, lastScan } = Route.useLoaderData();
+  const { profile, lastScan } = useProfileData();
 
   if (!lastScan) {
     return null;

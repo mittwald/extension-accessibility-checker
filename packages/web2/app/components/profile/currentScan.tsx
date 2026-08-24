@@ -1,4 +1,4 @@
-import { Route } from "../../routes/profiles.$profileId.tsx";
+import { useProfileData } from "../../hooks/useProfileData.tsx";
 import {
   Alert,
   Align,
@@ -32,7 +32,7 @@ const PendingScan = () => {
 export const CurrentScan = () => {
   const {
     profile: { nextScan },
-  } = Route.useLoaderData();
+  } = useProfileData();
 
   if (!nextScan) {
     return null;
