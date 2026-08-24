@@ -32,7 +32,7 @@ export const ClimateAccentBox: FC<Props> = (props) => {
   }
 
   return (
-    <AccentBox color="green">
+    <AccentBox backgroundColor="green">
       <Icon>
         <IconLeaf />
       </Icon>
