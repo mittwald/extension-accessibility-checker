@@ -6,21 +6,17 @@ import {
 } from "@mittwald/flow-remote-react-components";
 import { Field } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { extractDomainFromUrl } from "../helpers.ts";
-import { UseFormReturn } from "react-hook-form";
-
-interface DomainFormValues {
-  domain: string;
-}
+import { useFormContext } from "react-hook-form";
+import { FormValues } from "../types.ts";
 
 export const Domain = ({
-  form,
   helpText,
   autoFocus,
 }: {
-  form: UseFormReturn<DomainFormValues>;
   helpText?: string;
   autoFocus?: boolean;
 }) => {
+  const form = useFormContext<Pick<FormValues, "domain">>();
   return (
     <Field
       name="domain"

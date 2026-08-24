@@ -57,7 +57,6 @@ export const ChangeDomainModal = ({
           <Section>
             <Domain
               autoFocus
-              form={form}
               helpText="Kontrolliere die Domain auf Richtigkeit und versuche es erneut."
             />
           </Section>

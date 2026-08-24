@@ -83,11 +83,10 @@ export const CreateModal = () => {
               <Segment value="custom">Individuelle Eingabe</Segment>
             </SegmentedControl>
             {domainInputTab === "mstudio" && <DomainSelect />}
-            {domainInputTab === "custom" && <Domain form={form} />}
+            {domainInputTab === "custom" && <Domain />}
             <Header>
               <Heading>Unterseiten hinzufügen</Heading>
               <GeneratePathsAction
-                form={form}
                 onError={setGenerateError}
                 onSuccess={() => setGenerateError(null)}
               />
@@ -109,7 +108,7 @@ export const CreateModal = () => {
               Füge Unterseiten hinzu, um mit einem Scanprofil mehrere Bereiche
               deiner Website im Blick zu behalten.
             </Text>
-            <PathsList form={form} autoFocus={!!form.getValues("domain")} />
+            <PathsList autoFocus={!!form.getValues("domain")} />
           </Section>
         </Content>
         <ActionGroup>
