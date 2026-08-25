@@ -14,13 +14,11 @@ export const Route = createFileRoute("/")({
   component: Home,
   validateSearch: zodValidator(QueryParams),
   ssr: false,
-  loader: async (ctx) => {
-    if (typeof window === "undefined") {
+  loaderDeps: ({ search: { contextId } }) => ({ contextId }),
+  loader: async ({ deps: { contextId } }) => {
+    if (typeof window === "undefined" || !contextId) {
       return null;
     }
-
-    console.log(window.location.href);
-    const { contextId } = ctx.location.search;
 
     return getProfiles({ data: contextId });
   },
