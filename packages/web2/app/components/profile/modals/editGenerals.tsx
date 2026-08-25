@@ -10,9 +10,9 @@ import {
   Heading,
   Label,
   Modal,
+  RadioButton,
+  RadioGroup,
   Section,
-  Segment,
-  SegmentedControl,
   useOverlayController,
 } from "@mittwald/flow-remote-react-components";
 import { useForm } from "react-hook-form";
@@ -81,7 +81,7 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
                 required: "Bitte wähle eine Konformitätsstufe aus",
               }}
             >
-              <SegmentedControl defaultValue={profile.standard}>
+              <RadioGroup s={[1, 1, 1]} defaultValue={profile.standard}>
                 <Label>
                   Konformitätsstufe
                   <ContextualHelpTrigger>
@@ -89,10 +89,10 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
                     <WcagStandardContextualHelp />
                   </ContextualHelpTrigger>
                 </Label>
-                <Segment value="WCAG2A">WCAG2 A</Segment>
-                <Segment value="WCAG2AA">WCAG2 AA</Segment>
-                <Segment value="WCAG2AAA">WCAG2 AAA</Segment>
-              </SegmentedControl>
+                <RadioButton value="WCAG2A">WCAG2 A</RadioButton>
+                <RadioButton value="WCAG2AA">WCAG2 AA</RadioButton>
+                <RadioButton value="WCAG2AAA">WCAG2 AAA</RadioButton>
+              </RadioGroup>
             </Field>
 
             <Field name="includedCriteria">

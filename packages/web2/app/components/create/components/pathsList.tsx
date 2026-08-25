@@ -88,6 +88,7 @@ export const PathsList = ({ autoFocus }: { autoFocus: boolean }) => {
           autoFocus={autoFocus}
           isInvalid={touched && isValidPath() !== true}
           value={pathInputValue}
+          isRequired
           onChange={(value) => {
             setPathInputValue(value);
             setTouched(true);

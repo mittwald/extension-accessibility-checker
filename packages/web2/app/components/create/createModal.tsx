@@ -9,13 +9,16 @@ import {
   InlineCode,
   Label,
   Modal,
+  RadioButton,
+  RadioGroup,
   Section,
-  Segment,
-  SegmentedControl,
   Text,
 } from "@mittwald/flow-remote-react-components";
-import { useForm } from "react-hook-form";
-import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
+import {
+  Field,
+  Form,
+} from "@mittwald/flow-remote-react-components/react-hook-form";
 import { FormValues } from "./types.ts";
 import { PathsList } from "./components/pathsList.tsx";
 import { createProfile } from "../../actions/profile.ts";
@@ -34,7 +37,6 @@ const defaultDomainInputTab = "mstudio";
 export const CreateModal = () => {
   const goToProfile = useGoToProfile();
   const { contextId } = Route.useSearch();
-  const [domainInputTab, setDomainInputTab] = useState(defaultDomainInputTab);
   const [generateError, setGenerateError] = useState<GenerateError | null>(
     null,
   );
@@ -43,8 +45,11 @@ export const CreateModal = () => {
     defaultValues: {
       domain: "",
       paths: new Set(["/"]),
+      type: defaultDomainInputTab,
     },
   });
+
+  const watchedTab = useWatch({ control: form.control, name: "type" });
 
   if (!contextId) {
     return null;
@@ -73,17 +78,15 @@ export const CreateModal = () => {
               Wähle eine bestehende Domain aus dem mStudio oder gib eine
               individuelle Domain ein.
             </Text>
-            <SegmentedControl
-              value={domainInputTab}
-              defaultValue={defaultDomainInputTab}
-              onChange={setDomainInputTab}
-            >
-              <Label>Domain-Art</Label>
-              <Segment value="mstudio">mStudio Domain</Segment>
-              <Segment value="custom">Individuelle Eingabe</Segment>
-            </SegmentedControl>
-            {domainInputTab === "mstudio" && <DomainSelect />}
-            {domainInputTab === "custom" && <Domain />}
+            <Field rules={{ required: true }} name="type">
+              <RadioGroup>
+                <Label>Domain-Art</Label>
+                <RadioButton value="mstudio">mStudio Domain</RadioButton>
+                <RadioButton value="custom">Individuelle Eingabe</RadioButton>
+              </RadioGroup>
+            </Field>
+            {watchedTab === "mstudio" && <DomainSelect />}
+            {watchedTab === "custom" && <Domain />}
             <Header>
               <Heading>Unterseiten hinzufügen</Heading>
               <GeneratePathsAction
