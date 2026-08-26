@@ -7,18 +7,15 @@ import {
   Header,
   Heading,
   InlineCode,
-  Label,
   Modal,
-  RadioButton,
-  RadioGroup,
   Section,
+  Tab,
+  Tabs,
+  TabTitle,
   Text,
 } from "@mittwald/flow-remote-react-components";
-import { useForm, useWatch } from "react-hook-form";
-import {
-  Field,
-  Form,
-} from "@mittwald/flow-remote-react-components/react-hook-form";
+import { useForm } from "react-hook-form";
+import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { FormValues } from "./types.ts";
 import { PathsList } from "./components/pathsList.tsx";
 import { createProfile } from "../../actions/profile.ts";
@@ -32,8 +29,6 @@ import {
   GeneratePathsAction,
 } from "./components/generatePaths.tsx";
 
-const defaultDomainInputTab = "mstudio";
-
 export const CreateModal = () => {
   const goToProfile = useGoToProfile();
   const { contextId } = Route.useSearch();
@@ -45,11 +40,8 @@ export const CreateModal = () => {
     defaultValues: {
       domain: "",
       paths: new Set(["/"]),
-      type: defaultDomainInputTab,
     },
   });
-
-  const watchedTab = useWatch({ control: form.control, name: "type" });
 
   if (!contextId) {
     return null;
@@ -78,15 +70,16 @@ export const CreateModal = () => {
               Wähle eine bestehende Domain aus dem mStudio oder gib eine
               individuelle Domain ein.
             </Text>
-            <Field rules={{ required: true }} name="type">
-              <RadioGroup>
-                <Label>Domain-Art</Label>
-                <RadioButton value="mstudio">mStudio Domain</RadioButton>
-                <RadioButton value="custom">Individuelle Eingabe</RadioButton>
-              </RadioGroup>
-            </Field>
-            {watchedTab === "mstudio" && <DomainSelect />}
-            {watchedTab === "custom" && <Domain />}
+            <Tabs>
+              <Tab id="mstudio">
+                <TabTitle>mStudio Domain</TabTitle>
+                <DomainSelect />
+              </Tab>
+              <Tab id="custom">
+                <TabTitle>Individuelle Eingabe</TabTitle>
+                <Domain />
+              </Tab>
+            </Tabs>
             <Header>
               <Heading>Unterseiten hinzufügen</Heading>
               <GeneratePathsAction
