@@ -43,17 +43,19 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
     criteria.push("includeNotices");
   }
 
-  const form = useForm<FormValues>({
-    defaultValues: {
-      cronExpression: profile.cronSchedule?.expression,
-      standard: profile.standard,
-      includedCriteria: criteria,
-    },
-  });
+  const defaultValues: FormValues = {
+    cronExpression: profile.cronSchedule?.expression,
+    standard: profile.standard,
+    includedCriteria: criteria,
+  };
+
+  const form = useForm<FormValues>({ defaultValues });
 
   const Field = typedField(form);
 
-  const controller = useOverlayController("Modal");
+  const controller = useOverlayController("Modal", {
+    onOpen: () => form.reset(defaultValues),
+  });
 
   const onSubmit = async (formValues: FormValues) => {
     await updateProfileSettings({
@@ -97,7 +99,7 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
 
             <Field name="includedCriteria">
               <CheckboxGroup>
-                <Label>
+                <Label optional={false}>
                   Kriterien
                   <ContextualHelpTrigger>
                     <Button />

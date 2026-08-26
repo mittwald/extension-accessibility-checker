@@ -6,7 +6,7 @@ export const IssuesList = ({ groups }: { groups: Issue[] }) => {
   const IssueList = typedList<Issue>();
 
   return (
-    <IssueList.List batchSize={groups.length} accordion>
+    <IssueList.List hidePagination batchSize={groups.length} accordion>
       <IssueList.StaticData data={groups} />
       <IssueList.Item textValue={(i) => i.errorCode}>
         {(group) => <IssueListItemView issue={group} />}
