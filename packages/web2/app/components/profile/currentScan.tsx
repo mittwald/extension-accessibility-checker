@@ -1,7 +1,7 @@
 import { Route } from "../../routes/profiles.$profileId.tsx";
 import {
   Alert,
-  Align,
+  Combine,
   LoadingSpinner,
   Text,
 } from "@mittwald/flow-remote-react-components";
@@ -10,10 +10,10 @@ import { isPending, isRunning } from "./helpers.ts";
 const RunningScan = () => {
   return (
     <Alert>
-      <Align>
+      <Combine>
         <LoadingSpinner size="m"></LoadingSpinner>
         <Text>Scan wird ausgeführt …</Text>
-      </Align>
+      </Combine>
     </Alert>
   );
 };
@@ -21,10 +21,10 @@ const RunningScan = () => {
 const PendingScan = () => {
   return (
     <Alert>
-      <Align>
+      <Combine>
         <LoadingSpinner size="m"></LoadingSpinner>
         <Text>Scan wird in Kürze gestartet …</Text>
-      </Align>
+      </Combine>
     </Alert>
   );
 };

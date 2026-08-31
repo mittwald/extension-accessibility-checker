@@ -64,7 +64,7 @@ export const ChangeDomainModal = ({
         </Content>
         <ActionGroup>
           <Action closeOverlay="Modal">
-            <Button color="accent" type="submit">
+            <Button color="success" type="submit">
               Speichern
             </Button>
             <Button slot="abort" color="secondary" variant="soft">

@@ -1,7 +1,7 @@
 import { UseFormReturn } from "react-hook-form";
 import { useState } from "react";
 import {
-  Align,
+  Combine,
   Button,
   FieldError,
   IconClose,
@@ -89,7 +89,7 @@ export const PathsList = ({
 
   return (
     <>
-      <Align>
+      <Combine>
         <TextField
           autoFocus={autoFocus}
           isInvalid={touched && isValidPath() !== true}
@@ -124,7 +124,7 @@ export const PathsList = ({
         >
           Hinzufügen
         </Button>
-      </Align>
+      </Combine>
       {pathsList}
     </>
   );

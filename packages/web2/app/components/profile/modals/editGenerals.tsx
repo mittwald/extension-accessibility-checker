@@ -113,7 +113,7 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
           </Section>
         </Content>
         <ActionGroup>
-          <Button color="accent" type="submit">
+          <Button color="success" type="submit">
             Speichern
           </Button>
           <Action closeOverlay="Modal">

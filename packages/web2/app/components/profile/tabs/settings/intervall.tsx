@@ -39,7 +39,7 @@ export const IntarvallSettings = () => {
           <EditIntervalModal profile={profile} />
         </ModalTrigger>
         <Button
-          color="accent"
+          color="success"
           onPress={async () => {
             await startScan({ data: { profileId: profile._id } });
             await router.invalidate({ sync: true });

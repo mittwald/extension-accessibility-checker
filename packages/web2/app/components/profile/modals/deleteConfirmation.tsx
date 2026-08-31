@@ -34,9 +34,9 @@ export const DeleteConfirmationModal = ({
         </Section>
       </Content>
       <ActionGroup>
-        <Action action={controller.close}>
+        <Action onAction={controller.close}>
           <Action
-            action={async () => {
+            onAction={async () => {
               await deleteProfile({ data: profile._id });
               await onDelete?.();
             }}
