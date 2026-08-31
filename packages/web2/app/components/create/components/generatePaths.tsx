@@ -55,7 +55,7 @@ export const GeneratePathsAction: FC<Props> = (props) => {
 
   return (
     <Action onAction={generatePaths}>
-      <Button isDisabled={Boolean(!domain)} color="accent">
+      <Button isDisabled={Boolean(!domain)} color="success">
         Autom. erkennen
       </Button>
     </Action>

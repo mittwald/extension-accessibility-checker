@@ -42,7 +42,7 @@ export function NoScans({ profile }: { profile: ScanProfile }) {
       <Heading>Los geht’s!</Heading>
       <Text wrap="balance">Der Scan wurde noch nicht ausgeführt.</Text>
       <Button
-        color="accent"
+        color="success"
         onPress={async () => {
           await startScan({ data: { profileId: profile._id.toString() } });
           await router.invalidate({ sync: true });

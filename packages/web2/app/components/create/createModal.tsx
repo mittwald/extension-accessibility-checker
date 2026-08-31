@@ -117,7 +117,7 @@ export const CreateModal = () => {
               Abbrechen
             </Button>
           </Action>
-          <Button color="accent" type="submit">
+          <Button color="success" type="submit">
             Scan starten
           </Button>
         </ActionGroup>

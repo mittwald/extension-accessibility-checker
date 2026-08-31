@@ -57,7 +57,7 @@ export const EditPathsModal = ({ profile }: { profile: ScanProfile }) => {
             >
               Abbrechen
             </Button>
-            <Button color="accent" type="submit">
+            <Button color="success" type="submit">
               Speichern
             </Button>
           </Action>
