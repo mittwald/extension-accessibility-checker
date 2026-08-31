@@ -11,6 +11,11 @@
 import { Route as rootRouteImport } from "./routes/__root"
 import { Route as IndexRouteImport } from "./routes/index"
 import { Route as ProfilesProfileIdRouteImport } from "./routes/profiles.$profileId"
+import { Route as ApiPdfExportProfileIdRouteImport } from "./routes/api/pdf-export.$profileId"
+import { Route as ApiWebhooksExtensionAddedRouteImport } from "./routes/api/webhooks/extension-added"
+import { Route as ApiWebhooksInstanceRemovedRouteImport } from "./routes/api/webhooks/instance-removed"
+import { Route as ApiWebhooksInstanceUpdatedRouteImport } from "./routes/api/webhooks/instance-updated"
+import { Route as ApiWebhooksSecretRotatedRouteImport } from "./routes/api/webhooks/secret-rotated"
 
 const IndexRoute = IndexRouteImport.update({
   id: "/",
@@ -22,31 +27,102 @@ const ProfilesProfileIdRoute = ProfilesProfileIdRouteImport.update({
   path: "/profiles/$profileId",
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPdfExportProfileIdRoute = ApiPdfExportProfileIdRouteImport.update({
+  id: "/api/pdf-export/$profileId",
+  path: "/api/pdf-export/$profileId",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiWebhooksExtensionAddedRoute =
+  ApiWebhooksExtensionAddedRouteImport.update({
+    id: "/api/webhooks/extension-added",
+    path: "/api/webhooks/extension-added",
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiWebhooksInstanceRemovedRoute =
+  ApiWebhooksInstanceRemovedRouteImport.update({
+    id: "/api/webhooks/instance-removed",
+    path: "/api/webhooks/instance-removed",
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiWebhooksInstanceUpdatedRoute =
+  ApiWebhooksInstanceUpdatedRouteImport.update({
+    id: "/api/webhooks/instance-updated",
+    path: "/api/webhooks/instance-updated",
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiWebhooksSecretRotatedRoute =
+  ApiWebhooksSecretRotatedRouteImport.update({
+    id: "/api/webhooks/secret-rotated",
+    path: "/api/webhooks/secret-rotated",
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
   "/profiles/$profileId": typeof ProfilesProfileIdRoute
+  "/api/pdf-export/$profileId": typeof ApiPdfExportProfileIdRoute
+  "/api/webhooks/extension-added": typeof ApiWebhooksExtensionAddedRoute
+  "/api/webhooks/instance-removed": typeof ApiWebhooksInstanceRemovedRoute
+  "/api/webhooks/instance-updated": typeof ApiWebhooksInstanceUpdatedRoute
+  "/api/webhooks/secret-rotated": typeof ApiWebhooksSecretRotatedRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/profiles/$profileId": typeof ProfilesProfileIdRoute
+  "/api/pdf-export/$profileId": typeof ApiPdfExportProfileIdRoute
+  "/api/webhooks/extension-added": typeof ApiWebhooksExtensionAddedRoute
+  "/api/webhooks/instance-removed": typeof ApiWebhooksInstanceRemovedRoute
+  "/api/webhooks/instance-updated": typeof ApiWebhooksInstanceUpdatedRoute
+  "/api/webhooks/secret-rotated": typeof ApiWebhooksSecretRotatedRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   "/": typeof IndexRoute
   "/profiles/$profileId": typeof ProfilesProfileIdRoute
+  "/api/pdf-export/$profileId": typeof ApiPdfExportProfileIdRoute
+  "/api/webhooks/extension-added": typeof ApiWebhooksExtensionAddedRoute
+  "/api/webhooks/instance-removed": typeof ApiWebhooksInstanceRemovedRoute
+  "/api/webhooks/instance-updated": typeof ApiWebhooksInstanceUpdatedRoute
+  "/api/webhooks/secret-rotated": typeof ApiWebhooksSecretRotatedRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/profiles/$profileId"
+  fullPaths:
+    | "/"
+    | "/profiles/$profileId"
+    | "/api/pdf-export/$profileId"
+    | "/api/webhooks/extension-added"
+    | "/api/webhooks/instance-removed"
+    | "/api/webhooks/instance-updated"
+    | "/api/webhooks/secret-rotated"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/profiles/$profileId"
-  id: "__root__" | "/" | "/profiles/$profileId"
+  to:
+    | "/"
+    | "/profiles/$profileId"
+    | "/api/pdf-export/$profileId"
+    | "/api/webhooks/extension-added"
+    | "/api/webhooks/instance-removed"
+    | "/api/webhooks/instance-updated"
+    | "/api/webhooks/secret-rotated"
+  id:
+    | "__root__"
+    | "/"
+    | "/profiles/$profileId"
+    | "/api/pdf-export/$profileId"
+    | "/api/webhooks/extension-added"
+    | "/api/webhooks/instance-removed"
+    | "/api/webhooks/instance-updated"
+    | "/api/webhooks/secret-rotated"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ProfilesProfileIdRoute: typeof ProfilesProfileIdRoute
+  ApiPdfExportProfileIdRoute: typeof ApiPdfExportProfileIdRoute
+  ApiWebhooksExtensionAddedRoute: typeof ApiWebhooksExtensionAddedRoute
+  ApiWebhooksInstanceRemovedRoute: typeof ApiWebhooksInstanceRemovedRoute
+  ApiWebhooksInstanceUpdatedRoute: typeof ApiWebhooksInstanceUpdatedRoute
+  ApiWebhooksSecretRotatedRoute: typeof ApiWebhooksSecretRotatedRoute
 }
 
 declare module "@tanstack/react-router" {
@@ -65,12 +141,52 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof ProfilesProfileIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/api/pdf-export/$profileId": {
+      id: "/api/pdf-export/$profileId"
+      path: "/api/pdf-export/$profileId"
+      fullPath: "/api/pdf-export/$profileId"
+      preLoaderRoute: typeof ApiPdfExportProfileIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/api/webhooks/extension-added": {
+      id: "/api/webhooks/extension-added"
+      path: "/api/webhooks/extension-added"
+      fullPath: "/api/webhooks/extension-added"
+      preLoaderRoute: typeof ApiWebhooksExtensionAddedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/api/webhooks/instance-removed": {
+      id: "/api/webhooks/instance-removed"
+      path: "/api/webhooks/instance-removed"
+      fullPath: "/api/webhooks/instance-removed"
+      preLoaderRoute: typeof ApiWebhooksInstanceRemovedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/api/webhooks/instance-updated": {
+      id: "/api/webhooks/instance-updated"
+      path: "/api/webhooks/instance-updated"
+      fullPath: "/api/webhooks/instance-updated"
+      preLoaderRoute: typeof ApiWebhooksInstanceUpdatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/api/webhooks/secret-rotated": {
+      id: "/api/webhooks/secret-rotated"
+      path: "/api/webhooks/secret-rotated"
+      fullPath: "/api/webhooks/secret-rotated"
+      preLoaderRoute: typeof ApiWebhooksSecretRotatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ProfilesProfileIdRoute: ProfilesProfileIdRoute,
+  ApiPdfExportProfileIdRoute: ApiPdfExportProfileIdRoute,
+  ApiWebhooksExtensionAddedRoute: ApiWebhooksExtensionAddedRoute,
+  ApiWebhooksInstanceRemovedRoute: ApiWebhooksInstanceRemovedRoute,
+  ApiWebhooksInstanceUpdatedRoute: ApiWebhooksInstanceUpdatedRoute,
+  ApiWebhooksSecretRotatedRoute: ApiWebhooksSecretRotatedRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

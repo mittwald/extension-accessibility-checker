@@ -2,11 +2,11 @@ import { createMiddleware } from "@tanstack/react-start";
 import { notFound } from "@tanstack/react-router";
 import { dbConnect, ScanProfileModel } from "extension-a11y-checker-storage";
 import { z } from "zod";
-import { getHeader } from "@tanstack/react-start/server";
+import { getRequestHeader } from "@tanstack/react-start/server";
 import { getAccessToken, verify } from "@mittwald/ext-bridge/node";
 import { getSessionToken } from "@mittwald/ext-bridge/browser";
 
-export const dbMiddleware = createMiddleware()
+export const dbMiddleware = createMiddleware({ type: "function" })
   .middleware([])
   .server(async ({ next }) => {
     await dbConnect();
@@ -18,7 +18,7 @@ const getToken = async (sessionToken: string) => {
   return (await getAccessToken(sessionToken, extensionSecret)).publicToken;
 };
 
-export const authenticateMiddleware = createMiddleware({ validateClient: true })
+export const authenticateMiddleware = createMiddleware({ type: "function" })
   .client(async ({ next }) => {
     const token = await getSessionToken();
     return next({
@@ -26,7 +26,7 @@ export const authenticateMiddleware = createMiddleware({ validateClient: true })
     });
   })
   .server(async ({ next }) => {
-    const sessionToken = getHeader("x-session-token");
+    const sessionToken = getRequestHeader("x-session-token");
     const verifiedToken = await verify(sessionToken!);
     const apiToken = await getToken(sessionToken!);
 
@@ -45,7 +45,7 @@ const contextSchema = z
   })
   .catchall(z.any());
 
-export const contextMatchingMiddleware = createMiddleware()
+export const contextMatchingMiddleware = createMiddleware({ type: "function" })
   .middleware([authenticateMiddleware])
   .validator(contextSchema)
   .server(async ({ next, context, data: { contextId } }) => {
@@ -73,7 +73,9 @@ async function assertContextMatching(profileId: string, contextId: string) {
   }
 }
 
-export const profileIdAuthorizeMiddleware = createMiddleware()
+export const profileIdAuthorizeMiddleware = createMiddleware({
+  type: "function",
+})
   .middleware([dbMiddleware, authenticateMiddleware])
   .validator(profileIdSchema)
   .server(async ({ next, context, data: profileId }) => {
@@ -82,7 +84,9 @@ export const profileIdAuthorizeMiddleware = createMiddleware()
     return next();
   });
 
-export const profileAuthorizeMiddleware = createMiddleware()
+export const profileAuthorizeMiddleware = createMiddleware({
+  type: "function",
+})
   .middleware([dbMiddleware, authenticateMiddleware])
   .validator(profileSchema)
   .server(async ({ next, context, data: { profileId } }) => {
