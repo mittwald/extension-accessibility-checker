@@ -57,14 +57,13 @@ export const ChangeDomainModal = ({
           <Section>
             <Domain
               autoFocus
-              form={form}
               helpText="Kontrolliere die Domain auf Richtigkeit und versuche es erneut."
             />
           </Section>
         </Content>
         <ActionGroup>
           <Action closeOverlay="Modal">
-            <Button color="accent" type="submit">
+            <Button color="success" type="submit">
               Speichern
             </Button>
             <Button slot="abort" color="secondary" variant="soft">

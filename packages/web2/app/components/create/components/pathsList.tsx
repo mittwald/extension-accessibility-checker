@@ -1,8 +1,8 @@
-import { UseFormReturn } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { useState } from "react";
 import {
-  Align,
   Button,
+  Combine,
   FieldError,
   IconClose,
   InlineCode,
@@ -15,17 +15,11 @@ import {
 import { FormValues } from "../types.ts";
 import { extractPathFromUrl, prependPathWithSlash } from "../helpers.ts";
 
-type PathFormValues = Pick<FormValues, "paths">;
-
-export const PathsList = ({
-  form,
-  autoFocus,
-}: {
-  form: UseFormReturn<PathFormValues>;
-  autoFocus: boolean;
-}) => {
+export const PathsList = ({ autoFocus }: { autoFocus: boolean }) => {
   const [pathInputValue, setPathInputValue] = useState("/");
   const [touched, setTouched] = useState(false);
+
+  const form = useFormContext<Pick<FormValues, "paths">>();
 
   const paths = form.watch("paths");
 
@@ -89,11 +83,12 @@ export const PathsList = ({
 
   return (
     <>
-      <Align>
+      <Combine>
         <TextField
           autoFocus={autoFocus}
           isInvalid={touched && isValidPath() !== true}
           value={pathInputValue}
+          isRequired
           onChange={(value) => {
             setPathInputValue(value);
             setTouched(true);
@@ -124,7 +119,7 @@ export const PathsList = ({
         >
           Hinzufügen
         </Button>
-      </Align>
+      </Combine>
       {pathsList}
     </>
   );

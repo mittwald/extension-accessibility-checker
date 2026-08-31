@@ -140,7 +140,7 @@ export const getTimeFromCron = (cron: string) => {
 };
 
 export const getCronFromTime = (cron: string, time?: Time) => {
-  if (!time) {
+  if (!time || cron === "") {
     return cron;
   }
   const cronParts = cron.split(" ");

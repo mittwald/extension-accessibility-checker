@@ -10,9 +10,9 @@ import {
   Heading,
   Label,
   Modal,
+  RadioButton,
+  RadioGroup,
   Section,
-  Segment,
-  SegmentedControl,
   useOverlayController,
 } from "@mittwald/flow-remote-react-components";
 import { useForm } from "react-hook-form";
@@ -43,17 +43,19 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
     criteria.push("includeNotices");
   }
 
-  const form = useForm<FormValues>({
-    defaultValues: {
-      cronExpression: profile.cronSchedule?.expression,
-      standard: profile.standard,
-      includedCriteria: criteria,
-    },
-  });
+  const defaultValues: FormValues = {
+    cronExpression: profile.cronSchedule?.expression,
+    standard: profile.standard,
+    includedCriteria: criteria,
+  };
+
+  const form = useForm<FormValues>({ defaultValues });
 
   const Field = typedField(form);
 
-  const controller = useOverlayController("Modal");
+  const controller = useOverlayController("Modal", {
+    onOpen: () => form.reset(defaultValues),
+  });
 
   const onSubmit = async (formValues: FormValues) => {
     await updateProfileSettings({
@@ -81,7 +83,7 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
                 required: "Bitte wähle eine Konformitätsstufe aus",
               }}
             >
-              <SegmentedControl defaultValue={profile.standard}>
+              <RadioGroup s={[1, 1, 1]} defaultValue={profile.standard}>
                 <Label>
                   Konformitätsstufe
                   <ContextualHelpTrigger>
@@ -89,15 +91,15 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
                     <WcagStandardContextualHelp />
                   </ContextualHelpTrigger>
                 </Label>
-                <Segment value="WCAG2A">WCAG2 A</Segment>
-                <Segment value="WCAG2AA">WCAG2 AA</Segment>
-                <Segment value="WCAG2AAA">WCAG2 AAA</Segment>
-              </SegmentedControl>
+                <RadioButton value="WCAG2A">WCAG2 A</RadioButton>
+                <RadioButton value="WCAG2AA">WCAG2 AA</RadioButton>
+                <RadioButton value="WCAG2AAA">WCAG2 AAA</RadioButton>
+              </RadioGroup>
             </Field>
 
             <Field name="includedCriteria">
               <CheckboxGroup>
-                <Label>
+                <Label optional={false}>
                   Kriterien
                   <ContextualHelpTrigger>
                     <Button />
@@ -113,7 +115,7 @@ export const EditGeneralsModal = ({ profile }: { profile: ScanProfile }) => {
           </Section>
         </Content>
         <ActionGroup>
-          <Button color="accent" type="submit">
+          <Button color="success" type="submit">
             Speichern
           </Button>
           <Action closeOverlay="Modal">

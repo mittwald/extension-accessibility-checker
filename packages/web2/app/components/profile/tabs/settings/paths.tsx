@@ -13,11 +13,11 @@ import {
   TableRow,
   Text,
 } from "@mittwald/flow-remote-react-components";
-import { Route } from "../../../../routes/profiles.$profileId.tsx";
+import { useProfileData } from "../../../../hooks/useProfileData.tsx";
 import { EditPathsModal } from "../../modals/editPaths.tsx";
 
 export const PathSettings = () => {
-  const { profile, lastScan } = Route.useLoaderData();
+  const { profile, lastScan } = useProfileData();
 
   const getScoreForPath = (path: string) => {
     const score = lastScan?.pages.find(

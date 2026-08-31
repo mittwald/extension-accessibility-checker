@@ -14,7 +14,7 @@ import martinImage from "../../feedback-person.webp?inline";
 export const FeedbackBox = () => {
   return (
     <LayoutCard>
-      <AccentBox color="gradient">
+      <AccentBox backgroundColor="gradient">
         <ColumnLayout l={[3, 1]} m={[2, 1]} s={[1, null]}>
           <Section>
             <Heading>Hast du einen Moment für Feedback?</Heading>

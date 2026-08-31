@@ -1,8 +1,9 @@
-import { UseFormReturn, useWatch } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import { getPathsFromMenu } from "../../../actions/domain.js";
 import { Action, Button } from "@mittwald/flow-remote-react-components";
 import { extractPathFromUrl } from "../helpers.js";
 import { FC, useState } from "react";
+import { FormValues } from "../types.ts";
 
 export interface GenerateError {
   error: Error;
@@ -10,14 +11,15 @@ export interface GenerateError {
 }
 
 interface Props {
-  form: UseFormReturn;
   onError: (error: GenerateError) => void;
   onSuccess: () => void;
 }
 
 export const GeneratePathsAction: FC<Props> = (props) => {
-  const { form, onError, onSuccess } = props;
+  const { onError, onSuccess } = props;
   const [generatedPaths, setGeneratedPaths] = useState<string[]>([]);
+
+  const form = useFormContext<FormValues>();
 
   const domain = useWatch({ control: form.control, name: "domain" });
 
@@ -53,7 +55,7 @@ export const GeneratePathsAction: FC<Props> = (props) => {
 
   return (
     <Action onAction={generatePaths}>
-      <Button isDisabled={Boolean(!domain)} color="accent">
+      <Button isDisabled={Boolean(!domain)} color="success">
         Autom. erkennen
       </Button>
     </Action>

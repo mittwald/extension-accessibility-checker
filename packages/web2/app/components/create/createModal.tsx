@@ -7,11 +7,11 @@ import {
   Header,
   Heading,
   InlineCode,
-  Label,
   Modal,
   Section,
-  Segment,
-  SegmentedControl,
+  Tab,
+  Tabs,
+  TabTitle,
   Text,
 } from "@mittwald/flow-remote-react-components";
 import { useForm } from "react-hook-form";
@@ -29,12 +29,9 @@ import {
   GeneratePathsAction,
 } from "./components/generatePaths.tsx";
 
-const defaultDomainInputTab = "mstudio";
-
 export const CreateModal = () => {
   const goToProfile = useGoToProfile();
   const { contextId } = Route.useSearch();
-  const [domainInputTab, setDomainInputTab] = useState(defaultDomainInputTab);
   const [generateError, setGenerateError] = useState<GenerateError | null>(
     null,
   );
@@ -73,21 +70,19 @@ export const CreateModal = () => {
               Wähle eine bestehende Domain aus dem mStudio oder gib eine
               individuelle Domain ein.
             </Text>
-            <SegmentedControl
-              value={domainInputTab}
-              defaultValue={defaultDomainInputTab}
-              onChange={setDomainInputTab}
-            >
-              <Label>Domain-Art</Label>
-              <Segment value="mstudio">mStudio Domain</Segment>
-              <Segment value="custom">Individuelle Eingabe</Segment>
-            </SegmentedControl>
-            {domainInputTab === "mstudio" && <DomainSelect />}
-            {domainInputTab === "custom" && <Domain form={form} />}
+            <Tabs>
+              <Tab id="mstudio">
+                <TabTitle>mStudio Domain</TabTitle>
+                <DomainSelect />
+              </Tab>
+              <Tab id="custom">
+                <TabTitle>Individuelle Eingabe</TabTitle>
+                <Domain />
+              </Tab>
+            </Tabs>
             <Header>
               <Heading>Unterseiten hinzufügen</Heading>
               <GeneratePathsAction
-                form={form}
                 onError={setGenerateError}
                 onSuccess={() => setGenerateError(null)}
               />
@@ -109,7 +104,7 @@ export const CreateModal = () => {
               Füge Unterseiten hinzu, um mit einem Scanprofil mehrere Bereiche
               deiner Website im Blick zu behalten.
             </Text>
-            <PathsList form={form} autoFocus={!!form.getValues("domain")} />
+            <PathsList autoFocus={!!form.getValues("domain")} />
           </Section>
         </Content>
         <ActionGroup>
@@ -122,7 +117,7 @@ export const CreateModal = () => {
               Abbrechen
             </Button>
           </Action>
-          <Button color="accent" type="submit">
+          <Button color="success" type="submit">
             Scan starten
           </Button>
         </ActionGroup>

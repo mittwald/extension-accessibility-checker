@@ -11,7 +11,23 @@ import {
   profileAuthorizeMiddleware,
   profileIdAuthorizeMiddleware,
 } from "./middleware.js";
-import { scheduleScan, validateCron } from "./commons.js";
+import { validateCron } from "../lib/cron.ts";
+import { scheduleScan } from "./commons.js";
+
+const cronExpressionSchema = z.string().superRefine((value, ctx) => {
+  const validationResult = validateCron(value);
+  if (validationResult === "too-frequent") {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "interval must not be more frequent than once per hour",
+    });
+  } else if (validationResult === "not-parseable") {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "invalid cron expression",
+    });
+  }
+});
 
 export const getProfiles = createServerFn()
   .middleware([dbMiddleware, authenticateMiddleware])
@@ -90,7 +106,7 @@ export const updateProfilePaths = createServerFn({ method: "POST" })
       { new: true },
     );
     if (!profile) {
-      return new Response("Profile not found", { status: 404 });
+      throw notFound();
     }
     return profile.toJSON() as unknown as ScanProfile;
   });
@@ -110,7 +126,7 @@ export const updateProfileName = createServerFn({ method: "POST" })
       { new: true },
     );
     if (!profile) {
-      return new Response("Profile not found", { status: 404 });
+      throw notFound();
     }
     return profile.toJSON() as unknown as ScanProfile;
   });
@@ -137,7 +153,7 @@ export const updateProfileDomain = createServerFn({ method: "POST" })
       { new: true },
     );
     if (!profile) {
-      return new Response("Profile not found", { status: 404 });
+      throw notFound();
     }
 
     const nextScan = await ScanModel.nextScanOfProfile(profileId);
@@ -153,15 +169,10 @@ export const updateProfileCron = createServerFn({ method: "POST" })
   .validator(
     z.object({
       profileId: z.string(),
-      cronExpression: z.string(),
+      cronExpression: cronExpressionSchema,
     }),
   )
   .handler(async ({ data: { profileId, cronExpression } }) => {
-    const validationResult = validateCron(cronExpression);
-    if (validationResult !== true) {
-      return validationResult;
-    }
-
     const cronUpdateSet = cronExpression
       ? { cronSchedule: { expression: cronExpression } }
       : undefined;
@@ -176,7 +187,7 @@ export const updateProfileCron = createServerFn({ method: "POST" })
       { new: true },
     );
     if (!profile) {
-      return new Response("Profile not found", { status: 404 });
+      throw notFound();
     }
 
     await ScanModel.deleteScheduledForProfile(profile);
@@ -190,7 +201,7 @@ export const updateProfileSettings = createServerFn({ method: "POST" })
   .validator(
     z.object({
       profileId: z.string(),
-      cronExpression: z.string().optional(),
+      cronExpression: cronExpressionSchema.optional(),
       includeWarnings: z.boolean(),
       includeNotices: z.boolean(),
       standard: z.enum(["WCAG2A", "WCAG2AA", "WCAG2AAA"]),
@@ -206,11 +217,6 @@ export const updateProfileSettings = createServerFn({ method: "POST" })
         standard,
       },
     }) => {
-      const validationResult = validateCron(cronExpression);
-      if (validationResult !== true) {
-        return validationResult;
-      }
-
       const cronUpdateSet = cronExpression
         ? { cronSchedule: { expression: cronExpression } }
         : undefined;
@@ -229,7 +235,7 @@ export const updateProfileSettings = createServerFn({ method: "POST" })
         { new: true },
       );
       if (!profile) {
-        return new Response("Profile not found", { status: 404 });
+        throw notFound();
       }
       return profile.toJSON() as unknown as ScanProfile;
     },

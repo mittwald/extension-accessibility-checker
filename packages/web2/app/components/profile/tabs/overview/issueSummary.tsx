@@ -10,7 +10,7 @@ import {
 export function IssueSummary({ profile }: { profile: ScanProfile }) {
   return (
     <ColumnLayout m={[2, 2, 2]}>
-      <AccentBox color="neutral">
+      <AccentBox>
         <Flex direction="column" gap="s" align="center" text-align="center">
           <BigNumber>
             <Text>{profile.issueSummary?.errors}</Text>
@@ -26,7 +26,7 @@ export function IssueSummary({ profile }: { profile: ScanProfile }) {
           )}
         </Flex>
       </AccentBox>
-      <AccentBox color="neutral">
+      <AccentBox>
         <Flex direction="column" gap="xs" align="center">
           <BigNumber>
             <Text>{profile.issueSummary?.warnings}</Text>
@@ -37,7 +37,7 @@ export function IssueSummary({ profile }: { profile: ScanProfile }) {
           </Text>
         </Flex>
       </AccentBox>
-      <AccentBox color="neutral">
+      <AccentBox>
         <Flex direction="column" gap="xs" align="center">
           <BigNumber>
             <Text>{profile.issueSummary?.notices}</Text>

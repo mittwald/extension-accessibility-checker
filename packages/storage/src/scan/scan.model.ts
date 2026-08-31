@@ -225,7 +225,7 @@ export class Scan {
     await this.save();
   }
 
-  public getIssueSummary(this: DocumentType<Scan>) {
+  public getIssueSummary(this: Scan) {
     const summary = this.pages.reduce(
       (c: Issues & { score: number }, page) => {
         return {

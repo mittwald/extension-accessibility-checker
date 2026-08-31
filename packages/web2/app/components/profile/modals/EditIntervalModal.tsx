@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { FC } from "react";
 import {
   Action,
   ActionGroup,
@@ -89,7 +89,7 @@ export const EditIntervalModal: FC<Props> = (props) => {
         </Content>
 
         <ActionGroup>
-          <Button color="accent" type="submit">
+          <Button color="success" type="submit">
             Speichern
           </Button>
           <Action closeOverlay="Modal">

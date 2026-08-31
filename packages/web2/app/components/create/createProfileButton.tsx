@@ -4,7 +4,7 @@ import { CreateModal } from "./createModal.tsx";
 export function CreateProfileButton() {
   return (
     <ModalTrigger>
-      <Button color="accent">Anlegen</Button>
+      <Button color="success">Anlegen</Button>
       <CreateModal />
     </ModalTrigger>
   );
