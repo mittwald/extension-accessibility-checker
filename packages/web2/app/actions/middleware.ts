@@ -3,7 +3,6 @@ import { notFound } from "@tanstack/react-router";
 import { dbConnect, ScanProfileModel } from "extension-a11y-checker-storage";
 import { z } from "zod";
 import { getRequestHeader } from "@tanstack/react-start/server";
-import { getAccessToken, verify } from "@mittwald/ext-bridge/node";
 import { getSessionToken } from "@mittwald/ext-bridge/browser";
 
 export const dbMiddleware = createMiddleware({ type: "function" })
@@ -12,11 +11,6 @@ export const dbMiddleware = createMiddleware({ type: "function" })
     await dbConnect();
     return next();
   });
-
-const getToken = async (sessionToken: string) => {
-  const extensionSecret = process.env.EXTENSION_SECRET!;
-  return (await getAccessToken(sessionToken, extensionSecret)).publicToken;
-};
 
 export const authenticateMiddleware = createMiddleware({ type: "function" })
   .client(async ({ next }) => {
@@ -27,15 +21,10 @@ export const authenticateMiddleware = createMiddleware({ type: "function" })
   })
   .server(async ({ next }) => {
     const sessionToken = getRequestHeader("x-session-token");
-    const verifiedToken = await verify(sessionToken!);
-    const apiToken = await getToken(sessionToken!);
+    const { verifySession } = await import("./auth.server.js");
 
     return next({
-      context: {
-        contextId: verifiedToken.contextId,
-        contextType: verifiedToken.context,
-        apiToken,
-      },
+      context: await verifySession(sessionToken!),
     });
   });
 

@@ -7,7 +7,6 @@ import {
   ScanProfileModel,
 } from "extension-a11y-checker-storage";
 import { ScanProfile } from "../../api/types";
-import { verify } from "@mittwald/ext-bridge/node";
 
 export const Route = createFileRoute("/api/pdf-export/$profileId")({
   server: {
@@ -16,7 +15,10 @@ export const Route = createFileRoute("/api/pdf-export/$profileId")({
         try {
           await dbConnect();
           const sessionToken = request.headers.get("x-session-token");
-          const verifiedToken = await verify(sessionToken!);
+          const { verifySessionToken } = await import(
+            "../../actions/auth.server.js"
+          );
+          const verifiedToken = await verifySessionToken(sessionToken!);
 
           const profile = await ScanProfileModel.findById(profileId).exec();
           if (!profile) {
