@@ -2858,33 +2858,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mittwald/ext-bridge@npm:0.2.0-alpha.1045":
-  version: 0.2.0-alpha.1045
-  resolution: "@mittwald/ext-bridge@npm:0.2.0-alpha.1045"
-  dependencies:
-    "@mittwald/react-use-promise": "npm:~4.2.2"
-    axios: "npm:^1.18.1"
-    jose: "npm:^6.2.3"
-    std-env: "npm:^4.1.0"
-    zod: "npm:^4.4.3"
-  peerDependencies:
-    i18next: ^26.0.0
-    react: ^19.2.0
-    react-dom: ^19.2.0
-  peerDependenciesMeta:
-    i18next:
-      optional: true
-    react:
-      optional: true
-    react-dom:
-      optional: true
-  checksum: 10c0/60a42ffe16fa6af7960e045e56a78114ac14356ff9d00edde3d039a5d41b8286080f3a0a18da353531e52530b37dc9947a3af358e1e284e3eeac9956c7420c77
-  languageName: node
-  linkType: hard
-
-"@mittwald/ext-bridge@npm:1.0.12":
-  version: 1.0.12
-  resolution: "@mittwald/ext-bridge@npm:1.0.12"
+"@mittwald/ext-bridge@npm:1.1.3, @mittwald/ext-bridge@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "@mittwald/ext-bridge@npm:1.1.3"
   dependencies:
     "@mittwald/react-use-promise": "npm:~4.2.2"
     axios: "npm:^1.19.0"
@@ -2902,24 +2878,24 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10c0/375a019931f063767d3f67998e53de25af76c9d2e083528eedf658ac9bf32214100664cb84ef3f18dc5a7b3b0b4662a0e89930fd1b2916d7b08550011668d0c9
+  checksum: 10c0/6c61c31c3336b52bd96d2eabc51bc7cfe2b487f67a9136781ca58e15a1bd99654a0892ca54b2132bddfd043b18d4669a33dd730daf11bb6ba189332077119a27
   languageName: node
   linkType: hard
 
-"@mittwald/flow-icons@npm:1.0.12":
-  version: 1.0.12
-  resolution: "@mittwald/flow-icons@npm:1.0.12"
+"@mittwald/flow-icons@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@mittwald/flow-icons@npm:1.1.3"
   dependencies:
     "@tabler/icons-react": "npm:^3.46.0"
   peerDependencies:
     react: ^19.2.0
-  checksum: 10c0/57d029ffd99abd88a1d675732bbe6843eca0b7ca1016d1abe18f7447c614b88355cce20799ef441936ea1614df220553ca5a8b7cacb190ee3c14aa44a6c8392a
+  checksum: 10c0/d8e34a73b4d6b2902734f94def197f34ff6a9d34d1cbdeb2eab58814f812ee5a5b147c73d5aae21cade7510f72a1a987c17f545d93fe642aea40adb56932fdfd
   languageName: node
   linkType: hard
 
-"@mittwald/flow-react-components@npm:1.0.12":
-  version: 1.0.12
-  resolution: "@mittwald/flow-react-components@npm:1.0.12"
+"@mittwald/flow-react-components@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@mittwald/flow-react-components@npm:1.1.3"
   dependencies:
     "@codemirror/language": "npm:^6.12.4"
     "@codemirror/lint": "npm:^6.9.7"
@@ -2931,9 +2907,9 @@ __metadata:
     "@internationalized/string-compiler": "npm:^3.4.1"
     "@lezer/common": "npm:^1.5.2"
     "@lezer/highlight": "npm:^1.2.3"
-    "@mittwald/flow-icons": "npm:1.0.12"
+    "@mittwald/flow-icons": "npm:1.1.3"
     "@mittwald/password-tools-js": "npm:3.0.0-alpha.31"
-    "@mittwald/react-tunnel": "npm:1.0.12"
+    "@mittwald/react-tunnel": "npm:1.1.3"
     "@mittwald/react-use-promise": "npm:^4.2.2"
     "@react-aria/form": "npm:^3.2.1"
     "@react-aria/i18n": "npm:^3.13.1"
@@ -2983,7 +2959,7 @@ __metadata:
     zod: "npm:^4.4.3"
   peerDependencies:
     "@internationalized/date": ^3.12.2
-    "@mittwald/flow-icons-pro": 1.0.12
+    "@mittwald/flow-icons-pro": 1.1.3
     "@mittwald/react-use-promise": ^4.2.2
     next: ^16.2.3
     react: ^19.2.0
@@ -2998,13 +2974,13 @@ __metadata:
       optional: true
     react-hook-form:
       optional: true
-  checksum: 10c0/4827487b8fcd01e589c81b7da154e86f818cdae5e3b4779ebb108edc928b1c94c28cfa8c425abf459f7913eb0a781c32f1da8a7093b66c075c640e7baf64a0c7
+  checksum: 10c0/5ce802ef05430f69d0578bb2f15b62f85a39b5101cdf1140a048513a9cae6bd319e925dc4910d76cefd54ab2b32192976d5be960892b03426c1a083cb93162d5
   languageName: node
   linkType: hard
 
-"@mittwald/flow-remote-core@npm:1.0.12":
-  version: 1.0.12
-  resolution: "@mittwald/flow-remote-core@npm:1.0.12"
+"@mittwald/flow-remote-core@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@mittwald/flow-remote-core@npm:1.1.3"
   dependencies:
     "@internationalized/date": "npm:^3.12.3"
     "@lit-labs/ssr-dom-shim": "npm:^1.6.0"
@@ -3015,41 +2991,41 @@ __metadata:
     remeda: "npm:^2.43.0"
     zod: "npm:^4.4.3"
   peerDependencies:
-    "@mittwald/ext-bridge": 1.0.12
-    "@mittwald/flow-react-components": 1.0.12
+    "@mittwald/ext-bridge": 1.1.3
+    "@mittwald/flow-react-components": 1.1.3
   peerDependenciesMeta:
     "@mittwald/ext-bridge":
       optional: true
-  checksum: 10c0/91708dd6b421b37a55d96d64608106c2eef8a65a75b18186e68df8102c7df0e9ed2082c8f32fb72f623d88166d655c30f60a8dea0ab50a27121e5408ff9f13bd
+  checksum: 10c0/737035abc9cdee2d0b2c59d20b60da7213a3aab4eb4b60c8b857ea392aca8c4a2974ad0b40e473a88018f0c68b041c0a1de16e1cf3eb273957ec28e9369f1655
   languageName: node
   linkType: hard
 
-"@mittwald/flow-remote-elements@npm:1.0.12":
-  version: 1.0.12
-  resolution: "@mittwald/flow-remote-elements@npm:1.0.12"
+"@mittwald/flow-remote-elements@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@mittwald/flow-remote-elements@npm:1.1.3"
   dependencies:
-    "@mittwald/flow-remote-core": "npm:1.0.12"
+    "@mittwald/flow-remote-core": "npm:1.1.3"
     remeda: "npm:^2.43.0"
     type-fest: "npm:^5.7.0"
   peerDependencies:
-    "@mittwald/flow-react-components": 1.0.12
-  checksum: 10c0/865d7d329be7c6e8be5619111da6110757a076048be2448001bce9020003fa92f81b2f3a8004e0172de66d485a51b7c775a9570cf8385ab5eca885e8817ea504
+    "@mittwald/flow-react-components": 1.1.3
+  checksum: 10c0/4e10f1c69233f698d1e4ab3e62a08231243dc3c835b0323d4492c26b66177e90589f38b2281aeb779aa5ec423bb1ed7b00c8683ff9a6665a928535befb6bdf9d
   languageName: node
   linkType: hard
 
-"@mittwald/flow-remote-react-components@npm:^1.0.12":
-  version: 1.0.12
-  resolution: "@mittwald/flow-remote-react-components@npm:1.0.12"
+"@mittwald/flow-remote-react-components@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "@mittwald/flow-remote-react-components@npm:1.1.3"
   dependencies:
-    "@mittwald/flow-react-components": "npm:1.0.12"
-    "@mittwald/flow-remote-core": "npm:1.0.12"
-    "@mittwald/flow-remote-elements": "npm:1.0.12"
+    "@mittwald/flow-react-components": "npm:1.1.3"
+    "@mittwald/flow-remote-core": "npm:1.1.3"
+    "@mittwald/flow-remote-elements": "npm:1.1.3"
     "@mittwald/remote-dom-react": "npm:1.2.2-mittwald.10"
     "@types/react": "npm:^19.2"
     react-error-boundary: "npm:^6.1.3"
   peerDependencies:
     "@internationalized/date": ^3.12.2
-    "@mittwald/ext-bridge": 1.0.12
+    "@mittwald/ext-bridge": 1.1.3
     react: ^19.2.0
     react-hook-form: ^7.65.0
   peerDependenciesMeta:
@@ -3059,17 +3035,17 @@ __metadata:
       optional: true
     react-hook-form:
       optional: true
-  checksum: 10c0/a8a16802a5946e39a8026a953baad258c02c0e9ea9172eb362f5db5ac75909c48c60efe3d41f2762c0012d569f40970d95d7aa77291a48b38921781860572826
+  checksum: 10c0/e5a970b4aba00ff2251802300f28e9c9329e1aaaa5a3bd40d195fa1ef91a85ad8bda0ceee011f7cfe1f3a0d02eb1d4425f9f465b96f8acfd46d2e85d6ca23ca9
   languageName: node
   linkType: hard
 
-"@mittwald/flow-remote-react-renderer@npm:^1.0.12":
-  version: 1.0.12
-  resolution: "@mittwald/flow-remote-react-renderer@npm:1.0.12"
+"@mittwald/flow-remote-react-renderer@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "@mittwald/flow-remote-react-renderer@npm:1.1.3"
   dependencies:
-    "@mittwald/ext-bridge": "npm:1.0.12"
-    "@mittwald/flow-remote-core": "npm:1.0.12"
-    "@mittwald/flow-remote-elements": "npm:1.0.12"
+    "@mittwald/ext-bridge": "npm:1.1.3"
+    "@mittwald/flow-remote-core": "npm:1.1.3"
+    "@mittwald/flow-remote-elements": "npm:1.1.3"
     "@mittwald/react-use-promise": "npm:^4.2.2"
     "@mittwald/remote-dom-react": "npm:1.2.2-mittwald.10"
     "@types/react": "npm:^19.2"
@@ -3077,26 +3053,26 @@ __metadata:
     react-children-utilities: "npm:^2.10.0"
     remeda: "npm:^2.43.0"
   peerDependencies:
-    "@mittwald/flow-react-components": 1.0.12
+    "@mittwald/flow-react-components": 1.1.3
     react: ^19.2.0
     react-dom: ^19.2.0
     react-hook-form: ^7.65.0
   peerDependenciesMeta:
     react-hook-form:
       optional: true
-  checksum: 10c0/32918abd1a030228099de067405b9ed0d69f651df2b3f3b1a8c1d7618c55a7d845369aa5f51bc07f98883984d24e9e3d5c95514d57d3148f0dc0923ec8fc6837
+  checksum: 10c0/1dc0206d7d45269e97323be6bbbca04bd34bf52c04257ca4a6d3d6ba9213f0363c0cfae58130f7a189cbfaa551d020313e6dd76951dd9e69e72dc0b5179ac1d0
   languageName: node
   linkType: hard
 
-"@mittwald/mstudio-ext-react-components@npm:^1.0.12":
-  version: 1.0.12
-  resolution: "@mittwald/mstudio-ext-react-components@npm:1.0.12"
+"@mittwald/mstudio-ext-react-components@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "@mittwald/mstudio-ext-react-components@npm:1.1.3"
   dependencies:
     "@types/react": "npm:^19.2"
   peerDependencies:
-    "@mittwald/flow-remote-react-components": 1.0.12
+    "@mittwald/flow-remote-react-components": 1.1.3
     react: ^19.2.0
-  checksum: 10c0/2bd036efdae55a25fa919feccde76d15d4de1c46101e25ea7082526daad963b95d4769835dc2274510ee8191439e48f46b6bace34990e4a7234d9f1cb7cf85a8
+  checksum: 10c0/6f05622f203a72628de20ea89d823e767b2bca24783af9a18891dd49beae2a7a1cc1ad46ff0b48bba1c69409832076bd3b5e2c63826011ed3fd013387b54971a
   languageName: node
   linkType: hard
 
@@ -3122,16 +3098,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mittwald/react-tunnel@npm:1.0.12":
-  version: 1.0.12
-  resolution: "@mittwald/react-tunnel@npm:1.0.12"
+"@mittwald/react-tunnel@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@mittwald/react-tunnel@npm:1.1.3"
   dependencies:
     mobx: "npm:^6.16.1"
     mobx-react-lite: "npm:^4.1.1"
   peerDependencies:
     react: ^19.2.0
     react-dom: ^19.2.0
-  checksum: 10c0/f44209c82c242738ecc968ce9db0a01eb5d1ea5a6f200a36e841b1babdc2df5ddbb58e176254a73dde05281ad1dffeca6199523d411426181d2348013108edb3
+  checksum: 10c0/7acbf1505ee805ed8ee3d39ef9ad22af41e5387906afd67d37c5d2345c42a31de09946201f931d106b28a9a198af44376a4fa943d9929c10d5ac0d8ce3cb08f2
   languageName: node
   linkType: hard
 
@@ -5795,7 +5771,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.15.2, axios@npm:^1.18.1":
+"axios@npm:^1.15.2":
   version: 1.19.0
   resolution: "axios@npm:1.19.0"
   dependencies:
@@ -8048,10 +8024,10 @@ __metadata:
   dependencies:
     "@eslint/js": "npm:^9.19.0"
     "@mittwald/api-client": "npm:^4.131.0"
-    "@mittwald/ext-bridge": "npm:0.2.0-alpha.1045"
-    "@mittwald/flow-remote-react-components": "npm:^1.0.12"
-    "@mittwald/flow-remote-react-renderer": "npm:^1.0.12"
-    "@mittwald/mstudio-ext-react-components": "npm:^1.0.12"
+    "@mittwald/ext-bridge": "npm:^1.1.3"
+    "@mittwald/flow-remote-react-components": "npm:^1.1.3"
+    "@mittwald/flow-remote-react-renderer": "npm:^1.1.3"
+    "@mittwald/mstudio-ext-react-components": "npm:^1.1.3"
     "@react-pdf/renderer": "npm:^4.3.1"
     "@tabler/icons-react": "npm:^3.29.0"
     "@tanstack/react-query": "npm:^5.84.1"
@@ -9390,7 +9366,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:^6.2.10, jose@npm:^6.2.3":
+"jose@npm:^6.2.10":
   version: 6.2.10
   resolution: "jose@npm:6.2.10"
   checksum: 10c0/799fd8d3d92fe748ebe1f57dbd3dfd917d2e61d9fb39912c72cc674ae61d69414b7cc0ce773df8a0160e849926fc31853aec9caab88c481563d5a8ab6558e107
