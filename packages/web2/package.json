@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "build": "vite build",
-    "start": "node dist/server/server.js",
+    "start": "srvx --prod -s ../client dist/server/server.js",
     "compile": "yarn build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -38,6 +38,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.68.0",
+    "srvx": "^0.12.7",
     "zod": "^3.24.2"
   },
   "devDependencies": {

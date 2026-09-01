@@ -1,0 +1,14 @@
+**/node_modules
+**/dist
+**/.output
+**/.vinxi
+**/.tanstack
+**/.nx
+.git
+*.log
+yarn-error.log*
+npm-debug.log*
+pnpm-debug.log*
+.env
+**/.env
+**/.env.*
