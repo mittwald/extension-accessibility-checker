@@ -1,5 +1,5 @@
 import { json } from "@tanstack/react-start";
-import { createAPIFileRoute } from "@tanstack/react-start/api";
+import { createFileRoute } from "@tanstack/react-router";
 import schema from "../../../lib/webhooks/schemas/extensionAdded.js";
 import { ContextModel } from "extension-a11y-checker-storage";
 import { assertContextType } from "../../../lib/webhooks/helpers.js";
@@ -10,22 +10,26 @@ import {
   handleAPIError,
 } from "../../../api/helpers.js";
 
-export const APIRoute = createAPIFileRoute("/api/webhooks/extension-added")({
-  POST: async ({ request }) => {
-    try {
-      logger.debug("webhook received: extension-added");
-      await assertValidSignature(request);
+export const Route = createFileRoute("/api/webhooks/extension-added")({
+  server: {
+    handlers: {
+      POST: async ({ request }) => {
+        try {
+          logger.debug("webhook received: extension-added");
+          await assertValidSignature(request);
 
-      const parseResult = await schema.safeParseAsync(await request.json());
-      assertValidationSuccess(parseResult);
+          const parseResult = await schema.safeParseAsync(await request.json());
+          assertValidationSuccess(parseResult);
 
-      const { data } = parseResult;
-      assertContextType(data.context);
-      await ContextModel.instanceAdded(data.context.id);
+          const { data } = parseResult;
+          assertContextType(data.context);
+          await ContextModel.instanceAdded(data.context.id);
 
-      return json({ message: "ok" }, { status: 201 });
-    } catch (e) {
-      return handleAPIError(e);
-    }
+          return json({ message: "ok" }, { status: 201 });
+        } catch (e) {
+          return handleAPIError(e);
+        }
+      },
+    },
   },
 });

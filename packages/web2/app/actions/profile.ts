@@ -39,7 +39,7 @@ export const getProfiles = createServerFn()
     }
 
     const profiles = data.map((profileDoc) => {
-      const profileObject = profileDoc.toObject();
+      const profileObject = profileDoc.toObject({ flattenObjectIds: true });
       return {
         ...profileObject,
         issueSummary: profileDoc.lastScan?.getIssueSummary(),
@@ -62,12 +62,16 @@ export const getProfile = createServerFn({
 
     return {
       profile: {
-        ...profile?.toObject(),
+        ...profile?.toObject({ flattenObjectIds: true }),
         issueSummary: lastScan?.getIssueSummary(),
       } as unknown as ScanProfile,
 
-      lastScan: lastScan as unknown as Scan | undefined,
-      lastSuccessfulScan: lastSuccessfulScan as unknown as Scan | undefined,
+      lastScan: lastScan?.toObject({
+        flattenObjectIds: true,
+      }) as unknown as Scan | undefined,
+      lastSuccessfulScan: lastSuccessfulScan?.toObject({
+        flattenObjectIds: true,
+      }) as unknown as Scan | undefined,
     };
   });
 
@@ -88,7 +92,7 @@ export const createProfile = createServerFn({ method: "POST" })
       ...data,
     });
     await scheduleScan(profile._id.toString(), true);
-    return profile.toJSON() as unknown as ScanProfile;
+    return profile.toJSON({ flattenObjectIds: true }) as unknown as ScanProfile;
   });
 
 export const updateProfilePaths = createServerFn({ method: "POST" })
@@ -108,7 +112,7 @@ export const updateProfilePaths = createServerFn({ method: "POST" })
     if (!profile) {
       throw notFound();
     }
-    return profile.toJSON() as unknown as ScanProfile;
+    return profile.toJSON({ flattenObjectIds: true }) as unknown as ScanProfile;
   });
 
 export const updateProfileName = createServerFn({ method: "POST" })
@@ -128,7 +132,7 @@ export const updateProfileName = createServerFn({ method: "POST" })
     if (!profile) {
       throw notFound();
     }
-    return profile.toJSON() as unknown as ScanProfile;
+    return profile.toJSON({ flattenObjectIds: true }) as unknown as ScanProfile;
   });
 
 export const updateProfileDomain = createServerFn({ method: "POST" })
@@ -161,7 +165,7 @@ export const updateProfileDomain = createServerFn({ method: "POST" })
       await nextScan.regeneratePageUrls();
     }
 
-    return profile.toJSON() as unknown as ScanProfile;
+    return profile.toJSON({ flattenObjectIds: true }) as unknown as ScanProfile;
   });
 
 export const updateProfileCron = createServerFn({ method: "POST" })
@@ -193,7 +197,7 @@ export const updateProfileCron = createServerFn({ method: "POST" })
     await ScanModel.deleteScheduledForProfile(profile);
     await ScanModel.scheduleNextForProfile(profile);
 
-    return profile.toJSON() as unknown as ScanProfile;
+    return profile.toJSON({ flattenObjectIds: true }) as unknown as ScanProfile;
   });
 
 export const updateProfileSettings = createServerFn({ method: "POST" })
@@ -237,7 +241,9 @@ export const updateProfileSettings = createServerFn({ method: "POST" })
       if (!profile) {
         throw notFound();
       }
-      return profile.toJSON() as unknown as ScanProfile;
+      return profile.toJSON({
+        flattenObjectIds: true,
+      }) as unknown as ScanProfile;
     },
   );
 
