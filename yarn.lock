@@ -8041,6 +8041,7 @@ __metadata:
     "@types/react": "npm:^19.2.0"
     "@types/react-dom": "npm:^19.2.0"
     "@vitejs/plugin-react": "npm:^5.2.0"
+    "@vitest/ui": "npm:^4.1.11"
     "@weissaufschwarz/mitthooks": "npm:^0.2.1"
     axios: "npm:^1.18.0"
     babel-plugin-react-compiler: "npm:^1.0.0"
@@ -8064,6 +8065,7 @@ __metadata:
     typescript: "npm:~5.7.2"
     typescript-eslint: "npm:^8.22.0"
     vite: "npm:^7.3.6"
+    vitest: "npm:^4.1.11"
     zod: "npm:^3.24.2"
   languageName: unknown
   linkType: soft
