@@ -1,4 +1,4 @@
-FROM --platform=amd64 node:22 AS builder
+FROM --platform=amd64 node:24 AS builder
 
 WORKDIR /app
 
@@ -16,7 +16,7 @@ ENV NX_DAEMON=false
 RUN yarn nx run extension-a11y-checker-executor:build
 
 
-FROM --platform=amd64 node:22-slim
+FROM --platform=amd64 node:24-slim
 WORKDIR /app
 
 RUN apt-get update \

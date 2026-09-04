@@ -1,4 +1,4 @@
-FROM node:22 AS builder
+FROM node:24 AS builder
 
 WORKDIR /app
 
@@ -16,7 +16,7 @@ ENV NX_DAEMON=false
 ENV NODE_ENV=production
 RUN yarn nx run extension-a11y-checker-web2:build
 
-FROM node:22-slim
+FROM node:24-slim
 
 WORKDIR /app
 

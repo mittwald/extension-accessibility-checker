@@ -5,6 +5,9 @@
     "email": "l.fritze@mittwald.de"
   },
   "packageManager": "yarn@4.6.0",
+  "engines": {
+    "node": ">=24"
+  },
   "license": "MIT",
   "private": true,
   "workspaces": [
