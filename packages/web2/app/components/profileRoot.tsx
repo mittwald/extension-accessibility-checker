@@ -42,7 +42,7 @@ export const ProfileRoot = ({
       )}
       {hasSuccessfulScan ? (
         <LayoutCard>
-          <ProfileTabs profile={profile} lastScan={lastSuccessfulScan} />
+          <ProfileTabs profile={profile} />
         </LayoutCard>
       ) : (
         (!lastScanIsError || shouldReloadData) && (
