@@ -16,6 +16,10 @@ import { Route as ApiWebhooksExtensionAddedRouteImport } from "./routes/api/webh
 import { Route as ApiWebhooksInstanceRemovedRouteImport } from "./routes/api/webhooks/instance-removed"
 import { Route as ApiWebhooksInstanceUpdatedRouteImport } from "./routes/api/webhooks/instance-updated"
 import { Route as ApiWebhooksSecretRotatedRouteImport } from "./routes/api/webhooks/secret-rotated"
+import { Route as ProfilesProfileIdIndexRouteImport } from "./routes/profiles.$profileId.index"
+import { Route as ProfilesProfileIdIssuesRouteImport } from "./routes/profiles.$profileId.issues"
+import { Route as ProfilesProfileIdOverviewRouteImport } from "./routes/profiles.$profileId.overview"
+import { Route as ProfilesProfileIdSettingsRouteImport } from "./routes/profiles.$profileId.settings"
 
 const IndexRoute = IndexRouteImport.update({
   id: "/",
@@ -56,34 +60,67 @@ const ApiWebhooksSecretRotatedRoute =
     path: "/api/webhooks/secret-rotated",
     getParentRoute: () => rootRouteImport,
   } as any)
+const ProfilesProfileIdIndexRoute = ProfilesProfileIdIndexRouteImport.update({
+  id: "/",
+  path: "/",
+  getParentRoute: () => ProfilesProfileIdRoute,
+} as any)
+const ProfilesProfileIdIssuesRoute = ProfilesProfileIdIssuesRouteImport.update({
+  id: "/issues",
+  path: "/issues",
+  getParentRoute: () => ProfilesProfileIdRoute,
+} as any)
+const ProfilesProfileIdOverviewRoute =
+  ProfilesProfileIdOverviewRouteImport.update({
+    id: "/overview",
+    path: "/overview",
+    getParentRoute: () => ProfilesProfileIdRoute,
+  } as any)
+const ProfilesProfileIdSettingsRoute =
+  ProfilesProfileIdSettingsRouteImport.update({
+    id: "/settings",
+    path: "/settings",
+    getParentRoute: () => ProfilesProfileIdRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
-  "/profiles/$profileId": typeof ProfilesProfileIdRoute
+  "/profiles/$profileId": typeof ProfilesProfileIdRouteWithChildren
   "/api/pdf-export/$profileId": typeof ApiPdfExportProfileIdRoute
   "/api/webhooks/extension-added": typeof ApiWebhooksExtensionAddedRoute
   "/api/webhooks/instance-removed": typeof ApiWebhooksInstanceRemovedRoute
   "/api/webhooks/instance-updated": typeof ApiWebhooksInstanceUpdatedRoute
   "/api/webhooks/secret-rotated": typeof ApiWebhooksSecretRotatedRoute
+  "/profiles/$profileId/issues": typeof ProfilesProfileIdIssuesRoute
+  "/profiles/$profileId/overview": typeof ProfilesProfileIdOverviewRoute
+  "/profiles/$profileId/settings": typeof ProfilesProfileIdSettingsRoute
+  "/profiles/$profileId/": typeof ProfilesProfileIdIndexRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
-  "/profiles/$profileId": typeof ProfilesProfileIdRoute
   "/api/pdf-export/$profileId": typeof ApiPdfExportProfileIdRoute
   "/api/webhooks/extension-added": typeof ApiWebhooksExtensionAddedRoute
   "/api/webhooks/instance-removed": typeof ApiWebhooksInstanceRemovedRoute
   "/api/webhooks/instance-updated": typeof ApiWebhooksInstanceUpdatedRoute
   "/api/webhooks/secret-rotated": typeof ApiWebhooksSecretRotatedRoute
+  "/profiles/$profileId/issues": typeof ProfilesProfileIdIssuesRoute
+  "/profiles/$profileId/overview": typeof ProfilesProfileIdOverviewRoute
+  "/profiles/$profileId/settings": typeof ProfilesProfileIdSettingsRoute
+  "/profiles/$profileId": typeof ProfilesProfileIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   "/": typeof IndexRoute
-  "/profiles/$profileId": typeof ProfilesProfileIdRoute
+  "/profiles/$profileId": typeof ProfilesProfileIdRouteWithChildren
   "/api/pdf-export/$profileId": typeof ApiPdfExportProfileIdRoute
   "/api/webhooks/extension-added": typeof ApiWebhooksExtensionAddedRoute
   "/api/webhooks/instance-removed": typeof ApiWebhooksInstanceRemovedRoute
   "/api/webhooks/instance-updated": typeof ApiWebhooksInstanceUpdatedRoute
   "/api/webhooks/secret-rotated": typeof ApiWebhooksSecretRotatedRoute
+  "/profiles/$profileId/issues": typeof ProfilesProfileIdIssuesRoute
+  "/profiles/$profileId/overview": typeof ProfilesProfileIdOverviewRoute
+  "/profiles/$profileId/settings": typeof ProfilesProfileIdSettingsRoute
+  "/profiles/$profileId/": typeof ProfilesProfileIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -95,15 +132,22 @@ export interface FileRouteTypes {
     | "/api/webhooks/instance-removed"
     | "/api/webhooks/instance-updated"
     | "/api/webhooks/secret-rotated"
+    | "/profiles/$profileId/issues"
+    | "/profiles/$profileId/overview"
+    | "/profiles/$profileId/settings"
+    | "/profiles/$profileId/"
   fileRoutesByTo: FileRoutesByTo
   to:
     | "/"
-    | "/profiles/$profileId"
     | "/api/pdf-export/$profileId"
     | "/api/webhooks/extension-added"
     | "/api/webhooks/instance-removed"
     | "/api/webhooks/instance-updated"
     | "/api/webhooks/secret-rotated"
+    | "/profiles/$profileId/issues"
+    | "/profiles/$profileId/overview"
+    | "/profiles/$profileId/settings"
+    | "/profiles/$profileId"
   id:
     | "__root__"
     | "/"
@@ -113,11 +157,15 @@ export interface FileRouteTypes {
     | "/api/webhooks/instance-removed"
     | "/api/webhooks/instance-updated"
     | "/api/webhooks/secret-rotated"
+    | "/profiles/$profileId/issues"
+    | "/profiles/$profileId/overview"
+    | "/profiles/$profileId/settings"
+    | "/profiles/$profileId/"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ProfilesProfileIdRoute: typeof ProfilesProfileIdRoute
+  ProfilesProfileIdRoute: typeof ProfilesProfileIdRouteWithChildren
   ApiPdfExportProfileIdRoute: typeof ApiPdfExportProfileIdRoute
   ApiWebhooksExtensionAddedRoute: typeof ApiWebhooksExtensionAddedRoute
   ApiWebhooksInstanceRemovedRoute: typeof ApiWebhooksInstanceRemovedRoute
@@ -176,12 +224,57 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof ApiWebhooksSecretRotatedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/profiles/$profileId/": {
+      id: "/profiles/$profileId/"
+      path: "/"
+      fullPath: "/profiles/$profileId/"
+      preLoaderRoute: typeof ProfilesProfileIdIndexRouteImport
+      parentRoute: typeof ProfilesProfileIdRoute
+    }
+    "/profiles/$profileId/issues": {
+      id: "/profiles/$profileId/issues"
+      path: "/issues"
+      fullPath: "/profiles/$profileId/issues"
+      preLoaderRoute: typeof ProfilesProfileIdIssuesRouteImport
+      parentRoute: typeof ProfilesProfileIdRoute
+    }
+    "/profiles/$profileId/overview": {
+      id: "/profiles/$profileId/overview"
+      path: "/overview"
+      fullPath: "/profiles/$profileId/overview"
+      preLoaderRoute: typeof ProfilesProfileIdOverviewRouteImport
+      parentRoute: typeof ProfilesProfileIdRoute
+    }
+    "/profiles/$profileId/settings": {
+      id: "/profiles/$profileId/settings"
+      path: "/settings"
+      fullPath: "/profiles/$profileId/settings"
+      preLoaderRoute: typeof ProfilesProfileIdSettingsRouteImport
+      parentRoute: typeof ProfilesProfileIdRoute
+    }
   }
 }
 
+interface ProfilesProfileIdRouteChildren {
+  ProfilesProfileIdIssuesRoute: typeof ProfilesProfileIdIssuesRoute
+  ProfilesProfileIdOverviewRoute: typeof ProfilesProfileIdOverviewRoute
+  ProfilesProfileIdSettingsRoute: typeof ProfilesProfileIdSettingsRoute
+  ProfilesProfileIdIndexRoute: typeof ProfilesProfileIdIndexRoute
+}
+
+const ProfilesProfileIdRouteChildren: ProfilesProfileIdRouteChildren = {
+  ProfilesProfileIdIssuesRoute: ProfilesProfileIdIssuesRoute,
+  ProfilesProfileIdOverviewRoute: ProfilesProfileIdOverviewRoute,
+  ProfilesProfileIdSettingsRoute: ProfilesProfileIdSettingsRoute,
+  ProfilesProfileIdIndexRoute: ProfilesProfileIdIndexRoute,
+}
+
+const ProfilesProfileIdRouteWithChildren =
+  ProfilesProfileIdRoute._addFileChildren(ProfilesProfileIdRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ProfilesProfileIdRoute: ProfilesProfileIdRoute,
+  ProfilesProfileIdRoute: ProfilesProfileIdRouteWithChildren,
   ApiPdfExportProfileIdRoute: ApiPdfExportProfileIdRoute,
   ApiWebhooksExtensionAddedRoute: ApiWebhooksExtensionAddedRoute,
   ApiWebhooksInstanceRemovedRoute: ApiWebhooksInstanceRemovedRoute,
