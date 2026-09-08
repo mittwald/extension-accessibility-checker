@@ -92,7 +92,7 @@ export const EditIntervalModal: FC<Props> = (props) => {
           <Button color="success" type="submit">
             Speichern
           </Button>
-          <Action closeOverlay="Modal">
+          <Action closeModal>
             <Button color="secondary" slot="abort" variant="soft">
               Abbrechen
             </Button>
