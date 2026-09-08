@@ -3,6 +3,7 @@ import {
   ActionGroup,
   Button,
   Content,
+  Header,
   Heading,
   Modal,
   Section,
@@ -16,11 +17,19 @@ import { PathsList } from "../../create/components/pathsList.tsx";
 import { useRouter } from "@tanstack/react-router";
 
 import { updateProfilePaths } from "../../../actions/profile.ts";
+import {
+  GenerateError,
+  GeneratePathsAction,
+} from "../../generatePaths/generatePaths.tsx";
+import { useState } from "react";
+import { GenerateErrorAlert } from "../../generatePaths/GenerateErrorAlert.tsx";
 
 type PathFormValues = Pick<FormValues, "paths">;
 
 export const EditPathsModal = ({ profile }: { profile: ScanProfile }) => {
   const router = useRouter();
+
+  const [generateError, setGenerateError] = useState<GenerateError>();
 
   const form = useForm<PathFormValues>({
     values: {
@@ -37,14 +46,27 @@ export const EditPathsModal = ({ profile }: { profile: ScanProfile }) => {
 
   return (
     <Modal offCanvas>
-      <Heading slot="title">Unterseiten bearbeiten</Heading>
       <Form form={form} onSubmit={onSubmit}>
         <Content>
           <Section>
+            <Header>
+              <Heading slot="title">Unterseiten bearbeiten</Heading>
+              <GeneratePathsAction
+                domain={profile.domain}
+                onError={(error) => setGenerateError(error)}
+                onSuccess={() => {
+                  setGenerateError(undefined);
+                }}
+              />
+            </Header>
             <Text>
               Füge Unterseiten hinzu. So kannst du mit einem Profil den
               Überblick über mehrere Seiten deiner Website bekommen.
             </Text>
+
+            {generateError && (
+              <GenerateErrorAlert generateError={generateError} />
+            )}
             <PathsList autoFocus={true} />
           </Section>
         </Content>

@@ -1,12 +1,10 @@
 import {
   Action,
   ActionGroup,
-  Alert,
   Button,
   Content,
   Header,
   Heading,
-  InlineCode,
   Modal,
   Section,
   Tab,
@@ -27,7 +25,8 @@ import { Domain } from "./components/domain.tsx";
 import {
   GenerateError,
   GeneratePathsAction,
-} from "./components/generatePaths.tsx";
+} from "../generatePaths/generatePaths.tsx";
+import { GenerateErrorAlert } from "../generatePaths/GenerateErrorAlert.tsx";
 
 export const CreateModal = () => {
   const goToProfile = useGoToProfile();
@@ -88,17 +87,7 @@ export const CreateModal = () => {
               />
             </Header>
             {generateError && (
-              <Alert status="danger">
-                <Heading>Unterseiten nicht automatisch erkannt</Heading>
-                <Content>
-                  <Text>
-                    Die Unterseiten für{" "}
-                    <InlineCode>{generateError.domain}</InlineCode> konnten
-                    nicht automatisch erkannt werden. Überprüfe die eingegebene
-                    Domain und versuche es erneut.
-                  </Text>
-                </Content>
-              </Alert>
+              <GenerateErrorAlert generateError={generateError} />
             )}
             <Text>
               Füge Unterseiten hinzu, um mit einem Scanprofil mehrere Bereiche

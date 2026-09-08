@@ -1,9 +1,9 @@
 import { useFormContext, useWatch } from "react-hook-form";
-import { getPathsFromMenu } from "../../../actions/domain.js";
+import { getPathsFromMenu } from "../../actions/domain.ts";
 import { Action, Button } from "@mittwald/flow-remote-react-components";
-import { extractPathFromUrl } from "../helpers.js";
+import { extractPathFromUrl } from "../create/helpers.ts";
 import { FC, useState } from "react";
-import { FormValues } from "../types.ts";
+import { FormValues } from "../create/types.ts";
 
 export interface GenerateError {
   error: Error;
@@ -13,15 +13,18 @@ export interface GenerateError {
 interface Props {
   onError: (error: GenerateError) => void;
   onSuccess: () => void;
+  domain?: string;
 }
 
 export const GeneratePathsAction: FC<Props> = (props) => {
-  const { onError, onSuccess } = props;
+  const { onError, onSuccess, domain: domainFromProps } = props;
   const [generatedPaths, setGeneratedPaths] = useState<string[]>([]);
 
   const form = useFormContext<FormValues>();
 
-  const domain = useWatch({ control: form.control, name: "domain" });
+  const watchedDomain = useWatch({ control: form.control, name: "domain" });
+
+  const domain = domainFromProps ?? watchedDomain ?? "";
 
   async function generatePaths() {
     try {
@@ -30,6 +33,7 @@ export const GeneratePathsAction: FC<Props> = (props) => {
         values.delete(generatedPath);
       });
       const pathsFromMenu = await getPathsFromMenu({ data: domain ?? "" });
+      // throw new Error("no paths");
       if (pathsFromMenu) {
         form.setValue(
           "paths",

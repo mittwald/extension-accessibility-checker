@@ -1,4 +1,4 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import { useState } from "react";
 import {
   Button,
@@ -21,7 +21,7 @@ export const PathsList = ({ autoFocus }: { autoFocus: boolean }) => {
 
   const form = useFormContext<Pick<FormValues, "paths">>();
 
-  const paths = form.watch("paths");
+  const paths = useWatch({ control: form.control, name: "paths" });
 
   const isValidPath = (path?: string) => {
     const p = path ?? pathInputValue;
