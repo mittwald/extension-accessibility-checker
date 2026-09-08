@@ -16,6 +16,7 @@
     "format": "nx run-many --target=format",
     "format:check": "nx run-many --target=format:check",
     "typecheck": "nx run-many --target=typecheck",
+    "test": "nx run-many --target=test",
     "dev": "yarn workspaces foreach --all --interlaced --parallel run dev",
     "build": "nx run-many --target=build",
     "start": "nx run-many --target=start",

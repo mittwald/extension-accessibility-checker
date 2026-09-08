@@ -57,17 +57,13 @@ export const Issues = ({ scan }: IssuesProps) => {
         !("wcagLevel" in wcagData) ||
         viewOptions.includes(wcagData.wcagLevel)
       );
-    })
-    .sort((a, b) => {
-      const order = {
-        error: 0,
-        warning: 1,
-        notice: 2,
-      };
-      return order[a.severity] - order[b.severity];
     });
 
   const issueGroups = groupIssuesByGuidelineAndTechnique(preparedIssues ?? []);
+
+  const sortedGroups = issueGroups.sort((a, b) =>
+    a.groupKey.localeCompare(b.groupKey, undefined, { numeric: true }),
+  );
 
   return (
     <Section>
@@ -109,8 +105,8 @@ export const Issues = ({ scan }: IssuesProps) => {
         </LabeledValue>
       </ColumnLayout>
 
-      {issueGroups.length === 0 && <NoIssues />}
-      {issueGroups.map((issueGroup) => (
+      {sortedGroups.length === 0 && <NoIssues />}
+      {sortedGroups.map((issueGroup) => (
         <IssueGroupView key={issueGroup.groupKey} group={issueGroup} />
       ))}
     </Section>

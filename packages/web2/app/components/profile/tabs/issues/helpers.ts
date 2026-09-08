@@ -117,3 +117,22 @@ export const groupIssuesByPrincipleAndTechnique = (
 ): IssueGroup[] => {
   return groupIssuesByCategoryAndTechnique(issues, "principle");
 };
+
+const severityOrder: Record<Issue["severity"], number> = {
+  error: 0,
+  warning: 1,
+  notice: 2,
+};
+
+export const sortIssuesBySeverity = (issues: Issue[]) =>
+  [...issues].sort((a, b) => {
+    const severityDifference =
+      severityOrder[a.severity] - severityOrder[b.severity];
+
+    return (
+      severityDifference ||
+      a.meta.criterion.localeCompare(b.meta.criterion, undefined, {
+        numeric: true,
+      })
+    );
+  });

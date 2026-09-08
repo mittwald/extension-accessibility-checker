@@ -85,7 +85,7 @@ const groupIssuesByGuideline = (issues: Issue[]) => {
       key,
       ...data,
     }))
-    .sort((a, b) => a.key.localeCompare(b.key));
+    .sort((a, b) => a.key.localeCompare(b.key, undefined, { numeric: true }));
 };
 
 interface PdfIssueGroupOverviewProps {
@@ -190,7 +190,9 @@ const PdfIssueTable: FC<{ issues: Issue[] }> = ({ issues }) => {
       level: g.level,
       count: g.count,
     }))
-    .sort((a, b) => a.criteria.localeCompare(b.criteria));
+    .sort((a, b) =>
+      a.criteria.localeCompare(b.criteria, undefined, { numeric: true }),
+    );
 
   return (
     <PdfTable
