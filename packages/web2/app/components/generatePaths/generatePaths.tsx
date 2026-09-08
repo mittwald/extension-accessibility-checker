@@ -34,10 +34,11 @@ export const GeneratePathsAction: FC<Props> = (props) => {
       const pathsFromMenu = await getPathsFromMenu({ data: domain ?? "" });
 
       if (pathsFromMenu) {
-        form.setValue("paths", [
-          ...Array.from(values),
+        const paths = [
+          ...values,
           ...pathsFromMenu.map((path) => extractPathFromUrl(path)),
-        ]);
+        ];
+        form.setValue("paths", Array.from(new Set(paths)));
         setGeneratedPaths(pathsFromMenu);
       }
       onSuccess();
