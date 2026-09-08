@@ -12,7 +12,7 @@ import {
 import { ScanProfile } from "../../../api/types.ts";
 import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { FormValues } from "../../create/types.ts";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { PathsList } from "../../create/components/pathsList.tsx";
 import { useRouter } from "@tanstack/react-router";
 
@@ -21,7 +21,7 @@ import {
   GenerateError,
   GeneratePathsAction,
 } from "../../generatePaths/generatePaths.tsx";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { GenerateErrorAlert } from "../../generatePaths/GenerateErrorAlert.tsx";
 
 type PathFormValues = Pick<FormValues, "paths">;
@@ -34,6 +34,7 @@ export const EditPathsModal = ({ profile }: { profile: ScanProfile }) => {
   const defaultValues = { paths: profile.paths };
 
   const form = useForm<PathFormValues>({ defaultValues });
+  const formId = useId();
 
   const onSubmit = async (formValues: PathFormValues) => {
     const { paths } = formValues;
@@ -43,45 +44,43 @@ export const EditPathsModal = ({ profile }: { profile: ScanProfile }) => {
 
   return (
     <Modal offCanvas>
-      <Form form={form} onSubmit={onSubmit}>
+      <FormProvider {...form}>
         <Content>
           <Section>
-            <Header>
-              <Heading slot="title">Unterseiten bearbeiten</Heading>
-              <GeneratePathsAction
-                domain={profile.domain}
-                onError={(error) => setGenerateError(error)}
-                onSuccess={() => {
-                  setGenerateError(undefined);
-                }}
-              />
-            </Header>
-            <Text>
-              Füge Unterseiten hinzu. So kannst du mit einem Profil den
-              Überblick über mehrere Seiten deiner Website bekommen.
-            </Text>
+            <Form id={formId} form={form} onSubmit={onSubmit}>
+              <Header>
+                <Heading slot="title">Unterseiten bearbeiten</Heading>
+                <GeneratePathsAction
+                  domain={profile.domain}
+                  onError={(error) => setGenerateError(error)}
+                  onSuccess={() => {
+                    setGenerateError(undefined);
+                  }}
+                />
+              </Header>
+              <Text>
+                Füge Unterseiten hinzu. So kannst du mit einem Profil den
+                Überblick über mehrere Seiten deiner Website bekommen.
+              </Text>
 
-            {generateError && (
-              <GenerateErrorAlert generateError={generateError} />
-            )}
-            <PathsList autoFocus={true} />
+              {generateError && (
+                <GenerateErrorAlert generateError={generateError} />
+              )}
+            </Form>
+            <PathsList autoFocus />
           </Section>
         </Content>
         <ActionGroup>
-          <Action closeOverlay="Modal">
-            <Button
-              color="secondary"
-              variant="soft"
-              onPress={() => form.reset()}
-            >
+          <Action closeModal>
+            <Button color="secondary" variant="soft">
               Abbrechen
             </Button>
-            <Button color="success" type="submit">
+            <Button color="success" type="submit" form={formId}>
               Speichern
             </Button>
           </Action>
         </ActionGroup>
-      </Form>
+      </FormProvider>
     </Modal>
   );
 };
