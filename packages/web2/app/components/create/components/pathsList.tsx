@@ -32,7 +32,7 @@ export const PathsList = ({ autoFocus }: { autoFocus: boolean }) => {
         </Text>
       );
     }
-    if (paths.has(p)) {
+    if (paths.includes(p)) {
       return "Pfad ist bereits hinzugefügt.";
     }
     return true;
@@ -43,16 +43,17 @@ export const PathsList = ({ autoFocus }: { autoFocus: boolean }) => {
       return;
     }
 
-    const values = form.getValues("paths");
-    values.add(value);
-    form.setValue("paths", values);
+    const paths = form.getValues("paths");
+    form.setValue("paths", [...paths, value]);
     setTouched(false);
   };
 
   const removePathFromFormValues = (value: string) => {
-    const values = form.getValues("paths");
-    values.delete(value.toString());
-    form.setValue("paths", values);
+    const paths = form.getValues("paths");
+    form.setValue(
+      "paths",
+      paths.filter((i) => value.toString() !== i),
+    );
   };
 
   const PathList = typedList<string>();

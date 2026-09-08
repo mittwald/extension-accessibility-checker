@@ -35,12 +35,12 @@ export const CreateModal = () => {
     null,
   );
 
-  const form = useForm<FormValues>({
-    defaultValues: {
-      domain: "",
-      paths: new Set(["/"]),
-    },
-  });
+  const defaultValues = {
+    domain: "",
+    paths: ["/"],
+  };
+
+  const form = useForm<FormValues>({ defaultValues });
 
   if (!contextId) {
     return null;
@@ -51,12 +51,12 @@ export const CreateModal = () => {
       data: {
         ...formValues,
         name: formValues.domain,
-        paths: Array.from(formValues.paths),
+        paths: formValues.paths,
         contextId,
       },
     });
     await goToProfile(profile);
-    form.reset();
+    form.reset(defaultValues);
   };
 
   return (

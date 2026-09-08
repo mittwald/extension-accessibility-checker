@@ -31,16 +31,13 @@ export const EditPathsModal = ({ profile }: { profile: ScanProfile }) => {
 
   const [generateError, setGenerateError] = useState<GenerateError>();
 
-  const form = useForm<PathFormValues>({
-    values: {
-      paths: new Set(profile.paths),
-    },
-  });
+  const defaultValues = { paths: profile.paths };
+
+  const form = useForm<PathFormValues>({ defaultValues });
 
   const onSubmit = async (formValues: PathFormValues) => {
-    await updateProfilePaths({
-      data: { profileId: profile._id, paths: Array.from(formValues.paths) },
-    });
+    const { paths } = formValues;
+    await updateProfilePaths({ data: { profileId: profile._id, paths } });
     await router.invalidate({ sync: true });
   };
 

@@ -28,30 +28,23 @@ export const GeneratePathsAction: FC<Props> = (props) => {
 
   async function generatePaths() {
     try {
-      const values = form.getValues("paths");
-      generatedPaths.forEach((generatedPath) => {
-        values.delete(generatedPath);
-      });
+      const values = form
+        .getValues("paths")
+        .filter((i) => !generatedPaths.includes(i));
       const pathsFromMenu = await getPathsFromMenu({ data: domain ?? "" });
-      // throw new Error("no paths");
+
       if (pathsFromMenu) {
-        form.setValue(
-          "paths",
-          new Set([
-            ...Array.from(values),
-            ...pathsFromMenu.map((path) => extractPathFromUrl(path)),
-          ]),
-        );
+        form.setValue("paths", [
+          ...Array.from(values),
+          ...pathsFromMenu.map((path) => extractPathFromUrl(path)),
+        ]);
         setGeneratedPaths(pathsFromMenu);
       }
       onSuccess();
     } catch (error) {
       setGeneratedPaths([]);
       if (error instanceof Error) {
-        onError({
-          error,
-          domain,
-        });
+        onError({ error, domain });
       }
       throw error;
     }
