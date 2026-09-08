@@ -11,7 +11,7 @@ import {
 } from "@mittwald/flow-remote-react-components";
 import { extractPathFromUrl, prependPathWithSlash } from "../helpers.ts";
 import { FormValues } from "../types.ts";
-import { useForm, useFormContext } from "react-hook-form";
+import { useForm, useFormContext, useWatch } from "react-hook-form";
 
 interface Props {
   onSubmit: (path: string) => void;
@@ -28,8 +28,10 @@ export const PathInput: FC<Props> = (props) => {
   const { onSubmit, autofocus } = props;
 
   const parentForm = useFormContext<Pick<FormValues, "paths">>();
-
   const form = useForm<Values>({ defaultValues });
+
+  const watchedPaths = useWatch({ control: parentForm.control, name: "paths" });
+  const watchedNewPath = useWatch({ control: form.control, name: "path" });
 
   const handleSubmit = ({ path }: Values) => {
     onSubmit(path);
@@ -42,13 +44,14 @@ export const PathInput: FC<Props> = (props) => {
         <Field
           name="path"
           rules={{
-            required: "Der Pfad ist erforderlich.",
+            required: "Bitte gib einen Pfad an, der mit / beginnt",
             validate: {
               startsWithSlash: (path) =>
-                path.startsWith("/") || "Der Pfad muss mit / beginnen.",
+                path.startsWith("/") ||
+                "Bitte gib einen Pfad an, der mit / beginnt",
               isUnique: (path) =>
-                !parentForm.getValues("paths").includes(path) ||
-                "Pfad ist bereits hinzugefügt.",
+                !watchedPaths.includes(path) ||
+                "Der Pfad ist bereits eingetragen",
             },
           }}
         >
@@ -66,7 +69,11 @@ export const PathInput: FC<Props> = (props) => {
             <Label>Pfad</Label>
           </TextField>
         </Field>
-        <Button color="primary" type="submit">
+        <Button
+          isDisabled={watchedPaths.includes(watchedNewPath)}
+          color="primary"
+          type="submit"
+        >
           Hinzufügen
         </Button>
       </Combine>
