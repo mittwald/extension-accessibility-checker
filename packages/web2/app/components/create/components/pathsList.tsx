@@ -1,58 +1,28 @@
-import { useFormContext } from "react-hook-form";
-import { useState } from "react";
+import { useFormContext, useWatch } from "react-hook-form";
 import {
   Button,
-  Combine,
-  FieldError,
   IconClose,
-  InlineCode,
-  Label,
   ListItemView,
   Text,
-  TextField,
   typedList,
 } from "@mittwald/flow-remote-react-components";
 import { FormValues } from "../types.ts";
-import { extractPathFromUrl, prependPathWithSlash } from "../helpers.ts";
+import { PathInput } from "./PathInput.tsx";
 
 export const PathsList = ({ autoFocus }: { autoFocus: boolean }) => {
-  const [pathInputValue, setPathInputValue] = useState("/");
-  const [touched, setTouched] = useState(false);
-
   const form = useFormContext<Pick<FormValues, "paths">>();
 
-  const paths = form.watch("paths");
+  const paths = useWatch({ control: form.control, name: "paths" });
 
-  const isValidPath = (path?: string) => {
-    const p = path ?? pathInputValue;
-    if (!p.startsWith("/")) {
-      return (
-        <Text>
-          Muss mit <InlineCode>/</InlineCode> beginnen.
-        </Text>
-      );
-    }
-    if (paths.has(p)) {
-      return "Pfad ist bereits hinzugefügt.";
-    }
-    return true;
-  };
-
-  const addPathToFormValues = (value: string) => {
-    if (isValidPath(value) !== true) {
-      return;
-    }
-
-    const values = form.getValues("paths");
-    values.add(value);
-    form.setValue("paths", values);
-    setTouched(false);
-  };
+  const addPath = (path: string) =>
+    form.setValue("paths", [...form.getValues("paths"), path]);
 
   const removePathFromFormValues = (value: string) => {
-    const values = form.getValues("paths");
-    values.delete(value.toString());
-    form.setValue("paths", values);
+    const paths = form.getValues("paths");
+    form.setValue(
+      "paths",
+      paths.filter((i) => value.toString() !== i),
+    );
   };
 
   const PathList = typedList<string>();
@@ -83,43 +53,7 @@ export const PathsList = ({ autoFocus }: { autoFocus: boolean }) => {
 
   return (
     <>
-      <Combine>
-        <TextField
-          autoFocus={autoFocus}
-          isInvalid={touched && isValidPath() !== true}
-          value={pathInputValue}
-          isRequired
-          onChange={(value) => {
-            setPathInputValue(value);
-            setTouched(true);
-          }}
-          onPaste={(event) => {
-            const data = event.clipboardData.getData("text");
-            const path = prependPathWithSlash(extractPathFromUrl(data));
-            setTimeout(() => {
-              setPathInputValue(path);
-            });
-          }}
-          onKeyDown={(event) => {
-            if (event.key === "Enter" || event.key === "NumpadEnter") {
-              event.preventDefault();
-              addPathToFormValues(pathInputValue);
-            }
-          }}
-        >
-          <Label>Pfad</Label>
-          {touched && isValidPath() !== true && (
-            <FieldError>{isValidPath()}</FieldError>
-          )}
-        </TextField>
-        <Button
-          color="primary"
-          isDisabled={isValidPath() !== true}
-          onPress={() => addPathToFormValues(pathInputValue)}
-        >
-          Hinzufügen
-        </Button>
-      </Combine>
+      <PathInput autofocus={autoFocus} onSubmit={(path) => addPath(path)} />
       {pathsList}
     </>
   );

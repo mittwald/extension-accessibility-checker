@@ -1,12 +1,10 @@
 import {
   Action,
   ActionGroup,
-  Alert,
   Button,
   Content,
   Header,
   Heading,
-  InlineCode,
   Modal,
   Section,
   Tab,
@@ -14,7 +12,7 @@ import {
   TabTitle,
   Text,
 } from "@mittwald/flow-remote-react-components";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { FormValues } from "./types.ts";
 import { PathsList } from "./components/pathsList.tsx";
@@ -22,12 +20,13 @@ import { createProfile } from "../../actions/profile.ts";
 import { Route } from "../../routes/index.js";
 import { useGoToProfile } from "../../hooks/useGoTo.js";
 import { DomainSelect } from "./components/DomainSelect.js";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { Domain } from "./components/domain.tsx";
 import {
   GenerateError,
   GeneratePathsAction,
-} from "./components/generatePaths.tsx";
+} from "../generatePaths/generatePaths.tsx";
+import { GenerateErrorAlert } from "../generatePaths/GenerateErrorAlert.tsx";
 
 export const CreateModal = () => {
   const goToProfile = useGoToProfile();
@@ -36,12 +35,13 @@ export const CreateModal = () => {
     null,
   );
 
-  const form = useForm<FormValues>({
-    defaultValues: {
-      domain: "",
-      paths: new Set(["/"]),
-    },
-  });
+  const defaultValues = {
+    domain: "",
+    paths: ["/"],
+  };
+
+  const form = useForm<FormValues>({ defaultValues });
+  const formId = useId();
 
   if (!contextId) {
     return null;
@@ -52,76 +52,64 @@ export const CreateModal = () => {
       data: {
         ...formValues,
         name: formValues.domain,
-        paths: Array.from(formValues.paths),
+        paths: formValues.paths,
         contextId,
       },
     });
     await goToProfile(profile);
-    form.reset();
+    form.reset(defaultValues);
   };
 
   return (
     <Modal offCanvas>
       <Heading slot="title">Scanprofil anlegen</Heading>
-      <Form form={form} onSubmit={onSubmit}>
+      <FormProvider {...form}>
         <Content>
           <Section>
-            <Text>
-              Wähle eine bestehende Domain aus dem mStudio oder gib eine
-              individuelle Domain ein.
-            </Text>
-            <Tabs>
-              <Tab id="mstudio">
-                <TabTitle>mStudio Domain</TabTitle>
-                <DomainSelect />
-              </Tab>
-              <Tab id="custom">
-                <TabTitle>Individuelle Eingabe</TabTitle>
-                <Domain />
-              </Tab>
-            </Tabs>
-            <Header>
-              <Heading>Unterseiten hinzufügen</Heading>
-              <GeneratePathsAction
-                onError={setGenerateError}
-                onSuccess={() => setGenerateError(null)}
-              />
-            </Header>
-            {generateError && (
-              <Alert status="danger">
-                <Heading>Unterseiten nicht automatisch erkannt</Heading>
-                <Content>
-                  <Text>
-                    Die Unterseiten für{" "}
-                    <InlineCode>{generateError.domain}</InlineCode> konnten
-                    nicht automatisch erkannt werden. Überprüfe die eingegebene
-                    Domain und versuche es erneut.
-                  </Text>
-                </Content>
-              </Alert>
-            )}
-            <Text>
-              Füge Unterseiten hinzu, um mit einem Scanprofil mehrere Bereiche
-              deiner Website im Blick zu behalten.
-            </Text>
+            <Form id={formId} form={form} onSubmit={onSubmit}>
+              <Text>
+                Wähle eine bestehende Domain aus dem mStudio oder gib eine
+                individuelle Domain ein.
+              </Text>
+              <Tabs>
+                <Tab id="mstudio">
+                  <TabTitle>mStudio Domain</TabTitle>
+                  <DomainSelect />
+                </Tab>
+                <Tab id="custom">
+                  <TabTitle>Individuelle Eingabe</TabTitle>
+                  <Domain />
+                </Tab>
+              </Tabs>
+              <Header>
+                <Heading>Unterseiten hinzufügen</Heading>
+                <GeneratePathsAction
+                  onError={setGenerateError}
+                  onSuccess={() => setGenerateError(null)}
+                />
+              </Header>
+              {generateError && (
+                <GenerateErrorAlert generateError={generateError} />
+              )}
+              <Text>
+                Füge Unterseiten hinzu, um mit einem Scanprofil mehrere Bereiche
+                deiner Website im Blick zu behalten.
+              </Text>
+            </Form>
             <PathsList autoFocus={!!form.getValues("domain")} />
           </Section>
         </Content>
         <ActionGroup>
-          <Action closeOverlay="Modal">
-            <Button
-              color="secondary"
-              variant="soft"
-              onPress={() => form.reset()}
-            >
+          <Action closeModal>
+            <Button color="secondary" variant="soft">
               Abbrechen
             </Button>
           </Action>
-          <Button color="success" type="submit">
+          <Button color="success" type="submit" form={formId}>
             Scan starten
           </Button>
         </ActionGroup>
-      </Form>
+      </FormProvider>
     </Modal>
   );
 };
