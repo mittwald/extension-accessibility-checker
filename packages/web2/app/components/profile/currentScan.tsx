@@ -12,8 +12,9 @@ import { isPending, isRunning } from "./helpers.ts";
 
 const RunningScan = ({ scan }: { scan: Scan }) => {
   const totalPages = scan.pages.length;
+  const { scannedPages } = scan;
 
-  if (totalPages === 0) {
+  if (scannedPages === 0) {
     return (
       <Alert>
         <Combine>
@@ -23,8 +24,6 @@ const RunningScan = ({ scan }: { scan: Scan }) => {
       </Alert>
     );
   }
-
-  const scannedPages = scan.scannedPages ?? 0;
 
   return (
     <Alert>

@@ -17,6 +17,8 @@ export function NoScans({ profile }: { profile: ScanProfile }) {
   const router = useRouter();
 
   if (isRunningOrPending(profile.nextScan)) {
+    const scan = profile.nextScan!;
+
     return (
       <IllustratedMessage>
         <LoadingSpinner size="l" />
@@ -27,12 +29,12 @@ export function NoScans({ profile }: { profile: ScanProfile }) {
               Der Barrierefreiheits-Score wird ermittelt. Je nach Anzahl der
               Seiten kann das einen Moment dauern.
             </Text>
-            {profile.nextScan!.pages.length > 0 && (
+            {scan.scannedPages > 0 && (
               <ProgressBar
                 formatOptions={{ style: "decimal" }}
-                maxValue={profile.nextScan!.pages.length}
+                maxValue={scan.pages.length}
                 showMaxValue
-                value={profile.nextScan!.scannedPages ?? 0}
+                value={scan.scannedPages}
               />
             )}
           </>
