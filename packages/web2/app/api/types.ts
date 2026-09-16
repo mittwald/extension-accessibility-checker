@@ -55,6 +55,7 @@ export interface Scan {
   profile: string;
   pages: Page[];
   status: "queued" | "running" | "completed" | "failed";
+  scannedPages: number;
   issues?: Issue[];
   error?: string;
   scheduledBy: "system" | string;

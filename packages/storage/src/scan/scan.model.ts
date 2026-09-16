@@ -74,6 +74,9 @@ export class Scan {
   @prop({ required: true, enum: ["queued", "running", "completed", "failed"] })
   public status!: "queued" | "running" | "completed" | "failed";
 
+  @prop({ default: 0 })
+  public scannedPages!: number;
+
   @prop({ type: () => [Issue] })
   issues?: Issue[];
 
@@ -110,6 +113,7 @@ export class Scan {
       },
       {
         status: "running",
+        scannedPages: 0,
       },
     ).exec();
   }
@@ -210,11 +214,22 @@ export class Scan {
 
   public async markAsRunning(this: DocumentType<Scan>) {
     this.status = "running";
+    this.scannedPages = 0;
     await this.save();
+  }
+
+  public async updateScannedPages(
+    this: DocumentType<Scan>,
+    scannedPages: number,
+  ) {
+    this.scannedPages = scannedPages;
+    console.log(`updating scanned pages for ${this._id} to ${scannedPages}`);
+    await ScanModel.updateOne({ _id: this._id }, { $set: { scannedPages } });
   }
 
   public async markAsCompleted(this: DocumentType<Scan>) {
     this.status = "completed";
+    this.scannedPages = this.pages.length;
     this.completedAt = new Date();
     await this.save();
   }
