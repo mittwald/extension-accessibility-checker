@@ -223,7 +223,6 @@ export class Scan {
     scannedPages: number,
   ) {
     this.scannedPages = scannedPages;
-    console.log(`updating scanned pages for ${this._id} to ${scannedPages}`);
     await ScanModel.updateOne({ _id: this._id }, { $set: { scannedPages } });
   }
 

@@ -43,7 +43,7 @@ const PendingScan = () => {
   return (
     <Alert>
       <Combine>
-        <LoadingSpinner size="m"></LoadingSpinner>
+        <LoadingSpinner size="m" />
         <Text>Scan wird in Kürze gestartet …</Text>
       </Combine>
     </Alert>
