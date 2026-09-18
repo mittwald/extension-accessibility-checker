@@ -116,14 +116,20 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
                   {o.context && (
                     <CodeBlock code={o.context} language="html" copyable />
                   )}
-                  {o.urls.map(({ url, screenshot }) => (
-                    <Flex key={url} direction="column" rowGap="s">
-                      <Text>{url}</Text>
-                      {screenshot && (
-                        <IssueScreenshot screenshot={screenshot} url={url} />
-                      )}
-                    </Flex>
-                  ))}
+                  <Text>
+                    <ul>
+                      {o.urls.map(({ url, screenshot }) => (
+                        <li>
+                          <Flex direction="row" gap="s">
+                            <Text>{url}</Text>
+                            {screenshot && (
+                              <IssueScreenshot screenshot={screenshot} />
+                            )}
+                          </Flex>
+                        </li>
+                      ))}
+                    </ul>
+                  </Text>
                 </Flex>
               </li>
             ))}
