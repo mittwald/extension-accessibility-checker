@@ -12,6 +12,12 @@ export interface ScreenshotInput {
   height: number;
 }
 
+export interface StoredScreenshot {
+  id: ObjectId;
+  width: number;
+  height: number;
+}
+
 @index({ scan: 1 })
 // Keep one screenshot per issue location within a scanned URL.
 @index({ scan: 1, url: 1, selector: 1 }, { unique: true })
@@ -52,7 +58,7 @@ export class Screenshot {
     scanId: ObjectId,
     url: string,
     screenshots: ScreenshotInput[],
-  ): Promise<Map<string, ObjectId>> {
+  ): Promise<Map<string, StoredScreenshot>> {
     if (screenshots.length === 0) {
       return new Map();
     }
@@ -66,7 +72,14 @@ export class Screenshot {
     );
 
     return new Map(
-      documents.map((screenshot) => [screenshot.selector, screenshot._id]),
+      documents.map((screenshot) => [
+        screenshot.selector,
+        {
+          id: screenshot._id,
+          width: screenshot.width,
+          height: screenshot.height,
+        },
+      ]),
     );
   }
 
