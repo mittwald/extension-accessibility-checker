@@ -6,6 +6,8 @@ import { logger } from "../../logger.js";
 import { Lighthouse } from "../Lighthouse.js";
 import { pa11yLogger, puppeteerLaunchOptions } from "../helpers.js";
 import puppeteer from "puppeteer";
+import { ElementScreenshot } from "../ElementScreenshot.js";
+import { mkdirSync, writeFileSync } from "node:fs";
 
 const log = logger.child({ module: "Pa11yScanEngine" });
 
@@ -78,6 +80,23 @@ export class Pa11yScanEngine implements ScanEngine, ScanResults {
         page,
         log: pa11yLogger(url),
       });
+
+      const screenshots = await ElementScreenshot.captureForIssues(
+        page,
+        pa11yResults.issues,
+      );
+
+      const debugDir = "/tmp/a11y-screenshots";
+      mkdirSync(debugDir, { recursive: true });
+
+      let index = 0;
+      screenshots.forEach((screenshot, selector) => {
+        const name = `${index++}-${selector.replace(/[^a-z0-9]+/gi, "_").slice(0, 60)}`;
+        writeFileSync(`${debugDir}/${name}.webp`, screenshot.image);
+      });
+
+      // todo: store the screenshots properly and reference them from the issues
+      log.debug("📸 Screenshots captured: %d", screenshots.size);
 
       return this.convertPallyResults(pa11yResults);
     } catch (e) {
