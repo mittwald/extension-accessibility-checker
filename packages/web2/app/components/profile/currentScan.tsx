@@ -2,18 +2,39 @@ import { useProfileData } from "../../hooks/useProfileData.tsx";
 import {
   Alert,
   Combine,
+  Label,
   LoadingSpinner,
+  ProgressBar,
   Text,
 } from "@mittwald/flow-remote-react-components";
+import type { Scan } from "../../api/types.ts";
 import { isPending, isRunning } from "./helpers.ts";
 
-const RunningScan = () => {
+const RunningScan = ({ scan }: { scan: Scan }) => {
+  const totalPages = scan.pages.length;
+  const { scannedPages } = scan;
+
+  if (scannedPages === 0) {
+    return (
+      <Alert>
+        <Combine>
+          <LoadingSpinner size="m"></LoadingSpinner>
+          <Text>Scan wird ausgeführt …</Text>
+        </Combine>
+      </Alert>
+    );
+  }
+
   return (
     <Alert>
-      <Combine>
-        <LoadingSpinner size="m"></LoadingSpinner>
-        <Text>Scan wird ausgeführt …</Text>
-      </Combine>
+      <ProgressBar
+        formatOptions={{ style: "decimal" }}
+        maxValue={totalPages}
+        showMaxValue
+        value={scannedPages}
+      >
+        <Label>Scan wird ausgeführt …</Label>
+      </ProgressBar>
     </Alert>
   );
 };
@@ -22,7 +43,7 @@ const PendingScan = () => {
   return (
     <Alert>
       <Combine>
-        <LoadingSpinner size="m"></LoadingSpinner>
+        <LoadingSpinner size="m" />
         <Text>Scan wird in Kürze gestartet …</Text>
       </Combine>
     </Alert>
@@ -39,7 +60,7 @@ export const CurrentScan = () => {
   }
 
   if (isRunning(nextScan)) {
-    return <RunningScan />;
+    return <RunningScan scan={nextScan} />;
   }
 
   if (isPending(nextScan)) {

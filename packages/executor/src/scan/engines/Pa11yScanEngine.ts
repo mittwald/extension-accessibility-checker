@@ -35,8 +35,9 @@ export class Pa11yScanEngine implements ScanEngine, ScanResults {
 
   public async executeScan(): Promise<ScanResults> {
     try {
-      for (const page of this.scan.pages) {
+      for (const [index, page] of this.scan.pages.entries()) {
         await this.runPageScan(page);
+        await this.scan.updateScannedPages(index + 1);
       }
       log.debug("📝 Issues found: %d", this.issues.length);
     } catch (e) {

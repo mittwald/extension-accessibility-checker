@@ -7,6 +7,7 @@ import {
   Icon,
   IllustratedMessage,
   LoadingSpinner,
+  ProgressBar,
   Text,
 } from "@mittwald/flow-remote-react-components";
 import { IconWorldSearch } from "@tabler/icons-react";
@@ -16,6 +17,8 @@ export function NoScans({ profile }: { profile: ScanProfile }) {
   const router = useRouter();
 
   if (isRunningOrPending(profile.nextScan)) {
+    const scan = profile.nextScan!;
+
     return (
       <IllustratedMessage>
         <LoadingSpinner size="l" />
@@ -26,6 +29,14 @@ export function NoScans({ profile }: { profile: ScanProfile }) {
               Der Barrierefreiheits-Score wird ermittelt. Je nach Anzahl der
               Seiten kann das einen Moment dauern.
             </Text>
+            {scan.scannedPages > 0 && (
+              <ProgressBar
+                formatOptions={{ style: "decimal" }}
+                maxValue={scan.pages.length}
+                showMaxValue
+                value={scan.scannedPages}
+              />
+            )}
           </>
         ) : (
           <Heading wrap="balance">Scan wird in Kürze gestartet …</Heading>
