@@ -27,7 +27,10 @@ const buildIssueItem = (
       {
         selector: "html > body > main > img:nth-child(2)",
         context: '<img src="/images/hero.png" alt="" role="presentation">',
-        urls: ["https://example.com/", "https://example.com/impressum"],
+        urls: [
+          { url: "https://example.com/" },
+          { url: "https://example.com/impressum" },
+        ],
       },
     ],
     key: `${meta.criterion}.${meta.techniques.join(",")}.${severity}`,

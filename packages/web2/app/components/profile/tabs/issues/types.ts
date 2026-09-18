@@ -1,6 +1,9 @@
 import wcagLinks from "../../../../wcagLinks.json";
 import techniquesLinks from "../../../../techniquesLinks.json";
-import { Issue as ApiIssue } from "../../../../api/types.ts";
+import type {
+  Issue as ApiIssue,
+  IssueScreenshot,
+} from "../../../../api/types.ts";
 
 export interface IssueMeta {
   wcagLevel: string;
@@ -27,8 +30,13 @@ export interface Issue
   selectors: IssueOccurrence[];
 }
 
+export interface IssueUrl {
+  url: string;
+  screenshot?: IssueScreenshot;
+}
+
 export interface IssueOccurrence {
   selector?: string;
   context?: string;
-  urls: string[];
+  urls: IssueUrl[];
 }

@@ -6,6 +6,7 @@ import { Context, ContextModel } from "../context/context.model.js";
 import { getModel } from "../lib/mongoose.js";
 import { ReturnModelType } from "@typegoose/typegoose/lib/types";
 import { Scan, ScanModel } from "../scan/scan.model.js";
+import { ScreenshotModel } from "../screenshot/screenshot.model.js";
 
 @modelOptions({ schemaOptions: { _id: false } })
 class CronSchedule {
@@ -95,6 +96,8 @@ export class ScanProfile {
     this: ReturnModelType<typeof ScanProfile>,
     profileId: ObjectId | string,
   ) {
+    const scans = await ScanModel.find({ profile: profileId }).select("_id");
+    await ScreenshotModel.deleteForScans(scans.map((scan) => scan._id));
     await ScanModel.deleteMany({ profile: profileId });
     await ScanProfileModel.findByIdAndDelete(profileId);
   }
