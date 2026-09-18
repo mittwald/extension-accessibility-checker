@@ -1,13 +1,18 @@
-import { Issue, Page, Scan } from "extension-a11y-checker-storage";
+import {
+  Issue,
+  Page,
+  Scan,
+  ScreenshotModel,
+} from "extension-a11y-checker-storage";
 import pa11y, { Pa11yIssue, Pa11yOptions, Pa11yResults } from "pa11y";
 import { DocumentType, isDocument } from "@typegoose/typegoose";
+import type { ObjectId } from "mongodb";
 import { PageResult, ScanEngine, ScanResults } from "./ScanEngine.js";
 import { logger } from "../../logger.js";
 import { Lighthouse } from "../Lighthouse.js";
 import { pa11yLogger, puppeteerLaunchOptions } from "../helpers.js";
 import puppeteer from "puppeteer";
 import { ElementScreenshot } from "../ElementScreenshot.js";
-import { mkdirSync, writeFileSync } from "node:fs";
 
 const log = logger.child({ module: "Pa11yScanEngine" });
 
@@ -86,19 +91,15 @@ export class Pa11yScanEngine implements ScanEngine, ScanResults {
         pa11yResults.issues,
       );
 
-      const debugDir = "/tmp/a11y-screenshots";
-      mkdirSync(debugDir, { recursive: true });
-
-      let index = 0;
-      screenshots.forEach((screenshot, selector) => {
-        const name = `${index++}-${selector.replace(/[^a-z0-9]+/gi, "_").slice(0, 60)}`;
-        writeFileSync(`${debugDir}/${name}.webp`, screenshot.image);
-      });
-
-      // todo: store the screenshots properly and reference them from the issues
       log.debug("📸 Screenshots captured: %d", screenshots.size);
 
-      return this.convertPallyResults(pa11yResults);
+      const screenshotIds = await ScreenshotModel.storeForScan(
+        this.scan._id,
+        url,
+        [...screenshots.values()],
+      );
+
+      return this.convertPallyResults(pa11yResults, screenshotIds);
     } catch (e) {
       throw e;
     } finally {
@@ -107,7 +108,10 @@ export class Pa11yScanEngine implements ScanEngine, ScanResults {
     }
   }
 
-  private convertPallyResults(pa11yResults: Pa11yResults): URLExecutionResults {
+  private convertPallyResults(
+    pa11yResults: Pa11yResults,
+    screenshotIds: Map<string, ObjectId>,
+  ): URLExecutionResults {
     const pageResults: URLExecutionResults["page"] = {
       title: pa11yResults.documentTitle,
       issues: {
@@ -119,7 +123,7 @@ export class Pa11yScanEngine implements ScanEngine, ScanResults {
 
     const mappedIssues = pa11yResults.issues.map((i) => {
       pageResults.issues[`${i.type}s`] = pageResults.issues[`${i.type}s`] + 1;
-      return this.convertToUnifiedIssue(i, pa11yResults);
+      return this.convertToUnifiedIssue(i, pa11yResults, screenshotIds);
     });
 
     return {
@@ -128,7 +132,11 @@ export class Pa11yScanEngine implements ScanEngine, ScanResults {
     };
   }
 
-  private convertToUnifiedIssue(issue: Pa11yIssue, results: Pa11yResults) {
+  private convertToUnifiedIssue(
+    issue: Pa11yIssue,
+    results: Pa11yResults,
+    screenshotIds: Map<string, ObjectId>,
+  ) {
     const i = new Issue();
     i.url = results.pageUrl;
     i.errorCode = issue.code;
@@ -136,6 +144,7 @@ export class Pa11yScanEngine implements ScanEngine, ScanResults {
     i.description = issue.message;
     i.selector = issue.selector;
     i.context = issue.context;
+    i.screenshot = screenshotIds.get(issue.selector);
     return i;
   }
 }

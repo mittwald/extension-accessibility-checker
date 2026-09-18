@@ -27,8 +27,13 @@ export interface Issue
   selectors: IssueOccurrence[];
 }
 
+export interface IssueUrl {
+  url: string;
+  screenshot?: string;
+}
+
 export interface IssueOccurrence {
   selector?: string;
   context?: string;
-  urls: string[];
+  urls: IssueUrl[];
 }

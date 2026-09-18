@@ -4,6 +4,7 @@ import { index, modelOptions, prop } from "@typegoose/typegoose";
 import { ObjectId } from "mongodb";
 import { ScanProfile } from "../scanProfile/scanProfile.model.js";
 import { getModel } from "../lib/mongoose.js";
+import type { Screenshot } from "../screenshot/screenshot.model.js";
 
 @modelOptions({ schemaOptions: { _id: false } })
 export class Issue {
@@ -24,6 +25,9 @@ export class Issue {
 
   @prop()
   public selector?: string;
+
+  @prop({ ref: () => "Screenshot" })
+  public screenshot?: Ref<Screenshot>;
 }
 
 @modelOptions({

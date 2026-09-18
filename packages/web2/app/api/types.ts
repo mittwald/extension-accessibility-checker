@@ -30,6 +30,7 @@ export interface Issue {
   description: string;
   context?: string;
   selector?: string;
+  screenshot?: string;
   url: string;
 }
 

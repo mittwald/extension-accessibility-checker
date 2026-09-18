@@ -13,6 +13,7 @@ import {
 import wcagLinks from "../../../../wcagLinks.json";
 import techniquesLinks from "../../../../techniquesLinks.json";
 import { getLinkForTechnique } from "./helpers.ts";
+import { IssueScreenshot } from "./components/issueScreenshot.tsx";
 import { Issue } from "./types.ts";
 
 const IssueAvatar = ({ issue }: { issue: Issue }) => {
@@ -115,13 +116,14 @@ export const IssueListItemView = ({ issue }: { issue: Issue }) => {
                   {o.context && (
                     <CodeBlock code={o.context} language="html" copyable />
                   )}
-                  <Text>
-                    <ul>
-                      {o.urls.map((url) => (
-                        <li key={url}>{url}</li>
-                      ))}
-                    </ul>
-                  </Text>
+                  {o.urls.map(({ url, screenshot }) => (
+                    <Flex key={url} direction="column" rowGap="s">
+                      <Text>{url}</Text>
+                      {screenshot && (
+                        <IssueScreenshot screenshot={screenshot} url={url} />
+                      )}
+                    </Flex>
+                  ))}
                 </Flex>
               </li>
             ))}
