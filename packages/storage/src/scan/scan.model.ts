@@ -6,6 +6,18 @@ import { ScanProfile } from "../scanProfile/scanProfile.model.js";
 import { getModel } from "../lib/mongoose.js";
 import type { Screenshot } from "../screenshot/screenshot.model.js";
 
+@modelOptions({ schemaOptions: { _id: false, id: false } })
+export class IssueScreenshot {
+  @prop({ required: true, ref: () => "Screenshot" })
+  public id!: Ref<Screenshot>;
+
+  @prop({ required: true })
+  public width!: number;
+
+  @prop({ required: true })
+  public height!: number;
+}
+
 @modelOptions({ schemaOptions: { _id: false } })
 export class Issue {
   @prop({ required: true })
@@ -26,8 +38,8 @@ export class Issue {
   @prop()
   public selector?: string;
 
-  @prop({ ref: () => "Screenshot" })
-  public screenshot?: Ref<Screenshot>;
+  @prop({ type: () => IssueScreenshot })
+  public screenshot?: IssueScreenshot;
 }
 
 @modelOptions({

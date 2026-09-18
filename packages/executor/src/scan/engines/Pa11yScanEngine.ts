@@ -4,9 +4,9 @@ import {
   Scan,
   ScreenshotModel,
 } from "extension-a11y-checker-storage";
+import type { StoredScreenshot } from "extension-a11y-checker-storage";
 import pa11y, { Pa11yIssue, Pa11yOptions, Pa11yResults } from "pa11y";
 import { DocumentType, isDocument } from "@typegoose/typegoose";
-import type { ObjectId } from "mongodb";
 import { PageResult, ScanEngine, ScanResults } from "./ScanEngine.js";
 import { logger } from "../../logger.js";
 import { Lighthouse } from "../Lighthouse.js";
@@ -110,7 +110,7 @@ export class Pa11yScanEngine implements ScanEngine, ScanResults {
 
   private convertPallyResults(
     pa11yResults: Pa11yResults,
-    screenshotIds: Map<string, ObjectId>,
+    screenshotIds: Map<string, StoredScreenshot>,
   ): URLExecutionResults {
     const pageResults: URLExecutionResults["page"] = {
       title: pa11yResults.documentTitle,
@@ -135,7 +135,7 @@ export class Pa11yScanEngine implements ScanEngine, ScanResults {
   private convertToUnifiedIssue(
     issue: Pa11yIssue,
     results: Pa11yResults,
-    screenshotIds: Map<string, ObjectId>,
+    screenshotIds: Map<string, StoredScreenshot>,
   ) {
     const i = new Issue();
     i.url = results.pageUrl;
