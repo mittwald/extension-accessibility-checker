@@ -21,6 +21,9 @@ export interface ResolvedElementRect {
   htmlPrefix: string;
   documentWidth: number;
   documentHeight: number;
+  viewportWidth: number;
+  viewportHeight: number;
+  isVisuallyHidden: boolean;
 }
 
 export const resolveElementRect = (
@@ -93,6 +96,8 @@ export const resolveElementRect = (
     return null;
   }
 
+  const style = window.getComputedStyle(element);
+
   return {
     x: rect.x + window.scrollX,
     y: rect.y + window.scrollY,
@@ -101,5 +106,10 @@ export const resolveElementRect = (
     htmlPrefix: element.outerHTML.slice(0, 40),
     documentWidth: document.documentElement.scrollWidth,
     documentHeight: document.documentElement.scrollHeight,
+    viewportWidth: window.innerWidth,
+    viewportHeight: window.innerHeight,
+    isVisuallyHidden:
+      style.clipPath === "inset(50%)" ||
+      style.clip === "rect(0px, 0px, 0px, 0px)",
   };
 };

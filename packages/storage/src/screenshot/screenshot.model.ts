@@ -1,5 +1,6 @@
 import type { Ref, ReturnModelType } from "@typegoose/typegoose";
 import { index, modelOptions, prop } from "@typegoose/typegoose";
+import { createHash } from "node:crypto";
 import { ObjectId } from "mongodb";
 import type { Scan } from "../scan/scan.model.js";
 import { getModel } from "../lib/mongoose.js";
@@ -19,6 +20,7 @@ export interface StoredScreenshot {
 }
 
 @index({ scan: 1 })
+@index({ scan: 1, hash: 1 })
 // Keep one screenshot per issue location within a scanned URL.
 @index({ scan: 1, url: 1, selector: 1 }, { unique: true })
 @modelOptions({
@@ -36,6 +38,9 @@ export class Screenshot {
 
   @prop({ required: true })
   public selector!: string;
+
+  @prop({ required: true })
+  public hash!: string;
 
   // Exclude binary data unless a query explicitly requests it.
   @prop({ required: true, type: () => Buffer, select: false })
@@ -63,23 +68,50 @@ export class Screenshot {
       return new Map();
     }
 
-    const documents = await this.insertMany(
-      screenshots.map((screenshot) => ({
+    const hashedScreenshots = screenshots.map((screenshot) => ({
+      screenshot,
+      hash: createHash("sha256").update(screenshot.image).digest("hex"),
+    }));
+    const hashes = [...new Set(hashedScreenshots.map(({ hash }) => hash))];
+    const existingDocuments = await this.find({
+      scan: scanId,
+      hash: { $in: hashes },
+    });
+    const documentsByHash = new Map(
+      existingDocuments.map((screenshot) => [screenshot.hash, screenshot]),
+    );
+
+    const newScreenshots = new Map<string, ScreenshotInput>();
+    for (const { screenshot, hash } of hashedScreenshots) {
+      if (!documentsByHash.has(hash) && !newScreenshots.has(hash)) {
+        newScreenshots.set(hash, screenshot);
+      }
+    }
+
+    const insertedDocuments = await this.insertMany(
+      [...newScreenshots].map(([hash, screenshot]) => ({
         ...screenshot,
+        hash,
         scan: scanId,
         url,
       })),
     );
+    for (const screenshot of insertedDocuments) {
+      documentsByHash.set(screenshot.hash, screenshot);
+    }
 
     return new Map(
-      documents.map((screenshot) => [
-        screenshot.selector,
-        {
-          id: screenshot._id,
-          width: screenshot.width,
-          height: screenshot.height,
-        },
-      ]),
+      hashedScreenshots.map(({ screenshot, hash }) => {
+        const document = documentsByHash.get(hash)!;
+        return [
+          screenshot.selector,
+          {
+            id: document._id,
+            width: document.width,
+            height: document.height,
+          },
+        ];
+      }),
     );
   }
 

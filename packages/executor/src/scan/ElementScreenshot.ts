@@ -27,6 +27,12 @@ const maxScreenshotsPerPage = 50;
 /** Tall elements (lists, containers) would produce unusably large images. */
 const maxClipHeightPx = 1024;
 
+/** Smaller elements cannot show a recognisable issue location. */
+const minElementSizePx = 8;
+
+/** Elements covering most of the viewport only produce pictures of the page. */
+const maxViewportCoverage = 0.7;
+
 const highlightOverlayId = "a11y-checker-screenshot-highlight";
 const highlightColor = "#e5484d";
 
@@ -83,7 +89,15 @@ export class ElementScreenshot {
   ): Promise<CapturedScreenshot | null> {
     try {
       const rect = await page.evaluate(resolveElementRect, selector);
-      if (!rect) {
+      if (
+        !rect ||
+        rect.isVisuallyHidden ||
+        rect.width < minElementSizePx ||
+        rect.height < minElementSizePx ||
+        (rect.width * rect.height) /
+          (rect.viewportWidth * rect.viewportHeight) >
+          maxViewportCoverage
+      ) {
         log.trace("no visible element for selector %s", selector);
         return null;
       }
