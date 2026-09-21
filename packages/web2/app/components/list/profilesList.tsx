@@ -17,7 +17,7 @@ type StatusFilterValue = (typeof statusFilterValues)[number];
 
 const statusFilterLabels: Record<StatusFilterValue, string> = {
   running: "Läuft gerade",
-  scheduled: "Geplant",
+  scheduled: "Automatische Ausführung",
   manual: "Manuelle Ausführung",
 };
 
@@ -40,24 +40,13 @@ const sortByLastScanCompletedAt: SortingFn<ScanProfile> = (
   rowB,
   columnId,
 ) => {
-  const getTimestamp = (value: unknown) => {
-    if (value === undefined || value === null) {
-      return Number.NEGATIVE_INFINITY;
-    }
+  const getTimestamp = (value: unknown) =>
+    value instanceof Date ? value.getTime() : -1;
 
-    const timestamp =
-      value instanceof Date ? value.getTime() : Date.parse(String(value));
-    return Number.isNaN(timestamp) ? Number.NEGATIVE_INFINITY : timestamp;
-  };
-
-  const timestampA = getTimestamp(rowA.getValue(columnId));
-  const timestampB = getTimestamp(rowB.getValue(columnId));
-
-  if (timestampA === timestampB) {
-    return 0;
-  }
-
-  return timestampA < timestampB ? -1 : 1;
+  return (
+    getTimestamp(rowA.getValue(columnId)) -
+    getTimestamp(rowB.getValue(columnId))
+  );
 };
 
 export const ProfilesList = ({ profiles }: { profiles: ScanProfile[] }) => {
