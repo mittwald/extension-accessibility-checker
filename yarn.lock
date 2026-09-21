@@ -8003,6 +8003,7 @@ __metadata:
     puppeteer: "npm:^24.2.1"
     reflect-metadata: "npm:^0.2.2"
     typescript: "npm:^5"
+    vitest: "npm:^4.1.11"
   languageName: unknown
   linkType: soft
 
