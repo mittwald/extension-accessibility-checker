@@ -10,6 +10,44 @@ import { useAutoRefresh } from "../../hooks/useAutoRefresh.tsx";
 import { useGoToProfile } from "../../hooks/useGoTo.tsx";
 import { CreateProfileButton } from "../create/createProfileButton.tsx";
 import { ProfileListItemView } from "./profileListItemView.tsx";
+import type { SortingFn } from "@tanstack/react-table";
+
+const statusFilterValues = ["running", "scheduled", "manual"] as const;
+type StatusFilterValue = (typeof statusFilterValues)[number];
+
+const statusFilterLabels: Record<StatusFilterValue, string> = {
+  running: "Läuft gerade",
+  scheduled: "Automatische Ausführung",
+  manual: "Manuelle Ausführung",
+};
+
+const matchesStatusFilter = (
+  filterBy: StatusFilterValue,
+  profile: ScanProfile,
+) => {
+  switch (filterBy) {
+    case "running":
+      return isRunningOrPending(profile.nextScan);
+    case "scheduled":
+      return !!profile.cronSchedule;
+    case "manual":
+      return !profile.cronSchedule;
+  }
+};
+
+const sortByLastScanCompletedAt: SortingFn<ScanProfile> = (
+  rowA,
+  rowB,
+  columnId,
+) => {
+  const getTimestamp = (value: unknown) =>
+    value instanceof Date ? value.getTime() : -1;
+
+  return (
+    getTimestamp(rowA.getValue(columnId)) -
+    getTimestamp(rowB.getValue(columnId))
+  );
+};
 
 export const ProfilesList = ({ profiles }: { profiles: ScanProfile[] }) => {
   const ProfileList = typedList<ScanProfile>();
@@ -29,6 +67,55 @@ export const ProfilesList = ({ profiles }: { profiles: ScanProfile[] }) => {
       <ActionGroup>
         <CreateProfileButton />
       </ActionGroup>
+      <ProfileList.Sorting
+        property="lastScan.completedAt"
+        name="Letzter Scan"
+        direction="desc"
+        defaultEnabled
+        directionName="Neueste zuerst"
+        customSortingFn={sortByLastScanCompletedAt}
+      />
+      <ProfileList.Sorting
+        property="lastScan.completedAt"
+        name="Letzter Scan"
+        direction="asc"
+        directionName="Älteste zuerst"
+        customSortingFn={sortByLastScanCompletedAt}
+      />
+      <ProfileList.Sorting
+        property="domain"
+        name="Domain"
+        direction="asc"
+        directionName="A–Z"
+      />
+      <ProfileList.Sorting
+        property="domain"
+        name="Domain"
+        direction="desc"
+        directionName="Z–A"
+      />
+      <ProfileList.Sorting
+        property="issueSummary.score"
+        name="Score"
+        direction="asc"
+        directionName="Niedrigste zuerst"
+      />
+      <ProfileList.Sorting
+        property="issueSummary.score"
+        name="Score"
+        direction="desc"
+        directionName="Höchste zuerst"
+      />
+      <ProfileList.Filter
+        property="$status"
+        mode="some"
+        name="Status"
+        values={statusFilterValues}
+        matcher={matchesStatusFilter}
+      >
+        {(value) => statusFilterLabels[value]}
+      </ProfileList.Filter>
+      <ProfileList.Search />
       <ProfileList.Table>
         <ProfileList.TableHeader>
           <ProfileList.TableColumn>Name</ProfileList.TableColumn>
