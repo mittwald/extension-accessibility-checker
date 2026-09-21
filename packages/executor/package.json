@@ -11,6 +11,8 @@
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'yarn start'",
     "build": "tsc",
     "compile": "yarn build",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "start": "yarn build && LOG_LEVEL=debug DEBUG='*,-puppeteer:protocol*' MONGODB_URI=mongodb://localhost:27017/extension-a11y-checker node --no-experimental-require-module dist/index.js",
     "format": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --write",
     "format:check": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --check"
@@ -31,7 +33,8 @@
     "@types/node-cron": "^3.0.11",
     "eslint": "^9",
     "nodemon": "^3.1.9",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.11"
   },
   "packageManager": "yarn@4.6.0"
 }
