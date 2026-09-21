@@ -12,6 +12,29 @@ import { CreateProfileButton } from "../create/createProfileButton.tsx";
 import { ProfileListItemView } from "./profileListItemView.tsx";
 import type { SortingFn } from "@tanstack/react-table";
 
+const statusFilterValues = ["running", "scheduled", "manual"] as const;
+type StatusFilterValue = (typeof statusFilterValues)[number];
+
+const statusFilterLabels: Record<StatusFilterValue, string> = {
+  running: "Läuft gerade",
+  scheduled: "Geplant",
+  manual: "Manuelle Ausführung",
+};
+
+const matchesStatusFilter = (
+  filterBy: StatusFilterValue,
+  profile: ScanProfile,
+) => {
+  switch (filterBy) {
+    case "running":
+      return isRunningOrPending(profile.nextScan);
+    case "scheduled":
+      return !!profile.cronSchedule;
+    case "manual":
+      return !profile.cronSchedule;
+  }
+};
+
 const sortByLastScanCompletedAt: SortingFn<ScanProfile> = (
   rowA,
   rowB,
@@ -24,7 +47,6 @@ const sortByLastScanCompletedAt: SortingFn<ScanProfile> = (
 
     const timestamp =
       value instanceof Date ? value.getTime() : Date.parse(String(value));
-
     return Number.isNaN(timestamp) ? Number.NEGATIVE_INFINITY : timestamp;
   };
 
@@ -95,6 +117,15 @@ export const ProfilesList = ({ profiles }: { profiles: ScanProfile[] }) => {
         direction="desc"
         directionName="Höchste zuerst"
       />
+      <ProfileList.Filter
+        property="$status"
+        mode="some"
+        name="Status"
+        values={statusFilterValues}
+        matcher={matchesStatusFilter}
+      >
+        {(value) => statusFilterLabels[value]}
+      </ProfileList.Filter>
       <ProfileList.Search />
       <ProfileList.Table>
         <ProfileList.TableHeader>
