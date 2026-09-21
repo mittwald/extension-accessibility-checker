@@ -79,7 +79,10 @@ export class Pa11yScanEngine implements ScanEngine, ScanResults {
       });
       page = await browser.newPage();
 
+      const userAgent = await browser.userAgent();
+
       const pa11yResults = await pa11y(url, {
+        userAgent,
         ...this.options,
         browser,
         page,
