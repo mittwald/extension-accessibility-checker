@@ -4,10 +4,12 @@ import { CurrentScan } from "../currentScan.tsx";
 import { PathResultsTable } from "./overview/pathResultsTable.tsx";
 import { IssueSummary } from "./overview/issueSummary.tsx";
 import { A11yScore } from "./overview/a11yScore.tsx";
+import { CurrentScanDeletionAlert } from "./overview/CurrentScanDeletionAlert.tsx";
 
 export const Overview = ({ profile }: { profile: ScanProfile }) => {
   return (
     <Section>
+      <CurrentScanDeletionAlert />
       <CurrentScan />
       <A11yScore profile={profile} />
       <IssueSummary profile={profile} />
