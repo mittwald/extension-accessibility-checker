@@ -55,6 +55,10 @@ export class Page {
 }
 
 @index({ status: 1, executionScheduledFor: 1 })
+@index(
+  { completedAt: 1 },
+  { expireAfterSeconds: 60 * 60 * 24 * 90 }, // Expire after 90 days
+)
 @modelOptions({
   schemaOptions: { collection: "scans", versionKey: false },
   options: { automaticName: false },
