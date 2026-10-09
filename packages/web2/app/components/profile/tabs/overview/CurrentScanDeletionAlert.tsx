@@ -1,39 +1,30 @@
 import { FC } from "react";
 import { Alert, Heading, Text } from "@mittwald/flow-remote-react-components";
 import { useProfileData } from "../../../../hooks/useProfileData.tsx";
-import { DateTime } from "luxon";
+import {
+  deletionDays,
+  getDeletionDate,
+  isDeletionDateSoon,
+} from "../../helpers.ts";
 
 export const CurrentScanDeletionAlert: FC = () => {
   const { lastSuccessfulScan } = useProfileData();
 
-  const expiryDays = 90;
-  const warningDays = 14;
+  const deletionDate = getDeletionDate(lastSuccessfulScan);
+  const isDeletedSoon = isDeletionDateSoon(lastSuccessfulScan);
 
-  const lastSuccessfulScanCompletionDate = lastSuccessfulScan?.completedAt;
-  if (!lastSuccessfulScanCompletionDate) {
+  if (!isDeletedSoon || !deletionDate) {
     return null;
   }
-
-  const deletionDate = DateTime.fromJSDate(
-    lastSuccessfulScanCompletionDate,
-  ).plus({ days: expiryDays });
-  const warningDate = deletionDate.minus({ days: warningDays });
-
-  console.log(warningDate.toISO(), warningDate.diffNow().as("days"));
-
-  if (warningDate.diffNow().as("days") > 0) {
-    return null;
-  }
-
-  const deletionDateString = deletionDate.toFormat("dd.MM.yyyy");
 
   return (
     <Alert status="warning">
-      <Heading>Löschung nach {expiryDays} Tagen</Heading>
+      <Heading>Löschung nach {deletionDays} Tagen</Heading>
       <Text>
-        Der letzte Scan ist bald {expiryDays} Tage alt und wird{" "}
-        <strong>am {deletionDateString} gelöscht.</strong> Stelle einen
-        Intervall ein, um jederzeit den aktuellsten Scan deiner Seite zu sehen.
+        Der letzte Scan ist bald {deletionDays} Tage alt und das Ergebnis wird{" "}
+        <strong>am {deletionDate.toFormat("dd.MM.yyyy")} gelöscht.</strong>{" "}
+        Stelle einen Intervall ein, um jederzeit das aktuellste Ergebnis deiner
+        Scans zu sehen.
       </Text>
     </Alert>
   );
