@@ -1,5 +1,9 @@
 import { ScanProfile } from "../../api/types.ts";
-import { isPending, isRunning } from "../profile/helpers.ts";
+import {
+  isDeletionDateSoon,
+  isPending,
+  isRunning,
+} from "../profile/helpers.ts";
 import {
   AlertBadge,
   Avatar,
@@ -11,16 +15,24 @@ import {
 import { ProfileListContextMenu } from "./profileListContextMenu.tsx";
 
 const StateBatch = ({ profile }: { profile: ScanProfile }) => {
-  if (!profile.nextScan) {
-    return null;
+  const isDeletedSoon = isDeletionDateSoon(profile.lastScan);
+
+  if (profile.nextScan) {
+    if (isRunning(profile.nextScan)) {
+      return <AlertBadge status="info">Wird ausgeführt …</AlertBadge>;
+    }
+    if (isPending(profile.nextScan)) {
+      return <AlertBadge status="info">Wird gestartet …</AlertBadge>;
+    }
   }
 
-  if (isRunning(profile.nextScan)) {
-    return <AlertBadge status="info">Wird ausgeführt …</AlertBadge>;
+  if (isDeletedSoon) {
+    return (
+      <AlertBadge status="warning">Ergebnis wird bald gelöscht</AlertBadge>
+    );
   }
-  if (isPending(profile.nextScan)) {
-    return <AlertBadge status="info">Wird gestartet …</AlertBadge>;
-  }
+
+  return null;
 };
 
 export function ProfileListItemView(props: { profile: ScanProfile }) {

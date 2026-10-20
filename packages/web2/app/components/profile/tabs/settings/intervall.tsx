@@ -13,18 +13,15 @@ import {
   Text,
 } from "@mittwald/flow-remote-react-components";
 import { useProfileData } from "../../../../hooks/useProfileData.tsx";
-import { isRunningOrPending } from "../../helpers.ts";
-import { useRouter } from "@tanstack/react-router";
-import { startScan } from "../../../../actions/scan.ts";
 import { EditIntervalModal } from "../../modals/EditIntervalModal.js";
 import { CronText } from "../../CronFields/CronText.js";
 import { SaveResourcesBanner } from "./components/saveResourcesBanner.tsx";
 import { hasDailyCronInterval } from "../../../../lib/hasDailyCronInterval.ts";
+import { StartScanButton } from "./components/StartScanButton.tsx";
 
 export const IntarvallSettings = () => {
   const { profile } = useProfileData();
   const nextScan = profile.nextScan;
-  const router = useRouter();
 
   const nextExecution = nextScan?.executionScheduledFor;
 
@@ -38,16 +35,7 @@ export const IntarvallSettings = () => {
           </Button>
           <EditIntervalModal profile={profile} />
         </ModalTrigger>
-        <Button
-          color="success"
-          onPress={async () => {
-            await startScan({ data: { profileId: profile._id } });
-            await router.invalidate({ sync: true });
-          }}
-          isDisabled={isRunningOrPending(nextScan)}
-        >
-          Scan starten
-        </Button>
+        <StartScanButton profile={profile} />
       </Header>
       {hasDailyCronInterval(profile) && (
         <SaveResourcesBanner profile={profile} />
