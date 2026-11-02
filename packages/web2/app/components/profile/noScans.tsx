@@ -1,6 +1,11 @@
 import { ScanProfile } from "../../api/types.ts";
 import { useRouter } from "@tanstack/react-router";
-import { isRunning, isRunningOrPending } from "./helpers.ts";
+import {
+  deletionDays,
+  isRunning,
+  isRunningOrPending,
+  isScanResultExpired,
+} from "./helpers.ts";
 import {
   Button,
   Heading,
@@ -10,11 +15,13 @@ import {
   ProgressBar,
   Text,
 } from "@mittwald/flow-remote-react-components";
-import { IconWorldSearch } from "@tabler/icons-react";
+import { IconClockX, IconWorldSearch } from "@tabler/icons-react";
 import { startScan } from "../../actions/scan.ts";
+import { useProfileData } from "../../hooks/useProfileData.tsx";
 
 export function NoScans({ profile }: { profile: ScanProfile }) {
   const router = useRouter();
+  const { lastSuccessfulScan } = useProfileData();
 
   if (isRunningOrPending(profile.nextScan)) {
     const scan = profile.nextScan!;
@@ -45,13 +52,31 @@ export function NoScans({ profile }: { profile: ScanProfile }) {
     );
   }
 
+  const isExpired = isScanResultExpired(profile, lastSuccessfulScan);
+
   return (
     <IllustratedMessage>
-      <Icon>
-        <IconWorldSearch />
-      </Icon>
-      <Heading>Los geht’s!</Heading>
-      <Text wrap="balance">Der Scan wurde noch nicht ausgeführt.</Text>
+      {isExpired ? (
+        <>
+          <Icon>
+            <IconClockX />
+          </Icon>
+          <Heading>Scan-Ergebnis gelöscht</Heading>
+          <Text wrap="balance">
+            Scan-Ergebnisse werden nach {deletionDays} Tagen automatisch
+            gelöscht. Starte einen neuen Scan, um ein aktuelles Ergebnis zu
+            erhalten.
+          </Text>
+        </>
+      ) : (
+        <>
+          <Icon>
+            <IconWorldSearch />
+          </Icon>
+          <Heading>Los geht’s!</Heading>
+          <Text wrap="balance">Der Scan wurde noch nicht ausgeführt.</Text>
+        </>
+      )}
       <Button
         color="success"
         onPress={async () => {

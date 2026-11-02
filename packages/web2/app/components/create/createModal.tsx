@@ -1,6 +1,7 @@
 import {
   Action,
   ActionGroup,
+  Alert,
   Button,
   Content,
   Header,
@@ -27,6 +28,7 @@ import {
   GeneratePathsAction,
 } from "../generatePaths/generatePaths.tsx";
 import { GenerateErrorAlert } from "../generatePaths/GenerateErrorAlert.tsx";
+import { deletionDays } from "../profile/helpers.ts";
 
 export const CreateModal = () => {
   const goToProfile = useGoToProfile();
@@ -81,6 +83,14 @@ export const CreateModal = () => {
                   <Domain />
                 </Tab>
               </Tabs>
+              <Alert>
+                <Heading>Automatische Löschung</Heading>
+                <Text>
+                  Erfolgreiche Scans werden nach {deletionDays} Tagen
+                  automatisch gelöscht. Führe regelmäßig Scans aus, um die
+                  Barrierefreiheit deiner Seite im Blick zu behalten.
+                </Text>
+              </Alert>
               <Header>
                 <Heading>Unterseiten hinzufügen</Heading>
                 <GeneratePathsAction
