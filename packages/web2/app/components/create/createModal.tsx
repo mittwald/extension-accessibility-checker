@@ -1,6 +1,7 @@
 import {
   Action,
   ActionGroup,
+  Alert,
   Button,
   Content,
   Header,
@@ -27,6 +28,7 @@ import {
   GeneratePathsAction,
 } from "../generatePaths/generatePaths.tsx";
 import { GenerateErrorAlert } from "../generatePaths/GenerateErrorAlert.tsx";
+import { deletionDays } from "../profile/helpers.ts";
 
 export const CreateModal = () => {
   const goToProfile = useGoToProfile();
@@ -71,6 +73,14 @@ export const CreateModal = () => {
                 Wähle eine bestehende Domain aus dem mStudio oder gib eine
                 individuelle Domain ein.
               </Text>
+              <Alert>
+                <Heading>Automatische Löschung</Heading>
+                <Text>
+                  Scan-Ergebnisse werden nach {deletionDays} Tagen automatisch
+                  gelöscht. Führe regelmäßig Scans aus, um die Barrierefreiheit
+                  deiner Seite im Blick zu behalten.
+                </Text>
+              </Alert>
               <Tabs>
                 <Tab id="mstudio">
                   <TabTitle>mStudio Domain</TabTitle>

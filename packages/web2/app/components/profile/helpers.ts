@@ -1,4 +1,4 @@
-import { Scan } from "../../api/types.ts";
+import { Scan, ScanProfile } from "../../api/types.ts";
 import { DateTime } from "luxon";
 
 export const isRunning = (scan: Scan) => {
@@ -35,4 +35,21 @@ export const isDeletionDateSoon = (scan?: Scan): boolean => {
   const deletionWarningDate = deletionDate.minus({ days: deletionWarningDays });
 
   return deletionWarningDate.diffNow().as("days") <= 0;
+};
+
+// Heuristic: every profile gets a scan on creation, so a profile older than the
+// deletion period without a successful scan most likely had its result deleted.
+export const isScanResultExpired = (
+  profile: ScanProfile,
+  lastSuccessfulScan?: Scan,
+): boolean => {
+  if (lastSuccessfulScan) {
+    return false;
+  }
+
+  const deletionPeriodEnd = DateTime.fromJSDate(profile.createdAt).plus({
+    days: deletionDays,
+  });
+
+  return deletionPeriodEnd.diffNow().as("days") <= 0;
 };

@@ -3,6 +3,7 @@ import {
   isDeletionDateSoon,
   isPending,
   isRunning,
+  isScanResultExpired,
 } from "../profile/helpers.ts";
 import {
   AlertBadge,
@@ -30,6 +31,10 @@ const StateBatch = ({ profile }: { profile: ScanProfile }) => {
     return (
       <AlertBadge status="warning">Ergebnis wird bald gelöscht</AlertBadge>
     );
+  }
+
+  if (isScanResultExpired(profile, profile.lastScan)) {
+    return <AlertBadge status="warning">Ergebnis gelöscht</AlertBadge>;
   }
 
   return null;
