@@ -73,6 +73,14 @@ export const CreateModal = () => {
                 Wähle eine bestehende Domain aus dem mStudio oder gib eine
                 individuelle Domain ein.
               </Text>
+              <Alert>
+                <Heading>Automatische Löschung</Heading>
+                <Text>
+                  Scan-Ergebnisse werden nach {deletionDays} Tagen automatisch
+                  gelöscht. Führe regelmäßig Scans aus, um die Barrierefreiheit
+                  deiner Seite im Blick zu behalten.
+                </Text>
+              </Alert>
               <Tabs>
                 <Tab id="mstudio">
                   <TabTitle>mStudio Domain</TabTitle>
@@ -83,14 +91,6 @@ export const CreateModal = () => {
                   <Domain />
                 </Tab>
               </Tabs>
-              <Alert>
-                <Heading>Automatische Löschung</Heading>
-                <Text>
-                  Erfolgreiche Scans werden nach {deletionDays} Tagen
-                  automatisch gelöscht. Führe regelmäßig Scans aus, um die
-                  Barrierefreiheit deiner Seite im Blick zu behalten.
-                </Text>
-              </Alert>
               <Header>
                 <Heading>Unterseiten hinzufügen</Heading>
                 <GeneratePathsAction
