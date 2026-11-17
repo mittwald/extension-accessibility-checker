@@ -122,6 +122,7 @@ MONGODB_URI="mongodb://localhost:27017/extension-a11y-checker"
 NODE_ENV="development"
 
 MITTWALD_KEY_PROVIDER_API_URL="http://localhost:8080/"
+EXTENSION_ID="<uuid of the extension>"
 EXTENSION_SECRET="mwes-..."
 ```
 
