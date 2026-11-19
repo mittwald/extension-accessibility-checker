@@ -97,7 +97,7 @@ the mongoose library. The data is stored in a MongoDB database.
 ## Development
 
 NodeJS dependencies are managed using [pnpm](https://pnpm.io/). Make sure
-[NodeJS](https://nodejs.org/en) v22 or higher is installed, enable pnpm via
+[NodeJS](https://nodejs.org/en) v24 or higher is installed (see `.nvmrc`), enable pnpm via
 `corepack enable` (it picks up the version pinned in `package.json`) and run
 `pnpm install` to install the dependencies.
 
