@@ -18,6 +18,7 @@ declare module "pa11y" {
     runners?: ("htmlcs" | "axe" | string)[];
     browser?: any;
     page?: any;
+    userAgent?: string;
     // Add other options as needed
   }
 

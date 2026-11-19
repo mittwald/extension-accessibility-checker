@@ -85,12 +85,20 @@ const groupIssuesByCategoryAndTechnique = (
       (s) => s.selector === issue.selector,
     );
     if (occurrence) {
-      occurrence.urls.push(issue.url);
+      occurrence.urls.push({
+        url: issue.url,
+        screenshot: issue.screenshot,
+      });
     } else {
       aggregatedIssue.selectors.push({
         selector: issue.selector,
         context: issue.context,
-        urls: [issue.url],
+        urls: [
+          {
+            url: issue.url,
+            screenshot: issue.screenshot,
+          },
+        ],
       });
     }
   }

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from "./routes/__root"
 import { Route as IndexRouteImport } from "./routes/index"
 import { Route as ProfilesProfileIdRouteImport } from "./routes/profiles.$profileId"
 import { Route as ApiPdfExportProfileIdRouteImport } from "./routes/api/pdf-export.$profileId"
+import { Route as ApiScreenshotScreenshotIdRouteImport } from "./routes/api/screenshot.$screenshotId"
 import { Route as ApiWebhooksExtensionAddedRouteImport } from "./routes/api/webhooks/extension-added"
 import { Route as ApiWebhooksInstanceRemovedRouteImport } from "./routes/api/webhooks/instance-removed"
 import { Route as ApiWebhooksInstanceUpdatedRouteImport } from "./routes/api/webhooks/instance-updated"
@@ -36,6 +37,12 @@ const ApiPdfExportProfileIdRoute = ApiPdfExportProfileIdRouteImport.update({
   path: "/api/pdf-export/$profileId",
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiScreenshotScreenshotIdRoute =
+  ApiScreenshotScreenshotIdRouteImport.update({
+    id: "/api/screenshot/$screenshotId",
+    path: "/api/screenshot/$screenshotId",
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiWebhooksExtensionAddedRoute =
   ApiWebhooksExtensionAddedRouteImport.update({
     id: "/api/webhooks/extension-added",
@@ -87,6 +94,7 @@ export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
   "/profiles/$profileId": typeof ProfilesProfileIdRouteWithChildren
   "/api/pdf-export/$profileId": typeof ApiPdfExportProfileIdRoute
+  "/api/screenshot/$screenshotId": typeof ApiScreenshotScreenshotIdRoute
   "/api/webhooks/extension-added": typeof ApiWebhooksExtensionAddedRoute
   "/api/webhooks/instance-removed": typeof ApiWebhooksInstanceRemovedRoute
   "/api/webhooks/instance-updated": typeof ApiWebhooksInstanceUpdatedRoute
@@ -99,6 +107,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/api/pdf-export/$profileId": typeof ApiPdfExportProfileIdRoute
+  "/api/screenshot/$screenshotId": typeof ApiScreenshotScreenshotIdRoute
   "/api/webhooks/extension-added": typeof ApiWebhooksExtensionAddedRoute
   "/api/webhooks/instance-removed": typeof ApiWebhooksInstanceRemovedRoute
   "/api/webhooks/instance-updated": typeof ApiWebhooksInstanceUpdatedRoute
@@ -113,6 +122,7 @@ export interface FileRoutesById {
   "/": typeof IndexRoute
   "/profiles/$profileId": typeof ProfilesProfileIdRouteWithChildren
   "/api/pdf-export/$profileId": typeof ApiPdfExportProfileIdRoute
+  "/api/screenshot/$screenshotId": typeof ApiScreenshotScreenshotIdRoute
   "/api/webhooks/extension-added": typeof ApiWebhooksExtensionAddedRoute
   "/api/webhooks/instance-removed": typeof ApiWebhooksInstanceRemovedRoute
   "/api/webhooks/instance-updated": typeof ApiWebhooksInstanceUpdatedRoute
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | "/"
     | "/profiles/$profileId"
     | "/api/pdf-export/$profileId"
+    | "/api/screenshot/$screenshotId"
     | "/api/webhooks/extension-added"
     | "/api/webhooks/instance-removed"
     | "/api/webhooks/instance-updated"
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
   to:
     | "/"
     | "/api/pdf-export/$profileId"
+    | "/api/screenshot/$screenshotId"
     | "/api/webhooks/extension-added"
     | "/api/webhooks/instance-removed"
     | "/api/webhooks/instance-updated"
@@ -153,6 +165,7 @@ export interface FileRouteTypes {
     | "/"
     | "/profiles/$profileId"
     | "/api/pdf-export/$profileId"
+    | "/api/screenshot/$screenshotId"
     | "/api/webhooks/extension-added"
     | "/api/webhooks/instance-removed"
     | "/api/webhooks/instance-updated"
@@ -167,6 +180,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ProfilesProfileIdRoute: typeof ProfilesProfileIdRouteWithChildren
   ApiPdfExportProfileIdRoute: typeof ApiPdfExportProfileIdRoute
+  ApiScreenshotScreenshotIdRoute: typeof ApiScreenshotScreenshotIdRoute
   ApiWebhooksExtensionAddedRoute: typeof ApiWebhooksExtensionAddedRoute
   ApiWebhooksInstanceRemovedRoute: typeof ApiWebhooksInstanceRemovedRoute
   ApiWebhooksInstanceUpdatedRoute: typeof ApiWebhooksInstanceUpdatedRoute
@@ -194,6 +208,13 @@ declare module "@tanstack/react-router" {
       path: "/api/pdf-export/$profileId"
       fullPath: "/api/pdf-export/$profileId"
       preLoaderRoute: typeof ApiPdfExportProfileIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/api/screenshot/$screenshotId": {
+      id: "/api/screenshot/$screenshotId"
+      path: "/api/screenshot/$screenshotId"
+      fullPath: "/api/screenshot/$screenshotId"
+      preLoaderRoute: typeof ApiScreenshotScreenshotIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/api/webhooks/extension-added": {
@@ -276,6 +297,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ProfilesProfileIdRoute: ProfilesProfileIdRouteWithChildren,
   ApiPdfExportProfileIdRoute: ApiPdfExportProfileIdRoute,
+  ApiScreenshotScreenshotIdRoute: ApiScreenshotScreenshotIdRoute,
   ApiWebhooksExtensionAddedRoute: ApiWebhooksExtensionAddedRoute,
   ApiWebhooksInstanceRemovedRoute: ApiWebhooksInstanceRemovedRoute,
   ApiWebhooksInstanceUpdatedRoute: ApiWebhooksInstanceUpdatedRoute,

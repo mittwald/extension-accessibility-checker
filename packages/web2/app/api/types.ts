@@ -24,12 +24,19 @@ export interface ScanProfileWithSuccessfulScan extends ScanProfile {
   lastSuccessfulScan?: Scan;
 }
 
+export interface IssueScreenshot {
+  id: string;
+  width: number;
+  height: number;
+}
+
 export interface Issue {
   errorCode: string;
   severity: "error" | "warning" | "notice";
   description: string;
   context?: string;
   selector?: string;
+  screenshot?: IssueScreenshot;
   url: string;
 }
 
