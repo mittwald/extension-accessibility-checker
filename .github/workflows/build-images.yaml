@@ -3,32 +3,32 @@
 #   ghcr.io/mittwald/extension-accessibility-checker/web
 #   ghcr.io/mittwald/extension-accessibility-checker/executor
 #
+# Images are only published for release tags (v*), which are then deployed via
+# deploy.yaml. Pushes to main publish and deploy nothing.
+#
 # Tags:
-#   sha-<full commit sha>  every pushed build; immutable, this is what gets deployed
-#   v1.2.3                 release tags (same pattern as before: v*)
-#   latest                 builds from main
+#   sha-<full commit sha>  immutable, this is what gets deployed
+#   v1.2.3                 the release tag
 #
 # Pull requests only build (no push), so the Dockerfiles are checked before
 # merge. Pushing uses the built-in GITHUB_TOKEN; no extra secrets are needed.
 #
 # The packages are private. Whoever pulls them (e.g. the mittwald container
 # stack) needs a token with read:packages.
-#
-# After a v* tag is built, the release is deployed via deploy.yaml.
 
 name: Build Images
 
 on:
   push:
-    branches: ["main"]
     tags: ["v*"]
   pull_request:
     branches: ["main"]
+  # Manual runs push only when started on a v* tag (rebuild without deploying).
   workflow_dispatch:
 
 concurrency:
   group: build-images-${{ github.ref }}
-  # Superseded PR builds can go; builds on main and tags always finish.
+  # Superseded PR builds can go; tag builds always finish.
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
@@ -42,6 +42,8 @@ jobs:
     permissions:
       contents: read
       packages: write
+    env:
+      PUBLISH: ${{ startsWith(github.ref, 'refs/tags/v') }}
     strategy:
       fail-fast: false
       matrix:
@@ -59,7 +61,7 @@ jobs:
         uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
 
       - name: Log in to GHCR
-        if: github.event_name != 'pull_request'
+        if: env.PUBLISH == 'true'
         uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
         with:
           registry: ghcr.io
@@ -74,7 +76,6 @@ jobs:
           tags: |
             type=sha,format=long,prefix=sha-
             type=ref,event=tag
-            type=raw,value=latest,enable={{is_default_branch}}
           labels: |
             org.opencontainers.image.title=extension-accessibility-checker-${{ matrix.image }}
 
@@ -85,14 +86,13 @@ jobs:
           file: ${{ matrix.dockerfile }}
           # mittwald container hosting runs amd64 only.
           platforms: linux/amd64
-          push: ${{ github.event_name != 'pull_request' }}
+          push: ${{ env.PUBLISH == 'true' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha,scope=${{ matrix.image }}
           cache-to: type=gha,scope=${{ matrix.image }},mode=max
 
-  # Release tags go straight on to the deploy (which may still wait for an
-  # approval, depending on the "production" environment's protection rules).
+  # Pushed release tags go straight on to the deploy.
   deploy:
     name: Deploy
     needs: build

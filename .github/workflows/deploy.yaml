@@ -88,6 +88,19 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: refs/tags/${{ inputs.ref }}
+          # Full history, so the next step can see whether the tag is on main.
+          fetch-depth: 0
+
+      # Only released code from main is deployed – not a tag someone put on a
+      # branch or fork commit.
+      - name: Check that the tag is on main
+        env:
+          REF: ${{ inputs.ref }}
+        run: |
+          if ! git merge-base --is-ancestor HEAD origin/main; then
+            echo "::error::$REF does not point to a commit on main. Nothing was deployed."
+            exit 1
+          fi
 
       - name: Resolve images
         id: images

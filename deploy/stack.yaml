@@ -44,7 +44,7 @@ services:
 
   # Never recreated by the deploy (skip_recreation in deploy.yaml).
   mongo:
-    image: "mongo:8.0"
+    image: "mongo:8"
     description: "a11y checker – MongoDB"
     volumes:
       - "mongo_data:/data/db"
