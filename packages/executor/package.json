@@ -8,10 +8,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nodemon --watch 'src/**/*.ts' --exec 'yarn start'",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'pnpm start'",
     "build": "tsc",
-    "compile": "yarn build",
-    "start": "yarn build && LOG_LEVEL=debug DEBUG='*,-puppeteer:protocol*' MONGODB_URI=mongodb://localhost:27017/extension-a11y-checker node --no-experimental-require-module dist/index.js",
+    "compile": "pnpm build",
+    "start": "pnpm build && LOG_LEVEL=debug DEBUG='*,-puppeteer:protocol*' MONGODB_URI=mongodb://localhost:27017/extension-a11y-checker node --no-experimental-require-module dist/index.js",
     "format": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --write",
     "format:check": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --check"
   },
@@ -32,6 +32,5 @@
     "eslint": "^9",
     "nodemon": "^3.1.9",
     "typescript": "^5"
-  },
-  "packageManager": "yarn@4.6.0"
+  }
 }

@@ -21,7 +21,7 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc",
-    "compile": "yarn build",
+    "compile": "pnpm build",
     "format": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --write",
     "format:check": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}' --check"
   },
@@ -36,6 +36,5 @@
     "@types/node": "^20",
     "eslint": "^9",
     "typescript": "^5"
-  },
-  "packageManager": "yarn@4.6.0"
+  }
 }

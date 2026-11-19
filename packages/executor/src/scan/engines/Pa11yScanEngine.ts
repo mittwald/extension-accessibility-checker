@@ -1,6 +1,11 @@
-import { Issue, Page, Scan } from "extension-a11y-checker-storage";
+import {
+  DocumentType,
+  isDocument,
+  Issue,
+  Page,
+  Scan,
+} from "extension-a11y-checker-storage";
 import pa11y, { Pa11yIssue, Pa11yOptions, Pa11yResults } from "pa11y";
-import { DocumentType, isDocument } from "@typegoose/typegoose";
 import { PageResult, ScanEngine, ScanResults } from "./ScanEngine.js";
 import { logger } from "../../logger.js";
 import { Lighthouse } from "../Lighthouse.js";

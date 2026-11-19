@@ -1,5 +1,9 @@
-import { DocumentType } from "@typegoose/typegoose";
-import { Issue, Page, Scan } from "extension-a11y-checker-storage";
+import {
+  DocumentType,
+  Issue,
+  Page,
+  Scan,
+} from "extension-a11y-checker-storage";
 import { Pa11yScanEngine } from "./Pa11yScanEngine.js";
 
 export type PageResult = Pick<
