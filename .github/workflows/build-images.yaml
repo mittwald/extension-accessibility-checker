@@ -1,0 +1,108 @@
+# Builds the web and executor images and pushes them to GHCR.
+#
+#   ghcr.io/mittwald/extension-accessibility-checker/web
+#   ghcr.io/mittwald/extension-accessibility-checker/executor
+#
+# Images are only published for release tags (v*), which are then deployed via
+# deploy.yaml. Pushes to main publish and deploy nothing.
+#
+# Tags:
+#   sha-<full commit sha>  immutable, this is what gets deployed
+#   v1.2.3                 the release tag
+#
+# Pull requests only build (no push), so the Dockerfiles are checked before
+# merge. Pushing uses the built-in GITHUB_TOKEN; no extra secrets are needed.
+#
+# The packages are private. Whoever pulls them (e.g. the mittwald container
+# stack) needs a token with read:packages.
+
+name: Build Images
+
+on:
+  push:
+    tags: ["v*"]
+  pull_request:
+    branches: ["main"]
+  # Manual runs push only when started on a v* tag (rebuild without deploying).
+  workflow_dispatch:
+
+concurrency:
+  group: build-images-${{ github.ref }}
+  # Superseded PR builds can go; tag builds always finish.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build ${{ matrix.image }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      packages: write
+    env:
+      PUBLISH: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - image: web
+            dockerfile: packages/web2/Dockerfile
+          - image: executor
+            dockerfile: packages/executor/Dockerfile
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+
+      - name: Log in to GHCR
+        if: env.PUBLISH == 'true'
+        uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Image metadata
+        id: meta
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
+        with:
+          images: ghcr.io/${{ github.repository }}/${{ matrix.image }}
+          tags: |
+            type=sha,format=long,prefix=sha-
+            type=ref,event=tag
+          labels: |
+            org.opencontainers.image.title=extension-accessibility-checker-${{ matrix.image }}
+
+      - name: Build and push
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          file: ${{ matrix.dockerfile }}
+          # mittwald container hosting runs amd64 only.
+          platforms: linux/amd64
+          push: ${{ env.PUBLISH == 'true' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha,scope=${{ matrix.image }}
+          cache-to: type=gha,scope=${{ matrix.image }},mode=max
+
+  # Pushed release tags go straight on to the deploy.
+  deploy:
+    name: Deploy
+    needs: build
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: read
+      packages: read
+    uses: ./.github/workflows/deploy.yaml
+    # The deploy reads its secrets from the repository; a called workflow
+    # only gets them when they are passed on explicitly.
+    secrets: inherit
+    with:
+      ref: ${{ github.ref_name }}
