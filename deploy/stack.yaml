@@ -20,9 +20,7 @@ services:
     envs:
       NODE_ENV: "production"
       LOG_LEVEL: "info"
-      # Kept on one line: a wrapped line would split the template placeholder.
-      # prettier-ignore
-      MONGODB_URI: "mongodb://a11y:{{ .Env.MONGO_PASSWORD }}@mongo:27017/extension-a11y-checker?authSource=admin"
+      MONGODB_URI: "mongodb://mongo:27017/extension-a11y-checker"
       EXTENSION_ID: "{{ .Env.EXTENSION_ID }}"
       EXTENSION_SECRET: "{{ .Env.EXTENSION_SECRET }}"
     deploy:
@@ -37,8 +35,7 @@ services:
     envs:
       NODE_ENV: "production"
       LOG_LEVEL: "info"
-      # prettier-ignore
-      MONGODB_URI: "mongodb://a11y:{{ .Env.MONGO_PASSWORD }}@mongo:27017/extension-a11y-checker?authSource=admin"
+      MONGODB_URI: "mongodb://mongo:27017/extension-a11y-checker"
     deploy:
       resources:
         limits:
@@ -46,14 +43,9 @@ services:
           memory: "2gb"
 
   # Never recreated by the deploy (skip_recreation in deploy.yaml).
-  # The root user is only created when the volume is empty; changing
-  # MONGO_PASSWORD later does not change the password inside the database.
   mongo:
     image: "mongo:8.0"
     description: "a11y checker – MongoDB"
-    envs:
-      MONGO_INITDB_ROOT_USERNAME: "a11y"
-      MONGO_INITDB_ROOT_PASSWORD: "{{ .Env.MONGO_PASSWORD }}"
     volumes:
       - "mongo_data:/data/db"
     deploy:
