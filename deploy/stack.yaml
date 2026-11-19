@@ -29,9 +29,12 @@ services:
           cpus: "0.5"
           memory: "512mb"
 
+  # Two identical executors run scans in parallel. Each one claims the next
+  # queued scan atomically (Scan.getNextPending → findOneAndUpdate), so no scan
+  # is picked up twice. Keep both services in sync when changing one of them.
   executor:
     image: "{{ .Env.EXECUTOR_IMAGE }}"
-    description: "a11y checker – scan executor (Chrome, pa11y, Lighthouse)"
+    description: "a11y checker – scan executor 1 (Chrome, pa11y, Lighthouse)"
     envs:
       NODE_ENV: "production"
       LOG_LEVEL: "info"
@@ -40,7 +43,20 @@ services:
       resources:
         limits:
           cpus: "2"
-          memory: "2gb"
+          memory: "4gb"
+
+  executor-2:
+    image: "{{ .Env.EXECUTOR_IMAGE }}"
+    description: "a11y checker – scan executor 2 (Chrome, pa11y, Lighthouse)"
+    envs:
+      NODE_ENV: "production"
+      LOG_LEVEL: "info"
+      MONGODB_URI: "mongodb://mongo:27017/extension-a11y-checker"
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: "4gb"
 
   # Never recreated by the deploy (skip_recreation in deploy.yaml).
   mongo:
