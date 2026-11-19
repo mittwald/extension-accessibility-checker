@@ -96,9 +96,10 @@ the mongoose library. The data is stored in a MongoDB database.
 
 ## Development
 
-NodeJS dependencies are managed using [yarn](https://yarnpkg.com/). Make sure
-[NodeJS](https://nodejs.org/en) v22 or higher is installed. Run `yarn install`
-to install the dependencies.
+NodeJS dependencies are managed using [pnpm](https://pnpm.io/). Make sure
+[NodeJS](https://nodejs.org/en) v24 or higher is installed (see `.nvmrc`), enable pnpm via
+`corepack enable` (it picks up the version pinned in `package.json`) and run
+`pnpm install` to install the dependencies.
 
 ### Preparation
 
@@ -144,7 +145,7 @@ docker exec mongodb mongosh extension-a11y-checker \
 In the root directory of the project run:
 
 ```shell
-yarn dev
+pnpm dev
 ```
 
 This will start the frontend app and the executor in watch mode. The frontend
@@ -154,7 +155,7 @@ changes on the model classes are made, frontend and executor need to be
 restarted manually.
 
 Alternatively you can start the frontend and executor separately by running
-`yarn dev` in each package directory.
+`pnpm dev` in each package directory.
 
 ### Load the frontend fragments
 

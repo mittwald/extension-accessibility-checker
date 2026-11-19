@@ -1,0 +1,9 @@
+packages:
+  - "packages/*"
+
+# pnpm skips dependency install scripts unless they are allowed here.
+# puppeteer downloads the Chrome build the executor scans with.
+allowBuilds:
+  esbuild: true
+  nx: true
+  puppeteer: true

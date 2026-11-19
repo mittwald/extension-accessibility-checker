@@ -1,6 +1,10 @@
-import { Scan, ScanModel } from "extension-a11y-checker-storage";
+import {
+  DocumentType,
+  isDocument,
+  Scan,
+  ScanModel,
+} from "extension-a11y-checker-storage";
 import { ScanEngineFactory } from "./engines/ScanEngine.js";
-import { DocumentType, isDocument } from "@typegoose/typegoose";
 import { logger } from "../logger.js";
 
 const log = logger.child({ module: "ScanExecutor" });

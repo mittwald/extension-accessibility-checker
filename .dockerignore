@@ -6,7 +6,6 @@
 **/.nx
 .git
 *.log
-yarn-error.log*
 npm-debug.log*
 pnpm-debug.log*
 .env

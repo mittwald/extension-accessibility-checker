@@ -1,22 +1,25 @@
-FROM --platform=amd64 node:22 AS builder
+FROM --platform=amd64 node:24 AS builder
 
 WORKDIR /app
 
-COPY .yarn .yarn
-COPY package.json yarn.lock .yarnrc.yml nx.json ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml nx.json ./
 COPY packages/storage/package.json ./packages/storage/
 COPY packages/executor/package.json ./packages/executor/
+# pnpm checks every workspace project against the lockfile, so the web2
+# manifest is needed even though only executor and storage get installed.
+COPY packages/web2/package.json ./packages/web2/
 
-RUN yarn install
+RUN corepack enable \
+    && pnpm install --frozen-lockfile --filter . --filter "extension-a11y-checker-executor..."
 
 COPY packages/storage ./packages/storage
 COPY packages/executor ./packages/executor
 
 ENV NX_DAEMON=false
-RUN yarn nx run extension-a11y-checker-executor:build
+RUN pnpm nx run extension-a11y-checker-executor:build
 
 
-FROM --platform=amd64 node:22-slim
+FROM --platform=amd64 node:24-slim
 WORKDIR /app
 
 RUN apt-get update \
