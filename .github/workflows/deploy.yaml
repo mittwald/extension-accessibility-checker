@@ -1,0 +1,160 @@
+# Deploys a release to the mittwald container stack (deploy/stack.yaml).
+#
+# It does not build anything: it deploys the sha-<commit> images that
+# "Build Images" pushed for the release tag. Two ways in:
+#
+#   - automatically: "Build Images" calls this workflow after building a v* tag
+#   - manually: Actions → Deploy → Run workflow, with the tag to deploy.
+#     Deploying an older tag is the rollback.
+#
+# Configuration lives in the GitHub environment "production"
+# (Settings → Environments). Use environment secrets/variables, not repository
+# ones – a called workflow only sees the environment's.
+#
+#   secrets:
+#     MITTWALD_API_TOKEN  mStudio API token with access to the stack's project
+#     EXTENSION_SECRET    extension secret from the mStudio contributor area
+#     MONGO_PASSWORD      password of the "a11y" Mongo user; letters and digits
+#                         only, it ends up in a connection URI
+#   variables:
+#     MITTWALD_STACK_ID   UUID of the container stack
+#     EXTENSION_ID        UUID of the extension
+#     DEPLOYMENT_URL      (optional) public URL, shown on the deployment
+#
+# One-time setup in the mStudio project: add ghcr.io as a container registry
+# with credentials that can read the private images (a classic GitHub token
+# with read:packages), and point the domain to service "web", port 3000.
+
+name: Deploy
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        description: "Release tag to deploy"
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      ref:
+        description:
+          'Release tag to deploy, e.g. v1.6.0 (leave "Use workflow from" on
+          main)'
+        required: true
+        type: string
+
+# Never run two deploys against the stack at once, and never cancel one that
+# is already running – a half-applied stack update is worse than waiting.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy ${{ inputs.ref }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment:
+      name: production
+      url: ${{ vars.DEPLOYMENT_URL }}
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      # A manual run executes the workflow file of the selected branch. Running
+      # it from an old tag would use that tag's (possibly outdated) deploy logic.
+      - name: Refuse manual runs from anything but main
+        if:
+          github.event_name == 'workflow_dispatch' && github.ref !=
+          'refs/heads/main'
+        run: |
+          echo "::error::Set 'Use workflow from' to main and put the tag into the 'ref' input."
+          exit 1
+
+      - name: Check release tag
+        env:
+          REF: ${{ inputs.ref }}
+        run: |
+          if [[ ! "$REF" =~ ^v[0-9]+(\.[0-9]+){2,3}(-.+)?$ ]]; then
+            echo "::error::'$REF' is not a release tag (expected e.g. v1.6.0)."
+            exit 1
+          fi
+
+      # stack.yaml is taken from the release, so a rollback also restores that
+      # release's services, limits and settings.
+      - name: Checkout ${{ inputs.ref }}
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: refs/tags/${{ inputs.ref }}
+
+      - name: Resolve images
+        id: images
+        run: |
+          sha="$(git rev-parse HEAD)"
+          repo="${GITHUB_REPOSITORY,,}"
+          {
+            echo "web=ghcr.io/${repo}/web:sha-${sha}"
+            echo "executor=ghcr.io/${repo}/executor:sha-${sha}"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Log in to GHCR
+        uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # The stack would otherwise be updated to an image it cannot pull and
+      # simply fail to start.
+      - name: Check that both images exist
+        env:
+          WEB_IMAGE: ${{ steps.images.outputs.web }}
+          EXECUTOR_IMAGE: ${{ steps.images.outputs.executor }}
+        run: |
+          for image in "$WEB_IMAGE" "$EXECUTOR_IMAGE"; do
+            if ! docker buildx imagetools inspect "$image" > /dev/null 2>&1; then
+              echo "::error::$image not found in GHCR. Was 'Build Images' successful for this tag?"
+              exit 1
+            fi
+            echo "found $image"
+          done
+
+      # An empty secret would render as an empty value and still "deploy fine".
+      - name: Check configuration
+        env:
+          MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
+          EXTENSION_SECRET: ${{ secrets.EXTENSION_SECRET }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+          MITTWALD_STACK_ID: ${{ vars.MITTWALD_STACK_ID }}
+          EXTENSION_ID: ${{ vars.EXTENSION_ID }}
+        run: |
+          missing=0
+          for name in MITTWALD_API_TOKEN EXTENSION_SECRET MONGO_PASSWORD MITTWALD_STACK_ID EXTENSION_ID; do
+            if [ -z "${!name}" ]; then
+              echo "::error::$name is not set in the 'production' environment."
+              missing=1
+            fi
+          done
+          if [[ -n "$MONGO_PASSWORD" && ! "$MONGO_PASSWORD" =~ ^[A-Za-z0-9]+$ ]]; then
+            echo "::error::MONGO_PASSWORD may only contain letters and digits (it is used in a connection URI)."
+            missing=1
+          fi
+          exit "$missing"
+
+      - name: Deploy stack
+        uses: mittwald/deploy-container-action@bc2fb8ccf6340a04da8a148f99c6eacc1a7b69fa # v1.0.7
+        env:
+          WEB_IMAGE: ${{ steps.images.outputs.web }}
+          EXECUTOR_IMAGE: ${{ steps.images.outputs.executor }}
+          EXTENSION_ID: ${{ vars.EXTENSION_ID }}
+          EXTENSION_SECRET: ${{ secrets.EXTENSION_SECRET }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+        with:
+          api_token: ${{ secrets.MITTWALD_API_TOKEN }}
+          stack_id: ${{ vars.MITTWALD_STACK_ID }}
+          stack_file: ${{ github.workspace }}/deploy/stack.yaml
+          skip_recreation: mongo

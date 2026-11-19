@@ -1,0 +1,67 @@
+# mittwald container stack for the accessibility checker.
+#
+# Applied by .github/workflows/deploy.yaml through mittwald/deploy-container-action.
+# The {{ .Env.* }} placeholders are filled from that job's env; a missing variable
+# fails the deploy instead of rendering an empty value.
+#
+# The action uses the UpdateStack API: the stack ends up exactly as declared
+# here. Changes made by hand in mStudio are overwritten on the next deploy.
+#
+# Not part of this file (set up once in mStudio):
+#   - the domain pointing to service "web", port 3000
+#   - the ghcr.io registry credentials used to pull the private images
+
+services:
+  web:
+    image: "{{ .Env.WEB_IMAGE }}"
+    description: "a11y checker – web app, frontend fragments and webhooks"
+    ports:
+      - "3000/tcp"
+    envs:
+      NODE_ENV: "production"
+      LOG_LEVEL: "info"
+      # Kept on one line: a wrapped line would split the template placeholder.
+      # prettier-ignore
+      MONGODB_URI: "mongodb://a11y:{{ .Env.MONGO_PASSWORD }}@mongo:27017/extension-a11y-checker?authSource=admin"
+      EXTENSION_ID: "{{ .Env.EXTENSION_ID }}"
+      EXTENSION_SECRET: "{{ .Env.EXTENSION_SECRET }}"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "512mb"
+
+  executor:
+    image: "{{ .Env.EXECUTOR_IMAGE }}"
+    description: "a11y checker – scan executor (Chrome, pa11y, Lighthouse)"
+    envs:
+      NODE_ENV: "production"
+      LOG_LEVEL: "info"
+      # prettier-ignore
+      MONGODB_URI: "mongodb://a11y:{{ .Env.MONGO_PASSWORD }}@mongo:27017/extension-a11y-checker?authSource=admin"
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: "2gb"
+
+  # Never recreated by the deploy (skip_recreation in deploy.yaml).
+  # The root user is only created when the volume is empty; changing
+  # MONGO_PASSWORD later does not change the password inside the database.
+  mongo:
+    image: "mongo:8.0"
+    description: "a11y checker – MongoDB"
+    envs:
+      MONGO_INITDB_ROOT_USERNAME: "a11y"
+      MONGO_INITDB_ROOT_PASSWORD: "{{ .Env.MONGO_PASSWORD }}"
+    volumes:
+      - "mongo_data:/data/db"
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "1gb"
+
+volumes:
+  mongo_data:
+    name: "a11y-checker-mongo"
