@@ -101,5 +101,8 @@ jobs:
       contents: read
       packages: read
     uses: ./.github/workflows/deploy.yaml
+    # The deploy reads its secrets from the repository; a called workflow
+    # only gets them when they are passed on explicitly.
+    secrets: inherit
     with:
       ref: ${{ github.ref_name }}

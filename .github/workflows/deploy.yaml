@@ -7,9 +7,9 @@
 #   - manually: Actions → Deploy → Run workflow, with the tag to deploy.
 #     Deploying an older tag is the rollback.
 #
-# Configuration lives in the GitHub environment "production"
-# (Settings → Environments). Use environment secrets/variables, not repository
-# ones – a called workflow only sees the environment's.
+# Configuration comes from the repository's Actions secrets and variables
+# (Settings → Secrets and variables → Actions). "Build Images" passes the
+# secrets on with `secrets: inherit`.
 #
 #   secrets:
 #     MITTWALD_API_TOKEN  mStudio API token with access to the stack's project
@@ -132,7 +132,7 @@ jobs:
           missing=0
           for name in MITTWALD_API_TOKEN EXTENSION_SECRET MITTWALD_STACK_ID EXTENSION_ID; do
             if [ -z "${!name}" ]; then
-              echo "::error::$name is not set in the 'production' environment."
+              echo "::error::$name is not set (repository Actions secrets/variables)."
               missing=1
             fi
           done
